@@ -1,11 +1,10 @@
 #include <unistd.h>
-
-void    ft_putchar(char c)
+void    ft_putchar(char i)
 {
-    write(1, &c, 1);
+    write(1, &i, 1);
 }
 
-void    ft_write_comb(char a, char b, char c, int end)
+void    ft_writechar(char a, char b, char c, int end)
 {
     ft_putchar(a);
     ft_putchar(b);
@@ -16,11 +15,11 @@ void    ft_write_comb(char a, char b, char c, int end)
         ft_putchar(',');
         ft_putchar(' ');
     }
-	else
-	ft_putchar('\n');
+    else
+        ft_putchar('\n');
 }
 
-void    ft_print_comb(void)
+void ft_print_comb(void)
 {
     char a, b, c;
     int end;
@@ -28,17 +27,17 @@ void    ft_print_comb(void)
     a = '0';
     while(a <= '7')
     {
-        b = '1';
+        b = a + 1;
         while(b <= '8')
         {
-            c = '2';
+            c = b + 1;
             while(c <= '9')
             {
-                if( a == '7' && b == '8' && c == '9')
+                if(a == '7' && b == '8' && c == '9')
                 {
                     end = 1;
                 }
-                    ft_write_comb(a, b, c, end);
+                ft_writechar(a, b, c, end);
                 c++;
             }
             b++;
