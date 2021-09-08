@@ -36,13 +36,13 @@ void ft_print_comb(void)
             {
                 if(a != '7')
                 {
-                    ft_putchar(a, b, c);
+                	ft_putchar(a, b, c);
                 }
                 else
                 {
-                  write(1, &a, 1);
-                  write(1, &b, 1);
-                  write(1, &c, 1);
+                	write(1, &a, 1);
+                	write(1, &b, 1);
+                  	write(1, &c, 1);
                 }
                 c++;
             }
