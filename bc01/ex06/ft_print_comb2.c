@@ -1,55 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/08 11:45:31 by abuzdin           #+#    #+#             */
+/*   Updated: 2021/09/08 11:45:44 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include <unistd.h>
 
-void    ft_putspace(void)
+void	ft_putchar(char a, char b, char c, char d)
 {
-    write(1, " ", 1);
-}
-void    ft_putcomma(void)
-{
-	write(1, ",", 1);
-}
-void    ft_putchar_ab(char a, char b)
-{
-    write(1, &a, 1);
-    write(1, &b, 1);
-}
-void    ft_putchar_cd(char c, char d)
-{
-    write(1, &c, 1);
-    write(1, &d, 1);
+	write(1, &a, 1);
+	write(1, &b, 1);
+	write(1, " ", 1);
+	write(1, &c, 1);
+	write(1, &d, 1);
+	if (a == '9' && b == '8')
+	{
+		write(1, "", 0);
+	}
+	else
+	{
+		write(1, ", ", 2);
+	}
 }
 
-
-void ft_put_comb2(void)
+void	ft_put_comb2(void)
 {
-    char a, b, c, d;
+	char	a;
+	char	b;
 
-    a = '0' - 1;
-    while(a++ <= '9')
-    {
-        b = a - 1;
-        while(b++ < '8')
-        {
-			d++;
-            c = a - 1;
-			while(c++ < '9')
-			{
-				d = c - 1;
-				while(d++ < '9')
-				{
-					if(a == 9 && b == 8 && c == 9 && d == 9)
-					{
-						ft_putspace();
-					}
-					ft_putchar_ab(a, b);
-					ft_putspace();
-					ft_putchar_cd(c, d);
-					ft_putcomma();
-					ft_putspace();
-				}
-			}
-        }
-    }
+	a = 0;
+	b = 0;
+	while (b++ <= 98)
+	{
+		ft_putchar(a / 10 + 48, a % 10 + 48, b / 10 + 48, b % 10 + 48);
+		if (b == 99)
+		{
+			a++;
+			b = a;
+		}
+	}
 }
 
 int		main()
