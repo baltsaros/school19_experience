@@ -1,13 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/08 11:04:30 by abuzdin           #+#    #+#             */
+/*   Updated: 2021/09/08 11:04:44 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include <unistd.h>
 
-void    ft_putchar(char c)
+void	ft_putchar(char c)
 {
-    write(1, &c, 1);
+	write(1, &c, 1);
 }
 
+/*
 int     main()
 {  
-    ft_putchar('a');
-    ft_putchar('\n');
-    return 0;
+	ft_putchar('a');
+	ft_putchar('\n');
+	return 0;
 }
+/*
