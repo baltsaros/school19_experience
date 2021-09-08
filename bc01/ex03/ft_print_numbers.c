@@ -1,14 +1,23 @@
 #include <unistd.h>
 
-void	ft_print_numbers(void)
+void	ft_putchar(char n)	
 {
-	write(1, "0123456789", 10);
+	write(1, &n, 1);
 }
 
-/*
+void ft_print_alphabet(void)
+{
+	char	n;
+	n = 48;
+	while (n <= '9')
+	{
+		ft_putchar(n);
+		n++;
+	}
+}
+
 int     main()
 {
-    ft_print_numbers();
-    return 0;    
+    ft_print_alphabet();
+    return 0;
 }
-/*
