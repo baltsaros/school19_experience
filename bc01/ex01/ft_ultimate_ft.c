@@ -1,11 +1,12 @@
 #include <stdio.h>
 void	ft_ultimate_ft(int *********nbr)
 {
-	printf("%d\n", *********nbr);
+	*********nbr = 42;
 }
 
-void	ft_ft(int nbr)
+int main()
 {
+	int		nbr;
 	int		*ptr;
 	int		**ptr1;
 	int		***ptr2;
@@ -15,6 +16,7 @@ void	ft_ft(int nbr)
 	int		*******ptr6;
 	int		********ptr7;
 
+	nbr = 42;
 	ptr = &nbr;
 	ptr1 = &ptr;
 	ptr2 = &ptr1;
@@ -23,12 +25,8 @@ void	ft_ft(int nbr)
 	ptr5 = &ptr4;
 	ptr6 = &ptr5;
 	ptr7 = &ptr6;
-	nbr = &ptr7;
 
-}
-
-int main()
-{
-	ft_ultimate_ft(42);
+	ft_ultimate_ft(&ptr7);
+	printf("%d\n", nbr);
 	return 0;
 }
