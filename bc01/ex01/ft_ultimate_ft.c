@@ -2,7 +2,6 @@
 
 void	ft_ultimate_ft(int *********nbr)
 {
-	printf("%d\n", *********nbr);
 	*********nbr = 42;
 }
 
@@ -27,8 +26,9 @@ int main()
 	ptr5 = &ptr4;
 	ptr6 = &ptr5;
 	ptr7 = &ptr6;
-
-	ft_ultimate_ft(&ptr7);
 	printf("%d\n", nbr);
+	printf("%d\n", ********ptr7);
+	ft_ultimate_ft(&ptr7);
+	printf("%d\n", ********ptr7);
 	return 0;
 }
