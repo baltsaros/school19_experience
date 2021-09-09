@@ -1,61 +1,35 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/08 11:45:31 by abuzdin           #+#    #+#             */
-/*   Updated: 2021/09/08 11:45:44 by abuzdin          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-#include <unistd.h>
-
-void	ft_putcharcomma(char a, char b, char c)
+#include <stdio.h>
+void	ft_ultimate_ft(int *********nbr)
 {
-	write(1, &a, 1);
-	write(1, &b, 1);
-	write(1, &c, 1);
-	write(1, ", ", 2);
+	printf("%d\n", *********nbr);
 }
 
-void	ft_putcharspace(char a, char b, char c)
+void	ft_ft(int nbr)
 {
-	write(1, &a, 1);
-	write(1, &b, 1);
-	write(1, &c, 1);
+	int		*ptr;
+	int		**ptr1;
+	int		***ptr2;
+	int		****ptr3;
+	int		*****ptr4;
+	int		******ptr5;
+	int		*******ptr6;
+	int		********ptr7;
+	int		*********ptr78;
+
+	ptr = &nbr;
+	ptr1 = &ptr;
+	ptr2 = &ptr1;
+	ptr3 = &ptr2;
+	ptr4 = &ptr3;
+	ptr5 = &ptr4;
+	ptr6 = &ptr5;
+	ptr7 = &ptr6;
+	ptr8 = &nbr;
+
 }
 
-void	ft_print_comb(void)
+int main()
 {
-	char	a;
-	char	b;
-	char	c;
-
-	a = '0' - 1;
-	while (a++ < '7')
-	{
-		b = a;
-		while (b++ < '8')
-		{
-			c = b;
-			while (c++ < '9')
-			{
-				if (a != '7')
-				{
-					ft_putcharcomma(a, b, c);
-				}
-				else
-				{
-					ft_putcharspace(a, b, c);
-				}
-			}
-		}
-	}
-}
-
-int     main()
-{
-    ft_print_comb();
-    return 0;
+	ft_ultimate_ft(42);
+	return 0;
 }
