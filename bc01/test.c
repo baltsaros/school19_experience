@@ -1,35 +1,24 @@
 #include <stdio.h>
-void	ft_ultimate_ft(int *********nbr)
+#include <unistd.h>
+
+void	ft_rev_int_tab(int *tab, int size)
 {
-	printf("%d\n", *********nbr);
+	int		tab2[size];
+	int		i;
+
+	i = 0;
+	while (size >= 0)
+	{
+		tab2[size] = tab[i];
+		printf("%d ", tab2[size]);
+		i++;
+		size--;
+	}
 }
 
-void	ft_ft(int nbr)
+int		main()
 {
-	int		*ptr;
-	int		**ptr1;
-	int		***ptr2;
-	int		****ptr3;
-	int		*****ptr4;
-	int		******ptr5;
-	int		*******ptr6;
-	int		********ptr7;
-	int		*********ptr78;
+	int	tab[] = { 1, 2, 3, 4, 5 };
 
-	ptr = &nbr;
-	ptr1 = &ptr;
-	ptr2 = &ptr1;
-	ptr3 = &ptr2;
-	ptr4 = &ptr3;
-	ptr5 = &ptr4;
-	ptr6 = &ptr5;
-	ptr7 = &ptr6;
-	ptr8 = &nbr;
-
-}
-
-int main()
-{
-	ft_ultimate_ft(42);
-	return 0;
+	ft_rev_int_tab(tab, 5);
 }
