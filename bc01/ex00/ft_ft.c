@@ -9,7 +9,7 @@ int		main()
 {
 	int		nbr;
 
-	nbr = 42;
+	nbr = 40;
 	ft_ft(&nbr);
 	printf("%d\n", nbr);
 	return 0;
