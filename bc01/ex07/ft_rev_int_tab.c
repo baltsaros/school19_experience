@@ -16,7 +16,7 @@ void	ft_rev_int_tab(int *tab, int size)
 
 	tab2[size];
 	i = 0;
-	while (size >= 0)
+	while (size != 0)
 	{
 		tab2[i] = tab[size - 1];
 		i++;
@@ -24,11 +24,10 @@ void	ft_rev_int_tab(int *tab, int size)
 	}
 }
 
-
 /*
 int		main()
 {
-	int	tab[] = { 1, 2, 3, 4, 5 };
+	int		tab[] = { 1, 2, 3, 4, 5 };
 
 	ft_rev_int_tab(tab, 5);
 	printf("%d ", tab2[i]);
