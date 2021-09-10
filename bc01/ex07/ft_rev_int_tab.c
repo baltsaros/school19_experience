@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 void	ft_rev_int_tab(int *tab, int size)
 {
-	int		tab2[size];
+	int		tab2;
 	int		i;
 
+	tab2[size];
 	i = 0;
 	while (size >= 0)
 	{
@@ -23,8 +24,8 @@ void	ft_rev_int_tab(int *tab, int size)
 	}
 }
 
+
 /*
-#include <stdio.h>
 int		main()
 {
 	int	tab[] = { 1, 2, 3, 4, 5 };
