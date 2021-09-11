@@ -22,18 +22,14 @@ void	ft_halfline(int x, int y)
 {
 	int		i;
 
-	while (y-- > 1)
+	ft_putchar('B');
+	i = 1;
+	while (x > ++i)
 	{
-		ft_putchar('B');
-		i = 1;
-		while (x > ++i)
-		{
-			ft_putchar(' ');
-		}
-		ft_putchar('B');
-		ft_putchar('\n');
+		ft_putchar(' ');
 	}
-
+	ft_putchar('B');
+	ft_putchar('\n');
 }
 
 void	ft_firstcolumn(int y)
@@ -50,6 +46,7 @@ void	ft_firstcolumn(int y)
 		ft_putchar('A');
 		ft_putchar('\n');
 }
+
 void	rush(int x, int y)
 {
 	int		i;
@@ -63,7 +60,6 @@ void	rush(int x, int y)
 	{
 		ft_fullline(x);
 	}
-
 	else if ( x == 1 && y > 1)
 	{
 		ft_firstcolumn(y);
@@ -71,7 +67,7 @@ void	rush(int x, int y)
 	else
 	{
 		ft_fullline(x);
-		while (y-- != 1)
+		while (--y > 1)
 		{
 			ft_halfline(x, y);
 		}
@@ -81,6 +77,6 @@ void	rush(int x, int y)
 
 int		main()
 {
-	rush(5, 3);
+	rush(4, 4);
 	return (0);
 }
