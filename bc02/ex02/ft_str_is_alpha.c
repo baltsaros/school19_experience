@@ -2,11 +2,11 @@ int        ft_str_is_alpha(char *str)
 {
     while (*str != '\0')
     {
-        if ((*str < 'A') || (*str > 'z'))
+        if ((*str < 65) || (*str > 122))
         {
             return 0;
         }
-        if ((*str <= 'Z' ) || (*str >= 'a'))
+        if ((*str <= 90 ) || (*str >= 97))
         {
             *str++;
         }

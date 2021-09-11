@@ -1,33 +1,20 @@
-int        ft_str_is_alpha(char *str)
+int        ft_str_is_uppercase(char *str)
 {
-    int        i;
-    char  *tmp;
-    
-    tmp = str;
-
-    i = 0;
-    while (tmp[i] != '\0')
-    {
-        if ((tmp[i] < 'A') || (tmp[i] > 'z'))
-        {
-            return 0;
-        }
-        if ((tmp[i] <= 'Z' ) || (tmp[i] >= 'a'))
-        {
-            i++;
-        }
-        else
-        {
-            return (0);
-        }
-    }    
-    return (1);
+	while (*str != '\0')
+	{
+		if ((*str < 65) || (*str > 90))
+		{
+			return (0);
+		}
+		*str++;
+	}
+	return (1);
 }
 
 int        main()
 {
     char    *str;
 
-    str = "test";
-    ft_str_is_alpha(str);
+    str = "aesz";
+    ft_str_is_uppercase(str);
 }
