@@ -1,36 +1,30 @@
-#include <stdio.h>
+int		ft_str_is_alpha(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if ((str[i] < 'A') || (str[i] > 'z'))
+		{
+			return 0;
+		}
+		if ((str[i] <= 'Z' ) || (str[i] >= 'a'))
+		{
+			i++;
+		}
+		else
+		{
+			return (0);
+		}
+	}	
+	return (1);
+}
 
 int		main()
 {
-	char str[] = "abcdtt";
-	int i;
-	int j;
+	char	*str;
 
-	i = 0;
-	j = sizeof(str);
-
-	char temp[j];
-
-	j = j - 1;
-	while (j != 0)
-	{
-		temp[i] = str[j - 1];
-		i++;
-		j--;
-	}
-
-	printf("str %s\n", str);
-	printf("temp %s\n", temp);
-
-	j = sizeof(str) - 1;
-	i = 0;
-	while (j != 0)
-	{
-		str[i] = temp[i];
-		i++;
-		j--;
-	}
-	printf("str %s\n", str);
-	printf("temp %s\n", temp);
-	return (0);
+	str = "test";
+	ft_str_is_alpha(str);
 }
