@@ -9,17 +9,24 @@
 /*   Updated: 2021/09/12 13:37:38 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <unistd.h>
+
+void    ft_putchar(char c)
+{
+    write(1, &c, 1);
+}
+
 void	ft_fullline(int x)
 {
 	int		i;
 
 	i = 1;
-	ft_putchar('A');
+	ft_putchar('o');
 	while (++i != x)
 	{
-		ft_putchar('B');
+		ft_putchar('-');
 	}
-	ft_putchar('C');
+	ft_putchar('o');
 	ft_putchar('\n');
 }
 
@@ -27,13 +34,13 @@ void	ft_halfline(int x)
 {
 	int		i;
 
-	ft_putchar('B');
+	ft_putchar('|');
 	i = 1;
 	while (x > ++i)
 	{
 		ft_putchar(' ');
 	}
-	ft_putchar('B');
+	ft_putchar('|');
 	ft_putchar('\n');
 }
 
@@ -42,14 +49,14 @@ void	ft_firstcolumn(int y)
 	int		i;
 
 	i = 1;
-	ft_putchar('A');
+	ft_putchar('o');
 	ft_putchar('\n');
 	while (++i != y)
 	{
-		ft_putchar('B');
+		ft_putchar('|');
 		ft_putchar('\n');
 	}
-	ft_putchar('A');
+	ft_putchar('o');
 	ft_putchar('\n');
 }
 
@@ -57,7 +64,7 @@ void	rush(int x, int y)
 {
 	if (x == 1 && y == 1)
 	{
-		ft_putchar('A');
+		ft_putchar('o');
 		ft_putchar('\n');
 	}
 	else if (x > 1 && y == 1)
@@ -77,4 +84,9 @@ void	rush(int x, int y)
 		}
 		ft_fullline(x);
 	}
+}
+
+int    main(void)
+{
+    rush(5, 3);
 }

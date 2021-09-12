@@ -13,7 +13,7 @@ void	ft_firstline(int x)
 {
 	int		i;
 
-	i = 0;
+	i = 1;
 	ft_putchar('/');
 	while (++i != x)
 	{
@@ -41,7 +41,7 @@ void	ft_lastline(int x)
 {
 	int		i;
 
-	i = 0;
+	i = 1;
 	ft_putchar('\\');
 	while (++i != x)
 	{
@@ -55,7 +55,7 @@ void	ft_firstcolumn(int y)
 {
 	int		i;
 
-	i = 0;
+	i = 1;
 	ft_putchar('/');
 	ft_putchar('\n');
 	while (++i != y)
