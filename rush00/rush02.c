@@ -5,7 +5,7 @@ void		ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_fullline(int x)
+void	ft_firstline(int x)
 {
 	int		i = 1;
 
@@ -68,7 +68,7 @@ void	rush(int x, int y)
 	}
 	else if ( x > 1 && y == 1)
 	{
-		ft_fullline(x);
+		ft_firstline(x);
 	}
 
 	else if ( x == 1 && y > 1)
@@ -77,7 +77,7 @@ void	rush(int x, int y)
 	}
 	else
 	{
-		ft_fullline(x);
+		ft_firstline(x);
 		while (--y > 1)
 		{
 			ft_halfline(x);
