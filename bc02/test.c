@@ -1,22 +1,54 @@
+
 char  *ft_strlowcase(char *str)
 {
-	while (*str != '\0')
+    int		i;
+
+	i = 0;
+	while (str[i] != '\0')
+    {
+        if ((str[i] >= 62) && (str[i] <= 90))
+        {
+            str[i] = str[i] + 32;
+        }
+        ++i;
+    }
+    return (str);
+}
+
+
+char  *ft_strcapitalize(char *str)
+{
+	int		i;
+
+	*ft_strlowcase(str);
+	i = 0;
+	while (str[i] != '\0')
 	{
-		if (90 >= *str >= 62)
+		if ((97 <= str[0]) && (str[0] <= 122))
+			{
+				str[0] = str[0] + 32;
+				++i;
+			}
+		if ((str[i] >= 32) && (str[i] <= 47))
 		{
-			*str = *str + 32;
+			++i;
 		}
-		*str++;
+			if ((97 <= str[i]) && (str[i] <= 122))
+			{
+				str[i] = str[i] + 32;
+				++i;
+			}
+		++i;	
 	}
-    return (*str);
+    return (str);
 }
 
 int        main()
 {
-    char    str[] = "1AESZ";
+    char    str[] = "salut, comment tu vas ? 42mots quarante-deux; cinquante+et+un";
 
     printf("first %s\n", str);
-    *ft_strlowcase(str);
+    *ft_strcapitalize(str);
     printf("third %s\n", str);
     return (0);
 }

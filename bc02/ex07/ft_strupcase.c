@@ -11,7 +11,7 @@ char  *ft_strupcase(char *str)
         }
         ++i;
     }
-    return (&str);
+    return (str);
 }
 
 #include <stdio.h>
