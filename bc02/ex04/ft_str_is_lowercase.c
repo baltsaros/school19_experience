@@ -1,12 +1,15 @@
 int        ft_str_is_lowercase(char *str)
 {
-	while (*str != '\0')
+	int		i;
+
+	i = 0;
+	while (str[i] != '\0')
 	{
-		if ((*str < 97) || (*str > 122))
+		if ((str[i] < 97) || (str[i] > 122))
 		{
 			return(0);
 		}
-		*str++;
+		++i;
 	}
 	return (1);
 }
