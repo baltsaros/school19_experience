@@ -1,6 +1,6 @@
 #include <unistd.h>
 
-void	ft_putchar(char c)
+void		ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
@@ -14,7 +14,7 @@ void	ft_fullline(int x)
 		{
 			ft_putchar('B');
 		}
-		ft_putchar('C');
+		ft_putchar('A');
 		ft_putchar('\n');	
 }
 
@@ -32,6 +32,19 @@ void	ft_halfline(int x)
 	ft_putchar('\n');
 }
 
+void	ft_lastline(int x)
+{
+	int		i = 1;
+
+		ft_putchar('C');
+		while (++i != x)
+		{
+			ft_putchar('B');
+		}
+		ft_putchar('C');
+		ft_putchar('\n');	
+}
+
 void	ft_firstcolumn(int y)
 {
 	int		i = 1;
@@ -43,7 +56,7 @@ void	ft_firstcolumn(int y)
 			ft_putchar('B');
 			ft_putchar('\n');
 		}
-		ft_putchar('A');
+		ft_putchar('C');
 		ft_putchar('\n');
 }
 void	rush(int x, int y)
@@ -69,12 +82,12 @@ void	rush(int x, int y)
 		{
 			ft_halfline(x);
 		}
-		ft_fullline(x);
+		ft_lastline(x);
 	}
 }
 
 int		main()
 {
-	rush(5, 3);
+	rush(4, 4);
 	return (0);
 }
