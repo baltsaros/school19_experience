@@ -1,93 +1,80 @@
 #include <unistd.h>
 
-void		ft_putchar(char c)
+void    ft_putchar(char c)
 {
-	write(1, &c, 1);
+    write(1, &c, 1);
 }
 
-void	ft_firstline(int x)
+void    milieu(int x, int y)
 {
-	int		i = 1;
+    int    i;
+    int    cmp;
 
-		ft_putchar('A');
-		while (++i != x)
-		{
-			ft_putchar('B');
-		}
-		ft_putchar('C');
-		ft_putchar('\n');	
+    if (y > 1)
+    {
+        cmp = 0;
+        while (cmp < (y - 2))
+        {
+            ft_putchar('\n');
+            ft_putchar('|');
+            i = 0;
+            while (i < (x - 2))
+            {
+                ft_putchar(' ');
+                i ++;
+            }
+            cmp ++;
+        }
+        if (x > 1 && y > 1)
+        {
+            ft_putchar('\n');
+            ft_putchar('|');
+        }
+    }
 }
 
-void	ft_halfline(int x)
+void    fin(int x, int y)
 {
-	int		i;
+    int    cmp;
 
-	ft_putchar('B');
-	i = 1;
-	while (x > ++i)
-	{
-		ft_putchar(' ');
-	}
-	ft_putchar('B');
-	ft_putchar('\n');
+    if (x > 1 && y > 1)
+    {
+        ft_putchar('\n');
+        ft_putchar('o');
+    }
+    cmp = 0;
+    while (cmp < (x - 2))
+    {
+        ft_putchar('-');
+        cmp ++;
+    }
+    if (y > 1)
+    {
+        ft_putchar('\n');
+        ft_putchar('o');
+    }
 }
 
-void	ft_lastline(int x)
+void    rush(int x, int y)
 {
-	int		i = 1;
-
-		ft_putchar('C');
-		while (++i != x)
-		{
-			ft_putchar('B');
-		}
-		ft_putchar('A');
-		ft_putchar('\n');	
+    if (x > 1 && y == 1)
+    {
+        ft_putchar('o');
+    }
+    fin(x, y);
+    milieu(x, y);
+    fin(x, y);
+    if (x == 1 && y == 1)
+    {
+        ft_putchar('o');
+    }
+    if (x > 1 && y == 1)
+    {
+        ft_putchar('o');
+    }
 }
 
-void	ft_firstcolumn(int y)
+int    main(void)
 {
-	int		i = 1;
-
-		ft_putchar('A');
-		ft_putchar('\n');
-		while (++i != y)
-		{
-			ft_putchar('B');
-			ft_putchar('\n');
-		}
-		ft_putchar('C');
-		ft_putchar('\n');
-}
-void	rush(int x, int y)
-{
-	if (x == 1 && y == 1)
-	{
-		ft_putchar('A');
-		ft_putchar('\n');
-	}
-	else if ( x > 1 && y == 1)
-	{
-		ft_firstline(x);
-	}
-
-	else if ( x == 1 && y > 1)
-	{
-		ft_firstcolumn(y);
-	}
-	else
-	{
-		ft_firstline(x);
-		while (--y > 1)
-		{
-			ft_halfline(x);
-		}
-		ft_lastline(x);
-	}
-}
-
-int		main()
-{
-	rush(14, 14);
-	return (0);
+    rush(1, 5);
 }

@@ -59,6 +59,7 @@ void	ft_firstcolumn(int y)
 		ft_putchar('C');
 		ft_putchar('\n');
 }
+
 void	rush(int x, int y)
 {
 	if (x == 1 && y == 1)
@@ -70,7 +71,6 @@ void	rush(int x, int y)
 	{
 		ft_firstline(x);
 	}
-
 	else if ( x == 1 && y > 1)
 	{
 		ft_firstcolumn(y);

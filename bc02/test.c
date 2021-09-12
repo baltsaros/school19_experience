@@ -1,8 +1,8 @@
-int        ft_str_is_uppercase(char *str)
+int		ft_str_is_printable(char *str)
 {
 	while (*str != '\0')
 	{
-		if ((*str < 65) || (*str > 90))
+		if ((*str < 20) || (*str > 127))
 		{
 			return (0);
 		}
@@ -11,10 +11,11 @@ int        ft_str_is_uppercase(char *str)
 	return (1);
 }
 
-int        main()
+int		main()
 {
-    char    *str;
+	char	*str;
 
-    str = "aesz";
-    ft_str_is_uppercase(str);
+	str = "\a{aesz";
+	ft_str_is_printable(str);
+	return (0);
 }
