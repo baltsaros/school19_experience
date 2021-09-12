@@ -1,21 +1,26 @@
-int		ft_str_is_printable(char *str)
+char  *ft_strupcase(char *str)
 {
-	while (*str != '\0')
-	{
-		if ((*str < 20) || (*str > 127))
-		{
-			return (0);
-		}
-		*str++;
-	}
-	return (1);
+    int        i;
+
+    i = 0;
+    while (str[i] != '\0')
+    {
+        if ((str[i] >= 97) && (str[i] <= 122))
+        {
+            str[i] = str[i] - 32;
+        }
+        i++;
+    }
+    printf("second %s\n", str);
+    return (*str);
 }
 
-int		main()
+int        main()
 {
-	char	*str;
+    char    str[] = "1aesz";
 
-	str = "\a{aesz";
-	ft_str_is_printable(str);
-	return (0);
+    printf("first %s\n", str);
+    *ft_strupcase(str);
+    printf("third %s\n", str);
+    return (0);
 }
