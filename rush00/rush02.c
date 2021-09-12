@@ -1,21 +1,26 @@
-#include <unistd.h>
-
-void		ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rush02.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/12 13:36:02 by abuzdin           #+#    #+#             */
+/*   Updated: 2021/09/12 13:36:05 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 void	ft_firstline(int x)
 {
-	int		i = 1;
+	int		i;
 
-		ft_putchar('A');
-		while (++i != x)
-		{
-			ft_putchar('B');
-		}
-		ft_putchar('A');
-		ft_putchar('\n');	
+	i = 0;
+	ft_putchar('A');
+	while (++i != x)
+	{
+		ft_putchar('B');
+	}
+	ft_putchar('A');
+	ft_putchar('\n');
 }
 
 void	ft_halfline(int x)
@@ -34,30 +39,32 @@ void	ft_halfline(int x)
 
 void	ft_lastline(int x)
 {
-	int		i = 1;
+	int		i;
 
-		ft_putchar('C');
-		while (++i != x)
-		{
-			ft_putchar('B');
-		}
-		ft_putchar('C');
-		ft_putchar('\n');	
+	i = 0;
+	ft_putchar('C');
+	while (++i != x)
+	{
+		ft_putchar('B');
+	}
+	ft_putchar('C');
+	ft_putchar('\n');
 }
 
 void	ft_firstcolumn(int y)
 {
-	int		i = 1;
+	int		i;
 
-		ft_putchar('A');
+	i = 0;
+	ft_putchar('A');
+	ft_putchar('\n');
+	while (++i != y)
+	{
+		ft_putchar('B');
 		ft_putchar('\n');
-		while (++i != y)
-		{
-			ft_putchar('B');
-			ft_putchar('\n');
-		}
-		ft_putchar('C');
-		ft_putchar('\n');
+	}
+	ft_putchar('C');
+	ft_putchar('\n');
 }
 
 void	rush(int x, int y)
@@ -67,11 +74,11 @@ void	rush(int x, int y)
 		ft_putchar('A');
 		ft_putchar('\n');
 	}
-	else if ( x > 1 && y == 1)
+	else if (x > 1 && y == 1)
 	{
 		ft_firstline(x);
 	}
-	else if ( x == 1 && y > 1)
+	else if (x == 1 && y > 1)
 	{
 		ft_firstcolumn(y);
 	}
@@ -84,10 +91,4 @@ void	rush(int x, int y)
 		}
 		ft_lastline(x);
 	}
-}
-
-int		main()
-{
-	rush(4, 4);
-	return (0);
 }
