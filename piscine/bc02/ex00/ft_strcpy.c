@@ -18,6 +18,10 @@ char	*ft_strcpy(char *dest, char *src)
 	{
 		dest[j] = src[j];
 		++j;
+		if (src[j] == '\0')
+		{
+			dest[j] = '\0';
+		}
 	}
 	return (dest);
 }
@@ -26,11 +30,13 @@ char	*ft_strcpy(char *dest, char *src)
 #include <stdio.h>
 int		main()
 {
-	char	dest[] = "destin";
-	char	src[] = "source";
+	char	dest[] = "destination";
+	char	src[] = "so";
+	
+	printf("dest before %s\n", dest);
 	ft_strcpy(dest, src);
-	printf("source %s\n", src);
-	printf("destination %s\n", dest);
+	printf("src %s\n", src);
+	printf("dest after %s\n", dest);
 	return (0);
 }
 */

@@ -9,37 +9,20 @@
 /*   Updated: 2021/09/13 08:57:15 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-int	ft_strlen(char *src)
-{
-	int		i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-
 char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
-	unsigned int		d;
-	unsigned int		j;
+	unsigned int	j;
 
-	d = ft_strlen(dest);
 	j = 0;
-	while (j != d)
+	while ((src[j] != '\0') && (j < n))
 	{
-		if (j <= n)
-		{
-			dest[j] = src[j];
-			j++;
-		}
-		else
-		{
-			dest[j] = '\0';
-			j++;
-		}
+		dest[j] = src[j];
+		j++;
+	}
+	while (dest[j] != '\0')
+	{
+		dest[j] = '\0';
+		j++;
 	}
 	return (dest);
 }
@@ -48,16 +31,13 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 #include <stdio.h>
 int		main()
 {
-	char	dest[] = "destination";
+	char	dest[] = "des";
 	char	src[] = "source";
 	unsigned int	n;
 
-	n = ft_strlen(src);
-	printf("strlen SRC is %d\n", n);
-	printf("sizeofsrc is %lu\n", sizeof(src));
 	printf("dest is %s\n", dest);
 	printf("sizeof DEST is %lu\n", sizeof(dest));
-	ft_strncpy(dest, src, n);
+	ft_strncpy(dest, src, 5);
 	printf("dest2 is %s\n", dest);
 	printf("sizeof2 DEST is %lu\n", sizeof(dest));
 }

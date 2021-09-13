@@ -53,15 +53,14 @@ char	*ft_strcapitalize(char *str)
 	return (str);
 }
 
-/*
-#include <stdio.h>
-int        main()
-{
-    char    str[] = "salut, comment tu vas ?";
 
-    printf("first %s\n", str);
-    ft_strcapitalize(str);
-    printf("third %s\n", str);
-    return (0);
+#include <stdio.h>
+int	main()
+{
+	char	str[] = "+`@N=9bcm[+L,G,Ryqp~:]Six,4$";
+
+	printf("first %s\n", str);
+	ft_strcapitalize(str);
+	printf("third %s\n", str);
+	return (0);
 }
-*/
