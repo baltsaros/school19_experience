@@ -13,7 +13,7 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 		}
 		if (s1[i] < s2[i])
 		{
-			return (k);
+			return (s1[i] - s2[i]);
 		}
 		if (s1[i] == s2[i])
 		{
@@ -29,7 +29,7 @@ int	main()
 	char	s1[] = "abAd";
 	char	s2[] = "abzd";
 	unsigned int	n;
-	unsigned int	d;
+	int				d;
 
 	ft_strncmp(s1, s2, 3);
 	d = ft_strncmp(s1, s2, 3);
