@@ -27,13 +27,13 @@ int	ft_str_is_lowercase(char *str)
 
 /*
 #include <stdio.h>
-int        main()
+int	main()
 {
-    char    *str;
+	char	*str;
 	int		ret;
 
-    str = "aesz";
-    ft_str_is_lowercase(str);
+	str = "aesz";
+	ft_str_is_lowercase(str);
 	ret = ft_str_is_lowercase(str);
 	printf("return is %d\n", ret);
 	return (0);

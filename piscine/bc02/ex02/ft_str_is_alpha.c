@@ -34,13 +34,13 @@ int	ft_str_is_alpha(char *str)
 
 /*
 #include <stdio.h>
-int        main()
+int	main()
 {
-    char    *str;
+	char    *str;
 	int		ret;
 
-    str = "tEst";
-    ft_str_is_alpha(str);
+	str = "tEst";
+	ft_str_is_alpha(str);
 	ret = ft_str_is_alpha(str);
 	printf("return is %d\n", ret);
 	return (0);

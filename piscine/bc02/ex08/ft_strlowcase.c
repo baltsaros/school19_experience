@@ -27,13 +27,13 @@ char	*ft_strlowcase(char *str)
 
 /*
 #include <stdio.h>
-int        main()
+int	main()
 {
-    char    str[] = "1AESZ";
+	char	str[] = "1AESZ";
 
-    printf("first %s\n", str);
-    ft_strlowcase(str);
-    printf("third %s\n", str);
-    return (0);
+	printf("first %s\n", str);
+	ft_strlowcase(str);
+	printf("third %s\n", str);
+	return (0);
 }
 */

@@ -27,13 +27,13 @@ int	ft_str_is_uppercase(char *str)
 
 /*
 #include <stdio.h>
-int        main()
+int	main()
 {
-    char    *str;
+	char	*str;
 	int		ret;
 
-    str = "1AESZ";
-    ft_str_is_uppercase(str);
+	str = "1AESZ";
+	ft_str_is_uppercase(str);
 	ret = ft_str_is_uppercase(str);
 	printf("return is %d\n", ret);
 	return (0);

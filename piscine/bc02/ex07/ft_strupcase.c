@@ -27,13 +27,13 @@ char	*ft_strupcase(char *str)
 
 /*
 #include <stdio.h>
-int        main()
+int	main()
 {
-    char    str[] = "1aesz";
+	char	str[] = "1aesz";
 
-    printf("first %s\n", str);
-    ft_strupcase(str);
-    printf("third %s\n", str);
+	printf("first %s\n", str);
+	ft_strupcase(str);
+	printf("third %s\n", str);
 	return (0);
 }
 */

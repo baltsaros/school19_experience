@@ -29,11 +29,11 @@ int	ft_str_is_numeric(char *str)
 #include <stdio.h>
 int	main()
 {
-    char    *str;
+	char	*str;
 	int		ret;
 
-    str = "1234";
-    ft_str_is_numeric(str);
+	str = "1234";
+	ft_str_is_numeric(str);
 	ret = ft_str_is_numeric(str);
 	printf("return is %d\n", ret);
 	return (0);
