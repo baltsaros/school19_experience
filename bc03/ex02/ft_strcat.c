@@ -37,8 +37,8 @@ char	*ft_strcat(char *dest, char *src)
 #include <string.h>
 int	main()
 {
-	char	dest[] = "hello";
-	char	src[] = " world";
+	char	dest[] = "Ur mom is ";
+	char	src[] = "pretty swag";
 
 	printf("initial dest is %s\n", dest);
 	ft_strcat(dest, src);
