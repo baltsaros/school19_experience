@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 08:57:13 by abuzdin           #+#    #+#             */
-/*   Updated: 2021/09/13 08:57:15 by abuzdin          ###   ########.fr       */
+/*   Created: 2021/09/14 09:34:46 by abuzdin           #+#    #+#             */
+/*   Updated: 2021/09/14 09:34:47 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 char	*ft_strncpy(char *dest, char *src, unsigned int n)

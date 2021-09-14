@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 09:45:00 by abuzdin           #+#    #+#             */
-/*   Updated: 2021/09/13 09:45:02 by abuzdin          ###   ########.fr       */
+/*   Created: 2021/09/14 09:36:03 by abuzdin           #+#    #+#             */
+/*   Updated: 2021/09/14 09:36:04 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 char	*ft_strlowcase(char *str)
@@ -34,11 +34,12 @@ char	*ft_strcapitalize(char *str)
 	int		i;
 
 	ft_strlowcase(str);
-	i = 1;
+	i = 0;
 	while (str[i] != '\0')
 	{
 		if (!((97 <= str[i] && str[i] <= 122)
-				|| (48 <= str[i] && str[i] <= 57)))
+				|| (48 <= str[i] && str[i] <= 57)
+				|| (65 <= str[i] && str[i] <= 90)))
 		{
 			++i;
 			if ((97 <= str[i]) && (str[i] <= 122))

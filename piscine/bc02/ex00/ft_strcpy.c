@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 08:48:42 by abuzdin           #+#    #+#             */
-/*   Updated: 2021/09/13 08:48:44 by abuzdin          ###   ########.fr       */
+/*   Created: 2021/09/14 09:35:15 by abuzdin           #+#    #+#             */
+/*   Updated: 2021/09/14 09:35:16 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 char	*ft_strcpy(char *dest, char *src)
@@ -18,11 +18,8 @@ char	*ft_strcpy(char *dest, char *src)
 	{
 		dest[j] = src[j];
 		++j;
-		if (src[j] == '\0')
-		{
-			dest[j] = '\0';
-		}
 	}
+	dest[j] = '\0';
 	return (dest);
 }
 
