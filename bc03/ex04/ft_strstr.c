@@ -27,7 +27,7 @@ char	*ft_strstr(char *str, char *to_find)
 			++j;
 			if (j == size_f)
 			{
-				return ("Got it");
+				return (to_find);
 			}
 		}
 		else
@@ -40,13 +40,16 @@ char	*ft_strstr(char *str, char *to_find)
 }
 
 #include <stdio.h>
+#include <string.h>
 int	main()
 {
-	char	str[] = "hayNeedl";
+	char	str[] = "hayNeedle";
 	char	to_find[] = "Needle";
 	char	*ret;
 
 	ret = ft_strstr(str, to_find);
 	printf("return is %s\n", ret);
+	// ret = strstr(str, to_find);
+	// printf("return is %s\n", ret);
 	return (0);
 }
