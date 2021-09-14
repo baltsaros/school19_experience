@@ -1,6 +1,6 @@
 int	ft_strlen(char *dest)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (dest[i] != '\0')
@@ -13,8 +13,8 @@ int	ft_strlen(char *dest)
 char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
 	unsigned int	j;
-	int	size_d;
-	int	size_s;
+	int				size_d;
+	int				size_s;
 
 	j = 0;
 	size_d = ft_strlen(dest);
@@ -31,8 +31,13 @@ char	*ft_strncat(char *dest, char *src, unsigned int nb)
 		++size_d;
 		++j;
 	}
+	if (size_s == (size_d - j) || size_s > (size_d - j))
+	{
+		src[size_s - 1] = '\0';
+	}
 	return (dest);
 }
+
 
 #include <stdio.h>
 #include <string.h>
