@@ -33,7 +33,7 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	}
 }
 
-/*
+
 #include <stdio.h>
 int		main()
 {
@@ -50,4 +50,3 @@ int		main()
 	printf("dest2 is %s\n", dest);
 	printf("sizeof2 DEST is %lu\n", sizeof(dest));
 }
-*/

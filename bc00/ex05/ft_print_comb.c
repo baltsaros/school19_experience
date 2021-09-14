@@ -26,7 +26,7 @@ void	ft_putcharspace(char a, char b, char c)
 	write(1, &c, 1);
 }
 
-void	ft_print_combo(void)
+void	ft_print_comb(void)
 {
 	char	a;
 	char	b;
@@ -56,6 +56,6 @@ void	ft_print_combo(void)
 
 int     main()
 {
-    ft_print_combo();
+    ft_print_comb();
     return 0;
 }
