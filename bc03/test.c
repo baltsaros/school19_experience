@@ -1,23 +1,39 @@
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
+int	ft_strlen(char *dest)
 {
-	unsigned int	i;
-	int 			k;
+	int		i;
 
 	i = 0;
-	k = -1;
-	while (i < n)
+	while (dest[i] != '\0')
 	{
-		if (s1[i] > s2[i])
-		{
-			return (s1[i] - s2[i]);
-		}
-		if (s1[i] < s2[i])
-		{
-			return (s1[i] - s2[i]);
-		}
-		if (s1[i] == s2[i])
+		++i;
+	}
+	return (i);
+}
+
+char	*ft_strstr(char *str, char *to_find)
+{
+	int	i;
+	int	j;
+	int	size_f;
+
+	size_f = ft_strlen(to_find);
+	i = 0;
+	j = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == to_find[j])
 		{
 			++i;
+			++j;
+			if (j == size_f)
+			{
+				return ("Got it");
+			}
+		}
+		else
+		{
+			++i;
+			j = 0;
 		}
 	}
 	return (0);
@@ -26,12 +42,11 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 #include <stdio.h>
 int	main()
 {
-	char	s1[] = "abAd";
-	char	s2[] = "abzd";
-	unsigned int	n;
-	int				d;
+	char	str[] = "Needlehay";
+	char	to_find[] = "Needle";
+	char	*ret;
 
-	ft_strncmp(s1, s2, 3);
-	d = ft_strncmp(s1, s2, 3);
-	printf("return is %u\n", d);
+	ret = ft_strstr(str, to_find);
+	printf("return is %s\n", ret);
+	return (0);
 }

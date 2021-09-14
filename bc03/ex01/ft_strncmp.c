@@ -26,12 +26,13 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 #include <stdio.h>
 int	main()
 {
-	char	s1[] = "abAd";
+	char	s1[] = "ab";
 	char	s2[] = "abzd";
 	unsigned int	n;
 	int				d;
 
-	ft_strncmp(s1, s2, 3);
-	d = ft_strncmp(s1, s2, 3);
-	printf("return is %u\n", d);
+	n = 3;
+	ft_strncmp(s1, s2, n);
+	d = ft_strncmp(s1, s2, n);
+	printf("return is %d\n", d);
 }
