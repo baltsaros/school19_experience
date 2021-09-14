@@ -1,11 +1,9 @@
 int	ft_strncmp(char *s1, char *s2, unsigned int n)
 {
 	unsigned int	i;
-	int 			k;
 
 	i = 0;
-	k = -1;
-	while (i < n)
+	while (i < n && (s1[i] || s2[i]))
 	{
 		if (s1[i] > s2[i])
 		{
@@ -24,15 +22,17 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 }
 
 #include <stdio.h>
+#include <string.h>
 int	main()
 {
-	char	s1[] = "ab";
-	char	s2[] = "abzd";
+	char	s1[] = "a";
+	char	s2[] = "ac";
 	unsigned int	n;
-	int				d;
+	int				ret;
 
 	n = 3;
-	ft_strncmp(s1, s2, n);
-	d = ft_strncmp(s1, s2, n);
-	printf("return is %d\n", d);
+	ret = ft_strncmp(s1, s2, n);
+	printf("return(ft) is %d\n", ret);
+	ret = strncmp(s1, s2, n);
+	printf("return(strncmp) is %d\n", ret);
 }

@@ -13,8 +13,8 @@ int	ft_strlen(char *dest)
 char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
 	unsigned int	j;
-	int				size_d;
-	int				size_s;
+	unsigned int	size_d;
+	unsigned int	size_s;
 
 	j = 0;
 	size_d = ft_strlen(dest);
@@ -51,4 +51,5 @@ int	main()
 	printf("initial dest is %s\n", dest);
 	ft_strncat(dest, src, nb);
 	printf("concatenated dest is %s\n", dest);
+	// strncat(dest, src, nb);
 }

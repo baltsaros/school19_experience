@@ -19,7 +19,6 @@ char	*ft_strcat(char *dest, char *src)
 	j = 0;
 	size_d = ft_strlen(dest);
 	size_s = ft_strlen(src);
-	printf("size of dest is %d\n", size_d);
 	while (src[j] != '\0')
 	{
 		dest[size_d] = src[j];
@@ -37,12 +36,11 @@ char	*ft_strcat(char *dest, char *src)
 #include <string.h>
 int	main()
 {
-	char	dest[] = "Ur mom is ";
-	char	src[] = "pretty swag";
+	char	dest[] = "hello";
+	char	src[] = " worldddddddd";
 
 	printf("initial dest is %s\n", dest);
 	ft_strcat(dest, src);
-	//strcat(dest, src);
-	printf("concatenated dest is %s\n", dest);
-	printf("src is %s\n", src);
+	printf("dest(ft) is %s\n", dest);
+	// strcat(dest, src);	
 }

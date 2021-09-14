@@ -10,53 +10,46 @@ int	ft_strlen(char *dest)
 	return (i);
 }
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+char	*ft_strstr(char *str, char *to_find)
 {
-	unsigned int	j;
-	unsigned int	size_d;
-	unsigned int	size_d2;
+	int	i;
+	int	j;
+	int	size_f;
 
+	size_f = ft_strlen(to_find);
+	i = 0;
 	j = 0;
-	size_d = ft_strlen(dest);
-	size_d2 = size_d;
-	if (size_d2 < size)
+	while (str[i] != '\0')
 	{
-		while (size_d2 < size)
+		if (str[i] == to_find[j])
 		{
-			dest[size_d2 + 1] = '\0';
-			++size_d2;
+			++i;
+			++j;
+			if (j == size_f)
+			{
+				return (&str[i - size_f]);
+			}
+		}
+		else
+		{
+			++i;
+			j = 0;
 		}
 	}
-	while (src[j] != '\0' && j < size)
-	{
-		dest[size_d] = src[j];
-		++size_d;
-		++j;
-	}
-	while (j < size)
-	{
-		dest[size_d] = '\0';
-		++size_d;
-		++j;
-	}
-	return (ft_strlen(dest));
+	return (0);
 }
 
 #include <stdio.h>
 #include <string.h>
 int	main()
 {
-	char	dest[] = "hello";
-	char	src[] = " world";
-	unsigned int	size;
-	unsigned int	ret;
+	char	str[] = "haynNeedleTOP";
+	char	to_find[] = "Needle";
+	char	*ret;
 
-	size = 6;
-	printf("dest size is %u\n", ft_strlen(dest));
-	printf("src size is %u\n", ft_strlen(src));
-	ret = ft_strlcat(dest, src, size);
-	ft_strlcat(dest, src, size);
-	printf("ret is %u\n", ret);
-	printf("new dest is %s\n", dest);
+	ret = ft_strstr(str, to_find);
+	printf("return is %s\n", ret);
+	ret = strstr(str, to_find);
+	printf("return is %s\n", ret);
 	return (0);
 }
