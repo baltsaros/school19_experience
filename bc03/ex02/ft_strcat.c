@@ -19,16 +19,13 @@ char	*ft_strcat(char *dest, char *src)
 	j = 0;
 	size_d = ft_strlen(dest);
 	size_s = ft_strlen(src);
-	while (src[j] != '\0')
+	while (src[j])
 	{
 		dest[size_d] = src[j];
 		++j;
 		++size_d;
 	}
-	if (size_s == (size_d - j) || size_s > (size_d - j))
-	{
-		src[size_s - 1] = '\0';
-	}
+	dest[size_d] = '\0';
 	return (dest);
 }
 
@@ -36,11 +33,13 @@ char	*ft_strcat(char *dest, char *src)
 #include <string.h>
 int	main()
 {
-	char	dest[20] = "hello";
-	char	src[] = " worldddddddd";
+	char	dest[] = "hello";
+	char	dest2[] = "hello";
+	char	src[] = " world1";
+	char	src2[] = " world1";
 
 	printf("initial dest is %s\n", dest);
 	ft_strcat(dest, src);
 	printf("dest(ft) is %s\n", dest);
-	// strcat(dest, src);	
+	printf("dest(st) is %s\n", strcat(dest2, src2));
 }

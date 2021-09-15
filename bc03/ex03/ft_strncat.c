@@ -19,22 +19,13 @@ char	*ft_strncat(char *dest, char *src, unsigned int nb)
 	j = 0;
 	size_d = ft_strlen(dest);
 	size_s = ft_strlen(src);
-	while (src[j] != '\0' && j < nb)
+	while (src[j] && j < nb)
 	{
 		dest[size_d] = src[j];
 		++j;
 		++size_d;
 	}
-	while (j < nb)
-	{
-		dest[size_d] = '\0';
-		++size_d;
-		++j;
-	}
-	if (size_s == (size_d - j) || size_s > (size_d - j))
-	{
-		src[size_s - 1] = '\0';
-	}
+	dest[size_d] = '\0';
 	return (dest);
 }
 
@@ -43,13 +34,15 @@ char	*ft_strncat(char *dest, char *src, unsigned int nb)
 #include <string.h>
 int	main()
 {
-	char	dest[20] = "Hello";
-	char	src[] = " world";
+	char	dest[] = "hello";
+	char	dest2[] = "hello";
+	char	src[] = " worldabcd";
+	char	src2[] = " worldabcd";
 	unsigned int	nb;
 
-	nb = 5;
+	nb = 8;
 	printf("initial dest is %s\n", dest);
 	ft_strncat(dest, src, nb);
-	printf("concatenated dest is %s\n", dest);
-	// strncat(dest, src, nb);
+	printf("dest(ft) is %s\n", dest);
+	printf("dest(ft) is %s\n", strncat(dest2, src2, nb));
 }
