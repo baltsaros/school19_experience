@@ -9,6 +9,6 @@ int	main()
 	char	*base;
 
 	nbr =
-	base = "";
+	base = "OI";
 	return (0);
 }

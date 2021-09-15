@@ -38,5 +38,17 @@ int	main()
 	nb = 2147483647;
 	ft_putnbr(nb);
 	ft_putchar('\n');
+	nb = -400;
+	ft_putnbr(nb);
+	ft_putchar('\n');
+	nb = 21;
+	ft_putnbr(nb);
+	ft_putchar('\n');
+	nb = 7;
+	ft_putnbr(nb);
+	ft_putchar('\n');
+	nb = -5;
+	ft_putnbr(nb);
+	ft_putchar('\n');
 	return (0);
 }
