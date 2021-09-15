@@ -43,7 +43,7 @@ char	*ft_strncat(char *dest, char *src, unsigned int nb)
 #include <string.h>
 int	main()
 {
-	char	dest[] = "Hello";
+	char	dest[20] = "Hello";
 	char	src[] = " world";
 	unsigned int	nb;
 

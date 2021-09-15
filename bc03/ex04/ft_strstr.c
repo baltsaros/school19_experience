@@ -18,33 +18,33 @@ char	*ft_strstr(char *str, char *to_find)
 
 	size_f = ft_strlen(to_find);
 	i = 0;
-	j = 0;
+	if (size_f == '\0')
+	{
+		return (str);
+	}
 	while (str[i] != '\0')
 	{
-		if (str[i] == to_find[j])
+		j = 0;
+		while (str[i + j] == to_find[j])
 		{
-			++i;
-			++j;
-			if (j == size_f)
+			if (j + 1 == size_f)
 			{
-				return (&str[i - size_f]);
+				return (&str[i + j + 1 - size_f]);
 			}
+			++j;
 		}
-		else
-		{
-			++i;
-			j = 0;
-		}
+		++i;
 	}
 	return (0);
 }
 
+/*
 #include <stdio.h>
 #include <string.h>
 int	main()
 {
-	char	str[] = "haynNeedleTOP";
-	char	to_find[] = "Needle";
+	char	str[] = "hayNNeedleHay";
+	char	to_find[] = "";
 	char	*ret;
 
 	ret = ft_strstr(str, to_find);
@@ -53,3 +53,4 @@ int	main()
 	printf("return is %s\n", ret);
 	return (0);
 }
+*/

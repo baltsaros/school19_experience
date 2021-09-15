@@ -14,10 +14,12 @@ int        ft_str_is_uppercase(char *str)
 	return (1);
 }
 
+#include <stdio.h>
 int        main()
 {
     char    *str;
 
     str = "aesz";
     ft_str_is_uppercase(str);
+	printf("str is %s\n", str);
 }

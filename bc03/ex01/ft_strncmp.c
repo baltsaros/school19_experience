@@ -5,17 +5,13 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 	i = 0;
 	while (i < n && (s1[i] || s2[i]))
 	{
-		if (s1[i] > s2[i])
-		{
-			return (s1[i] - s2[i]);
-		}
-		if (s1[i] < s2[i])
-		{
-			return (s1[i] - s2[i]);
-		}
 		if (s1[i] == s2[i])
 		{
 			++i;
+		}
+		else
+		{
+			return (s1[i] - s2[i]);
 		}
 	}
 	return (0);
@@ -26,7 +22,7 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 int	main()
 {
 	char	s1[] = "a";
-	char	s2[] = "ac";
+	char	s2[] = "aaadddadadad";
 	unsigned int	n;
 	int				ret;
 

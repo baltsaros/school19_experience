@@ -36,7 +36,7 @@ char	*ft_strcat(char *dest, char *src)
 #include <string.h>
 int	main()
 {
-	char	dest[] = "hello";
+	char	dest[20] = "hello";
 	char	src[] = " worldddddddd";
 
 	printf("initial dest is %s\n", dest);
