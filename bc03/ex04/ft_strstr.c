@@ -38,7 +38,7 @@ char	*ft_strstr(char *str, char *to_find)
 	return (0);
 }
 
-/*
+
 #include <stdio.h>
 #include <string.h>
 int	main()
@@ -53,4 +53,3 @@ int	main()
 	printf("return is %s\n", ret);
 	return (0);
 }
-*/
