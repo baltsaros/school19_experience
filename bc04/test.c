@@ -1,46 +1,64 @@
 #include <unistd.h>
-int	ft_strlen(char *str)
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+int	ft_base_control(char *base)
 {
 	int	i;
 	int	j;
 
 	i = 1;
 	j = 0;
-	if (str[j] == '\0'|| str[j + 1] == '\0')
-		return ;
-	while (str[j])
+	if (base[j] == '\0'|| base[j + 1] == '\0' || base[j] == '-'
+		|| base[j] == '+')
+		return (0);
+	while (base[j])
 	{
-		if ()
-		++i;
+		if (base[j] == base[i])
+			return (0);
+		++j;
+		i = j + 1;
 	}
-	return (i);
+	return (1);
 }
 
-void	ft_putchar(char c)
+void	ft_putnbr(int nbr, int i)
 {
-	write(1, &c, 1);
+	if (nbr < 0)
+	{
+		ft_putchar('-');
+		nbr = -nbr;
+	}
+	if (nbr > 0)
+	{
+		ft_putnbr(nbr / i, i);
+		nbr = nbr % i;
+		if (nbr < 10)
+			ft_putchar(nbr + 48);
+		if (nbr >= 10)
+			ft_putchar(nbr + 55);
+	}
 }
 
 void	ft_putnbr_base(int nbr, char *base)
 {
-	if (nbr < 0)
-		nbr = -nbr;
-	if (base == "0123456789")
-		ft_base_deci(nbr);
-	if (base == "01")
-		ft_base_binary(nbr);
-	if (base == "0123456789ABCDEF")
-		ft_base_hexadec(nbr);
-	if (base == "poneyvif")
-		ft_base_oct(nbr);
+	int	i;
+
+	i = 0;
+	while (base[i])
+		++i;
+	if (ft_base_control(base))
+		ft_putnbr(nbr, i);
 }
 
 int	main()
 {
 	int		nbr;
-	//char	*base;
+	char	*base;
 
-	nbr = 400;
+	nbr = 123456789;
 	ft_putnbr_base(nbr, "0123456789");
 	ft_putchar('\n');
 	ft_putnbr_base(nbr, "01");
