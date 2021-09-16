@@ -21,37 +21,30 @@ int	ft_sign(char *str)
 
 int	ft_atoi(char *str)
 {
-	int		i;
 	int		j;
 	int		sign;
-	int		tab;
+	int		n;
 
-	i = 0;
-	tab = 0;
-	if (ft_sign(str) >= 0)
+	j = ft_sign(str);
+	n = 0;
+	sign = 1;
+	if (j < 0)
 	{
-		j = ft_sign(str);
-		sign = 1;
-	}
-	else
-	{
-		j = -ft_sign(str);
+		j = -j;
 		sign = -1;
 	}
 	while (str[j] >= 48 && str[j] <= 57)
 	{
-		tab = tab * 10 + str[j] - '0';
-		++i;
+		n = n * 10 + str[j] - '0';
 		++j;
 	}
-	tab = tab * sign;
-	return (tab);
+	return (sign * n);
 }
 
 #include <stdio.h>
 int	main()
 {
-	char	str[] = "  ---+--+0234ab567";
+	char	str[] = "  --+-+0234ab567";
 
 	printf("%s\n", str);
 	printf("%d\n", ft_atoi(str));
