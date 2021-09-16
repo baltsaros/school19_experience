@@ -34,36 +34,17 @@ void	ft_base_binary(int nbr)
 	}
 }
 
-char	ft_base_hexadec(int nbr)
+void	ft_base_hexadec(int nbr)
 {
-	char	base_hex[32];
-	int		tmp;
-	int		i;
-	int		j;
-
-	j = 0;
-	while (nbr > 0)
+	if (nbr > 0)
 	{
-		tmp = nbr % 16;
-		if (tmp < 10)
-			base_hex[j] = tmp + 48;
-		else
-			base_hex[j] = tmp + 55;
-		nbr = nbr / 16;
-		++j;
+		ft_base_hexadec(nbr / 16);
+		nbr = nbr % 16;
 	}
-	i = 0;
-	while (i < j)
-	{
-		tmp = base_hex[i];
-		base_hex[i] = base_hex[j - 1];
-		ft_putchar(base_hex[i]);
-		base_hex[j - 1] = tmp;
-		++i;
-		--j;
-	}
-	ft_putchar(base_hex[i]);
-	return (base_hex);
+	if (nbr < 10 && nbr > 0)
+		ft_putchar(nbr + 48);
+	if (nbr >= 10 && nbr < 17)
+		ft_putchar(nbr + 55);
 }
 
 void	ft_putnbr_base(int nbr, char *base)

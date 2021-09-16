@@ -41,7 +41,7 @@ int	ft_base_binary(int nbr, char *base)
 	return (base_bi);
 }
 
-char	ft_base_hexadec(int nbr, char *base)
+char	ft_base_hexadec(int nbr)
 {
 	char	base_hex[32];
 	int		tmp;
@@ -69,6 +69,7 @@ char	ft_base_hexadec(int nbr, char *base)
 		++i;
 		--j;
 	}
+	ft_putchar(base_hex[i]);
 	return (base_hex);
 }
 
