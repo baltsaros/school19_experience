@@ -25,16 +25,23 @@ void	ft_base_deci(int nbr)
 		ft_putchar(nb + '0');
 }
 
-void	ft_base_binary(int nbr)
+int	ft_base_binary(int nbr, char *base)
 {
-	if (nbr > 0)
+	int		i;
+	int		base_bi[32];
+
+	i = 0;
+	while (nbr > 0)
 	{
-		ft_base_binary(nbr / 2);
-		ft_putchar(nbr % 2 + '0');
+		base_bi[i] = nbr % 2;
+		ft_putchar(base_bi[i]);
+		nbr = nbr / 2;
+		++i;
 	}
+	return (base_bi);
 }
 
-char	ft_base_hexadec(int nbr)
+char	ft_base_hexadec(int nbr, char *base)
 {
 	char	base_hex[32];
 	int		tmp;
@@ -62,7 +69,6 @@ char	ft_base_hexadec(int nbr)
 		++i;
 		--j;
 	}
-	ft_putchar(base_hex[i]);
 	return (base_hex);
 }
 
@@ -81,9 +87,9 @@ int	main()
 	base = "01";
 	ft_base_deci(nbr);
 	ft_putchar('\n');
-	ft_base_binary(nbr);
+	ft_base_binary(nbr, base);
 	ft_putchar('\n');
-	ft_base_hexadec(nbr);
+	ft_base_hexadec(nbr, base);
 	ft_putchar('\n');
 	return (0);
 }
