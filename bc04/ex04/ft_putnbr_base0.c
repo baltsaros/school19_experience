@@ -9,7 +9,7 @@ void	ft_base_deci(int nbr)
 {
 	unsigned int	nb;
 	
-	if (nb < 0)
+	if (nbr < 0)
 	{
 		ft_putchar('-');
 		nb = -nbr;
@@ -25,72 +25,65 @@ void	ft_base_deci(int nbr)
 		ft_putchar(nb + '0');
 }
 
-int	ft_base_binary(int nbr, char *base)
+void	ft_base_binary(int nbr)
 {
-	int		i;
-	int		base_bi[32];
-
-	i = 0;
-	while (nbr > 0)
+	if (nbr > 0)
 	{
-		base_bi[i] = nbr % 2;
-		ft_putchar(base_bi[i]);
-		nbr = nbr / 2;
-		++i;
+		ft_base_binary(nbr / 2);
+		ft_putchar(nbr % 2 + '0');
 	}
-	return (base_bi);
 }
 
-char	ft_base_hexadec(int nbr)
+void	ft_base_hexadec(int nbr)
 {
-	char	base_hex[32];
-	int		tmp;
-	int		i;
-	int		j;
-
-	j = 0;
-	while (nbr > 0)
+	if (nbr > 0)
 	{
-		tmp = nbr % 16;
-		if (tmp < 10)
-			base_hex[j] = tmp + 48;
-		else
-			base_hex[j] = tmp + 55;
-		nbr = nbr / 16;
-		++j;
+		ft_base_hexadec(nbr / 16);
+		nbr = nbr % 16;
 	}
-	i = 0;
-	while (i < j)
-	{
-		tmp = base_hex[i];
-		base_hex[i] = base_hex[j - 1];
-		ft_putchar(base_hex[i]);
-		base_hex[j - 1] = tmp;
-		++i;
-		--j;
-	}
-	ft_putchar(base_hex[i]);
-	return (base_hex);
+	if (nbr < 10 && nbr > 0)
+		ft_putchar(nbr + 48);
+	if (nbr >= 10 && nbr < 17)
+		ft_putchar(nbr + 55);
 }
 
+void	ft_base_oct(int nbr)
+{
+	if (nbr > 0)
+	{
+		ft_base_oct(nbr / 8);
+		ft_putchar(nbr % 8 + '0');
+	}
+}
 void	ft_putnbr_base(int nbr, char *base)
 {
-
+	if (base == "0123456789")
+		ft_base_deci(nbr);
+	if (base == "01")
+		ft_base_binary(nbr);
+	if (base == "0123456789ABCDEF")
+		ft_base_hexadec(nbr);
+	if (base == "poneyvif")
+		ft_base_oct(nbr);
 }
-
 
 int	main()
 {
 	int		nbr;
-	char	*base;
+	//char	*base;
 
-	nbr = 2549;
-	base = "01";
-	ft_base_deci(nbr);
+	nbr = -400;
+	ft_putnbr_base(nbr, "0123456789");
 	ft_putchar('\n');
-	ft_base_binary(nbr, base);
+	ft_putnbr_base(nbr, "01");
 	ft_putchar('\n');
-	ft_base_hexadec(nbr, base);
+	ft_putnbr_base(nbr, "0123456789ABCDEF");
+	ft_putchar('\n');
+	ft_putnbr_base(nbr, "poneyvif");
 	ft_putchar('\n');
 	return (0);
+	//base = "0123456789"
+	//base = "01"
+	//base = "0123456789ABCDEF"
+	//base = "poneyvif"
 }
