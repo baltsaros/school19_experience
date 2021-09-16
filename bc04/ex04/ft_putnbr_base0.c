@@ -1,4 +1,15 @@
 #include <unistd.h>
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		++i;
+	}
+	return (i);
+}
 
 void	ft_putchar(char c)
 {
@@ -72,7 +83,7 @@ int	main()
 	int		nbr;
 	//char	*base;
 
-	nbr = -400;
+	nbr = 400;
 	ft_putnbr_base(nbr, "0123456789");
 	ft_putchar('\n');
 	ft_putnbr_base(nbr, "01");

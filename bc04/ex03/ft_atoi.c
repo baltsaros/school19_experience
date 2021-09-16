@@ -5,7 +5,8 @@ int	ft_sign(char *str)
 
 	i = 0;
 	sign = 0;
-	while (str[i] == ' ')
+	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n' 
+			|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
 		++i;
 	while (str[i] == '-' || str[i] == '+')
 	{
@@ -44,9 +45,15 @@ int	ft_atoi(char *str)
 #include <stdio.h>
 int	main()
 {
-	char	str[] = "  --+-+0234ab567";
+	char	str[] = "  \t--+-+0234ab567";
+	char	str2[] = "  --+-+\v0234ab567";
+	char	str3[] = "  ---+-+50234ab567";
 
 	printf("%s\n", str);
 	printf("%d\n", ft_atoi(str));
+	printf("%s\n", str2);
+	printf("%d\n", ft_atoi(str2));
+	printf("%s\n", str3);
+	printf("%d\n", ft_atoi(str3));
 	return (0);
 }
