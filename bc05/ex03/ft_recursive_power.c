@@ -4,7 +4,8 @@ int		ft_recursieve_power(int nb, int power)
 
 	if (power > 0)
 	{
-		n = nb * ft_recursieve_power(nb, --power);
+		--power;
+		n = nb * ft_recursieve_power(nb, power);
 		return (n);
 	}
 	if (power == 0)

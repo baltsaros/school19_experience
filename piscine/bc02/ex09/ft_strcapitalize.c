@@ -42,7 +42,7 @@ char	*ft_strcapitalize(char *str)
 				|| (65 <= str[i] && str[i] <= 90)))
 		{
 			++i;
-			if ((97 <= str[i]) && (str[i] <= 122))
+			if ((97 <= str[i+]) && (str[i] <= 122))
 			{
 				str[i] = str[i] - 32;
 				++i;

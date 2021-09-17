@@ -12,7 +12,7 @@ int	ft_base_control(char *base)
 	i = 1;
 	j = 0;
 	if (base[j] == '\0'|| base[j + 1] == '\0' || base[j] == '-'
-		|| base[j] == '+')
+		|| base[j] == '+' || base[j] < 32 || base[j] > 126)
 		return (0);
 	while (base[j])
 	{

@@ -1,5 +1,9 @@
 int	ft_sqrt(int nb)
 {
+	int	n;
+	int	i;
+
+	i = 1
 	
 }
 
