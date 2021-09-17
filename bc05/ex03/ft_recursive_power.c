@@ -11,8 +11,7 @@ int		ft_recursieve_power(int nb, int power)
 	if (power == 0)
 		return (1);
 	else
-		return (0);
-		
+		return (0);		
 }
 
 #include <stdio.h>

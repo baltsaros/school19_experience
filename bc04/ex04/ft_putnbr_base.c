@@ -61,14 +61,18 @@ int	main()
 	int		nbr;
 	char	*base;
 
-	nbr = -2147483648;
-	ft_putnbr_base(nbr, "0123456789");
+	nbr = 2147123124;
+	ft_putnbr_base(nbr, "9876543210");
 	ft_putchar('\n');
 	ft_putnbr_base(nbr, "01");
 	ft_putchar('\n');
 	ft_putnbr_base(nbr, "0123456789ABCDEF");
 	ft_putchar('\n');
 	ft_putnbr_base(nbr, "poneyvif");
+	ft_putchar('\n');
+	ft_putnbr_base(nbr, "abcd");
+	ft_putchar('\n');
+	ft_putnbr_base(nbr, "pon");
 	ft_putchar('\n');
 	return (0);
 	//base = "0123456789"
