@@ -12,7 +12,7 @@ int	ft_base_control(char *base)
 	i = 1;
 	j = 0;
 	if (base[j] == '\0'|| base[j + 1] == '\0' || base[j] == '-'
-		|| base[j] == '+')
+		|| base[j] == '+' || base[j] == ' ')
 		return (0);
 	while (base[j])
 	{
@@ -46,6 +46,8 @@ void	ft_putnbr_base(int nbr, char *base)
 {
 	int	i;
 
+	if (nbr == 0)
+		return ;
 	i = 0;
 	while (base[i])
 		++i;
@@ -59,7 +61,7 @@ int	main()
 	char	*base;
 
 	nbr = 123456789;
-	ft_putnbr_base(nbr, "0123456789");
+	ft_putnbr_base(nbr, "bcdefghjk");
 	ft_putchar('\n');
 	ft_putnbr_base(nbr, "01");
 	ft_putchar('\n');

@@ -26,19 +26,22 @@ int	ft_base_control(char *base)
 
 void	ft_putnbr(int nbr, int i)
 {
+	unsigned int	nb;
 	if (nbr < 0)
 	{
 		ft_putchar('-');
-		nbr = -nbr;
+		nb = -nbr;
 	}
-	if (nbr > 0)
+	else
+		nb = nbr;
+	if (nb > 0)
 	{
-		ft_putnbr(nbr / i, i);
-		nbr = nbr % i;
-		if (nbr < 10)
-			ft_putchar(nbr + 48);
-		if (nbr >= 10)
-			ft_putchar(nbr + 55);
+		ft_putnbr(nb / i, i);
+		nb = nb % i;
+		if (nb < 10)
+			ft_putchar(nb + 48);
+		if (nb >= 10)
+			ft_putchar(nb + 55);
 	}
 }
 
@@ -58,7 +61,7 @@ int	main()
 	int		nbr;
 	char	*base;
 
-	nbr = 123456789;
+	nbr = -2147483648;
 	ft_putnbr_base(nbr, "0123456789");
 	ft_putchar('\n');
 	ft_putnbr_base(nbr, "01");
