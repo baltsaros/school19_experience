@@ -31,21 +31,21 @@ void	ft_sortstr(int argc, char **argv)
 	int		j;
 	char	*tmp;
 
-	j = argc - 1;
-	while (j > 1)
+	i = 1;
+	while (i < argc)
 	{
-		i = 1;
-		while (i < j)
+		j = i + 1;
+		while (j < argc)
 		{
 			if (ft_strcmp(argv[i], argv[j]) > 0)
 			{
-				tmp = argv[i];
-				argv[i] = argv[j];
-				argv[j] = tmp;
+				tmp = argv[j];
+				argv[j] = argv[i];
+				argv[i] = tmp;
 			}
-			++i;
+			++j;
 		}
-		--j;
+		++i;
 	}
 }
 

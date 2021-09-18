@@ -18,38 +18,48 @@ int		ft_strcmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
-	while (s1[i] || s2[i])
+	while (s1[i] && s2[i] && (s1[i] == s2[i]))
 	{
-		if (s1[i] == s2[i])
-			++i;
+		++i;
 	}
 	return (s1[i] - s2[i]);
 }
 
-int		main(int argc, char **argv)
+void	ft_sortstr(int argc, char **argv)
 {
 	int		i;
 	int		j;
 	char	*tmp;
 
-	i = 1;
 	j = argc - 1;
-	while (i < argc)
+	while (j > 1)
 	{
-		if (ft_strcmp(argv[i], argv[j]) > 0)
+		i = 1;
+		while (i < j)
 		{
-			tmp = argv[j];
-			argv[j] = argv[i];
-			argv[i] = tmp;
+			if (ft_strcmp(argv[i], argv[j]) > 0)
+			{
+				tmp = argv[i];
+				argv[i] = argv[j];
+				argv[j] = tmp;
+			}
+			++i;
 		}
-		++i;
 		--j;
 	}
-	j = 1;
-	while (j < argc)
+}
+
+
+int		main(int argc, char **argv)
+{
+	int		i;
+
+	i = 1;
+	ft_sortstr(argc, argv);
+	while (i < argc)
 	{
-		ft_putstr(argv[j]);
-		++j;
+		ft_putstr(argv[i]);
+		++i;
 	}
 	return (0);
 }
