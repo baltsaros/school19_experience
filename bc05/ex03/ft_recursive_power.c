@@ -24,5 +24,6 @@ int		main()
 	printf("%d\n", ft_recursieve_power(3, 3));
 	printf("%d\n", ft_recursieve_power(3, 4));
 	printf("%d\n", ft_recursieve_power(3, 5));
+	printf("%d\n", ft_recursieve_power(46340, 2));
 	return (0);
 }

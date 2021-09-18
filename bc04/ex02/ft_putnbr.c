@@ -41,7 +41,7 @@ int	main()
 	nb = -400;
 	ft_putnbr(nb);
 	ft_putchar('\n');
-	nb = 21;
+	nb = 42;
 	ft_putnbr(nb);
 	ft_putchar('\n');
 	nb = 7;

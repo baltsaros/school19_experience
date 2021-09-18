@@ -11,6 +11,7 @@ void	ft_putstr(char *str)
 	}
 }
 
+
 int	main()
 {
 	char	str[] = "Inserted text";

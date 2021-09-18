@@ -1,82 +1,54 @@
 #include <unistd.h>
+
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
 
-int	ft_base_control(char *base)
+void	ft_putnbr(int nb)
 {
-	int	i;
-	int	j;
-
-	i = 1;
-	j = 0;
-	if (base[j] == '\0'|| base[j + 1] == '\0' || base[j] == '-'
-		|| base[j] == '+' || base[j] < 32 || base[j] > 126)
-		return (0);
-	while (base[j])
-	{
-		if (base[j] == base[i])
-			return (0);
-		++j;
-		i = j + 1;
-	}
-	return (1);
-}
-
-void	ft_putnbr(int nbr, int i, char *base)
-{
-	unsigned int	nb;
-	if (nbr < 0)
+	unsigned int	nbr;
+	
+	if (nb < 0)
 	{
 		ft_putchar('-');
-		nb = -nbr;
+		nbr = -nb;
 	}
 	else
-		nb = nbr;
-	if (nb > 0)
+		nbr = nb;
+	if (nbr >= 10)
 	{
-		ft_putnbr(nb / i, i, base);
-		nb = nb % i;
-		if (nb < 10)
-			ft_putchar(nb + base[i]);
-		if (nb >= 10)
-			ft_putchar(nb + base[i]);
+		ft_putnbr(nbr / 10);
+		nbr = nbr % 10;
 	}
-}
-
-void	ft_putnbr_base(int nbr, char *base)
-{
-	int	i;
-
-	i = 0;
-	while (base[i])
-		++i;
-	if (ft_base_control(base))
-		ft_putnbr(nbr, i, base);
+	if (nbr < 10)
+		ft_putchar(nbr + '0');
 }
 
 int	main()
 {
-	int		nbr;
-	char	*base;
+	int		nb;
 
-	nbr = 1239;
-	ft_putnbr_base(nbr, "0123456789");
+	nb = -2147483648;
+	ft_putnbr(nb);
 	ft_putchar('\n');
-	ft_putnbr_base(nbr, "01");
+	nb = 0;
+	ft_putnbr(nb);
 	ft_putchar('\n');
-	ft_putnbr_base(nbr, "0123456789ABCDEF");
+	nb = 2147483647;
+	ft_putnbr(nb);
 	ft_putchar('\n');
-	ft_putnbr_base(nbr, "poneyvif");
+	nb = -400;
+	ft_putnbr(nb);
 	ft_putchar('\n');
-	ft_putnbr_base(nbr, "abcd");
+	nb = 42;
+	ft_putnbr(nb);
 	ft_putchar('\n');
-	ft_putnbr_base(nbr, "pon");
+	nb = 7;
+	ft_putnbr(nb);
+	ft_putchar('\n');
+	nb = -5;
+	ft_putnbr(nb);
 	ft_putchar('\n');
 	return (0);
-	//base = "0123456789"
-	//base = "01"
-	//base = "0123456789ABCDEF"
-	//base = "poneyvif"
 }

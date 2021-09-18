@@ -1,4 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/18 08:11:29 by abuzdin           #+#    #+#             */
+/*   Updated: 2021/09/18 08:11:30 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include <unistd.h>
+
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
@@ -11,7 +23,7 @@ int	ft_base_control(char *base)
 
 	i = 1;
 	j = 0;
-	if (base[j] == '\0'|| base[j + 1] == '\0' || base[j] == '-'
+	if (base[j] == '\0' || base[j + 1] == '\0' || base[j] == '-'
 		|| base[j] == '+' || base[j] < 32 || base[j] > 126)
 		return (0);
 	while (base[j])
@@ -27,6 +39,7 @@ int	ft_base_control(char *base)
 void	ft_putnbr(int nbr, int i)
 {
 	unsigned int	nb;
+
 	if (nbr < 0)
 	{
 		ft_putchar('-');
@@ -56,6 +69,7 @@ void	ft_putnbr_base(int nbr, char *base)
 		ft_putnbr(nbr, i);
 }
 
+/*
 int	main()
 {
 	int		nbr;
@@ -71,8 +85,5 @@ int	main()
 	ft_putnbr_base(nbr, "poneyvif");
 	ft_putchar('\n');
 	return (0);
-	//base = "0123456789"
-	//base = "01"
-	//base = "0123456789ABCDEF"
-	//base = "poneyvif"
 }
+*/

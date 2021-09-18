@@ -22,7 +22,7 @@ int	ft_sqrt(int nb)
 	i = 1;
 	if (nb == 1)
 		return (1);
-	while (i < nb)
+	while (i < 46341)
 	{
 		if (nb == ft_recursive_power(i, 2))
 			return (i);
@@ -46,4 +46,5 @@ int	main()
 	printf("%d\n", ft_sqrt(9));
 	printf("%d\n", ft_sqrt(16));
 	printf("%d\n", ft_sqrt(25));
+	printf("%d\n", ft_sqrt(2147395600));
 }
