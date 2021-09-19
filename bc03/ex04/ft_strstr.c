@@ -18,19 +18,15 @@ char	*ft_strstr(char *str, char *to_find)
 
 	size_f = ft_strlen(to_find);
 	i = 0;
-	if (size_f == '\0')
-	{
+	if (to_find[j] == '\0')
 		return (str);
-	}
 	while (str[i] != '\0')
 	{
 		j = 0;
 		while (str[i + j] == to_find[j])
 		{
 			if (j + 1 == size_f)
-			{
 				return (&str[i + j + 1 - size_f]);
-			}
 			++j;
 		}
 		++i;
