@@ -27,6 +27,7 @@ int	main()
 	printf("%d\n", ft_iterative_factorial(2));
 	printf("%d\n", ft_iterative_factorial(3));
 	printf("%d\n", ft_iterative_factorial(4));
-	printf("%d\n", ft_iterative_factorial(10));
+	printf("%d\n", ft_iterative_factorial(5));
+	printf("%d\n", ft_iterative_factorial(6));
 	return 0;
 }

@@ -1,18 +1,30 @@
+int	ft_recursive_power(int n, int power)
+{
+	int	i;
+
+	if (power > 0)
+	{
+		--power;
+		i = n * ft_recursive_power(n, power);
+		return (i);
+	}
+	if (power == 0)
+		return (1);
+	else
+		return (0);
+}
+
 int	ft_sqrt(int nb)
 {
-	int		i;
-	int		square;
+	int	i;
 
 	i = 1;
 	if (nb > 2) 
 		while (i < 46341)
 		{
-			square = i * i;
-			if (nb == square)
+			if (nb == ft_recursive_power(i, 2))
 				return (i);
 			++i;
-			if (nb < square)
-				return (0);
 		}
 	if (nb == 1)
 		return (1);
