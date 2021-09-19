@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sort_params.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/18 15:00:07 by abuzdin           #+#    #+#             */
+/*   Updated: 2021/09/18 15:00:09 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include <unistd.h>
 
 void	ft_putstr(char *str)
@@ -13,7 +24,7 @@ void	ft_putstr(char *str)
 	write(1, "\n", 1);
 }
 
-int		ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
 
@@ -49,8 +60,7 @@ void	ft_sortstr(int argc, char **argv)
 	}
 }
 
-
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int		i;
 

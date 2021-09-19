@@ -1,38 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_params.c                                  :+:      :+:    :+:   */
+/*   ft_is_prime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/18 14:59:04 by abuzdin           #+#    #+#             */
-/*   Updated: 2021/09/18 14:59:05 by abuzdin          ###   ########.fr       */
+/*   Created: 2021/09/19 09:29:19 by abuzdin           #+#    #+#             */
+/*   Updated: 2021/09/19 09:29:21 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
-
-void	ft_putstr(char *str)
+int	ft_sieve(int n, int i)
 {
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		++i;
-	}
-	write(1, "\n", 1);
+	if (n % i == 0)
+		return (0);
+	if (i * i > n)
+		return (1);
+	else
+		return (ft_sieve(n, i + 1));
 }
 
-int	main(int argc, char **argv)
+int	ft_is_prime(int nb)
 {
-	int		i;
+	if (nb > 2)
+		return (ft_sieve(nb, 2));
+	if (nb == 2)
+		return (1);
+	else
+		return (0);
+}
 
-	i = 1;
-	while (i < argc)
+/*
+#include <stdio.h>
+int	main()
+{
+	int		nb;
+
+	nb = 100;
+	while (nb > -3)
 	{
-		ft_putstr(argv[i]);
-		++i;
+		printf("%d --- %d\n", nb, ft_is_prime(nb));
+		--nb;
 	}
 	return (0);
 }
+*/

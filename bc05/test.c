@@ -1,50 +1,56 @@
-int    ft_recursive_power(int n, int power)
+int	ft_recursive_power(int n, int power)
 {
-    int    i;
+	int	i;
 
-    if (power > 0)
-    {
-        --power;
-        i = n * ft_recursive_power(n, power);
-        return (i);
-    }
-    if (power == 0)
-        return (1);
-    else
-        return (0);
+	if (power > 0)
+	{
+		--power;
+		i = n * ft_recursive_power(n, power);
+		return (i);
+	}
+	if (power == 0)
+		return (1);
+	else
+		return (0);
 }
 
-int    ft_sqrt(int nb)
+int	ft_sqrt(int nb)
 {
-    int    i;
+	int		i;
+	int		square;
 
-    i = 1;
-    // if (nb == 1)
-    //     return (1);
-    if (nb > 1) 
-        while (i < 46341 || i * i < nb)
-        {
-            if (nb == ft_recursive_power(i, 2))
-                return (i);
-            ++i;
-        }
-    if (nb == 1)
-        return (1);
-    else
-        return (0);
+	i = 1;
+	if (nb > 2)
+	{
+		while (i < 46341)
+		{
+			square = i * i;
+			if (nb == square)
+				return (i);
+			if (nb < square)
+				return (0);
+			++i;
+		}
+	}
+	if (nb == 1)
+		return (1);
+	else
+		return (0);
 }
 
+/*
 #include <stdio.h>
-int    main()
+int	main()
 {
-    printf("%d\n", ft_sqrt(-2));
-    printf("%d\n", ft_sqrt(0));
-    printf("%d\n", ft_sqrt(1));
-    printf("%d\n", ft_sqrt(2));
-    printf("%d\n", ft_sqrt(4));
-    printf("%d\n", ft_sqrt(5));
-    // printf("%d\n", ft_sqrt(9));
-    // printf("%d\n", ft_sqrt(16));
-    // printf("%d\n", ft_sqrt(25));
-    // printf("%d\n", ft_sqrt(2147395600));
+	printf("%d\n", ft_sqrt(-2));
+	printf("%d\n", ft_sqrt(0));
+	printf("%d\n", ft_sqrt(1));
+	printf("%d\n", ft_sqrt(2));
+	printf("%d\n", ft_sqrt(4));
+	printf("%d\n", ft_sqrt(5));
+	printf("%d\n", ft_sqrt(9));
+	printf("%d\n", ft_sqrt(16));
+	printf("%d\n", ft_sqrt(25));
+	printf("%d\n", ft_sqrt(2147395600));
 }
+*/

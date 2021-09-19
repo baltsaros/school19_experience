@@ -4,21 +4,24 @@ int	ft_sqrt(int nb)
 	int		square;
 
 	i = 1;
-	if (nb > 2) 
+	if (nb > 2)
+	{
 		while (i < 46341)
 		{
 			square = i * i;
 			if (nb == square)
 				return (i);
-			++i;
 			if (nb < square)
 				return (0);
+			++i;
 		}
+	}
 	if (nb == 1)
 		return (1);
 	else
 		return (0);
 }
+
 
 #include <stdio.h>
 int	main()
