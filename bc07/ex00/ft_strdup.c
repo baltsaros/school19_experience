@@ -8,8 +8,8 @@ char	*ft_strdup(char *src)
 	size = 0;
 	while (src[size])
 		++size;
-	dest = malloc(sizeof(*src) * (size + 1));
-	if (dest == NULL)
+	dest = (char *)malloc(sizeof(*src) * (size + 1));
+	if (NULL == dest)
 		return NULL;
 	i = 0;
 	while (src[i])
