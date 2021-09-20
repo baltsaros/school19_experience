@@ -9,6 +9,7 @@ char	*ft_strcpy(char *dest, char *src)
 		dest[j] = src[j];
 		j++;
 	}
+	dest[j] = '\0';
 }
 
 /*

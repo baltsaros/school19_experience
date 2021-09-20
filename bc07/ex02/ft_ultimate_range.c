@@ -11,6 +11,8 @@ int	ft_ultimate_range(int **range, int min, int max)
 		}
 	size = max - min;
 	*range = (int *)malloc(sizeof(int) * size);
+	if (NULL == *range)
+		return (-1);
 	i = 0;
 	while (min < max)
 	{
@@ -24,7 +26,7 @@ int	ft_ultimate_range(int **range, int min, int max)
 #include <stdio.h>
 int	main()
 {
-	int		*range;
+	int		*range; // = {6, 7, 8, 9};
 	int		ret;
 
 	ret = ft_ultimate_range(&range, 1, 5);

@@ -18,19 +18,17 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 
 	d = ft_strlen(dest);
 	j = 0;
-	while (j != d)
+	while (src[j] && j < n)
 	{
-		if (j <= n)
-		{
-			dest[j] = src[j];
-			j++;
-		}
-		else
-		{
-			dest[j] = '\0';
-			j++;
-		}
+		dest[j] = src[j];
+		j++;
 	}
+	while (j < n)
+	{
+		dest[j] = '\0';
+		++j;
+	}
+	return (dest);
 }
 
 
