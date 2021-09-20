@@ -5,7 +5,7 @@ int	*ft_range(int min, int max)
 	int		*tab;
 	int		i;
 
-	if (min > max)
+	if (min >= max)
 		return (NULL);
 	size = max - min;
 	tab = (int *)malloc(sizeof(int) * size);
