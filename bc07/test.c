@@ -1,33 +1,28 @@
-#include <stdlib.h>
-int	ft_ultimate_range(int **range, int min, int max)
+char	ft_concatenation(int size, char *unistr, char **strs, char *sep)
 {
-	int		size;
 	int		i;
+	int		j;
+	int		s;
 
-	if (min >= max)
-		{
-			*range = NULL;
-			return (0);
-		}
-	size = max - min;
-	*range = (int *)malloc(sizeof(int) * size);
-	i = 0;
-	while (min < max)
+	j = 0;
+	while (j < size)
 	{
-		(*range)[i] = min;
-		++min;
-		++i;
+		i = 0;
+		s = 0;
+		while (strs[j][i])
+		{
+			*unistr = strs[j][i];
+			++unistr;
+			++i;
+		}
+		while (sep[s])
+		{
+			*unistr = sep[s];
+			++unistr;
+			++s;
+		}
+		j++;
 	}
-	return (i);
-}
-
-#include <stdio.h>
-int	main()
-{
-	int		*range;
-	int		ret;
-
-	ret = ft_ultimate_range(&range, 1, 5);
-	printf("return is %d\n", ret);
-	return (0);
+	unistr[k] = '\0';
+	return (unistr);
 }

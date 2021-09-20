@@ -27,52 +27,55 @@ void	ft_concatenation(int size, char *unistr, char **strs, char *sep)
 {
 	int		i;
 	int		j;
+	int		s;
 
 	j = 0;
 	while (j < size)
 	{
 		i = 0;
-		while (strs[j][i])
+		s = 0;
+		while (strs[j][i] && j < size)
 		{
 			*unistr = strs[j][i];
 			++unistr;
 			++i;
 		}
 		if (j < size - 1)
-			ft_addsep(&unistr, sep);
+		{
+			while (sep[s] && j < size - 1)
+			{
+				*unistr = sep[s];
+				++unistr;
+				++s;
+			}
+		}
 		j++;
 	}
 	*unistr = '\0';
-}
-
-void	ft_addsep(char **unistr, char *sep)
-{
-	int		s;
-
-	s = 0;
-	while (sep[s])
-	{
-		**unistr = sep[s];
-		++*unistr;
-		++s;
-	}
 }
 
 char	*ft_strjoin(int size, char **strs, char *sep)
 {
 	int		length;
 	char	*unistr;
-	char	*str_ret;
 
-	length = ft_totallen(size, strs, sep);
-	str_ret = (char *)malloc(sizeof(*str_ret) * (length + 1));	
-	unistr = str_ret;
+	if (size != 0)
+	{
+		length = ft_totallen(size, strs, sep);
+		unistr = (char *)malloc(sizeof(*unistr) * (length + 1));	
+	}
+	else
+	{
+		unistr = (char *)malloc(1);
+		*unistr = '\0';
+		return (unistr);
+	}
 	ft_concatenation(size, unistr, strs, sep);
-	return (str_ret);
+	return (unistr);
 }
 
 #include <stdio.h>
-int		main(void)
+int		main()
 {
 	char	*strs[5];
 
