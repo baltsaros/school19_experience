@@ -12,10 +12,9 @@
 #ifndef FT_POINT_H
 # define FT_POINT_H
 
-typedef int	t_point;
-typedef struct	s_variables
+typedef struct s_point
 {
 	int	x;
 	int	y;
-} t_point;
+}	t_point;
 #endif
