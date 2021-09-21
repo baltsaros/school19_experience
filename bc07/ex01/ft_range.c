@@ -6,9 +6,9 @@ int	*ft_range(int min, int max)
 	int		i;
 
 	if (min >= max)
-		return (NULL);
+		return NULL;
 	size = max - min;
-	tab = (int *)malloc(sizeof(int) * size);
+	tab = (int *)malloc(sizeof(*tab) * size);
 	i = 0;
 	while (min < max)
 	{
@@ -25,9 +25,9 @@ int	main()
 	int		*tab;
 	int		j;
 	
-	tab = ft_range(7, 5);
+	tab = ft_range(1, 5);
 	j = 0;
-	while (tab[j])
+	while (j < 4) // less than (max - min) otherwise seg fault
 	{
 		printf("%d ", tab[j]);
 		++j;

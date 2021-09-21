@@ -64,10 +64,12 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	int		length;
 	char	*unistr;
 
-	if (size != 0)
+	if (size > 0)
 	{
 		length = ft_totallen(size, strs, sep);
 		unistr = (char *)malloc(sizeof(*unistr) * (length + 1));
+		ft_concatenation(size, unistr, strs, sep);
+		return (unistr);
 	}
 	else
 	{
@@ -75,8 +77,6 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 		*unistr = '\0';
 		return (unistr);
 	}
-	ft_concatenation(size, unistr, strs, sep);
-	return (unistr);
 }
 
 #include <stdio.h>

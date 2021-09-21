@@ -1,4 +1,6 @@
+
 #include <stdlib.h>
+
 int		ft_totallen(int size, char **strs, char *sep)
 {
 	int		i;
