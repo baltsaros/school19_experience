@@ -5,7 +5,7 @@ void	ft_putchar(char a)
 	write(1, &a, 1);
 }
 
-void ft_print_alphabet(void)
+void	ft_print_alphabet(void)
 {
 	char	a;
 	a = 'a';
@@ -16,8 +16,8 @@ void ft_print_alphabet(void)
 	}
 }
 
-int     main()
+int	main(void)
 {
-    ft_print_alphabet();
+	ft_print_alphabet();
 	return 0;
 }

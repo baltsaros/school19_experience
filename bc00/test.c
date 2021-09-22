@@ -8,16 +8,16 @@ void	ft_putchar(char n)
 void ft_print_alphabet(void)
 {
 	char	n;
-	n = 48;
-	while (n <= '9')
-	{
-		ft_putchar(n);
-		n++;
-	}
+	char	a;
+	n = 0;
+	a = n / 10;
+	ft_putchar(a);
+	a = n / 10 + '0';
+	ft_putchar(a);
 }
 
-int     main()
+int	main(void)
 {
-    ft_print_alphabet();
-    return 0;
+	ft_print_alphabet();
+	return 0;
 }

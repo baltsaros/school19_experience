@@ -1,6 +1,6 @@
 #include <unistd.h>
 
-void	ft_putchar(char z)	
+void	ft_putchar(char z)
 {
 	write(1, &z, 1);
 }
@@ -16,8 +16,8 @@ void ft_print_alphabet(void)
 	}
 }
 
-int     main()
+int	main(void)
 {
-    ft_print_alphabet();
-    return 0;
+	ft_print_alphabet();
+	return 0;
 }

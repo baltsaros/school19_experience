@@ -34,19 +34,20 @@ void	ft_put_comb2(void)
 	char	b;
 
 	a = 0;
-	b = 0;
-	while (b++ <= 98)
+	b = 1;
+	while (b <= 99)
 	{
 		ft_putchar(a / 10 + 48, a % 10 + 48, b / 10 + 48, b % 10 + 48);
 		if (b == 99)
 		{
-			a++;
+			++a;
 			b = a;
 		}
+		++b;
 	}
 }
 
-int		main()
+int	main(void)
 {
 	ft_put_comb2();
 	return 0;
