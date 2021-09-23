@@ -1,11 +1,11 @@
 
-char  *ft_strlowcase(char *str)
+char	*ft_strlowcase(char *str)
 {
-    int        i;
+	int		i;
 
-    i = 0;
-    while (str[i] != '\0')
-    {
+	i = 0;
+	while (str[i] != '\0')
+	{
         if ((str[i] >= 65) && (str[i] <= 90))
         {
             str[i] = str[i] + 32;
@@ -38,7 +38,7 @@ char  *ft_strcapitalize(char *str)
         }
         else
         {
-          ++i;    
+          ++i;
         }
     }
     return (str);

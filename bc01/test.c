@@ -1,31 +1,39 @@
 #include <stdio.h>
 
-void    ft_rev_int_tab(int *tab, int size)
+void	ft_rev_int_tab(int *tab, int size)
 {
-    int        tmp;
-    int        i;
+	int		tmp;
+	int		i;
+	int		j;
 
-    i = 0;
-    while (i < size)
-    {
-        tmp = tab[i];
-        tab[i] = tab[size - 1];
-        tab[size - 1] = tmp;
-        ++i;
-        --size;
-    }
+	j = 0;
+	while (j < size)
+	{
+		i = 0;
+		while (i < size)
+		{
+			if (tab[i] > tab[j])
+				{
+					tmp = tab[j];
+					tab[j] = tab[i];
+					tab[i] = tmp;
+				}
+			++i;
+		}
+		++j;
+	}
 }
 
-int        main()
+int	main(void)
 {
-    int        tab[5] = { 1, 2, 3, 4, 5 };
-    int        j = 0;
+	int		tab[7] = {6, 7, 3, 4, 1 , 9, 0};
+	int		j = 0;
 
-    ft_rev_int_tab(tab, 5);
-    while (j != 5)
-    {
-        printf("%d ", tab[j]);
-        ++j;
-    }
-    return (0);
+	ft_rev_int_tab(tab, 7);
+	while (j != 7)
+	{
+		printf("%d ", tab[j]);
+		++j;
+	}
+	return (0);
 }

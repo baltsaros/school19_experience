@@ -1,48 +1,30 @@
-int	ft_sign(char *str)
-{
-	int		i;
-	int		sign;
-
-	i = 0;
-	sign = 0;
-	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n' 
-			|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
-		++i;
-	while (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i]== '-')
-			++sign;
-		++i;
-	}
-	if (sign % 2 != 0)
-		return (-i);
-	else
-		return(i);
-}
+#include <stdio.h>
 
 int	ft_atoi(char *str)
 {
-	int		j;
+	int		i;
 	int		sign;
 	int		n;
 
-	j = ft_sign(str);
-	n = 0;
+	i = 0;
 	sign = 1;
-	if (j < 0)
+	n = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
+		++i;
+	while (str[i] == '-' || str[i] == '+')
 	{
-		j = -j;
-		sign = -1;
+		if (str[i] == '-')
+			sign = sign * (-1);
+		++i;
 	}
-	while (str[j] >= 48 && str[j] <= 57)
+	while (str[i] >= 48 && str[i] <= 57)
 	{
-		n = n * 10 + str[j] - '0';
-		++j;
+		n = n * 10 + str[i] - '0';
+		++i;
 	}
 	return (sign * n);
 }
 
-#include <stdio.h>
 int	main()
 {
 	char	str[] = "  \t--+-+0234ab567";
