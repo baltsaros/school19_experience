@@ -10,7 +10,7 @@ char	*ft_strdup(char *src)
 		++size;
 	dest = (char *)malloc(sizeof(*src) * (size + 1));
 	if (NULL == dest)
-		return (NULL);
+		return NULL;
 	i = 0;
 	while (src[i])
 	{

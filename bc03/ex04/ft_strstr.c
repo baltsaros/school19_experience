@@ -18,6 +18,7 @@ char	*ft_strstr(char *str, char *to_find)
 
 	size_f = ft_strlen(to_find);
 	i = 0;
+	j = 0;
 	if (to_find[j] == '\0')
 		return (str);
 	while (str[i] != '\0')
@@ -40,12 +41,12 @@ char	*ft_strstr(char *str, char *to_find)
 int	main()
 {
 	char	str[] = "hayNNeedleHay";
-	char	to_find[] = "";
+	char	to_find[] = "eedle";
 	char	*ret;
 
 	ret = ft_strstr(str, to_find);
-	printf("return is %s\n", ret);
+	printf("ft return is %s\n", ret);
 	ret = strstr(str, to_find);
-	printf("return is %s\n", ret);
+	printf("str return is %s\n", ret);
 	return (0);
 }

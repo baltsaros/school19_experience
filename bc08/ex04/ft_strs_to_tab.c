@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "ft_strs_to_tab.h"
+#include "ft_stock_str.h"
 
 int	ft_strlen(char *str)
 {

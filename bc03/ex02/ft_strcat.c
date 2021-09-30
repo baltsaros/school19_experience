@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <string.h>
+
 int	ft_strlen(char *dest)
 {
 	int i;
@@ -14,11 +17,9 @@ char	*ft_strcat(char *dest, char *src)
 {
 	int	j;
 	int	size_d;
-	int	size_s;
 
 	j = 0;
 	size_d = ft_strlen(dest);
-	size_s = ft_strlen(src);
 	while (src[j])
 	{
 		dest[size_d] = src[j];
@@ -29,8 +30,6 @@ char	*ft_strcat(char *dest, char *src)
 	return (dest);
 }
 
-#include <stdio.h>
-#include <string.h>
 int	main()
 {
 	char	dest[] = "hello";
@@ -39,7 +38,6 @@ int	main()
 	char	src2[] = " world1";
 
 	printf("initial dest is %s\n", dest);
-	ft_strcat(dest, src);
-	printf("dest(ft) is %s\n", dest);
-	printf("dest(st) is %s\n", strcat(dest2, src2));
+	printf("dest(ft) is %s\n", ft_strcat(dest, src));
+	printf("dest(cat) is %s\n", strcat(dest2, src2));
 }

@@ -1,4 +1,5 @@
 #include <stdlib.h> 
+
 int	*ft_range(int min, int max)
 {
 	int		size;
@@ -6,9 +7,11 @@ int	*ft_range(int min, int max)
 	int		i;
 
 	if (min >= max)
-		return NULL;
+		return (NULL);
 	size = max - min;
 	tab = (int *)malloc(sizeof(*tab) * size);
+	if (NULL == tab)
+		return (NULL);
 	i = 0;
 	while (min < max)
 	{

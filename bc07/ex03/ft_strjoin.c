@@ -68,12 +68,16 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	{
 		length = ft_totallen(size, strs, sep);
 		unistr = (char *)malloc(sizeof(*unistr) * (length + 1));
+		if (NULL == unistr)
+			return (NULL);
 		ft_concatenation(size, unistr, strs, sep);
 		return (unistr);
 	}
 	else
 	{
 		unistr = (char *)malloc(1);
+		if (NULL == unistr)
+			return (NULL);
 		*unistr = '\0';
 		return (unistr);
 	}
