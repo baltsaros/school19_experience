@@ -30,5 +30,5 @@ int main()
 	printf("%d\n", ********ptr7);
 	ft_ultimate_ft(&ptr7);
 	printf("%d\n", ********ptr7);
-	return 0;
+	return (0);
 }

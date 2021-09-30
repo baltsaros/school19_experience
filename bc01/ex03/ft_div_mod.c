@@ -14,5 +14,5 @@ int		main()
 	ft_div_mod(44, 5, &div, &mod);
 	printf("%d\n", div);
 	printf("%d\n", mod);
-	return 0;
+	return (0);
 }

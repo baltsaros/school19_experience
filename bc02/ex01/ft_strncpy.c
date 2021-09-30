@@ -1,35 +1,32 @@
+#include <stdio.h>
+
 char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
-	int		j;
+	int		i;
 
-	j = 0;
-	while (src[j] && j < n)
+	i = 0;
+	while (src[i] && i < n)
 	{
-		dest[j] = src[j];
-		j++;
+		dest[i] = src[i];
+		i++;
 	}
-	while (j < n)
+	while (i < n)
 	{
-		dest[j] = '\0';
-		++j;
+		dest[i] = '\0';
+		++i;
 	}
 	return (dest);
 }
 
-
-#include <stdio.h>
 int		main()
 {
-	char	dest[] = "destination";
+	char	dest[] = "des";
 	char	src[] = "source";
-	int		n;
+	unsigned int	n;
 
-	n = ft_strlen(src);
-	printf("strlen SRC is %d\n", n);
-	printf("sizeofsrc is %lu\n", sizeof(src));
 	printf("dest is %s\n", dest);
 	printf("sizeof DEST is %lu\n", sizeof(dest));
-	*ft_strncpy(dest, src, n);
+	ft_strncpy(dest, src, 5);
 	printf("dest2 is %s\n", dest);
 	printf("sizeof2 DEST is %lu\n", sizeof(dest));
 }

@@ -26,10 +26,8 @@ void	ft_rev_int_tab(int *tab, int size)
 
 int	main(void)
 {
-	int		tab[1] = {};
+	int		tab[7] = {2, 0, 5, 1, 2, 9, 7};
 	int		j = 0;
-
-	tab[0] = 5;
 
 	ft_rev_int_tab(tab, 7);
 	while (j != 7)

@@ -1,13 +1,19 @@
 #include <stdio.h>
 
-int		ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	str = "hellothere";
-	printf("size of str is %lu\n", sizeof(str));
-	return (sizeof(str));
+	int		i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }
 
 int		main()
 {
-	ft_strlen("test");
+	printf("strlen is %d\n", ft_strlen("test"));
 	return (0);
+}

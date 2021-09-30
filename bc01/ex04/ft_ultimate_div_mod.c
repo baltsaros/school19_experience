@@ -21,5 +21,5 @@ int main()
 	printf("a(initial) %d, b(initial) %d\n", a, b);
 	ft_ultimate_div_mod(&a, &b);
 	printf("a(div) %d, b(mod) %d\n", a, b);
-	return 0;
+	return (0);
 }

@@ -21,5 +21,5 @@ int main()
 	ft_swap(&a, &b);
 	printf("%d\n", a);
 	printf("%d\n", b);
-	return 0;
+	return (0);
 }

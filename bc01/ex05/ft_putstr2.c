@@ -15,5 +15,5 @@ void	ft_putstr(char *str)
 int		main()
 {
 	ft_putstr("test");
-	return 0;
+	return (0);
 }

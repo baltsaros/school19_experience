@@ -1,26 +1,27 @@
+#include <stdio.h>
 
 char	*ft_strcpy(char *dest, char *src)
 {
-	int j;
+	int i;
 
-	j = 0;
-	while (src[j] != '\0')
+	i = 0;
+	while (src[i] != '\0')
 	{
-		dest[j] = src[j];
-		j++;
+		dest[i] = src[i];
+		i++;
 	}
-	dest[j] = '\0';
+	dest[i] = '\0';
+	return (dest);
 }
 
-/*
-#include <stdio.h>
 int		main()
 {
-	char	dest[] = "destin";
-	char	src[] = "source";
-	*ft_strcpy(&dest, &src);
-	printf("source %s\n", src);
-	printf("destination %s\n", dest);
+	char	dest[] = "destination";
+	char	src[] = "so";
+	
+	printf("dest before %s\n", dest);
+	ft_strcpy(dest, src);
+	printf("src %s\n", src);
+	printf("dest after %s\n", dest);
 	return (0);
 }
-*/
