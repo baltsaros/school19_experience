@@ -4,9 +4,11 @@
 void	*ft_memcpy(void *dest, void *src, size_t n)
 {
 	unsigned int	i;
-	char	*src_ch = (char *)src;
-	char	*dest_ch = (char *)dest;
-
+	char	*src_ch;
+	char	*dest_ch;
+	
+	src_ch = (char *)src;
+	dest_ch = (char *)dest;
 	i = 0;
 	while (n > i && src_ch[i])
 	{
