@@ -1,8 +1,9 @@
 #include <stdio.h>
 
-int	ft_isascii(int ch)
+int	ft_isalnum(int ch)
 {
-	if (ch >= 0 && ch <= 127)
+	if ((ch >= 48 && ch <= 57) || (ch >= 65 &&
+		ch <= 90) || (ch >= 97 && ch <= 122))
 		return (1);
 	else
 		return (0);
@@ -12,7 +13,7 @@ int	main(void)
 {
 	int	ret;
 
-	ret = ft_isascii(-1);
+	ret = ft_isalnum('9');
 	printf("return is %d\n", ret);
 	return (0);
 }
