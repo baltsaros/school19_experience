@@ -1,32 +1,21 @@
-// A C implementation of memcpy()
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
 
-void myMemCpy(void *dest, void *src, size_t n)
+void	*ft_memset(char *dest, int ch, int size)
 {
-// Typecast src and dest addresses to (char *)
-char *csrc = (char *)src;
-char *cdest = (char *)dest;
-
-// Copy contents of src[] to dest[]
-for (int i=0; i<n; i++)
-	cdest[i] = csrc[i];
+	while (size > 0 && *dest)
+	{
+		*dest = ch;
+		++dest;
+		--size;
+	}
+	return (dest);
 }
 
-// Driver program
-int main()
+int		main(void)
 {
-char csrc[] = "GeeksforGeeks";
-char cdest[100];
-myMemCpy(cdest, csrc, strlen(csrc)+1);
-printf("Copied string is %s", cdest);
+	char	dest[] = "hello world";
 
-int isrc[] = {10, 20, 30, 40, 50};
-int n = sizeof(isrc)/sizeof(isrc[0]);
-int idest[n], i;
-myMemCpy(idest, isrc, sizeof(isrc));
-printf("\nCopied array is ");
-for (i=0; i < n; i++)
-	printf("%d ", idest[i]);
-return 0;
+	ft_memset(dest + 3, '$', 10);
+	printf("new dest is %s\n", dest);
+	return (0);
 }

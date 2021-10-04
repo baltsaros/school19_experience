@@ -1,11 +1,14 @@
 #include <stdio.h>
 
-void	ft_bzero(char *str, int n)
+void	ft_bzero(void *str, size_t n)
 {
-	while (n > 0 && *str)
+	char	*str_ch;
+
+	str_ch = (char *)str;
+	while (n > 0 && *str_ch)
 	{
-		*str = '\0';
-		++str;
+		*str_ch = '\0';
+		++str_ch;
 		--n;
 	}
 }
