@@ -12,7 +12,7 @@ int	main(void)
 {
 	int	ret;
 
-	ret = ft_isascii(-1);
+	ret = ft_isascii('ç');
 	printf("return is %d\n", ret);
 	return (0);
 }
