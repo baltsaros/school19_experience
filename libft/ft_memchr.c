@@ -19,15 +19,20 @@ void	*ft_memchr(const void *buffer, int ch, size_t n)
 
 int	main(void)
 {
-	char	buffer[] = "hello world!";
+	const char buffer[] = "h\0ello world!";
 	int		ch;
 	char	*ret;
 
 	ch = 'o';
 	ret = ft_memchr(buffer, ch, 6);
 	if (NULL == ret)
-		printf("Ch was not found. Ret is '%s'\n", ret);
+		printf("Ch was not found. Ret(ft) is '%s'\n", ret);
 	else
-		printf("Ch was found. Ret is '%s'\n", ret);
+		printf("Ch was found. Ret(ft) is '%s'\n", ret);
+	ret = memchr(buffer, ch, 6);
+	if (NULL == ret)
+		printf("Ch was not found. Ret(mem) is '%s'\n", ret);
+	else
+		printf("Ch was found. Ret(mem) is '%s'\n", ret);
 	return (0);
 }
