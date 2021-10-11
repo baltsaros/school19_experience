@@ -50,9 +50,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		end;
 
 	i = 0;
-	if (!(s1[i]))
+	if (NULL == s1)
 		return (NULL);
-	if (!(set[i]))
+	if (NULL == set)
 		return (char *)s1;
 	while (check_set(s1[i], set))
 		++i;
@@ -73,32 +73,26 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 int		main(void)
 {
-	printf("0 : %s", ft_strtrim("str0str", "str"));
-	printf("\n");
-	printf("01234 : %s", ft_strtrim("01234str", "str"));
-	printf("\n");
-	printf("01234 : %s", ft_strtrim("str01234", "str"));
-	printf("\n");
-	printf("012str34 : %s", ft_strtrim("str012str34str", "str"));
-	printf("\n");
-	printf("01234 : %s", ft_strtrim("01234", "str"));
-	printf("\n");
-	printf("012345 : %s", ft_strtrim("strstr012345strstr", "str"));
-	printf("\n");
-	printf("str01234str : %s", ft_strtrim("str01234str", ""));
-	printf("\n");
-	printf("str01234str : %s", ft_strtrim("str01234str", "k"));
-	printf("\n");
-	printf("01234ttttt : %s", ft_strtrim("sssss01234tttttr", "rs"));
-	printf("\n");
-	printf("%s", ft_strtrim("strstr", "str"));
-	printf("\n");
-	printf("%s", ft_strtrim("", "str"));
-	printf("\n");
-	printf("%s", ft_strtrim(NULL, "str"));
-	printf("\n");
-	printf("%s", ft_strtrim("str", NULL));
-	printf("\n");
-	printf("%s", ft_strtrim(NULL, NULL));
+	printf("input | correct answer | ft result\n");
+	printf("TESTa - a| TEST | %s\n", ft_strtrim("TESTa", "a"));
+	printf("TESTabc - abc| TEST | %s\n", ft_strtrim("TESTabc", "abc"));
+	printf("abcTEST - abc| TEST | %s\n", ft_strtrim("abcTEST", "abc"));
+	printf("abcTESTabc - abc | TEST | %s\n", ft_strtrim("abcTESTabc", "abc"));
+	printf("abcTabc - abc | T | %s\n", ft_strtrim("abcTabc", "abc"));
+	printf("TEST - abc | TEST | %s\n", ft_strtrim("TEST", "abc"));
+	printf("abcTEST - bca | TEST | %s\n", ft_strtrim("abcTEST", "bca"));
+	printf("abcTEabcSTcab - bca | TEabcST | %s\n", ft_strtrim("abcTEabcSTcab", "bca"));
+	printf("aaaaaaTESTbbbbbb - abc | TEST | %s\n", ft_strtrim("aaaaaaTESTbbbbbb", "abc"));
+	printf("aaaaaaTESTbbbbbbccccccc - abc | TEST | %s\n", ft_strtrim("aaaaaaTESTbbbbbbccccccc", "abc"));
+	printf("bcaTESTcab - | bcaTESTcab | %s\n", ft_strtrim("bcaTESTcab", ""));
+	printf("  bcaTESTcab   -    | bcaTESTcab | %s\n", ft_strtrim("  bcaTESTcab  ", "  "));
+	printf("abcTEST - l | abcTEST | %s\n", ft_strtrim("abcTEST", "l"));
+	printf("abcTEST - 10 | abcTEST | %s\n", ft_strtrim("abcTEST", "10"));
+	printf("abcTEST10 - 10 | abcTEST | %s\n", ft_strtrim("abcTEST10", "10"));
+	printf("abccba - bca | (null) | %s\n", ft_strtrim("abccba", "bac"));
+	printf(" - abc | (null) | %s\n", ft_strtrim("", "abc"));
+	printf("NULL - abc| (null) | %s\n", ft_strtrim(NULL, "abc"));
+	printf("abc - NULL | abc | %s\n", ft_strtrim("abc", NULL));
+	printf("NULL - NULL | (null) | %s\n", ft_strtrim(NULL, NULL));
 	return (0);
 }
