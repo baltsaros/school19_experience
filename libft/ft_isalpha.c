@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int	ft_isascii(int ch)
+int	ft_isalpha(int ch)
 {
 	if ((ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122))
 		return (1);
@@ -12,17 +12,17 @@ int	main(void)
 {
 	int	ret;
 
-	ret = ft_isascii('A');
+	ret = ft_isalpha('A');
 	printf("return is %d\n", ret);
-	ret = ft_isascii('Z');
+	ret = ft_isalpha('Z');
 	printf("return is %d\n", ret);
-	ret = ft_isascii('a');
+	ret = ft_isalpha('a');
 	printf("return is %d\n", ret);
-	ret = ft_isascii('z');
+	ret = ft_isalpha('z');
 	printf("return is %d\n", ret);
-	ret = ft_isascii('1');
+	ret = ft_isalpha('1');
 	printf("return is %d\n", ret);
-	ret = ft_isascii(' ');
+	ret = ft_isalpha(' ');
 	printf("return is %d\n", ret);
 	return (0);
 }

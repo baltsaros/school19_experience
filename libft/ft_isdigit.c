@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int	ft_isascii(int ch)
+int	ft_isdigit(int ch)
 {
 	if (ch >= 48 && ch <= 57)
 		return (1);
@@ -12,11 +12,11 @@ int	main(void)
 {
 	int	ret;
 
-	ret = ft_isascii('a');
+	ret = ft_isdigit('a');
 	printf("return is %d\n", ret);
-	ret = ft_isascii('0');
+	ret = ft_isdigit('0');
 	printf("return is %d\n", ret);
-	ret = ft_isascii('9');
+	ret = ft_isdigit('9');
 	printf("return is %d\n", ret);
 	return (0);
 }

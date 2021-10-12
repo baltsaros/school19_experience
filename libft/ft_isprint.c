@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int	ft_isascii(int ch)
+int	ft_isprint(int ch)
 {
 	if (ch >= 32 && ch <= 126)
 		return (1);
@@ -12,13 +12,13 @@ int	main(void)
 {
 	int	ret;
 
-	ret = ft_isascii('a');
+	ret = ft_isprint('a');
 	printf("return is %d\n", ret);
-	ret = ft_isascii('\0');
+	ret = ft_isprint('\0');
 	printf("return is %d\n", ret);
-	ret = ft_isascii(' ');
+	ret = ft_isprint(' ');
 	printf("return is %d\n", ret);
-	ret = ft_isascii('~');
+	ret = ft_isprint('~');
 	printf("return is %d\n", ret);
 	return (0);
 }
