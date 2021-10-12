@@ -11,7 +11,7 @@ int		ft_strlen(char const *str)
 	return (i);
 }
 
-int		check_set(int ch, char const *set)
+static int		check_set(int ch, char const *set)
 {
 	int		i;
 

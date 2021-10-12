@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-size_t	ft_intlen(int n)
+static size_t	ft_intlen(int n)
 {
 	unsigned int	i;
 
@@ -15,7 +15,7 @@ size_t	ft_intlen(int n)
 	}
 	return (i);
 }
-char	*ft_addnbr(int n, char *s, int i)
+static char	*ft_addnbr(int n, char *s, int i)
 {
 	unsigned int	nbr;
 
