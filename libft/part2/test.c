@@ -9,6 +9,8 @@ static int	check_str(char const *s, char c)
 
 	i = 0;
 	n = 1;
+	if (!(s[i]))
+		return (0);
 	while (s[i])
 	{
 		if (s[i] != c && s[i + 1] == c)
@@ -63,12 +65,12 @@ char	**ft_split(char const *s, char c)
 			++start;
 	}
 	spl[i] = '\0';
-	return (char **)spl;
+	return (spl);
 }
 
 int		main(void)
 {
-	char	s[] = "aabcaAaefaaA";
+	char	s[] = "";
 	char	c;
 	char	**ret;
 	int		j;
