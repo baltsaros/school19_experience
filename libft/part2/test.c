@@ -68,7 +68,7 @@ char	**ft_split(char const *s, char c)
 
 int		main(void)
 {
-	char	s[] = "abcaef";
+	char	s[] = "aabcaAaefaaA";
 	char	c;
 	char	**ret;
 	int		j;
@@ -81,5 +81,6 @@ int		main(void)
 		printf("ret is '%s'\n", ret[j]);
 		++j;
 	}
+	free(ret);
 	return (0);
 }
