@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 18:34:10 by abuzdin           #+#    #+#             */
-/*   Updated: 2021/10/12 19:00:50 by abuzdin          ###   ########.fr       */
+/*   Updated: 2021/10/19 13:00:37 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+typedef struct	s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *str, size_t n);

@@ -24,7 +24,7 @@ SRCS	= srcs/ft_isalpha.c \
 			srcs/ft_calloc.c \
 			srcs/ft_strdup.c \
 
-OBJS	= ${SRCS: .c=.o}
+OBJS	= ${SRCS:.c=.o}
 
 INCS	= includes
 
