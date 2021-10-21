@@ -24,7 +24,6 @@ int		display_file(char *path)
 			++i;
 		}
 	}
-	buf[ARRAY_SIZE] = '\0';
 	close(fd);
 	return (1);
 }

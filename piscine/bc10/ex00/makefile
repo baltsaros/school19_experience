@@ -1,3 +1,4 @@
+C_PURPLE_B		=\033[1;95m
 C_YELLOW_B		=\033[1;33m
 C_LIGHT_RED_B	=\033[0;91m
 C_WHITE			=\033[0;97m
@@ -30,7 +31,7 @@ fclean:		clean
 
 re:			fclean all
 
-test : re
+test:		re
 	@echo "Hello world!" > test_file.txt
 	@echo "[$(C_YELLOW_B)TESTING$(C_RESET)] $(C_WHITE)No file$(C_RESET)" ;
 	@./ft_display_file || true;
