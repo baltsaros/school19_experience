@@ -24,7 +24,7 @@ int	ft_base_control(char *base)
 	return (1);
 }
 
-void	ft_putnbr(int nbr, int i)
+void	ft_putnbr(int nbr, unsigned int i, char *base)
 {
 	unsigned int	nb;
 	if (nbr < 0)
@@ -34,41 +34,47 @@ void	ft_putnbr(int nbr, int i)
 	}
 	else
 		nb = nbr;
-	if (nb > 0)
+	if (nb >= i)
 	{
-		ft_putnbr(nb / i, i);
+		ft_putnbr(nb / i, i, base);
 		nb = nb % i;
-		if (nb < 10)
-			ft_putchar(nb + 48);
-		if (nb >= 10)
-			ft_putchar(nb + 55);
 	}
+	if (nb < i)
+		ft_putchar(base[nb]);
 }
 
 void	ft_putnbr_base(int nbr, char *base)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	while (base[i])
 		++i;
 	if (ft_base_control(base))
-		ft_putnbr(nbr, i);
+		ft_putnbr(nbr, i, base);
 }
 
 int	main()
 {
 	int		nbr;
-	char	*base;
+	// char	*base;
 
-	nbr = 2147123124;
+	nbr = 1234678;
 	ft_putnbr_base(nbr, "0123456789");
+	ft_putchar('\n');
+	ft_putnbr_base(nbr, "9876543210");
+	ft_putchar('\n');
+	ft_putnbr_base(nbr, "9876543");
 	ft_putchar('\n');
 	ft_putnbr_base(nbr, "01");
 	ft_putchar('\n');
 	ft_putnbr_base(nbr, "0123456789ABCDEF");
 	ft_putchar('\n');
 	ft_putnbr_base(nbr, "poneyvif");
+	ft_putchar('\n');
+	ft_putnbr_base(nbr, "abcdef");
+	ft_putchar('\n');
+	ft_putnbr_base(nbr, "helop");
 	ft_putchar('\n');
 	return (0);
 	//base = "0123456789"
