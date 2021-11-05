@@ -8,7 +8,7 @@
 
 #define SIZE 1024
 
-void	ft_putstr_fd(char *str);
+void	ft_putstr_fd(int fd, char *str);
 int		ft_cat(int n, char **files);
 
 #endif

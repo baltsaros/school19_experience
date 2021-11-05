@@ -6,18 +6,6 @@
 
 #include "ft_cat.h"
 
-void	ft_putstr_fd(int fd, char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		write(fd, &str[i], 1);
-		++i;
-	}
-}
-
 int		write_file(char *path)
 {
 	int		i;
@@ -28,7 +16,7 @@ int		write_file(char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)			// ERR1
 	{
-		ft_putstr_fd(2, strerror(errno));
+		ft_putstr_fd(1, strerror(errno));
 		return (0);
 	}
 	i = 0;

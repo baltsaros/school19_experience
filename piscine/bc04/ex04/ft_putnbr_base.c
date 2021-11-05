@@ -9,17 +9,22 @@ int	ft_base_control(char *base)
 	int	i;
 	int	j;
 
-	i = 1;
-	j = 0;
-	if (base[j] == '\0'|| base[j + 1] == '\0' || base[j] == '-'
-		|| base[j] == '+' || base[j] < 32 || base[j] > 126)
+	i = 0;
+	if (base[i] == '\0' || base[i + 1] == '\0')
 		return (0);
-	while (base[j])
+	while (base[i])
 	{
-		if (base[j] == base[i])
+		j = i + 1;
+		if (base[i] == '+' || base[i] == '-' || (base[i] < 33
+			&& base[i] > 126))
 			return (0);
-		++j;
-		i = j + 1;
+		while (base[j])
+		{
+			if (base[i] == base[j])
+				return (0);
+			++j;
+		}
+		++i;
 	}
 	return (1);
 }
