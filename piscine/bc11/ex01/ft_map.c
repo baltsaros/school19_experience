@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	*ft_map(int *tab, int length, int(*f)(int))
+int	*ft_map(int *tab, int length, int (*f)(int))
 {
 	int		*ret;
 	int		i;
