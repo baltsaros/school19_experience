@@ -38,7 +38,7 @@ int	ft_sort(int a, int b)
 
 int main(void)
 {
-	int		array[5] = {10, 1, 5, 1, 1};
+	int		array[5] = {10, 1, 5, 1, 2};
 	int		length;
 
 	length = 5;
