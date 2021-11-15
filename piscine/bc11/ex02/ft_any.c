@@ -36,7 +36,6 @@ int	main(int argc, char *argv[])
 	// argv[3] = "Tfour";
 	// argv[4] = 0;
 	// (void)argc;
-	// // argc = 4;
 	if (argc > 1)
 		printf("return is %d\n", ft_any(argv, &ft_str_is_lowercase));
 	return (0);
