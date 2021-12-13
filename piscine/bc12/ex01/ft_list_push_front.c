@@ -17,8 +17,8 @@ int		main(void)
 
 	data = 19;
 	data2 = 42;
-	elem = ft_create_elem(&data);
-	ft_list_push_front(&elem, &data2);
+	elem = ft_create_elem((void *)&data);
+	ft_list_push_front(&elem, (void *)&data2);
 	printf("address of page2 is %p\n", (void *)elem->next);
 	printf("data page1 is %d\n", *((int *)elem->data));
 	printf("address of page 3 is %p\n", (void *)elem->next->next);
