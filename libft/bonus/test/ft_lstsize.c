@@ -5,10 +5,9 @@ int	ft_lstsize(t_list *lst)
 {
 	int	size;
 
-	size = 0;
+	size = 1;
 	while (lst != 0)
 	{
-		printf("Content on p[%d] is equal to %d.\n", size, *((int *)lst->content));
 		++size;
 		lst = lst->next;
 	}
@@ -21,7 +20,7 @@ int	main(void)
 	t_list	*head;
 
 	if (!(data = (int *)malloc(sizeof(int)*4)))
-		return (0);
+		return (NULL);
 	data[0] = 11;
 	data[1] = 22;
 	data[2] = 33;

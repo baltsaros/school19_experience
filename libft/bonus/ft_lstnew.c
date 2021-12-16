@@ -4,22 +4,22 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list	*elem;
+	t_list	*lst;
 
-	if (!(elem = (t_list *)malloc(sizeof(elem))))
+	if (!(lst = (t_list *)malloc(sizeof(t_list))))
 		return (NULL);
-	elem->content = content;
-	elem->next = 0;
-	return (elem);
+	lst->content = content;
+	lst->next = NULL;
+	return (lst);
 }
 
 // int		main(void)
 // {
-// 	int		n;
-// 	t_list	*elem;
+// 	t_list	*head;
+// 	int		data;
 
-// 	n = 11;
-// 	elem = ft_lstnew((void *)&n);
-// 	printf("n in the elem is equal %d\n", *(int *)elem->content);
+// 	data = 11;
+// 	head = ft_lstnew((void *)&data);
+// 	printf("Content on p1 is equal to %d\n", *((int *)head->content));
 // 	return (0);
 // }
