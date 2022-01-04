@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 18:34:10 by abuzdin           #+#    #+#             */
-/*   Updated: 2021/11/23 16:13:47 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/04 12:52:19 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		ft_isalnum(int ch);
 int		ft_isalpha(int ch);
 int		ft_isdigit(int ch);
 int		ft_isprint(int ch);
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	*ft_memchr(const void *buffer, int ch, size_t n);
 int		ft_memcmp(const void *buffer1, const void *buffer2, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
@@ -38,7 +39,8 @@ char	*ft_strchr(const char *str, int ch);
 char	*ft_strdup(const char *src);
 size_t	ft_strlcat(char *dest, const char *src, size_t n);
 size_t	ft_strlcpy(char *dest, const char *src, size_t n);
-size_t	ft_strlen(char *str);
+void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
 char 	*ft_strnstr(const char *big, const char *little, size_t n);
 char	*ft_strrchr(const char *str, int ch);
