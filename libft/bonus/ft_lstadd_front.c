@@ -4,30 +4,42 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	t_list	*tmp;
-
-	tmp = *lst;
+	new->next = *lst;
 	*lst = new;
-	(*lst)->next = tmp;
 }
 
 int		main(void)
 {
-	int		a;
-	int		b;
+	int		array[3];
+	int		i;
 	t_list	*head;
 	t_list	*current;
+	t_list	*print;
 
-	a = 11;
-	b = 22;
-	head = ft_lstnew((void *)&a);
-	current = ft_lstnew((void *)&b);
+	array[0] = 11;
+	array[1] = 22;
+	array[2] = 33;
+	i = 0;
+	head = ft_lstnew((void *)&array[0]);
+	current = ft_lstnew((void *)&array[1]);
 	head->next = current;
-	printf("Content on p1 is equal to %d\n", *((int *)head->content));
-	printf("Content on p2 is equal to %d\n", *((int *)head->next->content));
-	printf("Pushing the new element to the front...\n");
+	current = ft_lstnew((void *)&array[2]);
+	print = head;
+	while (print != NULL)
+	{
+		printf("Content on p%d is equal to %d\n", i, *((int *)print->content));
+		++i;
+		print = print->next;
+	}
+	printf("Pushing a new element to the front...\n");
 	ft_lstadd_front(&head, current);
-	printf("Content on p1 is equal to %d\n", *((int *)head->content));
-	printf("Content on p2 is equal to %d\n", *((int *)head->next->content));
+	print = head;
+	i = 0;
+	while (print != NULL)
+	{
+		printf("Content on p%d is equal to %d\n", i, *((int *)print->content));
+		++i;
+		print = print->next;
+	}
 	return (0);
 }
