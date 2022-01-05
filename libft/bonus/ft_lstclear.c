@@ -5,12 +5,15 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 
 	if (!(*lst))
 		return ;
-	while (*lst != NULL)
+	if (*del)
 	{
-		tmp = (*lst)->next;
-		(*del)((*lst)->content);
-		free(*lst);
-		*lst = tmp;
+		while (*lst != NULL)
+		{
+			tmp = (*lst)->next;
+			(*del)((*lst)->content);
+			free(*lst);
+			*lst = tmp;
+		}
 	}	
 }
 
