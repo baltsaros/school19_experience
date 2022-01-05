@@ -47,7 +47,7 @@ char	**ft_split(char const *s, char c)
 	start = 0;
 	if (!s)
 		return (NULL);
-	if (!(spl = (char **)malloc(sizeof(*spl) * (check_str(s, c) + 1))))
+	if (!(spl = (char **)malloc(sizeof(spl) * (check_str(s, c) + 1))))
 		return (NULL);
 	while (s[start])
 	{
@@ -63,13 +63,15 @@ char	**ft_split(char const *s, char c)
 		if (s[start])
 			++start;
 	}
-	spl[i] = '\0';
+	spl[i] = NULL;
 	return (spl);
 }
 
 int		main(void)
 {
+	// char	s[] = "b";
 	char	s[] = "aaabcaAaAaefaa a";
+	// char	s[] = "bac";
 	char	c;
 	char	**ret;
 	int		j;
@@ -79,8 +81,10 @@ int		main(void)
 	j = 0;
 	while (ret[j])
 	{
-		printf("ret is '%s'\n", ret[j]);
+		printf("str[%d] is '%s'\n", j, ret[j]);
 		++j;
 	}
+	printf("Final amount of strings is %d\n", j);
+	free(ret);
 	return (0);
 }
