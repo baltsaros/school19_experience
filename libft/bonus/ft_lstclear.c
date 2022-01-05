@@ -1,16 +1,22 @@
 #include "libft.h"
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*tmp;
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
-{
-	if (!lst)
+	if (!(*lst))
 		return ;
-	if (del)
-		(*del)(lst->content);
-	free(lst);
+	while (*lst != NULL)
+	{
+		tmp = (*lst)->next;
+		(*del)((*lst)->content);
+		free(*lst);
+		*lst = tmp;
+	}	
 }
-void	ft_print(void *content)
+
+void	ft_clear(void *content)
 {
-	printf("Content is %d\n", *((int *)content));
+	printf("freeing %d\n", *((int *)content));
 }
 
 int		main(void)
@@ -34,8 +40,8 @@ int		main(void)
 		print = print->next;
 		++i;
 	}
-	printf("Deleting one element...\n");
-	ft_lstdelone(head->next, &ft_print);
+	printf("Deleting one or more elements...\n");
+	ft_lstclear(&head->next, &ft_clear);
 	i = 0;
 	print = head;
 	while (print)
