@@ -1,9 +1,9 @@
-#include <stdio.h>
+#include "libft.h"
 
-int	ft_isalnum(int ch)
+int	ft_isalnum(int c)
 {
-	if ((ch >= 48 && ch <= 57) || (ch >= 65 &&
-		ch <= 90) || (ch >= 97 && ch <= 122))
+	if ((c >= 48 && c <= 57) || (c >= 65 &&
+		c <= 90) || (c >= 97 && c <= 122))
 		return (1);
 	else
 		return (0);
@@ -13,7 +13,21 @@ int	main(void)
 {
 	int	ret;
 
+	ret = ft_isalnum('0');
+	printf("for '0' return is %d\n", ret);
 	ret = ft_isalnum('9');
-	printf("return is %d\n", ret);
+	printf("for '9' return is %d\n", ret);
+	ret = ft_isalnum('a');
+	printf("for 'a' return is %d\n", ret);
+	ret = ft_isalnum('z');
+	printf("for 'z' return is %d\n", ret);
+	ret = ft_isalnum('A');
+	printf("for 'A' return is %d\n", ret);
+	ret = ft_isalnum('Z');
+	printf("for 'Z' return is %d\n", ret);
+	ret = ft_isalnum(' ');
+	printf("for ' ' return is %d\n", ret);
+	ret = ft_isalnum(')');
+	printf("for ')' return is %d\n", ret);
 	return (0);
 }

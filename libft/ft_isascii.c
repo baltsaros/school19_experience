@@ -1,8 +1,8 @@
-#include <stdio.h>
+#include "libft.h"
 
-int	ft_isascii(int ch)
+int	ft_isascii(int c)
 {
-	if (ch >= 0 && ch <= 127)
+	if (c >= 0 && c <= 127)
 		return (1);
 	else
 		return (0);
@@ -13,6 +13,6 @@ int	main(void)
 	int	ret;
 
 	ret = ft_isascii('ç');
-	printf("return is %d\n", ret);
+	printf("for 'ç' return is %d\n", ret);
 	return (0);
 }

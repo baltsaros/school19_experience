@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {
@@ -34,12 +34,12 @@ int	main(void)
 	int		ret;
 
 	ret = ft_atoi("  \t--+-+0234ab567");
-	printf("%s\n%d\n", str, ret);
+	printf("Test 1 %s\n%d\n", str, ret);
 	ret = ft_atoi("  --+-+\v0234ab567");
-	printf("%s\n%d\n", str2, ret);
+	printf("Test 2 %s\n%d\n", str2, ret);
 	ret = ft_atoi("  ---+-+50234ab567");
-	printf("%s\n%d\n", str3, ret);
+	printf("Test 3 %s\n%d\n", str3, ret);
 	ret = ft_atoi("1234ab567");
-	printf("%s\n%d\n", str4, ret);
+	printf("Test 4 %s\n%d\n", str4, ret);
 	return (0);
 }

@@ -29,5 +29,6 @@ int		main(void)
 	elem->next->next->next = ft_lstnew((void *)&data[3]);
 	last = ft_lstlast(elem);
 	printf("content on the last p is equal to %d\n", *(int *)last->content);
+	printf("content on the last p is equal to %d\n", *(int *)elem->next->next->next->content);
 	return (0);
 }
