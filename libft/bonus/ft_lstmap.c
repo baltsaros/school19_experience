@@ -1,9 +1,66 @@
 #include "libft.h"
-t_list *ft_lstmap(t_list *lst, void (*f)(void *), void (*del)(void *))
-{
 
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*tmp;
+
+	if (!(*lst) || !del)
+		return ;
+	while (*lst != NULL)
+	{
+		tmp = (*lst)->next;
+		(*del)((*lst)->content);
+		free(*lst);
+		*lst = tmp;
+	}
 }
 
+t_list *ft_lstmap(t_list *lst, void (*f)(void *), void (*del)(void *))
+{
+	t_list	*lst_new;
+	t_list	*lst_new_head;
+
+	if ((!lst) || (!f) || (!del))
+		return (NULL);
+	f(lst->content);
+	lst_new_head = ft_lstnew(lst->content);
+	lst_new = lst_new_head;
+	lst = lst->next;
+	while (lst)
+	{
+		f(lst->content);
+		if (!(lst_new->next = ft_lstnew(lst->content)))
+		{
+			ft_lstclear(&lst_new, del);
+			return (NULL);
+		}
+		lst = lst->next;
+		lst_new = lst_new->next;
+	}
+	return (lst_new_head);
+}
+
+void	ft_multiply_two(void *content)
+{
+	int	multiply;
+
+	multiply = *(int *)content * 2;
+	printf("%d multiplied by two is %d\n", *(int *)content, multiply);
+}
+
+// void	ft_multiply_two(void *content)
+// {
+// 	int	initial;
+
+// 	initial = *(int *)content;
+// 	content = *(int *)content * 2;
+// 	printf("%d multiplied by two is %d\n", initial, *(int *)content);
+// }
+
+void	del(void *content)
+{
+	printf("Content is %d\n", *((int *)content));
+}
 
 int		main(void)
 {
@@ -11,6 +68,7 @@ int		main(void)
 	int		i;
 	t_list	*head;
 	t_list	*print;
+	t_list	*new;
 
 	i = 0;
 	ar[0] = 11;
@@ -29,9 +87,9 @@ int		main(void)
 		++i;
 	}
 	printf("Transofrming the content...\n");
-	ft_lstiter(head, &ft_multiply_two);
+	new = ft_lstmap(head, &ft_multiply_two, &del);
 	i = 0;
-	print = head;
+	print = new;
 	while (print)
 	{
 		printf("Content on p%d is equal to %d\n", i, *((int *)print->content));
