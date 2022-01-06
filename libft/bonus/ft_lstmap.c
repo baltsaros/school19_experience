@@ -42,20 +42,12 @@ t_list *ft_lstmap(t_list *lst, void (*f)(void *), void (*del)(void *))
 
 void	ft_multiply_two(void *content)
 {
-	int	multiply;
+	int	initial;
 
-	multiply = *(int *)content * 2;
-	printf("%d multiplied by two is %d\n", *(int *)content, multiply);
+	initial = *(int *)content;
+	*(int *)content = *(int *)content * 2;
+	printf("%d multiplied by two is %d\n", initial, *(int *)content);
 }
-
-// void	ft_multiply_two(void *content)
-// {
-// 	int	initial;
-
-// 	initial = *(int *)content;
-// 	content = *(int *)content * 2;
-// 	printf("%d multiplied by two is %d\n", initial, *(int *)content);
-// }
 
 void	del(void *content)
 {
