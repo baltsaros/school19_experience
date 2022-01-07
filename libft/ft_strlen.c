@@ -12,6 +12,6 @@ size_t	ft_strlen(const char *s)
 
 int	main(void)
 {
-	printf("strlen is %ld\n", ft_strlen("test"));
+	printf("length of 'test' is %ld\n", ft_strlen("test"));
 	return (0);
 }

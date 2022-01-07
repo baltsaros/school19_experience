@@ -1,14 +1,14 @@
 #include "libft.h"
 
-char	*ft_strchr(const char *str, int ch)
+char	*ft_strchr(const char *s, int c)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (s[i])
 	{
-		if (str[i] == ch)
-			return (char *)str + i;
+		if (s[i] == c)
+			return (char *)s + i;
 		++i;
 	}
 	return (NULL);
@@ -17,14 +17,21 @@ char	*ft_strchr(const char *str, int ch)
 int	main(void)
 {
 	char	str[] = "Hello world!";
-	char	ch;
+	char	str2[] = "Hello world!";
+	char	c;
 	char	*ret;
+	char	*ret2;
 
-	ch = 'o';
-	ret = ft_strchr(str, ch);
+	c = 's';
+	ret = ft_strchr(str, c);
 	if (NULL == ret)
-		printf("Ch was not found. Ret is '%s'\n", ret);
+		printf("C was not found. Ret(ft) is '%s'\n", ret);
 	else
-		printf("Ch was found. Ret is '%s'\n", ret);
+		printf("C was found. Ret(ft) is '%s'\n", ret);
+	ret2 = strchr(str2, c);
+	if (NULL == ret2)
+		printf("C was not found. Ret(or) is '%s'\n", ret2);
+	else
+		printf("C was found. Ret(or) is '%s'\n", ret2);
 	return (0);
 }

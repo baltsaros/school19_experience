@@ -2,8 +2,8 @@
 
 void	*ft_calloc(size_t num, size_t size)
 {
-	int	*ptr;
-	unsigned int	i;
+	int		*ptr;
+	size_t	i;
 
 	i = 0;
 	ptr = (int *)malloc(num * size);

@@ -1,25 +1,30 @@
 #include "libft.h"
 
-void	*ft_memset(void *dest, int ch, size_t n)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	char	*dest_ch;
+	char	*dest;
 
-	dest_ch = (char *)dest;
-	while (n > 0 && *dest_ch)
+	dest = (char *)s;
+	while (n > 0 && *dest)
 	{
-		*dest_ch = ch;
-		++dest_ch;
+		*dest = c;
+		++dest;
 		--n;
 	}
-	return (dest_ch);
+	return (s);
 }
 
 int		main(void)
 {
-	char	dest[] = "hello world";
+	char	s[] = "hello world";
+	char	*ret;
+	char	s2[] = "hello world";
+	char	*ret2;
 
-	ft_memset(dest + 3, '$', 4);
-	// memset(dest + 3, '$', 4);
-	printf("new dest is %s\n", dest);
+
+	ret = ft_memset(s + 3, '$', 5);
+	ret2 = memset(s2 + 3, '$', 5);
+	printf("return(ft) is '%s'\n", ret);
+	printf("return(or) is '%s'\n", ret2);
 	return (0);
 }

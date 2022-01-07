@@ -1,16 +1,16 @@
 #include "libft.h"
 
-void	*ft_memchr(const void *buffer, int ch, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned int	i;
+	size_t		i;
 	const char	*str;
 
 	i = 0;
-	str = buffer;
+	str = s;
 	while (i < n)
 	{
-		if (str[i] == ch)
-			return (void *)buffer + i;
+		if (str[i] == c)
+			return (void *)s + i;
 		++i;
 	}
 	return (NULL);
@@ -19,19 +19,19 @@ void	*ft_memchr(const void *buffer, int ch, size_t n)
 int	main(void)
 {
 	const char buffer[] = "h\0ello world!";
-	int		ch;
+	int		c;
 	char	*ret;
 
-	ch = 'o';
-	ret = ft_memchr(buffer, ch, 6);
+	c = 'e';
+	ret = ft_memchr(buffer, c, 6);
 	if (NULL == ret)
-		printf("Ch was not found. Ret(ft) is '%s'\n", ret);
+		printf("C was not found. Ret(ft) is '%s'\n", ret);
 	else
-		printf("Ch was found. Ret(ft) is '%s'\n", ret);
-	ret = memchr(buffer, ch, 6);
+		printf("C was found. Ret(ft) is '%s'\n", ret);
+	ret = memchr(buffer, c, 6);
 	if (NULL == ret)
-		printf("Ch was not found. Ret(mem) is '%s'\n", ret);
+		printf("C was not found. Ret(or) is '%s'\n", ret);
 	else
-		printf("Ch was found. Ret(mem) is '%s'\n", ret);
+		printf("C was found. Ret(or) is '%s'\n", ret);
 	return (0);
 }
