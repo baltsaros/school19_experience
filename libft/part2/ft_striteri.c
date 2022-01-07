@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
@@ -14,7 +12,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 	}
 }
 
-static void	ft_to_lowercase(unsigned int i, char *ch)
+void	ft_to_lowercase(unsigned int i, char *ch)
 {
 	printf("s[%d] is %c\n", i, ch[0]);
 	if (ch[0] >= 65 && ch[0] <= 90)

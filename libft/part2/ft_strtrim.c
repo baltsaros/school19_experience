@@ -1,7 +1,6 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include "libft.h"
 
-int		ft_strlen(char const *str)
+size_t	ft_strlen(char const *str)
 {
 	unsigned int	i;
 
@@ -27,7 +26,7 @@ static int		check_set(int ch, char const *set)
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	unsigned int	i;
+	size_t	i;
 	char	*src_ch;
 	char	*dest_ch;
 	

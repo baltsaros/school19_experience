@@ -1,15 +1,5 @@
 #include "libft.h"
 
-size_t	ft_strlen(char const *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*unis;
@@ -37,17 +27,17 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (unis);
 }
 
-int	main(void)
-{
-	char	s1[] = "Hello";
-	char	s2[] = " world!";
-	char	*ret;
+// int	main(void)
+// {
+// 	char	s1[] = "Hello";
+// 	char	s2[] = " world!";
+// 	char	*ret;
 
-	ret = ft_strjoin(s1, s2);
-	if (NULL == ret)
-		printf("Ret is null!\n");
-	else
-		printf("Ret is '%s'\n", ret);
-	free(ret);
-	return (0);
-}
+// 	ret = ft_strjoin(s1, s2);
+// 	if (NULL == ret)
+// 		printf("Ret is null!\n");
+// 	else
+// 		printf("Ret is '%s'\n", ret);
+// 	free(ret);
+// 	return (0);
+// }

@@ -13,12 +13,12 @@ void	ft_putendl_fd(char *s, int fd)
 	write(fd, "\n", 1);
 }
 
-int		main(void)
-{
-	char	s[] = "Hello world!";
-	int		fd;
+// int		main(void)
+// {
+// 	char	s[] = "Hello world!";
+// 	int		fd;
 
-	fd = 1;
-	ft_putendl_fd(s, fd);
-	return (0);
-}
+// 	fd = 1;
+// 	ft_putendl_fd(s, fd);
+// 	return (0);
+// }

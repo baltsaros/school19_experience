@@ -18,16 +18,16 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
-int	main(void)
-{
-	char	s[] = "Hello world!";
-	char	*ret;
+// int	main(void)
+// {
+// 	char	s[] = "Hello world!";
+// 	char	*ret;
 
-	ret = ft_substr(s, 2, 4);
-	if (NULL == ret)
-		printf("Ret is null!\n");
-	else
-		printf("Ret is '%s' Size of ret is %ld.\n", ret, sizeof(ret));
-	free(ret);
-	return (0);
-}
+// 	ret = ft_substr(s, 2, 4);
+// 	if (NULL == ret)
+// 		printf("Ret is null!\n");
+// 	else
+// 		printf("Ret is '%s' Size of ret is %ld.\n", ret, sizeof(ret));
+// 	free(ret);
+// 	return (0);
+// }

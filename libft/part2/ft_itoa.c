@@ -1,5 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include "libft.h"
 
 static size_t	ft_intlen(int n)
 {
@@ -41,7 +40,7 @@ static char	*ft_addnbr(int n, char *s, int i)
 char	*ft_itoa(int n)
 {
 	char	*s_int;
-	unsigned int	i;
+	size_t	i;
 
 	i = ft_intlen(n);
 	s_int = (char *)malloc(sizeof(*s_int) * (i + 1));

@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 
 size_t	ft_strlen(const char *s)
@@ -31,7 +29,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	return (s2);
 }
 
-static char	ft_to_uppercase(unsigned int i, char ch)
+char	ft_to_uppercase(unsigned int i, char ch)
 {
 	printf("s[%d] is %c\n", i, ch);
 	if (ch >= 97 && ch <= 122)
