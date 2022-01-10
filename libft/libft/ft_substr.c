@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:34:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 09:34:27 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/10 17:58:08 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*substr;
 	size_t	i;
 
+	if (!(char *)s)
+		return (NULL);
 	substr = (char *)malloc(sizeof(*substr) * (len + 1));
 	if (NULL == substr)
 		return (NULL);
@@ -32,14 +34,23 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 // int	main(void)
 // {
-// 	char	s[] = "Hello world!";
-// 	char	*ret;
+// 	char	str[] = "lorem ipsum dolor sit amet";
+// 	char	*strsub;
+// 	char	*test;
 
-// 	ret = ft_substr(s, 2, 4);
-// 	if (NULL == ret)
-// 		printf("Ret is null!\n");
+// 	if (!(strsub = ft_substr(str, 400, 20)))
+// 		printf("NULL\n");
 // 	else
-// 		printf("Ret is '%s' Size of ret is %ld.\n", ret, sizeof(ret));
-// 	free(ret);
+// 	{
+// 		test = (char *)&strsub[30];
+// 		test = "TEST TEST";
+// 		if (strsub)
+// 			printf("Substr is %s\n", strsub);
+// 		else
+// 			printf("Fail\n");
+// 	}
+// 	if (str == strsub)
+// 		printf("No return for substr");
+// 	(void)test;
 // 	return (0);
 // }
