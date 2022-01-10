@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 09:33:32 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/01/10 09:50:28 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*unis;
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	l;
+	size_t	i;
+	size_t	j;
+	size_t	l;
 
 	l = ft_strlen(s1) + ft_strlen(s2);
 	unis = (char *)malloc(sizeof(*unis) * (l + 1));

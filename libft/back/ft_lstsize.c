@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 09:31:21 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/01/10 09:42:16 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 int	ft_lstsize(t_list *lst)
@@ -7,7 +19,7 @@ int	ft_lstsize(t_list *lst)
 	size = 0;
 	while (lst != 0)
 	{
-		printf("Content on p[%d] is equal to %d.\n", size, *((int *)lst->content));
+		printf("Content[%d] is %d.\n", size, *((int *)lst->content));
 		++size;
 		lst = lst->next;
 	}

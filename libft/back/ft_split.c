@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 09:33:11 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/01/10 10:54:09 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static int	check_str(char const *s, char c)
@@ -23,7 +35,8 @@ static char	*ft_strndup(char const *str, size_t size)
 	char	*dest;
 	size_t	i;
 
-	if (!(dest = (char *)malloc(sizeof(*dest) * (size + 1))))
+	dest = (char *)malloc(sizeof(*dest) * (size + 1));
+	if (!dest)
 		return (NULL);
 	i = 0;
 	while (str[i] && i < size)
@@ -35,19 +48,14 @@ static char	*ft_strndup(char const *str, size_t size)
 	return (dest);
 }
 
-char	**ft_split(char const *s, char c)
+static char	**ft_create_str(char **spl, char const *s, char c)
 {
-	char	**spl;
-	int		i;
 	int		start;
 	int		end;
+	int		i;
 
 	i = 0;
 	start = 0;
-	if (!s)
-		return (NULL);
-	if (!(spl = (char **)malloc(sizeof(spl) * (check_str(s, c) + 1))))
-		return (NULL);
 	while (s[start])
 	{
 		end = 0;
@@ -66,11 +74,27 @@ char	**ft_split(char const *s, char c)
 	return (spl);
 }
 
+char	**ft_split(char const *s, char c)
+{
+	char	**spl;
+	int		size;
+
+	size = check_str(s, c);
+	if (!s)
+		return (NULL);
+	spl = (char **)malloc(sizeof(spl) * (size + 1));
+	if (!spl)
+		return (NULL);
+	spl = ft_create_str(spl, s, c);
+	spl[size] = NULL;
+	return (spl);
+}
+
 // int		main(void)
 // {
 // 	// char	s[] = "b";
-// 	char	s[] = "aaabcaAaAaefaa a";
-// 	// char	s[] = "bac";
+// 	// char	s[] = "aaabcaAaAaefaa a";
+// 	char	s[] = "bac";
 // 	char	c;
 // 	char	**ret;
 // 	int		j;
