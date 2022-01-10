@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 09:34:23 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/01/10 09:57:09 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static int		check_set(int ch, char const *set)
+static int	check_set(int ch, char const *set)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	while(set[i])
+	while (set[i])
 	{
 		if (ch == set[i])
 			return (1);
@@ -25,12 +37,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (NULL == s1)
 		return (NULL);
 	if (NULL == set)
-		return (char *)s1;
+		return ((char *)s1);
 	while (check_set(s1[i], set))
 		++i;
 	start = i;
 	i = ft_strlen(s1) - 1;
-	while(check_set(s1[i], set))
+	while (check_set(s1[i], set))
 		--i;
 	end = i + 1;
 	if (start >= end)
@@ -53,11 +65,15 @@ char	*ft_strtrim(char const *s1, char const *set)
 // 	printf("abcTabc - abc | T | %s\n", ft_strtrim("abcTabc", "abc"));
 // 	printf("TEST - abc | TEST | %s\n", ft_strtrim("TEST", "abc"));
 // 	printf("abcTEST - bca | TEST | %s\n", ft_strtrim("abcTEST", "bca"));
-// 	printf("abcTEabcSTcab - bca | TEabcST | %s\n", ft_strtrim("abcTEabcSTcab", "bca"));
-// 	printf("aaaaaaTESTbbbbbb - abc | TEST | %s\n", ft_strtrim("aaaaaaTESTbbbbbb", "abc"));
-// 	printf("aaaaaaTESTbbbbbbccccccc - abc | TEST | %s\n", ft_strtrim("aaaaaaTESTbbbbbbccccccc", "abc"));
+// 	printf("abcTEabcSTcab - bca | TEabcST |
+// 		 %s\n", ft_strtrim("abcTEabcSTcab", "bca"));
+// 	printf("aaaaaaTESTbbbbbb - abc | TEST |
+// 		 %s\n", ft_strtrim("aaaaaaTESTbbbbbb", "abc"));
+// 	printf("aaaaaaTESTbbbbbbccccccc - abc | TEST |
+// 		 %s\n", ft_strtrim("aaaaaaTESTbbbbbbccccccc", "abc"));
 // 	printf("bcaTESTcab - | bcaTESTcab | %s\n", ft_strtrim("bcaTESTcab", ""));
-// 	printf("  bcaTESTcab   -    | bcaTESTcab | %s\n", ft_strtrim("  bcaTESTcab  ", "  "));
+// 	printf("  bcaTESTcab   -    | bcaTESTcab |
+// 		 %s\n", ft_strtrim("  bcaTESTcab  ", "  "));
 // 	printf("abcTEST - l | abcTEST | %s\n", ft_strtrim("abcTEST", "l"));
 // 	printf("abcTEST - 10 | abcTEST | %s\n", ft_strtrim("abcTEST", "10"));
 // 	printf("abcTEST10 - 10 | abcTEST | %s\n", ft_strtrim("abcTEST10", "10"));

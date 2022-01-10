@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 09:31:04 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/01/10 09:38:54 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 t_list	*ft_lstlast(t_list *lst)
 {
 	while (lst->next)
 		lst = lst->next;
-	return(lst);
+	return (lst);
 }
 
 // int		main(void)
@@ -28,6 +40,7 @@ t_list	*ft_lstlast(t_list *lst)
 // 	elem->next->next->next = ft_lstnew((void *)&data[3]);
 // 	last = ft_lstlast(elem);
 // 	printf("content on the last p is equal to %d\n", *(int *)last->content);
-// 	printf("content on the last p is equal to %d\n", *(int *)elem->next->next->next->content);
+// 	printf("content on the last p is equal to %d\n", 
+	// *(int *)elem->next->next->next->content);
 // 	return (0);
 // }

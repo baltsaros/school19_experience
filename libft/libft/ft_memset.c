@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 09:32:38 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/01/10 09:45:09 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void	*ft_memset(void *s, int c, size_t n)
@@ -20,7 +32,6 @@ void	*ft_memset(void *s, int c, size_t n)
 // 	char	*ret;
 // 	char	s2[] = "hello world";
 // 	char	*ret2;
-
 
 // 	ret = ft_memset(s + 3, '$', 5);
 // 	ret2 = memset(s2 + 3, '$', 5);

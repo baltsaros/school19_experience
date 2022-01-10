@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 09:32:13 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/01/10 10:00:00 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
@@ -6,10 +18,6 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	char	*src_ch;
 	size_t	i;
 
-	if (dest == 0 && src == 0)
-		return (0);
-	if (dest == src)
-		return (dest);
 	dest_ch = (char *)dest;
 	src_ch = (char *)src;
 	i = 0;
@@ -41,6 +49,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 // 	char	*ret;
 // 	char	*ret2;
 
+	// if (dest == src)
+	// 	return (dest);
 // 	// ret = ft_memmove(src, src, 5);
 // 	// ret2 = memmove(src2, src2, 5);
 // 	ret = ft_memmove(src, src + 3, 5);

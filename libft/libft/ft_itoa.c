@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 09:30:34 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/01/10 09:37:38 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static size_t	ft_intlen(int n)
@@ -14,6 +26,7 @@ static size_t	ft_intlen(int n)
 	}
 	return (i);
 }
+
 static char	*ft_addnbr(int n, char *s, int i)
 {
 	unsigned int	nbr;
