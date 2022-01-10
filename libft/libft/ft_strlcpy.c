@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:40 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 13:01:22 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/10 14:10:08 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
-	size_t	size_s;
+	size_t	len_s;
 
-	size_s = 0;
-	while (src[size_s])
-		++size_s;
+	len_s = 0;
+	while (src[len_s])
+		++len_s;
 	if (size == 0)
-		return (size_s);
+		return (len_s);
 	i = 0;
 	while (i < (size - 1) && src[i])
 	{
@@ -29,7 +29,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 		++i;
 	}
 	dst[i] = '\0';
-	return (size_s);
+	return (len_s);
 }
 
 // int	main(void)
@@ -54,6 +54,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 // 	write(1, "\n", 1);
 // 	write(1, dest, 15);
 // 	write(1, "\n", 1);
-// 	write(1, dest, 15);
+// 	write(1, dest2, 15);
 // 	return (0);
 // }
