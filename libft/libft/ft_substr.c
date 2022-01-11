@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:34:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 17:58:08 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/11 10:59:34 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
 	size_t	i;
+	size_t	len_s;
 
-	if (!(char *)s)
-		return (NULL);
-	substr = (char *)malloc(sizeof(*substr) * (len + 1));
+	len_s = ft_strlen(s);
+	if (len_s < start)
+		return (0);
+	substr = (char *)malloc(sizeof(substr) * (len + 1));
 	if (NULL == substr)
-		return (NULL);
+		return (0);
 	i = 0;
 	while (len > i && s[start + i])
 	{
@@ -52,5 +54,18 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 // 	if (str == strsub)
 // 		printf("No return for substr");
 // 	(void)test;
+// 	return (0);
+// }
+// int	main(void)
+// {
+// 	char	s[] = "Hello world!";
+// 	char	*ret;
+
+// 	ret = ft_substr(s, 2, 20);
+// 	if (NULL == ret)
+// 		printf("Ret is null!\n");
+// 	else
+// 		printf("Ret is '%s' Size of ret is %ld.\n", ret, sizeof(ret));
+// 	free(ret);
 // 	return (0);
 // }

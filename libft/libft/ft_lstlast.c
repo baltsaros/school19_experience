@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:31:04 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 17:56:32 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/11 11:37:44 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
+	if (lst == NULL)
+		return (0);
 	while (lst->next)
 		lst = lst->next;
 	return (lst);
