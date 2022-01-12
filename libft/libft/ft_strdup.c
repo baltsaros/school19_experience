@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:21 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 09:49:34 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/12 14:13:58 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char	*ft_strdup(const char *s)
 	int		i;
 	int		size;
 
-	if (!s)
-		return (NULL);
 	size = 0;
+	if (!s)
+		size = -1;
 	while (s[size])
 		++size;
 	dest = (char *)malloc(sizeof(*s) * (size + 1));
@@ -38,10 +38,10 @@ char	*ft_strdup(const char *s)
 
 // int		main()
 // {
-// 	char	src[] = "Copy me";
-// 	char	src2[] = "Copy me";
+// 	// char	src[] = "Copy me";
+// 	// char	src2[] = "Copy me";
 
-// 	printf("dest(ft) is %s\n", ft_strdup(src));
-// 	printf("dest(or) is %s\n", strdup(src2));
+// 	printf("dest(ft) is %s\n", ft_strdup((void *)0));
+// 	// printf("dest(or) is %s\n", strdup((void *)0));
 // 	return (0);
 // }

@@ -70,7 +70,7 @@ bonus:		${OBJS_b}
 norm:
 			norminette
 clean:
-			${RM} ${OBJS}
+			${RM} ${OBJS} ${OBJS_b}
 
 fclean:		clean
 			${RM} ${NAME}

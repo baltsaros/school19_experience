@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:32:48 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 09:32:49 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/12 14:52:17 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_putendl_fd(char *s, int fd)
 {
 	int		i;
 
+	if (!s)
+		return ;
 	i = 0;
 	while (s[i])
 	{

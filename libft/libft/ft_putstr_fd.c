@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:06 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 09:33:07 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/12 14:51:31 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	int		i;
 
+	if (!s)
+		return ;
 	i = 0;
 	while (s[i])
 	{

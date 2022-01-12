@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:34:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/12 10:26:41 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/12 14:45:54 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 	size_t	len_s;
 
+	if (!s)
+		return ((char *)s);
 	len_s = ft_strlen(s);
 	substr = (char *)malloc(sizeof(*substr) * (len + 1));
 	if (NULL == substr)
