@@ -6,22 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:30:39 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/11 11:41:32 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/12 09:24:10 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void	ft_print_result(t_list *elem)
-{
-	int		len;
-
-	len = 0;
-	while (((char *)elem->content)[len])
-		len++;
-	write(1, elem->content, len);
-	write(1, "\n", 1);
-}
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:34:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/11 10:59:34 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/12 10:26:41 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	len_s;
 
 	len_s = ft_strlen(s);
-	if (len_s < start)
-		return (0);
-	substr = (char *)malloc(sizeof(substr) * (len + 1));
+	substr = (char *)malloc(sizeof(*substr) * (len + 1));
 	if (NULL == substr)
 		return (0);
+	if (len_s < start)
+	{
+		ft_memset(substr, 0, len + 1);
+		return (substr);
+	}
 	i = 0;
 	while (len > i && s[start + i])
 	{
