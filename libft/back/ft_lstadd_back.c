@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:30:39 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 09:30:40 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/12 09:24:10 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,15 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*tmp;
 
-	tmp = *lst;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = new;
+	if (*lst == NULL)
+		*lst = new;
+	else
+	{
+		tmp = *lst;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
 }
 
 // int		main(void)
@@ -50,5 +55,34 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 // 		print = print->next;
 // 	}
 // 	printf("Last address is %p.\n", (void *)print);
+// 	return (0);
+// // }
+
+// int	main(void)
+// {
+// 	t_list		*begin;
+// 	t_list		*elem;
+// 	t_list		*elem2;
+// 	t_list		*elem3;
+// 	t_list		*elem4;
+// 	char		*str = strdup("lorem");
+// 	char		*str2 = strdup("ipsum");
+// 	char		*str3 = strdup("dolor");
+// 	char		*str4 = strdup("sit");
+
+// 	elem = ft_lstnew(str);
+// 	elem2 = ft_lstnew(str2);
+// 	elem3 = ft_lstnew(str3);
+// 	elem4 = ft_lstnew(str4);
+// 	begin = NULL;
+// 	ft_lstadd_back(&begin, elem);
+// 	ft_lstadd_back(&begin, elem2);
+// 	ft_lstadd_back(&begin, elem3);
+// 	ft_lstadd_back(&begin, elem4);
+// 	while (begin)
+// 	{
+// 		ft_print_result(begin);
+// 		begin = begin->next;
+// 	}
 // 	return (0);
 // }

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:31:04 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 09:38:54 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/12 09:29:03 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
+	if (lst == NULL)
+		return (0);
 	while (lst->next)
 		lst = lst->next;
 	return (lst);
@@ -40,7 +42,7 @@ t_list	*ft_lstlast(t_list *lst)
 // 	elem->next->next->next = ft_lstnew((void *)&data[3]);
 // 	last = ft_lstlast(elem);
 // 	printf("content on the last p is equal to %d\n", *(int *)last->content);
-// 	printf("content on the last p is equal to %d\n", 
+	// printf("content on the last p is equal to %d\n", 
 	// *(int *)elem->next->next->next->content);
 // 	return (0);
 // }

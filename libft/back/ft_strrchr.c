@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:34:18 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 09:52:58 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/12 09:58:04 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ char	*ft_strrchr(const char *s, int c)
 	i = 0;
 	while (s[i])
 		++i;
-	while (i > 0)
+	while (i >= 0)
 	{
-		if (s[i - 1] == c)
-			return ((char *)s + i - 1);
+		if (s[i] == c)
+			return ((char *)s + i);
 		--i;
 	}
 	return (NULL);
@@ -36,7 +36,7 @@ char	*ft_strrchr(const char *s, int c)
 // 	char	str2[] = "Hello world!";
 // 	char	*ret2;
 
-// 	c = 'o';
+// 	c = '\0';
 // 	ret = ft_strrchr(str, c);
 // 	if (NULL == ret)
 // 		printf("C was not found. Ret(ft) is '%s'\n", ret);
