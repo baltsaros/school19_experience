@@ -10,9 +10,9 @@ size_t	ft_strlen(char const *str)
 	return (i);
 }
 
-static int		check_set(int ch, char const *set)
+static size_t	check_set(int ch, char const *set)
 {
-	int		i;
+	size_t	i;
 
 	i = 0;
 	while(set[i])
@@ -44,9 +44,9 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*tr;
-	int		i;
-	int		start;
-	int		end;
+	size_t	i;
+	size_t	start;
+	size_t	end;
 
 	i = 0;
 	if (NULL == s1)
