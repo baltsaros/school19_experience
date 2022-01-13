@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:31:25 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 09:42:45 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/13 12:33:55 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t		i;
-	const char	*str;
+	unsigned char	*str;
+	unsigned char	x;
+	size_t			i;
 
 	i = 0;
-	str = s;
+	str = (unsigned char *)s;
+	x = (unsigned char)c;
 	while (i < n)
 	{
-		if (str[i] == c)
+		if (str[i] == x)
 			return ((void *)s + i);
 		++i;
 	}
@@ -30,19 +32,19 @@ void	*ft_memchr(const void *s, int c, size_t n)
 
 // int	main(void)
 // {
-// 	const char buffer[] = "h\0ello world!";
+// 	const char buffer[] = {0, 1, 2 ,3 ,4 ,5};
 // 	int		c;
 // 	char	*ret;
-// 	const char buffer2[] = "h\0ello world!";
+// 	const char buffer2[] = {0, 1, 2 ,3 ,4 ,5};
 // 	char	*ret2;
 
 // 	c = 'e';
-// 	ret = ft_memchr(buffer, c, 6);
+// 	ret = ft_memchr(buffer, 2 + 256, 6);
 // 	if (NULL == ret)
 // 		printf("C was not found. Ret(ft) is '%s'\n", ret);
 // 	else
 // 		printf("C was found. Ret(ft) is '%s'\n", ret);
-// 	ret2 = memchr(buffer2, c, 6);
+// 	ret2 = memchr(buffer, 2 + 256, 6);
 // 	if (NULL == ret2)
 // 		printf("C was not found. Ret(or) is '%s'\n", ret2);
 // 	else

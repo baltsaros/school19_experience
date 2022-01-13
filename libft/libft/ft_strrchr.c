@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:34:18 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/12 09:58:04 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/13 12:49:35 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	unsigned char	*str;
+	unsigned char	x;
+	int				i;
 
+	str = (unsigned char *)s;
+	x = (unsigned char)c;
 	i = 0;
-	while (s[i])
+	while (str[i])
 		++i;
 	while (i >= 0)
 	{
-		if (s[i] == c)
-			return ((char *)s + i);
+		if (str[i] == x)
+			return ((char *)str + i);
 		--i;
 	}
 	return (NULL);
@@ -30,10 +34,10 @@ char	*ft_strrchr(const char *s, int c)
 
 // int	main(void)
 // {
-// 	char	str[] = "Hello world!";
+// 	char	str[] = "Hello tworld!";
 // 	char	c;
 // 	char	*ret;
-// 	char	str2[] = "Hello world!";
+// 	char	str2[] = "Hello tworld!";
 // 	char	*ret2;
 
 // 	c = '\0';

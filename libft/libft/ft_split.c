@@ -6,16 +6,16 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:11 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/12 14:50:05 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/13 10:40:47 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	check_str(char const *s, char c)
+static size_t	check_str(char const *s, char c)
 {
-	int		i;
-	int		n;
+	size_t	i;
+	size_t	n;
 
 	i = 0;
 	n = 1;
@@ -50,9 +50,9 @@ static char	*ft_strndup(char const *str, size_t size)
 
 static char	**ft_create_str(char **spl, char const *s, char c)
 {
-	int		start;
-	int		end;
-	int		i;
+	size_t	start;
+	size_t	end;
+	size_t	i;
 
 	i = 0;
 	start = 0;
@@ -77,7 +77,7 @@ static char	**ft_create_str(char **spl, char const *s, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**spl;
-	int		size;
+	size_t	size;
 
 	size = check_str(s, c);
 	if (!s)
@@ -93,8 +93,8 @@ char	**ft_split(char const *s, char c)
 // int		main(void)
 // {
 // 	// char	s[] = "b";
-// 	// char	s[] = "aaabcaAaAaefaa a";
-// 	char	s[] = "bac";
+// 	char	s[] = "aaabcaAaAaefaa a";
+// 	// char	s[] = "bac";
 // 	char	c;
 // 	char	**ret;
 // 	int		j;

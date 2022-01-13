@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:16 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 14:31:52 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/13 12:37:21 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	unsigned char	*str;
+	unsigned char	x;
+	size_t			i;
 
+	str = (unsigned char *)s;
+	x = (unsigned char)c;
 	i = 0;
-	while (s[i])
+	while (str[i])
 	{
-		if (s[i] == c)
-			return ((char *)s + i);
+		if (str[i] == x)
+			return ((char *)str + i);
 		++i;
 	}
-	if (s[i] == c)
-		return ((char *)s + i);
+	if (str[i] == x)
+		return ((char *)str + i);
 	return (NULL);
 }
 
