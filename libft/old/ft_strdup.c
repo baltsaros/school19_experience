@@ -1,34 +1,35 @@
-#include <stdlib.h> 
-char	*ft_strdup(char *src)
+#include "libft.h"
+
+char	*ft_strdup(const char *s)
 {
 	char	*dest;
-	int		i;
-	int		size;
+	int			i;
+	int			size;
 
+	if (!s)
+		return (NULL);
 	size = 0;
-	while (src[size])
+	while (s[size])
 		++size;
-	dest = (char *)malloc(sizeof(*src) * (size + 1));
+	dest = (char *)malloc(sizeof(*s) * (size + 1));
 	if (NULL == dest)
-		return NULL;
+		return (NULL);
 	i = 0;
-	while (src[i])
+	while (s[i])
 	{
-		dest[i] = src[i];
+		dest[i] = s[i];
 		++i;
 	}
 	dest[i] = '\0';
 	return (dest);
 }
 
-#include <stdio.h>
-#include <string.h>
 int		main()
 {
-	char	src[] = "String to copy";
-	char	src2[] = "String to copy";
+	char	src[] = "Copy me";
+	char	src2[] = "Copy me";
 
-	printf("dest is %s\n", ft_strdup(src));
-	printf("dest is %s\n", strdup(src2));
+	printf("dest(ft) is %s\n", ft_strdup(src));
+	printf("dest(or) is %s\n", strdup(src2));
 	return (0);
 }

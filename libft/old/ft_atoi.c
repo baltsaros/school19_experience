@@ -1,6 +1,6 @@
-#include <stdio.h>
+#include "libft.h"
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
 	int		i;
 	int		sign;
@@ -25,17 +25,21 @@ int	ft_atoi(char *str)
 	return (sign * n);
 }
 
-int	main()
+int	main(void)
 {
 	char	str[] = "  \t--+-+0234ab567";
 	char	str2[] = "  --+-+\v0234ab567";
 	char	str3[] = "  ---+-+50234ab567";
+	char	str4[] = "1234ab567";
+	int		ret;
 
-	printf("%s\n", str);
-	printf("%d\n", ft_atoi(str));
-	printf("%s\n", str2);
-	printf("%d\n", ft_atoi(str2));
-	printf("%s\n", str3);
-	printf("%d\n", ft_atoi(str3));
+	ret = ft_atoi("  \t--+-+0234ab567");
+	printf("Test 1 %s\n%d\n", str, ret);
+	ret = ft_atoi("  --+-+\v0234ab567");
+	printf("Test 2 %s\n%d\n", str2, ret);
+	ret = ft_atoi("  ---+-+50234ab567");
+	printf("Test 3 %s\n%d\n", str3, ret);
+	ret = ft_atoi("1234ab567");
+	printf("Test 4 %s\n%d\n", str4, ret);
 	return (0);
 }

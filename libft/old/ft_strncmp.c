@@ -1,28 +1,23 @@
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	unsigned int	i;
 
 	i = 0;
-	while ((i < n - 1) && s1[i] && s2[i] && (s1[i] == s2[i]))
+	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n)
 		++i;
 	return (s1[i] - s2[i]);
 }
 
-int	main()
+int	main(void)
 {
-	char	s1[] = "aa";
-	char	s2[] = "aaB";
-	char	s3[] = "aa";
-	char	s4[] = "aaB";
-	unsigned int	n;
-	int				ret;
+	char	str1[] = "abcd";
+	char	str2[] = "abcz";
+	char	str3[] = "abcd";
+	char	str4[] = "abcz";
 
-	n = 3;
-	ret = ft_strncmp(s1, s2, n);
-	printf("return(ft) is %d\n", ret);
-	ret = strncmp(s3, s4, n);
-	printf("return(strncmp) is %d\n", ret);
+	printf("ret(ft) is %d\n", ft_strncmp(str1, str2, 5));
+	printf("ret(or) is %d\n", strncmp(str3, str4, 5));
+	return (0);
 }
