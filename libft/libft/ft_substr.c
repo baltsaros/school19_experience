@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:34:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/13 15:45:01 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/14 09:41:13 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	len_new;
 
 	if (!s)
-		return ((char *)s);
+		return (0);
 	len_s = ft_strlen(s);
 	len_new = 0;
-	while (s[start + len_new] && len >= len_new)
+	while (s[start + len_new] && len > len_new)
 		++len_new;
 	substr = (char *)malloc(sizeof(*substr) * (len_new + 1));
 	if (NULL == substr)
@@ -58,16 +58,16 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 // 	(void)test;
 // 	return (0);
 // }
-int	main(void)
-{
-	char	s[] = "Hello world!";
-	char	*ret;
+// int	main(void)
+// {
+// 	char	s[] = "Hello world!";
+// 	char	*ret;
 
-	ret = ft_substr(s, 1, 1);
-	if (NULL == ret)
-		printf("Ret is null!\n");
-	else
-		printf("Ret is '%s'\n", ret);
-	free(ret);
-	return (0);
-}
+// 	ret = ft_substr(s, 1, 1);
+// 	if (NULL == ret)
+// 		printf("Ret is null!\n");
+// 	else
+// 		printf("Ret is '%s'\n", ret);
+// 	free(ret);
+// 	return (0);
+// }

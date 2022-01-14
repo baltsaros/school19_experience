@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:31:21 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/13 12:01:06 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/14 10:21:55 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_lstsize(t_list *lst)
 	int	size;
 
 	size = 0;
-	while (lst != 0)
+	while (lst)
 	{
 		++size;
 		lst = lst->next;
