@@ -6,27 +6,27 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:34:13 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/13 13:01:14 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/17 16:19:19 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
-	if (little[0] == '\0')
-		return ((char *)big);
-	while (big[i] && len > i)
+	if (needle[0] == '\0')
+		return ((char *)haystack);
+	while (haystack[i] && len > i)
 	{
 		j = 0;
-		while ((big[i + j] == little[j]) && (len > i + j))
+		while ((haystack[i + j] == needle[j]) && (len > i + j))
 		{
-			if (little[j + 1] == '\0')
-				return ((char *)big + i);
+			if (needle[j + 1] == '\0')
+				return ((char *)haystack + i);
 			++j;
 		}
 		++i;
@@ -36,22 +36,22 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 
 // int	main(void)
 // {
-// 	char	big[] = "aaabcabcd";
-// 	char	little[] = "cd";
+// 	char	haystack[] = "aaabcabcd";
+// 	char	needle[] = "cd";
 // 	char	*ret;
-// 	char	big2[] = "aaabcabcd";
-// 	char	little2[] = "cd";
+// 	char	haystack2[] = "aaabcabcd";
+// 	char	needle2[] = "cd";
 // 	char	*ret2;
 
-// 	ret = ft_strnstr(big, little, 8);
+// 	ret = ft_strnstr(haystack, needle, 8);
 // 	if (ret == NULL)
-// 		printf("Little(ft) was not found!\n");
+// 		printf("Needle(ft) was not found!\n");
 // 	else
-// 		printf("Little(ft) was found! Return is '%s'!\n", ret);
-// 	ret2 = strnstr(big2, little2, 8);
+// 		printf("Needle(ft) was found! Return is '%s'!\n", ret);
+// 	ret2 = strnstr(haystack2, needle2, 8);
 // 	if (ret2 == NULL)
-// 		printf("Little(or) was not found!\n");
+// 		printf("Needle(or) was not found!\n");
 // 	else
-// 		printf("Little(or) was found! Return is '%s'!\n", ret2);
+// 		printf("Needle(or) was found! Return is '%s'!\n", ret2);
 // 	return (0);
 // }

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:28:57 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 15:43:41 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/17 16:11:46 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	ft_atoi(const char *str)
 // 	char	str6[] = "-+48";
 // 	char	str7[] = "--47";
 // 	char	str8[] = "++47";
+// 	char	str9[] = "234567890111";
 // 	int		ret;
 // 	int		ret2;
 
@@ -77,5 +78,9 @@ int	ft_atoi(const char *str)
 // 	printf("FT: Test 8 %s\n%d\n", str8, ret);
 // 	ret2 = atoi("++47");
 // 	printf("OR: Test 8 %s\n%d\n", str8, ret2);
+// 	ret = ft_atoi("-234567890111");
+// 	printf("FT: Test 9 %s\n%d\n", str9, ret);
+// 	ret2 = atoi("-234567890111");
+// 	printf("OR: Test 9 %s\n%d\n", str9, ret2);
 // 	return (0);
 // }
