@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:11 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/17 12:29:56 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/17 14:34:03 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ static size_t	check_str(char const *s, char c)
 	size_t	i;
 	size_t	n;
 
-	i = 0;
-	n = 1;
-	if (!(s[i]))
+	i = 1;
+	n = 0;
+	if (!(s[0]))
 		return (0);
+	if (s[0] != c)
+		++n;
 	while (s[i])
 	{
-		if (s[i] != c && s[i + 1] == c && s[i + 2])
+		if (s[i] != c && s[i - 1] == c)
 			++n;
 		++i;
 	}
@@ -46,7 +48,7 @@ static char	*ft_strndup(char const *str, size_t size)
 	char	*dest;
 	size_t	i;
 
-	dest = (char *)malloc(sizeof(*dest) * (size + 1));
+	dest = malloc(sizeof(*dest) * (size + 1));
 	if (!dest)
 		return (NULL);
 	i = 0;
@@ -94,11 +96,11 @@ char	**ft_split(char const *s, char c)
 	size_t	size;
 	int		i;
 
-	i = 0;
-	size = check_str(s, c);
 	if (!s)
 		return (NULL);
-	spl = (char **)malloc(sizeof(spl) * (size + 1));
+	i = 0;
+	size = check_str(s, c);
+	spl = (char **)malloc(sizeof(*spl) * (size + 1));
 	if (!spl)
 		return (NULL);
 	spl = ft_create_str(spl, s, c, i);
