@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 09:33:46 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/14 10:08:02 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,3 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-
-// int	main(void)
-// {
-// 	printf("length of 'test' is %ld\n", ft_strlen("test"));
-// 	return (0);
-// }
