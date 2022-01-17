@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:11 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/14 09:58:31 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/17 12:02:21 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ static size_t	check_str(char const *s, char c)
 		++i;
 	}
 	return (n);
+}
+
+static void	ft_free(char **spl, size_t i)
+{
+	while (i > 0)
+	{
+		free(spl[i]);
+		--i;
+	}
+	free(spl[0]);
+	free(spl);
 }
 
 static char	*ft_strndup(char const *str, size_t size)
@@ -64,6 +75,11 @@ static char	**ft_create_str(char **spl, char const *s, char c)
 		if (end > 0)
 		{
 			spl[i] = ft_strndup(s + start, end);
+			if (!spl[i])
+			{
+				ft_free(spl, i - 1);
+				return (NULL);
+			}
 			++i;
 			start = start + end;
 		}
