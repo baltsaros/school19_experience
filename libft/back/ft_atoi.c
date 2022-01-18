@@ -6,18 +6,28 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:28:57 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/14 10:04:46 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/18 15:37:54 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static int	ft_size_control(int sign)
+{
+	if (sign < 0)
+		return (0);
+	else
+		return (-1);
+}
 
 int	ft_atoi(const char *str)
 {
 	int		i;
 	int		sign;
 	int		n;
+	int		digs;
 
+	digs = 0;
 	i = 0;
 	sign = 1;
 	n = 0;
@@ -32,6 +42,9 @@ int	ft_atoi(const char *str)
 	{
 		n = n * 10 + str[i] - '0';
 		++i;
+		++digs;
+		if (digs > 19)
+			return (ft_size_control(sign));
 	}
 	return (sign * n);
 }

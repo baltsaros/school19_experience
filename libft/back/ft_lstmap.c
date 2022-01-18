@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:31:10 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/17 09:26:43 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/18 15:46:17 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		lst_new->next = ft_lstnew(f(lst->content));
 		if (!(lst_new->next))
 		{
-			ft_lstclear(&lst_new, del);
+			ft_lstclear(&lst_new_head, del);
 			return (NULL);
 		}
 		lst = lst->next;

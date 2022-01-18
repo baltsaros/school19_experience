@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:30:39 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/18 15:47:21 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/18 16:29:32 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 
 	if (!lst)
 		return ;
-	if (*lst == NULL)
+	if (!(*lst))
 		*lst = new;
 	else
 	{
@@ -39,13 +39,14 @@ int		main(void)
 	data[1] = 22;
 	data[2] = 33;
 	data[3] = 44;
-	head = ft_lstnew((void *)0);
+	head = NULL;
+	// head = ft_lstnew((void *)&data[0]);
 	current = ft_lstnew((void *)&data[1]);
 	ft_lstadd_back(&head, current);
-	current = ft_lstnew((void *)&data[2]);
-	ft_lstadd_back(&head, current);
-	current = ft_lstnew((void *)&data[3]);
-	ft_lstadd_back(&head, current);
+	// current = ft_lstnew((void *)&data[2]);
+	// ft_lstadd_back(&head, current);
+	// current = ft_lstnew((void *)&data[3]);
+	// ft_lstadd_back(&head, current);
 	print = head;
 	i = 0;
 	while (print)
