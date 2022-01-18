@@ -6,18 +6,28 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:28:57 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/17 16:11:46 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/18 15:37:11 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static int	ft_size_control(int sign)
+{
+	if (sign < 0)
+		return (0);
+	else
+		return (-1);
+}
 
 int	ft_atoi(const char *str)
 {
 	int		i;
 	int		sign;
 	int		n;
+	int		digs;
 
+	digs = 0;
 	i = 0;
 	sign = 1;
 	n = 0;
@@ -32,6 +42,9 @@ int	ft_atoi(const char *str)
 	{
 		n = n * 10 + str[i] - '0';
 		++i;
+		++digs;
+		if (digs > 19)
+			return (ft_size_control(sign));
 	}
 	return (sign * n);
 }
@@ -47,6 +60,9 @@ int	ft_atoi(const char *str)
 // 	char	str7[] = "--47";
 // 	char	str8[] = "++47";
 // 	char	str9[] = "234567890111";
+// 	char	str10[] = "500000000000000000";
+// 	char	str11[] = "50000000000000000000000";
+// 	char	str12[] = "-500000000000000000000";
 // 	int		ret;
 // 	int		ret2;
 
@@ -82,5 +98,17 @@ int	ft_atoi(const char *str)
 // 	printf("FT: Test 9 %s\n%d\n", str9, ret);
 // 	ret2 = atoi("-234567890111");
 // 	printf("OR: Test 9 %s\n%d\n", str9, ret2);
+// 	ret = ft_atoi("500000000000000000");
+// 	printf("FT: Test 10 %s\n%d\n", str10, ret);
+// 	ret2 = atoi("500000000000000000");
+// 	printf("OR: Test 10 %s\n%d\n", str10, ret2);
+// 	ret = ft_atoi("50000000000000000000000");
+// 	printf("FT: Test 11 %s\n%d\n", str11, ret);
+// 	ret2 = atoi("50000000000000000000000");
+// 	printf("OR: Test 11 %s\n%d\n", str11, ret2);
+// 	ret = ft_atoi("-500000000000000000000");
+// 	printf("FT: Test 12 %s\n%d\n", str12, ret);
+// 	ret2 = atoi("-500000000000000000000");
+// 	printf("OR: Test 12 %s\n%d\n", str12, ret2);
 // 	return (0);
 // }
