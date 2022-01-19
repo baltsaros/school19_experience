@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:30:59 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/14 10:05:59 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/19 15:55:10 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (!lst)
-		return ;
-	if (*f)
+	if (f)
 	{
 		while (lst != NULL)
 		{
