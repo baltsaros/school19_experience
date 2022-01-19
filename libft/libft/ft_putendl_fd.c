@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:32:48 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/12 14:52:17 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/19 09:24:44 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,21 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	int		i;
+	size_t	i;
 
 	if (!s)
 		return ;
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		++i;
-	}
+	i = ft_strlen(s);
+	write(fd, s, i);
 	write(fd, "\n", 1);
 }
 
-// int		main(void)
-// {
-// 	char	s[] = "Hello world!";
-// 	int		fd;
+int		main(void)
+{
+	char	s[] = "Hello world!";
+	int		fd;
 
-// 	fd = 1;
-// 	ft_putendl_fd(s, fd);
-// 	return (0);
-// }
+	fd = 1;
+	ft_putendl_fd(s, fd);
+	return (0);
+}

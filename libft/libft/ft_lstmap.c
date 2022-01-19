@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:31:10 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/18 14:24:17 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/19 10:02:54 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*lst_new;
 	t_list	*lst_new_head;
 
-	if ((!lst) || (!f) || (!del))
+	if ((!lst) || (!f))
 		return (NULL);
 	lst_new_head = ft_lstnew(f(lst->content));
 	lst_new = lst_new_head;
@@ -51,20 +51,36 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 // 	}
 // }
 
-// void	ft_multiply_two(void *content)
-// {
-// 	int	initial;
+void *		lstmap_f(void *content) {
+	(void)content;
+	return ("OK !");
+}
 
-// 	initial = *(int *)content;
-// 	*(int *)content = *(int *)content * 2;
-// 	printf("%d multiplied by two is %d\n", initial, *(int *)content);
-// }
+void	*ft_multiply_two(void *content)
+{
+	int	initial;
 
-// void	del(void *content)
-// {
-// 	printf("Content is %d\n", *((int *)content));
-// }
+	initial = *(int *)content;
+	*(int *)content = *(int *)content * 2;
+	printf("%d multiplied by two is %d\n", initial, *(int *)content);
+	return (content);
+}
 
+void	del(void *content)
+{
+	printf("Content is %d\n", *((int *)content));
+}
+
+int		main(void)
+{
+		t_list	*l = ft_lstnew(strdup(" 1 2 3 "));
+		t_list	*ret;
+
+		l->next = ft_lstnew(strdup("ss"));
+		l->next->next = ft_lstnew(strdup("-_-"));
+		ret = ft_lstmap(l, lstmap_f, NULL);
+	return (0);
+}
 // int		main(void)
 // {
 // 	int		ar[4];
