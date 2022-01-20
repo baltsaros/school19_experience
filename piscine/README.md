@@ -35,6 +35,7 @@ Selection stage for 19. Done online in September 2021. During the piscine I comp
 ## **Useful resources**
 * Google
 * Peers
+* To better understand [Git](https://git-scm.com/book/en/v2) (first chapter is enough)
 * [Neso Academy](https://youtu.be/4OGMB4Fhh50) - helps a lot to understand basics of C programming
 * [GeeksForGeeks](https://www.geeksforgeeks.org/) - some useful articles (Google will lead you there anyway)
 * Add [colors](https://gist.github.com/vratiu/9780109) to your Makefile! 
