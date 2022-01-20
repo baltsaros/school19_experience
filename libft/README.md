@@ -35,5 +35,5 @@ The project was tested by myself, peers and three testers ([libft-war-machine](h
 * Test
 * Protect functions in part 2 and bonus part
 * For part 1 copy prototypes from _man_
-* Add _ft_free_ in your ft_split to free every created string (including array for strings) in case of error
+* Add _ft_free_ in your ft_split to free every created string (including an array for strings) in case of error
 * More specific comments are inside **_libft_main_**
