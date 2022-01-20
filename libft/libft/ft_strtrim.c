@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:34:23 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/12 11:48:06 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/20 10:51:27 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,11 @@ char	*ft_strtrim(char const *s1, char const *set)
 // 	printf("abcTabc - abc | T | %s\n", ft_strtrim("abcTabc", "abc"));
 // 	printf("TEST - abc | TEST | %s\n", ft_strtrim("TEST", "abc"));
 // 	printf("abcTEST - bca | TEST | %s\n", ft_strtrim("abcTEST", "bca"));
-// 	printf("abcTEabcSTcab - bca |
-// 	 TEabcST | %s\n", ft_strtrim("abcTEabcSTcab", "bca"));
-// 	printf("aaaaaaTESTbbbbbb - abc |
-// 	 TEST | %s\n", ft_strtrim("aaaaaaTESTbbbbbb", "abc"));
-// 	printf("aaaaaaTESTbbbbbbccccccc - abc | TEST |
-// 	 %s\n", ft_strtrim("aaaaaaTESTbbbbbbccccccc", "abc"));
-// 	printf("bcaTESTcab - | bcaTESTcab |
-// 	 %s\n", ft_strtrim("bcaTESTcab", ""));
-// 	printf("  bcaTESTcab   -   |
-// 	 bcaTESTcab | %s\n", ft_strtrim("  bcaTESTcab  ", "  "));
+// 	printf("abcTEabcSTcab - bca | TEabcST | %s\n", ft_strtrim("abcTEabcSTcab", "bca"));
+// 	printf("aaaaaaTESTbbbbbb - abc | TEST | %s\n", ft_strtrim("aaaaaaTESTbbbbbb", "abc"));
+// 	printf("aaaaaaTESTbbbbbbccccccc - abc | TEST | %s\n", ft_strtrim("aaaaaaTESTbbbbbbccccccc", "abc"));
+// 	printf("bcaTESTcab - | bcaTESTcab | %s\n", ft_strtrim("bcaTESTcab", ""));
+// 	printf("  bcaTESTcab   -   | bcaTESTcab | %s\n", ft_strtrim("  bcaTESTcab  ", "  "));
 // 	printf("abcTEST - l | abcTEST | %s\n", ft_strtrim("abcTEST", "l"));
 // 	printf("abcTEST - 10 | abcTEST | %s\n", ft_strtrim("abcTEST", "10"));
 // 	printf("abcTEST10 - 10 | abcTEST | %s\n", ft_strtrim("abcTEST10", "10"));
