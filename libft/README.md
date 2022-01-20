@@ -10,8 +10,9 @@ The project was tested by myself, peers and three testers ([libft-war-machine](h
 2nd try: 97% overal/125% Moulinette (ft_atoi didn't address extreme cases, insufficient protection in some bonus functions)
 3rd try: 125%
 
-### **libft_main** - libft with main functions inside
-### **libft_norminette** - submitted folder
+## **Folders**
+**libft_main** - libft with main functions inside
+**libft_norminette** - submitted folder
 
 ## **Useful resources**
 * Google
