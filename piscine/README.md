@@ -1,5 +1,5 @@
 ## **Description** 
-Selection stage for 19. Done online in September 2021. During the piscine I completed both shell projects, rush 00 and C project 00-08. Other C projects I completed after the piscine, so I don't know whether they are correct or not.  
+Selection stage for 19. Done online in September 2021. During the piscine I validated both shell projects, rush 00 and C project 00-08. Other C projects I completed after the piscine, so I don't know whether they are correct or not.  
 
 ## **Results**
 **_Shell 00_**: 100%
