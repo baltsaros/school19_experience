@@ -33,7 +33,7 @@ Selection stage for 19. Done online in September 2021. During the piscine I comp
 **_Final Exam_**: ? (cannot see the result, must be around 30%)
 
 ## **Useful resources**
-* Google
+* [Google](https://youtu.be/dQw4w9WgXcQ)
 * Peers
 * To better understand [Git](https://git-scm.com/book/en/v2) (first chapter is enough)
 * [Neso Academy](https://youtu.be/4OGMB4Fhh50) - helps a lot to understand basics of C programming
