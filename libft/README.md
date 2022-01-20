@@ -7,11 +7,11 @@ For more info check _libft.pdf_
 The project was tested by myself, peers and three testers ([libft-war-machine](https://github.com/y3ll0w42/libft-war-machine), [libft-unit-tests](https://github.com/alelievr/libft-unit-test) and [libft-Tripouille](https://github.com/Tripouille/libftTester))
 
 ## **Attempts**
-1st try: 0% (memory leaks in ft_split)
+**_1st try_**: 0% (memory leaks in ft_split)
 
-2nd try: 97% overal/125% Moulinette (ft_atoi didn't address extreme cases, insufficient protection in some bonus functions)
+**_2nd try_**: 97% overal/125% Moulinette (ft_atoi didn't address extreme cases, insufficient protection in some bonus functions)
 
-3rd try: 125%
+**_3rd try_**: 125%
 
 ## **Folders**
 **libft_main** - libft with main functions inside
