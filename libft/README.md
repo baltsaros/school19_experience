@@ -1,5 +1,6 @@
 ## **Project summary** 
 > This project aims to code a C library regrouping usual functions that you’ll be use for all your next projects
+
 For more info check _libft.pdf_
 
 ## **Testing**
@@ -7,11 +8,14 @@ The project was tested by myself, peers and three testers ([libft-war-machine](h
 
 ## **Attempts**
 1st try: 0% (memory leaks in ft_split)
+
 2nd try: 97% overal/125% Moulinette (ft_atoi didn't address extreme cases, insufficient protection in some bonus functions)
+
 3rd try: 125%
 
 ## **Folders**
 **libft_main** - libft with main functions inside
+
 **libft_norminette** - submitted folder
 
 ## **Useful resources**
