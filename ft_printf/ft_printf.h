@@ -5,6 +5,12 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-int	ft_printf(const char *, ...);
+int		ft_printf(const char *, ...);
+
+char	**ft_split(char const *s, char c);
+void	ft_putnbr_base(int nbr, char *base);
+void	ft_putnbr_base_un(unsigned int nbr, char *base);
+void	ft_putchar(char c);
+void	ft_putstr(char *str);
 
 #endif

@@ -2,15 +2,15 @@ NAME	= libftprint.a
 
 SRCS	= ft_printf.c \
 
-SRCS_b	= \
-
 OBJS	= ${SRCS:.c=.o}
 
-OBJS_b	= ${SRCS_b:.c=.o}
 
 INCS	= .
 
-LIB		= ar rcs
+LIB		= 	make all libft
+			cp libft/libft.a .
+			mv libft.a libftprint.a
+			ar rcs
 GCC		= gcc
 RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror
