@@ -1,10 +1,10 @@
-NAME	= libftprint.a
+NAME	= libftprintf.a
 
 SRCS	= ft_printf.c \
 			ft_putchar.c \
 			ft_putnbr_base_un.c \
 			ft_putstr.c \
-			ft_putnbr_base.c 
+			ft_putnbr_base.c \
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -20,21 +20,22 @@ CFLAGS	= -Wall -Wextra -Werror
 			${GCC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
 
 ${NAME}:	${OBJS}
-			make all ./libft
+			make -C ./libft all 
 			cp libft/libft.a .
 			mv libft.a ${NAME}
 			${LIB} ${NAME} ${OBJS} 
 
 all:		${NAME}
 
-
 norm:
 			norminette
 clean:
-			${RM} ${OBJS} 
+			${RM} ${OBJS}
+			make -C ./libft clean
 
 fclean:		clean
 			${RM} ${NAME}
+			make -C ./libft fclean
 
 re:			fclean all
 
