@@ -3,8 +3,8 @@
 // REMOVE THIS FUNCTIONS LATER
 static int	ft_base_control(char *base)
 {
-	int	i;
-	int	j;
+	unsigned int	i;
+	unsigned int	j;
 
 	i = 0;
 	if (base[i] == '\0' || base[i + 1] == '\0')
@@ -26,7 +26,7 @@ static int	ft_base_control(char *base)
 	return (1);
 }
 
-static void	ft_putnbr_un(int nb, unsigned int i, char *base)
+static void	ft_putnbr_un(unsigned int nb, unsigned int i, char *base)
 {
 	if (nb >= i)
 	{
