@@ -90,6 +90,8 @@ int	main(void)
 	printf("OR | TEST 4 | %d\n", -99);
 	ft_printf("FT | TEST 5 | %s\n", s);
 	printf("OR | TEST 5 | %s\n", s);
+	ft_printf("FT | TEST 5.5 | %s\n", "");
+	printf("OR | TEST 5.5 | %s\n", "");
 	ft_printf("FT | TEST 6 | %i\n", -9);
 	printf("OR | TEST 6 | %i\n", -9);
 	ft_printf("FT | TEST 6.5 | %i\n", 10);
