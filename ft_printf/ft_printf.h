@@ -6,9 +6,19 @@
 #include <stdlib.h>
 #include <limits.h>
 
-int		ft_printf(const char *str, ...);
 
-char	**ft_split(char const *s, char c);
+typedef struct s_flags
+{
+	int	zero;
+	int	minus;
+	int	dot;
+	int	space;
+	int	plus;
+	int	sharp;
+	int	width;
+}	t_flags;
+
+int		ft_printf(const char *str, ...);
 void	ft_putnbr_base(int nbr, char *base, int *r);
 void	ft_putnbr_base_un(unsigned int nbr, char *base, int *r);
 void	ft_putptr_add(long nbr, char *base, int *r);
