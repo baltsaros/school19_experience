@@ -1,28 +1,28 @@
 #include "ft_printf.h"
 
-static int	ft_check_flag(va_list c, char ch, int r)
+static int	*ft_check_flag(va_list c, char ch, int *r)
 {
 	int	j;
 
 	if (ch == 'p')
 	{
 		j = va_arg(c, int);
-		ft_putstr("0x");
+		ft_putstr("0x", r);
 		if (j < 0)
-			ft_putnbr_base_un(j, "0123456789abcdef", &r);	
+			ft_putnbr_base_un(j, "0123456789abcdef", r);	
 		else
-			ft_putnbr_base(j, "0123456789abcdef", &r);
+			ft_putnbr_base(j, "0123456789abcdef", r);
 	}
 	if (ch == 'd')
-		ft_putnbr_base(va_arg(c, int), "0123456789", &r);
+		ft_putnbr_base(va_arg(c, int), "0123456789", r);
 	if (ch == 'i')
-		ft_putnbr_base(va_arg(c, int), "0123456789", &r);
+		ft_putnbr_base(va_arg(c, int), "0123456789", r);
 	if (ch == 'u')
-		ft_putnbr_base_un(va_arg(c, unsigned int), "0123456789", &r);
+		ft_putnbr_base_un(va_arg(c, unsigned int), "0123456789", r);
 	if (ch == 'x')
-		ft_putnbr_base_un(va_arg(c, int), "0123456789abcdef", &r);
+		ft_putnbr_base_un(va_arg(c, int), "0123456789abcdef", r);
 	if (ch == 'X')
-		ft_putnbr_base_un(va_arg(c, int), "0123456789ABCDEF", &r);
+		ft_putnbr_base_un(va_arg(c, int), "0123456789ABCDEF", r);
 	return (r);
 }
 
@@ -40,17 +40,18 @@ int	ft_printf(const char* str, ...)
 		if (str[i] == '%')
 		{
 			++i;
-			r += ft_check_flag(c, str[i], r);
 			if (str[i] == 'c')
 				ft_putchar(va_arg(c, unsigned int), &r);
-			if (str[i] == 's')
-				ft_putstr(va_arg(c, char *));
-			if (str[i] == '%')
+			else if (str[i] == 's')
+				ft_putstr(va_arg(c, char *), &r);
+			else if (str[i] == '%')
 				ft_putchar('%', &r);
+			else
+				ft_check_flag(c, str[i], &r);
 		}
 		else
 			ft_putchar(str[i], &r);
-			++i;
+		++i;
 	}
 	va_end(c);
 	return (r);
@@ -109,16 +110,36 @@ int	ft_printf(const char* str, ...)
 // 	printf("OR | TEST 19 | %d\n", printf("xyz"));
 // 	ft_printf("FT | TEST 20 | %d\n", ft_printf("%u", -1234));
 // 	printf("OR | TEST 20 | %d\n", printf("%u", -1234));
-// 	ft_printf("FT | TEST 21 | %d\n", ft_printf("NULL"));
-// 	printf("OR | TEST 21 | %d\n", printf("NULL"));
-// 	// ft_printf("FT | TEST 22 | \n", );
-// 	// printf("OR | TEST 22 | \n", );
-// 	// ft_printf("FT | TEST 23 | \n", );
-// 	// printf("OR | TEST 23 | \n", );
-// 	// ft_printf("FT | TEST 24 | \n", );
-// 	// printf("OR | TEST 24 | \n", );
-// 	// ft_printf("FT | TEST 25 | \n", );
-// 	// printf("OR | TEST 25 | \n", );
+// 	ft_printf("FT | TEST 21 | %c \n", '0');
+// 	printf("OR | TEST 21 | %c \n", '0');
+// 	ft_printf("FT | TEST 22 | %d\n", ft_printf("%c \n", '0'));
+// 	printf("OR | TEST 22 | %d\n", printf("%c \n", '0'));
+// 	ft_printf("FT | TEST 23 | %c %c %c \n", '0', 0, '1');
+// 	printf("OR | TEST 23 | %c %c %c \n", '0', 0, '1');
+// 	ft_printf("FT | TEST 24 | %d\n", ft_printf("%c %c %c \n", '0', 0, '1'));
+// 	printf("OR | TEST 24 | %d\n", printf("%c %c %c \n", '0', 0, '1'));
+// 	ft_printf("FT | TEST 25 | NULL %s NULL\n", NULL);
+// 	printf("OR | TEST 25 | NULL %s NULL\n", NULL);
+// 	ft_printf("FT | TEST 26 | %d\n", ft_printf("NULL %s NULL\n", NULL));
+// 	printf("OR | TEST 26 | %d\n", printf("NULL %s NULL\n", NULL));
+// 	ft_printf("FT | TEST 27 | %d\n", -100);
+// 	printf("OR | TEST 27 | %d\n", -100);
+// 	ft_printf("FT | TEST 28 | %d\n", ft_printf("%d\n", -100));
+// 	printf("OR | TEST 28 | %d\n", printf("%d\n", -100));
+// 	ft_printf("FT | TEST 29 | %p\n", 17);
+// 	printf("OR | TEST 29 | %p\n", 17);
+// 	ft_printf("FT | TEST 30 | %d\n", ft_printf("\n%p", 17));
+// 	printf("OR | TEST 30 | %d\n", printf("\n%p", 17));
+// 	// ft_printf("FT | TEST  | \n", );
+// 	// printf("OR | TEST  | \n", );
+// 	// ft_printf("FT | TEST  | \n", );
+// 	// printf("OR | TEST  | \n", );
+// 	// ft_printf("FT | TEST  | \n", );
+// 	// printf("OR | TEST  | \n", );
+// 	// ft_printf("FT | TEST  | \n", );
+// 	// printf("OR | TEST  | \n", );
+// 	// ft_printf("FT | TEST  | \n", );
+// 	// printf("OR | TEST  | \n", );
 // 	// ft_printf("FT | TEST  | \n", );
 // 	// printf("OR | TEST  | \n", );
 // 	// ft_printf("FT | TEST  | \n", );
