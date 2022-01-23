@@ -1,6 +1,5 @@
 #include "ft_printf.h"
 
-// REMOVE THIS FUNCTIONS LATER
 static int	ft_base_control(char *base)
 {
 	unsigned int	i;
@@ -26,7 +25,7 @@ static int	ft_base_control(char *base)
 	return (1);
 }
 
-static int	ft_putnbr_un(unsigned int nb, unsigned int i, char *base, int r)
+static void	ft_putnbr_un(unsigned int nb, unsigned int i, char *base, int *r)
 {
 	if (nb >= i)
 	{
@@ -34,14 +33,10 @@ static int	ft_putnbr_un(unsigned int nb, unsigned int i, char *base, int r)
 		nb = nb % i;
 	}
 	if (nb < i)
-	{
-		ft_putchar(base[nb]);
-		++r;
-	}
-	return (r);
+		ft_putchar(base[nb], r);
 }
 
-int	ft_putnbr_base_un(unsigned int nbr, char *base, int r)
+void	ft_putnbr_base_un(unsigned int nbr, char *base, int *r)
 {
 	unsigned int	i;
 
@@ -49,8 +44,7 @@ int	ft_putnbr_base_un(unsigned int nbr, char *base, int r)
 	while (base[i])
 		++i;
 	if (ft_base_control(base))
-		r = ft_putnbr_un(nbr, i, base, r);
-	return (r);
+		ft_putnbr_un(nbr, i, base, r);
 }
 
 // int	main()

@@ -1,5 +1,7 @@
 #include "ft_printf.h"
 
+// REMOVE THIS FUNCTIONS LATER
+
 void	ft_putnbr_unsigned(unsigned int nb)
 {
 	if (nb >= 10)

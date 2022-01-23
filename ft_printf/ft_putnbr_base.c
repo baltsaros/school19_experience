@@ -25,26 +25,26 @@ static int	ft_base_control(char *base)
 	return (1);
 }
 
-static void	ft_putnbr(int nbr, unsigned int i, char *base)
+static void	ft_putnbr(int nbr, unsigned int i, char *base, int *r)
 {
 	unsigned int	nb;
 	if (nbr < 0)
 	{
-		ft_putchar('-');
+		ft_putchar('-', r);
 		nb = -nbr;
 	}
 	else
 		nb = nbr;
 	if (nb >= i)
 	{
-		ft_putnbr(nb / i, i, base);
+		ft_putnbr(nb / i, i, base, r);
 		nb = nb % i;
 	}
 	if (nb < i)
-		ft_putchar(base[nb]);
+		ft_putchar(base[nb], r);
 }
 
-void	ft_putnbr_base(int nbr, char *base)
+void	ft_putnbr_base(int nbr, char *base, int *r)
 {
 	unsigned int	i;
 
@@ -52,7 +52,7 @@ void	ft_putnbr_base(int nbr, char *base)
 	while (base[i])
 		++i;
 	if (ft_base_control(base))
-		ft_putnbr(nbr, i, base);
+		ft_putnbr(nbr, i, base, r);
 }
 
 // int	main()
