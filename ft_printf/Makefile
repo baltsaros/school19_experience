@@ -5,6 +5,8 @@ SRCS	= ft_printf.c \
 			ft_putnbr_base_un.c \
 			ft_putstr.c \
 			ft_putnbr_base.c \
+			ft_putptr_add.c \
+			ft_putptr_add_un.c \
 
 OBJS	= ${SRCS:.c=.o}
 

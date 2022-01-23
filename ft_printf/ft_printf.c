@@ -2,16 +2,16 @@
 
 static int	*ft_check_flag(va_list c, char ch, int *r)
 {
-	int	j;
+	long	l;
 
 	if (ch == 'p')
 	{
-		j = va_arg(c, int);
+		l = va_arg(c, long);
 		ft_putstr("0x", r);
-		if (j < 0)
-			ft_putnbr_base_un(j, "0123456789abcdef", r);	
+		if (l < 0)
+			ft_putptr_add_un(l, "0123456789abcdef", r);
 		else
-			ft_putnbr_base(j, "0123456789abcdef", r);
+			ft_putptr_add(l, "0123456789abcdef", r);
 	}
 	if (ch == 'd')
 		ft_putnbr_base(va_arg(c, int), "0123456789", r);
@@ -26,11 +26,11 @@ static int	*ft_check_flag(va_list c, char ch, int *r)
 	return (r);
 }
 
-int	ft_printf(const char* str, ...)
+int	ft_printf(const char *str, ...)
 {
 	va_list	c;
-	int	i;
-	int	r;
+	int		i;
+	int		r;
 
 	va_start(c, str);
 	i = 0;
