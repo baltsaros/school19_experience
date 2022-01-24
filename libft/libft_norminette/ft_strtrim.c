@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:34:23 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/14 10:08:31 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/24 17:04:19 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	start;
 	size_t	end;
 
-	i = 0;
 	if (!s1)
 		return (NULL);
-	while (check_set(s1[i], set))
-		++i;
-	start = i;
+	if (!set)
+		return ((char *)s1);
+	while (check_set(s1[start], set))
+		++start;
 	i = ft_strlen(s1) - 1;
 	while (i >= 0 && check_set(s1[i], set))
 		--i;
