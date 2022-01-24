@@ -7,7 +7,7 @@
 #include <limits.h>
 
 
-typedef struct s_flags
+typedef struct s_par
 {
 	int	zero;
 	int	minus;
@@ -16,7 +16,8 @@ typedef struct s_flags
 	int	plus;
 	int	sharp;
 	int	width;
-}	t_flags;
+	int	type;
+}	t_par;
 
 int		ft_printf(const char *str, ...);
 void	ft_putnbr_base(int nbr, char *base, int *r);
@@ -25,5 +26,8 @@ void	ft_putptr_add(long nbr, char *base, int *r);
 void	ft_putptr_add_un(unsigned long nbr, char *base, int *r);
 void	ft_putchar(char c, int *r);
 void	ft_putstr(char *str, int *r);
+void	ft_output_char(t_par *params, char c, int *r);
+void	ft_output_nbr(t_par *params, int nbr, int *r);
+
 
 #endif

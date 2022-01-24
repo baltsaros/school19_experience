@@ -115,3 +115,101 @@ int	main(void)
 	// printf("\nTEST END\n");
 	// return (0);
 }
+
+// test code for c tutor
+// #include <stdio.h>
+// #include <stdarg.h>
+
+// typedef struct s_par
+// {
+//     int    zero;
+//     int    minus;
+//     int    dot;
+//     int    space;
+//     int    plus;
+//     int    sharp;
+//     int    width;
+//     int    type;
+// }    t_par;
+
+// static void    ft_set_params(t_par *params)
+// {
+//     params->zero = 1;
+//     params->minus = 0;
+//     params->dot = -1;
+//     params->space = 0;
+//     params->plus = 0;
+//     params->sharp = 0;
+//     params->width = 4;
+//     params->type = 99;
+// }
+
+// void    ft_putchar(char c, int *r)
+// {
+//     write(1, &c, 1);
+//     ++(*r);
+// }
+
+// void    ft_output_char(char c, t_par *params, int *r)
+// {
+//     if (params->width > 0)
+//         (*r) += params->width;
+//     else
+//         ++(*r);
+//     if (params->minus > 0)
+//     {
+//         write(1, &c, 1);
+//         while (params->width - 1 > 0)
+//         {
+//             write(1, " ", 1);
+//             --params->width;
+//         }
+//     }
+//     else if (params->zero > 0)
+//     {
+//         while (params->width - 1 > 0)
+//         {
+//             write(1, " ", 1);
+//             --params->width;
+//         }
+//         write(1, &c, 1);
+//     }
+//     else
+//         write(1, &c, 1);
+// }
+
+// static void    *ft_output(va_list arg, t_par *params, int *r)
+// {
+//     if (params->type == 'c')
+//       ft_output_char(va_arg(arg, unsigned int), params, r);
+// }
+
+// int    ft_printf(const char *str, ...)
+// {
+//     va_list    arg;
+//     t_par    params;
+//     int        r;
+
+//     va_start(arg, str);
+//     r = 0;
+//     while (*str)
+//     {
+//         if (*str == '%')
+//         {
+//             ++str;
+//             ft_set_params(&params);
+//             ft_output(arg, &params, &r);
+//         }
+//         else
+//             ft_putchar(*str, &r);
+//         ++str;
+//     }
+//     va_end(arg);
+//     return (r);
+// }
+
+// int main(void)
+// {
+//   ft_printf("  %04c\n", 'a');
+//   return (0);
+// }
