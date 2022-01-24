@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:49 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/14 10:08:09 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/24 17:24:40 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char			*s2;
 
 	i = 0;
-	if (!(s))
+	if (!s || !f)
 		return (NULL);
 	s2 = (char *)malloc(sizeof(*s2) * (ft_strlen(s) + 1));
 	if (!s2)
