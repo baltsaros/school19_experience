@@ -12,56 +12,56 @@ static void	ft_set_params(t_par *params)
 	params->type = 0;
 }
 
-static void	ft_check_params(char **str, t_par *params)
+static void	ft_check_params(const char *str, t_par *params, int *i)
 {
-	while (**str == '#' || **str == '+' || **str == '-' || **str == ' '
-			|| **str == '0')
+	while (str[*i] == '#' || str[*i] == '+' || str[*i] == '-' || str[*i] == ' '
+			|| str[*i] == '0')
 	{
-		if (**str == '0')
+		if (str[*i] == '0')
 			params->zero = 1;
-		else if (**str == ' ')
+		else if (str[*i] == ' ')
 			params->space = 1;
-		else if (**str == '+')
+		else if (str[*i] == '+')
 		{
 			params->space = 0;	
 			params->plus = 1;
 		}
-		else if (**str == '-')
+		else if (str[*i] == '-')
 		{
 			params->minus = 1;
 			params->zero = 0;
 		}
-		else if (**str == '#')
+		else if (str[*i] == '#')
 			params->sharp = 1;
-		++(*str);
+		++(*i);
 	}
 
-	while (ft_isdigit(**str))
+	while (ft_isdigit(str[*i]))
 	{
-		params->width = params->width * 10 + **str - '0';
-		++(*str);
+		params->width = params->width * 10 + str[*i]- '0';
+		++(*i);
 	}	
 // CHECK PARAMS AGAIN - NEED FOR CASES LIKE ("%04.7d\n", 500)
-	if (**str == '.')
+	if (str[*i] == '.')
 	{
 		params->zero = 0;
-		while (ft_isdigit(**str))
+		while (ft_isdigit(str[*i]))
 		{
-			params->dot = params->dot * 10 + **str - '0';
-			++(*str);
+			params->dot = params->dot * 10 + str[*i] - '0';
+			++(*i);
 		}	
 	}
 
-	if (**str == 'd' || **str == 'i' || **str == 's' || **str == 'c'
-			|| **str == 'x' || **str == 'X' || **str == 'u'
-			|| **str == 'p' || **str == '%')
+	if (str[*i] == 'd' || str[*i] == 'i' || str[*i]== 's' || str[*i] == 'c'
+			|| str[*i] == 'x' || str[*i]== 'X' || str[*i] == 'u'
+			|| str[*i] == 'p' || str[*i]== '%')
 	{
-		params->type = **str;
-		++(*str);
+		params->type = str[*i];
+		++(*i);
 	}
 }
 
-static void	*ft_output(va_list arg, t_par *params, int *r)
+static void	ft_output(va_list arg, t_par *params, int *r)
 {
 	long	l;
 
@@ -76,37 +76,38 @@ int	ft_printf(const char *str, ...)
 	va_list	arg;
 	t_par	params;
 	int		r;
+	int		i;
 
 	va_start(arg, str);
 	r = 0;
-	while (*str)
+	i = 0;
+	while (str[i])
 	{
-		if (*str == '%')
+		if (str[i] == '%')
 		{
-			++str;
+			++i;
 			ft_set_params(&params);
-			ft_check_params(&str, &params);
+			ft_check_params(str, &params, &i);
 			ft_output(arg, &params, &r);
 		}
-		else
-			ft_putchar(*str, &r);
-		++str;
+		ft_putchar(str[i], &r);
+		++i;
 	}
 	va_end(arg);
 	return (r);
 }
 
-#include <stdio.h>
 int	main(void)
 {
 // 	int		d = 9;
 // 	char	c = 'a';
 // 	char	s[6] = "Hello";
 
-	ft_printf("FT | TEST 01 | %d\n", 5);
 	printf("OR | TEST 01 | %d\n", 5);
-	// ft_printf("FT | TEST 02 | \n", );
-	// printf("OR | TEST 02 | \n", );
+	ft_printf("FT | TEST 01 | %d\n", 5);
+	printf("OR | TEST 02 | %d\n", 1);
+	ft_printf("FT | TEST 02 | %d\n", 1);
+	// fflush(stdout);
 // // 	ft_printf("TESTING FT\n");
 // // 	printf("TESTING OR\n");
 // // 	ft_printf("FT | TEST 1 | %c\n", c);

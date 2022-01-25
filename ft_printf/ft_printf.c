@@ -105,8 +105,10 @@ int	main(void)
 	char	s[6] = "Hello";
 
 
-	ft_printf("FT | TEST 01 | %-0.3d\n", 5);
-	printf("OR | TEST 01 | %-0.3d\n", 5);
+	ft_printf("FT | TEST 01 | %-04d\n", 5);
+	printf("OR | TEST 01 | %-04d\n", 5);
+	// ft_printf("FT | TEST 01 | %4d\n", -5);
+	// printf("OR | TEST 01 | %4d\n", -5);
 	// ft_printf("FT | TEST 01 | % 3d\n", 5);
 	// printf("OR | TEST 01 | % 3d\n", 5);
 	// ft_printf("FT | TEST 02 | %d\n", ft_printf("%.3d\n", -5));

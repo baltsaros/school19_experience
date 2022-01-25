@@ -63,6 +63,8 @@ void	ft_output_nbr(t_par *params, int nbr, int *r)
 		ft_putchar(' ', r);
 	if (params->plus && nbr >= 0)
 		ft_putchar('+', r);
+	while (!params->zero && !params->minus && ft_decrease(&params->width))
+		ft_putchar(' ', r);
 	if (nbr < 0)
 		ft_putchar('-', r);
 	while (params->zero && ft_decrease(&params->width))
@@ -73,7 +75,7 @@ void	ft_output_nbr(t_par *params, int nbr, int *r)
 	while (ft_decrease(&params->dot))
 		ft_putchar('0', r);
 	ft_putnbr(nbr, r);
-	while (params->minus && ft_decrease(&params->width))
+	while (params->minus && (params->dot < 0) && ft_decrease(&params->width))
 		ft_putchar(' ', r);
 }
 
