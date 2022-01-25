@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:30:39 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/18 16:29:32 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/25 10:01:57 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		main(void)
 	head = NULL;
 	// head = ft_lstnew((void *)&data[0]);
 	current = ft_lstnew((void *)&data[1]);
-	ft_lstadd_back(&head, current);
+	ft_lstadd_back(&head, NULL);
 	// current = ft_lstnew((void *)&data[2]);
 	// ft_lstadd_back(&head, current);
 	// current = ft_lstnew((void *)&data[3]);
