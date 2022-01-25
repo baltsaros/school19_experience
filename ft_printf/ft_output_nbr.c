@@ -25,16 +25,6 @@ static int	ft_decrease(int *width)
 	return (0);
 }
 
-static int	ft_precision(int *precision)
-{
-	if (*precision > 0)
-	{
-		--precision;
-		return (1);
-	}
-	return (0);
-}
-
 static void	ft_putnbr(int nbr, int *r)
 {
 	unsigned int	nb;
@@ -57,6 +47,8 @@ void	ft_output_nbr(t_par *params, int nbr, int *r)
 	params->width = params->width - ft_nbrlen(nbr);
 	if (params->plus && nbr >= 0)
 		--params->width;
+	if (params->space && params->width <= 0)
+		ft_putchar(' ', r);
 	while (params->space && ft_decrease(&params->width))
 		ft_putchar(' ', r);
 	while (params->plus && ft_decrease(&params->width))

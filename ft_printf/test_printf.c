@@ -3,9 +3,9 @@
 
 int	main(void)
 {
-	// printf("TESTING +\n");
+	printf("TESTING +\n");
 	// // printf("%+c\n", 'a');
-	// // printf("%+s\n", "test");
+	printf("%+s\n", "test");
 	// printf("%+d\n", 0);
 	// printf("%+3d\n", 0);
 	// printf("%+d\n", -1);
@@ -22,7 +22,7 @@ int	main(void)
 	// printf("%+p\n", 78);
 	// printf("%+p\n", -101);
 	// printf("%+%\n");
-	// printf("\nTESTING 0\n");
+	printf("\nTESTING 0\n");
 	// printf("%01d\n", 0);
 	// printf("%02d\n", -1); 
 	// printf("%04d\n", -1); 
@@ -36,22 +36,25 @@ int	main(void)
 	// printf("%05p\n", 100);
 	// printf("%15p\n", 100);
 	// printf("%03c\n", 'c');
-	// printf("%03s\n", "sa");
+	printf("%0s\n", "sa");
+	printf("%05s\n", "sa");
 	// printf("%03%\n");
 	printf("\nTESING .\n");
-	// printf("%.s\n", "test");
-	// printf("|%.3s\n", "t");
+	printf("|%.s\n", "test");
+	printf("|%.1s\n", "test");
+	printf("|%.3s\n", "t");
+	printf("|%.3s\n", "tes");
 	// printf("%.6s\n", " - ");
 	// printf("%.c\n", 'c');
 	// printf("%.1c\n", 'c');
 	// printf("%.6c\n", 'c');
 	// printf("%.d\n", 0);
-	printf("%.0d\n", 1);
-	printf("%.1d\n", 1);
-	printf("%.0d\n", 0);
-	printf("%.1d\n", 0);
-	printf("%.2d\n", -1);
-	printf("%.2d\n", 9);
+	// printf("%.0d\n", 1);
+	// printf("%.1d\n", 1);
+	// printf("%.0d\n", 0);
+	// printf("%.1d\n", 0);
+	// printf("%.2d\n", -1);
+	// printf("%.2d\n", 9);
 	// printf("%.3i\n", 101);
 	// printf("%.4i\n", -100);
 	// printf("%.3u\n", 11);
@@ -67,14 +70,15 @@ int	main(void)
 	// printf("%.15p\n", -99);
 	// printf("%.5%\n");
 	// printf("%.%\n");
-	// printf("\nTESTING -\n");
+	printf("\nTESTING -\n");
 	// printf("%-2c\n", '0');
 	// printf("%-1c\n", '0');
 	// printf("%-c\n", '0');
 	// printf("%c%-2c%c\n", 'a', 'b', 'c');
 	// printf("%1s\n", "t");
-	// printf("%-1s\n", "t");
-	// printf("%-3s\n", "-");
+	printf("%-s\n", "t");
+	printf("%-1s\n", "t");
+	printf("%-3s\n", "t");
 	// printf("%2p\n", -1);
 	// printf("%-2p\n", -1);
 	// printf("%-3p\n", 77);
@@ -98,9 +102,10 @@ int	main(void)
 	// printf("%-1X\n", 89);
 	// printf("%-15X\n", 89);
 	// printf("%-2%\n", 89);
-	// printf("\nTESTING #\n");
+	printf("\nTESTING #\n");
 	// printf("%#c\n", 'c');
-	// printf("%#s\n", "test");
+	printf("%#s\n", "test");
+	printf("%#5s\n", "test");
 	// printf("%#d\n", -3);
 	// printf("%#i\n", -3);
 	// printf("%#u\n", 3);
@@ -118,10 +123,11 @@ int	main(void)
 	// printf("%#X\n", 13);
 	// printf("%#p\n", 13);
 	// printf("%#%\n");
-	// printf("\nTESTING (space)\n");
+	printf("\nTESTING (space)\n");
 	// printf("% c\n", 'c');
 	// printf("% s\n", "test");
-	// printf("% 1s\n", "tst");
+	printf("% 4s\n", "tst");
+	printf("% s\n", "tst");
 	// printf("%d\n", 0);
 	// printf("% d\n", 0);
 	// printf("%  2d\n", 0);
@@ -138,5 +144,8 @@ int	main(void)
 	// printf("% X\n", 999);
 	// printf("% %\n");
 	// printf("\nTEST END\n");
+	printf("\nTESTING width\n");
+	printf("%10s\n", "tst");
+
 	return (0);
 }

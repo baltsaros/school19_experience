@@ -6,24 +6,15 @@ void	ft_output_char(t_par *params, char c, int *r)
 		(*r) += params->width;
 	else
 		++(*r);
-	if (params->minus > 0)
+	while (!params->minus && !params->zero && (params->width - 1 > 0))
 	{
-		write(1, &c, 1);
-		while (params->width - 1 > 0)
-		{
-			write(1, " ", 1);
-			--params->width;
-		}
+		write(1, " ", 1);
+		--params->width;
 	}
-	else if (params->zero > 0)
+	while (params->zero && (params->width - 1 > 0))
 	{
-		while (params->width - 1 > 0)
-		{
-			write(1, "0", 1);
-			--params->width;
-		}
-		write(1, &c, 1);
+		write(1, "0", 1);
+		--params->width;
 	}
-	else
-		write(1, &c, 1);
+	write(1, &c, 1);
 }

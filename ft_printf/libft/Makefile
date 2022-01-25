@@ -59,7 +59,7 @@ CFLAGS	= -Wall -Wextra -Werror
 %.o : %.c 
 			${GCC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
 
-${NAME}:	${OBJS}
+${NAME}:	${OBJS} 
 			${LIB} ${NAME} ${OBJS} 
 
 all:		${NAME} bonus
