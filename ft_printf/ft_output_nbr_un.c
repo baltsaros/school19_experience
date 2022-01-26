@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static int	ft_nbrlen(int nbr)
+static int	ft_nbrlen(unsigned int nbr)
 {
 	int	len;
 
@@ -25,48 +25,28 @@ static int	ft_decrease(int *width)
 	return (0);
 }
 
-static void	ft_putnbr(int nbr, int *r)
+static void	ft_putnbr_un(unsigned int nb, int *r)
 {
-	unsigned int	nb;
-
-	if (nbr < 0)
-		nb = -nbr;
-	else
-		nb = nbr;
 	if (nb >= 10)
 	{
-		ft_putnbr(nb / 10, r);
+		ft_putnbr_un(nb / 10, r);
 		nb = nb % 10;
 	}
 	if (nb < 10)
 		ft_putchar(nb + '0', r);
 }
 
-void	ft_output_nbr(t_par *params, int nbr, int *r)
+void	ft_output_nbr_un(t_par *params, unsigned int nbr, int *r)
 {
 	params->width = params->width - ft_nbrlen(nbr);
-	if (params->plus && nbr >= 0)
-		--params->width;
-	if (params->space && params->width <= 0)
-		ft_putchar(' ', r);
-	while (params->space && ft_decrease(&params->width))
-		ft_putchar(' ', r);
-	while (params->plus && ft_decrease(&params->width))
-		ft_putchar(' ', r);
-	if (params->plus && nbr >= 0)
-		ft_putchar('+', r);
 	while ((params->dot <= 0) && !params->zero && !params->minus && ft_decrease(&params->width))
 		ft_putchar(' ', r);
-	if (nbr < 0)
-		ft_putchar('-', r);
 	while (params->zero && ft_decrease(&params->width))
 		ft_putchar('0', r);
 	params->dot = params->dot - ft_nbrlen(nbr);
-	if (nbr < 0 && params->dot)
-		++params->dot;
-	while (ft_decrease(&params->dot))
+	while (params->dot >= 0 && ft_decrease(&params->dot))
 		ft_putchar('0', r);
-	ft_putnbr(nbr, r);
+	ft_putnbr_un(nbr, r);
 	while (params->minus && (params->dot < 0) && ft_decrease(&params->width))
 		ft_putchar(' ', r);
 }
