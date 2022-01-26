@@ -5,6 +5,8 @@ static int	ft_nbrlen(unsigned int nbr)
 	int	len;
 
 	len = 0;
+	if (nbr == 0)
+		++len;
 	while (nbr)
 	{
 		nbr = nbr / 10;
@@ -36,18 +38,22 @@ static void	ft_putnbr_un(unsigned int nb, int *r)
 
 void	ft_output_nbr_un(t_par *params, unsigned int nbr, int *r)
 {
-	params->width = params->width - ft_nbrlen(nbr);
-	while ((params->dot <= 0) && !params->zero && !params->minus && ft_decrease(&params->width))
+	int	check;
+
+	check = 0;
+	if (params->dot == 0 && nbr == 0)
+		check = 1;
+	params->width = params->width - ft_nbrlen(nbr) + check;
+	params->dot -= ft_nbrlen(nbr);
+	if (params->dot > 0)
+		params->width = params->width - params->dot;
+	while (!params->zero && !params->minus && ft_decrease(&params->width))
 		ft_putchar(' ', r);
-	while (params->zero && ft_decrease(&params->width))
+	while ((params->zero && ft_decrease(&params->width)) || ft_decrease(&params->dot))
 		ft_putchar('0', r);
-	params->dot = params->dot - ft_nbrlen(nbr);
-	while (params->dot >= 0 && ft_decrease(&params->dot))
-		ft_putchar('0', r);
-	if (nbr == 0)
-		return ;
-	ft_putnbr_un(nbr, r);
-	while (params->minus && (params->dot < 0) && ft_decrease(&params->width))
+	if (!check)
+		ft_putnbr_un(nbr, r);
+	while (params->minus && (params->dot <= 0) && ft_decrease(&params->width))
 		ft_putchar(' ', r);
 }
 

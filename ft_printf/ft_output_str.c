@@ -17,18 +17,18 @@ void	ft_output_str(t_par *params, char *str, int *r)
 		ft_output_str(params, "(null)", r);
 		return ;
 	}
-	params->width = params->width - ft_strlen(str);
+	if (params->dot != 0)
+		params->width -= ft_strlen(str);
 	while ((params->width > 0) && params->zero && ft_decrease(&params->width))
 		ft_putchar('0', r);
 	while ((params->width > 0) && !params->minus && ft_decrease(&params->width))
 		ft_putchar(' ', r);
-	if (params->dot == 0)
-		return ;
 	while (*str != '\0')
 	{
-		write(1, &(*str), 1);
+		if (params->dot >= 0 && !(ft_decrease(&params->dot)))
+			break ;
+		ft_putchar(*str, r);
 		++str;
-		++(*r);
 	}
 	while ((params->width > 0) && params->minus && ft_decrease(&params->width))
 		ft_putchar(' ', r);
