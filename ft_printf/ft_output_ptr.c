@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static int	ft_nbrlen(unsigned int nbr)
+static int	ft_nbrlen(unsigned long long nbr)
 {
 	int	len;
 
@@ -25,7 +25,7 @@ static int	ft_decrease(int *width)
 	return (0);
 }
 
-static void	ft_putnbr_un(unsigned int nb, int *r)
+static void	ft_putnbr_un(unsigned long long nb, int *r)
 {
 	if (nb >= 16)
 	{
@@ -38,15 +38,12 @@ static void	ft_putnbr_un(unsigned int nb, int *r)
 		ft_putchar(nb + 87, r);
 }
 
-void	ft_output_hex(t_par *params, unsigned int nbr, int *r)
+void	ft_output_ptr(t_par *params, unsigned long long nbr, int *r)
 {
-	params->width = params->width - ft_nbrlen(nbr);
-	if (params->sharp && nbr)
-		params->width -= 2;
+	params->width = params->width - ft_nbrlen(nbr) - 2;
 	while ((params->dot <= 0) && !params->zero && !params->minus && ft_decrease(&params->width))
 		ft_putchar(' ', r);
-	if (params->sharp && nbr)
-		ft_putstr("0x", r);
+	ft_putstr("0x", r);
 	while (params->zero && ft_decrease(&params->width))
 		ft_putchar('0', r);
 	params->dot = params->dot - ft_nbrlen(nbr);

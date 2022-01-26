@@ -35,10 +35,10 @@ static void	ft_putnbr_un(unsigned int nb, int *r)
 	if (nb < 10)
 		ft_putchar(nb + '0', r);
 	else
-		ft_putchar(nb + 87, r);
+		ft_putchar(nb + 55, r);
 }
 
-void	ft_output_hex(t_par *params, unsigned int nbr, int *r)
+void	ft_output_hexX(t_par *params, unsigned int nbr, int *r)
 {
 	params->width = params->width - ft_nbrlen(nbr);
 	if (params->sharp && nbr)
@@ -46,7 +46,7 @@ void	ft_output_hex(t_par *params, unsigned int nbr, int *r)
 	while ((params->dot <= 0) && !params->zero && !params->minus && ft_decrease(&params->width))
 		ft_putchar(' ', r);
 	if (params->sharp && nbr)
-		ft_putstr("0x", r);
+		ft_putstr("0X", r);
 	while (params->zero && ft_decrease(&params->width))
 		ft_putchar('0', r);
 	params->dot = params->dot - ft_nbrlen(nbr);
