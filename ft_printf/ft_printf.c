@@ -74,6 +74,8 @@ static void	ft_output(va_list arg, t_par *params, int *r)
 		ft_output_nbr(params, va_arg(arg, int), r);
 	else if (params->type == 'u')
 		ft_output_nbr_un(params, va_arg(arg, unsigned int), r);
+	else if (params->type == 'x')
+		ft_output_hex(params, va_arg(arg, unsigned int), r);
 }
 
 int	ft_printf(const char *str, ...)
@@ -156,8 +158,6 @@ int	main(void)
 	// printf("OR | TEST 24 | %+4d\n", -8);
 	// ft_printf("FT | TEST 25 | %-6d\n", 11);
 	// printf("OR | TEST 25 | %-6d\n", 11);
-	// ft_printf("FT | TEST 20 | %4 d\n", 3);
-	// printf("OR | TEST 20 | %4 d\n", 3);
 	// ft_printf("FT | TEST 26 | %d\n", ft_printf("%-6d %06d % 5d %+4d %.5d %#d\n", 11, 12, 13, 14, 15, 16));
 	// printf("OR | TEST 26 | %d\n", printf("%-6d %06d % 5d %+4d %.5d %#d\n", 11, 12, 13, 14, 15, 16));
 	// ft_printf("FT | TEST 27 | %d%d%d\n", 11, 12, 13);
@@ -172,6 +172,12 @@ int	main(void)
 	// printf("OR | TEST 31 | %4.d\n", 1);
 	// ft_printf("FT | TEST 32 | %04.d\n", 3);
 	// printf("OR | TEST 32 | %04.d\n", 3);
+	// ft_printf("FT | TEST 31 | %5.d\n", 0);
+	// printf("OR | TEST 31 | %5.d\n", 0);
+	// ft_printf("FT | TEST 32 | %05d\n", 0);
+	// printf("OR | TEST 32 | %05d\n", 0);
+	// ft_printf("FT | TEST 33 | %.5d\n", 0);
+	// printf("OR | TEST 33 | %.5d\n", 0);
 
 	// printf("TESTING %i with flags...........\n");
 	// ft_printf("FT | TEST 01 | %i \n", 5);
@@ -236,6 +242,12 @@ int	main(void)
 	// printf("OR | TEST 29 | %5.5i\n", 56);
 	// ft_printf("FT | TEST 30 | %5.i\n", 17);
 	// printf("OR | TEST 30 | %5.i\n", 17);
+	// ft_printf("FT | TEST 31 | %5.i\n", 0);
+	// printf("OR | TEST 31 | %5.i\n", 0);
+	// ft_printf("FT | TEST 32 | %05i\n", 0);
+	// printf("OR | TEST 32 | %05i\n", 0);
+	// ft_printf("FT | TEST 33 | %.5i\n", 0);
+	// printf("OR | TEST 33 | %.5i\n", 0);
 
 	// printf("TESTING %%c with flags...........\n");
 	// ft_printf("FT | TEST 1 | %c\n", 'a');
@@ -382,6 +394,114 @@ int	main(void)
 	// printf("OR | TEST 23 | %5.5u\n", 56);
 	// ft_printf("FT | TEST 24 | %5.u\n", 17);
 	// printf("OR | TEST 24 | %5.u\n", 17);
+	// ft_printf("FT | TEST 25 | %5.u\n", 0);
+	// printf("OR | TEST 25 | %5.u\n", 0);
+	// ft_printf("FT | TEST 26 | %05u\n", 0);
+	// printf("OR | TEST 26 | %05u\n", 0);
+
+	printf("TESTING %%x with flags...........\n");
+	ft_printf("FT | TEST 1 | %x\n", 3);
+	printf("OR | TEST 1 | %x\n", 3);
+	// ft_printf("FT | TEST 2 | %\n", );
+	// printf("OR | TEST 2 | %\n", );
+	// ft_printf("FT | TEST 3 | %\n", );
+	// printf("OR | TEST 3 | %\n", );
+	// ft_printf("FT | TEST 4 | %\n", );
+	// printf("OR | TEST 4 | %\n", );
+	// ft_printf("FT | TEST 5 | %\n", );
+	// printf("OR | TEST 5 | %\n", );
+	// ft_printf("FT | TEST 6 | %\n", );
+	// printf("OR | TEST 6 | %\n", );
+	// ft_printf("FT | TEST 7 | %\n", );
+	// printf("OR | TEST 7 | %\n", );
+	// ft_printf("FT | TEST 8 | %\n", );
+	// printf("OR | TEST 8 | %\n", );
+	// ft_printf("FT | TEST 9 | %\n", );
+	// printf("OR | TEST 9 | %\n", );
+	// ft_printf("FT | TEST 10 | %\n", );
+	// printf("OR | TEST 10 | %\n", );
+	// ft_printf("FT | TEST 11 | %\n", );
+	// printf("OR | TEST 11 | %\n", );
+	// ft_printf("FT | TEST 12 | %\n", );
+	// printf("OR | TEST 12 | %\n", );
+	// ft_printf("FT | TEST 13 | %\n", );
+	// printf("OR | TEST 13 | %\n", );
+	// ft_printf("FT | TEST 14 | %\n", );
+	// printf("OR | TEST 14 | %\n", );
+	// ft_printf("FT | TEST 15 | %\n", );
+	// printf("OR | TEST 15 | %\n", );
+	// ft_printf("FT | TEST 16 | %\n", );
+	// printf("OR | TEST 16 | %\n", );
+	// ft_printf("FT | TEST 17 | %\n", );
+	// printf("OR | TEST 17 | %\n", );
+	// ft_printf("FT | TEST 18 | %\n", );
+	// printf("OR | TEST 18 | %\n", );
+	// ft_printf("FT | TEST 19 | %\n", );
+	// printf("OR | TEST 19 | %\n", );
+	// ft_printf("FT | TEST 20 | %\n", );
+	// printf("OR | TEST 20 | %\n", );
+	// ft_printf("FT | TEST 21 | %\n", );
+	// printf("OR | TEST 21 | %\n", );
+	// ft_printf("FT | TEST 22 | %\n", );
+	// printf("OR | TEST 22 | %\n", );
+	// ft_printf("FT | TEST 23 | %\n", );
+	// printf("OR | TEST 23 | %\n", );
+	// ft_printf("FT | TEST 24 | %\n", );
+	// printf("OR | TEST 24 | %\n", );
+	// ft_printf("FT | TEST 25 | %\n", );
+	// printf("OR | TEST 25 | %\n", );
+	
+	// printf("TESTING % with flags...........\n");
+	// ft_printf("FT | TEST 1 | %\n", );
+	// printf("OR | TEST 1 | %\n", );
+	// ft_printf("FT | TEST 2 | %\n", );
+	// printf("OR | TEST 2 | %\n", );
+	// ft_printf("FT | TEST 3 | %\n", );
+	// printf("OR | TEST 3 | %\n", );
+	// ft_printf("FT | TEST 4 | %\n", );
+	// printf("OR | TEST 4 | %\n", );
+	// ft_printf("FT | TEST 5 | %\n", );
+	// printf("OR | TEST 5 | %\n", );
+	// ft_printf("FT | TEST 6 | %\n", );
+	// printf("OR | TEST 6 | %\n", );
+	// ft_printf("FT | TEST 7 | %\n", );
+	// printf("OR | TEST 7 | %\n", );
+	// ft_printf("FT | TEST 8 | %\n", );
+	// printf("OR | TEST 8 | %\n", );
+	// ft_printf("FT | TEST 9 | %\n", );
+	// printf("OR | TEST 9 | %\n", );
+	// ft_printf("FT | TEST 10 | %\n", );
+	// printf("OR | TEST 10 | %\n", );
+	// ft_printf("FT | TEST 11 | %\n", );
+	// printf("OR | TEST 11 | %\n", );
+	// ft_printf("FT | TEST 12 | %\n", );
+	// printf("OR | TEST 12 | %\n", );
+	// ft_printf("FT | TEST 13 | %\n", );
+	// printf("OR | TEST 13 | %\n", );
+	// ft_printf("FT | TEST 14 | %\n", );
+	// printf("OR | TEST 14 | %\n", );
+	// ft_printf("FT | TEST 15 | %\n", );
+	// printf("OR | TEST 15 | %\n", );
+	// ft_printf("FT | TEST 16 | %\n", );
+	// printf("OR | TEST 16 | %\n", );
+	// ft_printf("FT | TEST 17 | %\n", );
+	// printf("OR | TEST 17 | %\n", );
+	// ft_printf("FT | TEST 18 | %\n", );
+	// printf("OR | TEST 18 | %\n", );
+	// ft_printf("FT | TEST 19 | %\n", );
+	// printf("OR | TEST 19 | %\n", );
+	// ft_printf("FT | TEST 20 | %\n", );
+	// printf("OR | TEST 20 | %\n", );
+	// ft_printf("FT | TEST 21 | %\n", );
+	// printf("OR | TEST 21 | %\n", );
+	// ft_printf("FT | TEST 22 | %\n", );
+	// printf("OR | TEST 22 | %\n", );
+	// ft_printf("FT | TEST 23 | %\n", );
+	// printf("OR | TEST 23 | %\n", );
+	// ft_printf("FT | TEST 24 | %\n", );
+	// printf("OR | TEST 24 | %\n", );
+	// ft_printf("FT | TEST 25 | %\n", );
+	// printf("OR | TEST 25 | %\n", );
 
 	// printf("TESTING % with flags...........\n");
 	// ft_printf("FT | TEST 1 | %\n", );

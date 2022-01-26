@@ -31,6 +31,7 @@ void	ft_output_char(t_par *params, char c, int *r);
 void	ft_output_nbr(t_par *params, int nbr, int *r);
 void	ft_output_str(t_par *params, char *str, int *r);
 void	ft_output_nbr_un(t_par *params, unsigned int nbr, int *r);
+void	ft_output_hex(t_par *params, unsigned int nbr, int *r);
 
 
 #endif

@@ -5,7 +5,7 @@ static int	ft_nbrlen(int nbr)
 	int	len;
 
 	len = 0;
-	if (nbr <= 0)
+	if (nbr < 0)
 		++len;
 	while (nbr)
 	{
@@ -66,6 +66,8 @@ void	ft_output_nbr(t_par *params, int nbr, int *r)
 		++params->dot;
 	while (ft_decrease(&params->dot))
 		ft_putchar('0', r);
+	if (nbr == 0)
+		return ;
 	ft_putnbr(nbr, r);
 	while (params->minus && (params->dot < 0) && ft_decrease(&params->width))
 		ft_putchar(' ', r);
