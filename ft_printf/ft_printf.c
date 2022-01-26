@@ -80,6 +80,8 @@ static void	ft_output(va_list arg, t_par *params, int *r)
 		ft_output_hexX(params, va_arg(arg, unsigned int), r);
 	else if (params->type == 'p')
 		ft_output_ptr(params, va_arg(arg, unsigned long long), r);
+	else if (params->type == '%')
+		ft_output_char(params, '%', r);
 }
 
 int	ft_printf(const char *str, ...)
