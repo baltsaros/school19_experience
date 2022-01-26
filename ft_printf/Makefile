@@ -25,7 +25,7 @@ CFLAGS	= -Wall -Wextra -Werror
 			${GCC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
 
 ${NAME}:	${OBJS}
-			make -C ./libft all 
+			make -C ./libft && make -C ./libft bonus 
 			cp libft/libft.a .
 			mv libft.a ${NAME}
 			${LIB} ${NAME} ${OBJS} 
