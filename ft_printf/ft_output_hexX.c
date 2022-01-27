@@ -40,19 +40,39 @@ static void	ft_putnbr_un(unsigned int nb, int *r)
 
 void	ft_output_hexX(t_par *params, unsigned int nbr, int *r)
 {
-	params->width = params->width - ft_nbrlen(nbr);
+	int	check;
+	int	check2;
+
+	check = 0;
+	if (params->dot == 0 && nbr == 0)
+		check = 1;
+	check2 = 0;
+	if (params->width > params->dot)
+		check2 = 1;
+	params->dot = params->dot - ft_nbrlen(nbr);
+	if (!params->minus && params->dot >= 0 && params->width > 0 && params->width > params->dot)
+		params->width -= params->dot;
+	else if (params->dot >= 0 && params->width > 0 && params->width < params->dot)
+		params->width = params->dot - params->width + check;
+	params->width = params->width - ft_nbrlen(nbr) + check;
 	if (params->sharp && nbr)
 		params->width -= 2;
-	while ((params->dot <= 0) && !params->zero && !params->minus && ft_decrease(&params->width))
-		ft_putchar(' ', r);
+	if (check2)
+	{
+		while (!params->zero && !params->minus && ft_decrease(&params->width))
+			ft_putchar(' ', r);
+	}
 	if (params->sharp && nbr)
 		ft_putstr("0X", r);
 	while (params->zero && ft_decrease(&params->width))
 		ft_putchar('0', r);
-	params->dot = params->dot - ft_nbrlen(nbr);
 	while (params->dot >= 0 && ft_decrease(&params->dot))
+	{
 		ft_putchar('0', r);
-	ft_putnbr_un(nbr, r);
-	while (params->minus && (params->dot < 0) && ft_decrease(&params->width))
+		--params->width;
+	}	
+	if (!check)
+		ft_putnbr_un(nbr, r);
+	while (params->minus && ft_decrease(&params->width))
 		ft_putchar(' ', r);
 }

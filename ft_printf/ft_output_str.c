@@ -17,7 +17,11 @@ void	ft_output_str(t_par *params, char *str, int *r)
 		ft_output_str(params, "(null)", r);
 		return ;
 	}
-	if (params->dot != 0)
+	if (params->dot >= 0 && params->width && params->width > params->dot)
+		params->width -= params->dot;
+	else if (params->dot >= 0 && params->width && params->width < params->dot)
+			params->width = params->dot - params->width + 1;
+	else
 		params->width -= ft_strlen(str);
 	while ((params->width > 0) && params->zero && ft_decrease(&params->width))
 		ft_putchar('0', r);
