@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:09:08 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/27 12:09:10 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/27 15:49:42 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	ft_output_str(t_par *params, char *str, int *r)
 			params->width = params->dot - params->width + 1;
 	else
 		params->width -= ft_strlen(str);
-	while ((params->width > 0) && params->zero && ft_decrease(&params->width))
+	while (params->zero && ft_decrease(&params->width))
 		ft_putchar('0', r);
-	while ((params->width > 0) && !params->minus && ft_decrease(&params->width))
+	while (!params->zero && !params->minus && ft_decrease(&params->width))
 		ft_putchar(' ', r);
 	while (*str != '\0')
 	{
@@ -46,6 +46,6 @@ void	ft_output_str(t_par *params, char *str, int *r)
 		ft_putchar(*str, r);
 		++str;
 	}
-	while ((params->width > 0) && params->minus && ft_decrease(&params->width))
+	while (params->minus && ft_decrease(&params->width))
 		ft_putchar(' ', r);
 }

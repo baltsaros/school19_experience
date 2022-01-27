@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:07:37 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/27 12:08:03 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/27 16:17:44 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_output_ptr(t_par *params, unsigned long long nbr, int *r)
 	ft_putstr("0x", r);
 	while (params->zero && ft_decrease(&params->width))
 		ft_putchar('0', r);
-	params->dot = params->dot - ft_nbrlen(nbr);
+	params->dot -= ft_nbrlen(nbr);
 	while (params->dot >= 0 && ft_decrease(&params->dot))
 		ft_putchar('0', r);
 	ft_putnbr_un(nbr, r);

@@ -6,20 +6,18 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 11:58:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/27 13:28:29 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/27 16:14:16 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_nbrlen(int nbr, int include)
+static int	ft_nbrlen(int nbr)
 {
 	int	len;
 
 	len = 0;
-	if (nbr < 0 && include)
-		++len;
-	if (nbr == 0)
+	if (nbr <= 0)
 		++len;
 	while (nbr)
 	{
@@ -56,30 +54,40 @@ static void	ft_putnbr(int nbr, int *r)
 		ft_putchar(nb + '0', r);
 }
 
-void	ft_output_nbr(t_par *params, int nbr, int *r)
+static void	ft_putsign(t_par *params, int nbr, int *r)
 {
-	int	check;
-
-	check = 0;
-	if (params->dot == 0 && nbr == 0)
-		check = 1;
-	params->width = params->width - ft_nbrlen(nbr, 1) + check;
-	params->dot -= ft_nbrlen(nbr, 0);
-	if (params->dot > 0)
-		params->width = params->width - params->dot;
-	if (params->plus && nbr >= 0)
-		--params->width;
 	if (params->space && (!params->plus) && params->width <= 0 && nbr >= 0)
-		ft_putchar(' ', r);
-	while (!params->zero && !params->minus && ft_dec(&params->width))
 		ft_putchar(' ', r);
 	if (params->plus && nbr >= 0)
 		ft_putchar('+', r);
 	if (nbr < 0)
 		ft_putchar('-', r);
-	while ((params->zero && ft_dec(&params->width)) || ft_dec(&params->dot))
+}
+
+void	ft_output_nbr(t_par *params, int nbr, int *r)
+{
+	int	len;
+
+	len = ft_nbrlen(nbr);
+	if (params->dot == 0 && nbr == 0)
+		len = 0;
+	if (nbr < 0 && params->dot > 0)
+		++params->dot;
+	params->width -= len;
+	params->dot -= len;
+	if (params->plus && nbr >= 0)
+		--params->width;
+	while (params->width > params->dot && !params->zero
+		&& !params->minus && ft_dec(&params->width))
+		ft_putchar(' ', r);
+	ft_putsign(params, nbr, r);
+	while ((params->zero && params->width > 0) || params->dot > 0)
+	{
 		ft_putchar('0', r);
-	if (!check)
+		--params->width;
+		--params->dot;
+	}	
+	if (len)
 		ft_putnbr(nbr, r);
 	while (params->minus && (params->dot <= 0) && ft_dec(&params->width))
 		ft_putchar(' ', r);

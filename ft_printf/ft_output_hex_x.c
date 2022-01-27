@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_output_hexX.c                                   :+:      :+:    :+:   */
+/*   ft_output_hex_x.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:15:04 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/27 12:31:14 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/27 15:50:54 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,49 +50,29 @@ static void	ft_putnbr_un(unsigned int nb, int *r)
 		ft_putchar(nb + 55, r);
 }
 
-static t_par	*ft_check_par(t_par *params, unsigned int nbr, int ch, int *r)
-{
-	int	check2;
-
-	check2 = 0;
-	if (params->width > params->dot)
-		check2 = 1;
-	params->dot = params->dot - ft_nbrlen(nbr);
-	if (!params->minus && params->dot >= 0 && params->width > 0
-		&& params->width > params->dot)
-		params->width -= params->dot;
-	else if (params->dot >= 0 && params->width > 0
-		&& params->width < params->dot)
-		params->width = params->dot - params->width + ch;
-	params->width = params->width - ft_nbrlen(nbr) + ch;
-	if (params->sharp && nbr)
-		params->width -= 2;
-	if (check2)
-	{
-		while (!params->zero && !params->minus && ft_decrease(&params->width))
-			ft_putchar(' ', r);
-	}
-	return (params);
-}
-
 void	ft_output_hex_x(t_par *params, unsigned int nbr, int *r)
 {
-	int	check;
+	int	len;
 
-	check = 0;
+	len = ft_nbrlen(nbr);
 	if (params->dot == 0 && nbr == 0)
-		check = 1;
-	params = ft_check_par(params, nbr, check, r);
+		len = 0;
+	params->dot -= len;
+	params->width -= len;
+	if (params->sharp && nbr)
+		params->width -= 2;
+	while (params->width > params->dot && !params->zero
+		&& !params->minus && ft_decrease(&params->width))
+		ft_putchar(' ', r);
 	if (params->sharp && nbr)
 		ft_putstr("0X", r);
-	while (params->zero && ft_decrease(&params->width))
-		ft_putchar('0', r);
-	while (params->dot >= 0 && ft_decrease(&params->dot))
+	while ((params->zero && params->width > 0) || params->dot > 0)
 	{
 		ft_putchar('0', r);
 		--params->width;
+		--params->dot;
 	}	
-	if (!check)
+	if (len)
 		ft_putnbr_un(nbr, r);
 	while (params->minus && ft_decrease(&params->width))
 		ft_putchar(' ', r);
