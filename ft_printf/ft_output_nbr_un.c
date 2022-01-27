@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_output_nbr_un.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/27 11:57:26 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/01/27 11:58:07 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static int	ft_nbrlen(unsigned int nbr)
@@ -49,11 +61,11 @@ void	ft_output_nbr_un(t_par *params, unsigned int nbr, int *r)
 		params->width = params->width - params->dot;
 	while (!params->zero && !params->minus && ft_decrease(&params->width))
 		ft_putchar(' ', r);
-	while ((params->zero && ft_decrease(&params->width)) || ft_decrease(&params->dot))
+	while ((params->zero && ft_decrease(&params->width))
+		|| ft_decrease(&params->dot))
 		ft_putchar('0', r);
 	if (!check)
 		ft_putnbr_un(nbr, r);
 	while (params->minus && (params->dot <= 0) && ft_decrease(&params->width))
 		ft_putchar(' ', r);
 }
-

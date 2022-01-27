@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_output_nbr.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/27 11:58:26 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/01/27 13:28:29 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static int	ft_nbrlen(int nbr, int include)
@@ -17,7 +29,7 @@ static int	ft_nbrlen(int nbr, int include)
 	return (len);
 }
 
-static int	ft_decrease(int *width)
+static int	ft_dec(int *width)
 {
 	if (*width > 0)
 	{
@@ -59,17 +71,16 @@ void	ft_output_nbr(t_par *params, int nbr, int *r)
 		--params->width;
 	if (params->space && (!params->plus) && params->width <= 0 && nbr >= 0)
 		ft_putchar(' ', r);
-	while (!params->zero && !params->minus && ft_decrease(&params->width))
+	while (!params->zero && !params->minus && ft_dec(&params->width))
 		ft_putchar(' ', r);
 	if (params->plus && nbr >= 0)
 		ft_putchar('+', r);
 	if (nbr < 0)
 		ft_putchar('-', r);
-	while ((params->zero && ft_decrease(&params->width)) || ft_decrease(&params->dot))
+	while ((params->zero && ft_dec(&params->width)) || ft_dec(&params->dot))
 		ft_putchar('0', r);
 	if (!check)
 		ft_putnbr(nbr, r);
-	while (params->minus && (params->dot <= 0) && ft_decrease(&params->width))
+	while (params->minus && (params->dot <= 0) && ft_dec(&params->width))
 		ft_putchar(' ', r);
 }
-

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:06 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/12 14:51:31 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/14 10:07:06 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,3 @@ void	ft_putstr_fd(char *s, int fd)
 		++i;
 	}
 }
-
-// int		main(void)
-// {
-// 	char	s[] = "Hello world!";
-// 	int		fd;
-
-// 	fd = 1;
-// 	ft_putstr_fd(s, fd);
-// 	ft_putstr_fd("\n", fd);
-// 	return (0);
-// }

@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/01/27 14:14:28 by abuzdin           #+#    #+#              #
+#    Updated: 2022/01/27 14:14:48 by abuzdin          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME	= libft.a
 
 SRCS	= ft_isalpha.c \
@@ -59,10 +71,10 @@ CFLAGS	= -Wall -Wextra -Werror
 %.o : %.c 
 			${GCC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
 
-${NAME}:	${OBJS} 
+${NAME}:	${OBJS}
 			${LIB} ${NAME} ${OBJS} 
 
-all:		${NAME} bonus
+all:		${NAME}
 
 bonus:		${OBJS_b}
 			${LIB} ${NAME} ${OBJS_b}

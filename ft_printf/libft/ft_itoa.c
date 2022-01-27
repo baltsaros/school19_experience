@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:30:34 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/10 09:37:38 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/14 10:05:25 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,28 +63,3 @@ char	*ft_itoa(int n)
 	s_int[i] = '\0';
 	return (s_int);
 }
-
-// int	main(void)
-// {
-// 	int	n;
-
-// 	n = 0;
-// 	printf("n is %d, itoa is %s\n", n, ft_itoa(n));
-// 	n = 1;
-// 	printf("n is %d, itoa is %s\n", n, ft_itoa(n));
-// 	n = 12;
-// 	printf("n is %d, itoa is %s\n", n, ft_itoa(n));
-// 	n = 123;
-// 	printf("n is %d, itoa is %s\n", n, ft_itoa(n));
-// 	n = 2147483647;
-// 	printf("n is %d, itoa is %s\n", n, ft_itoa(n));
-// 	n = -1;
-// 	printf("n is %d, itoa is %s\n", n, ft_itoa(n));
-// 	n = -12;
-// 	printf("n is %d, itoa is %s\n", n, ft_itoa(n));
-// 	n = -123;
-// 	printf("n is %d, itoa is %s\n", n, ft_itoa(n));
-// 	n = -2147483648;
-// 	printf("n is %d, itoa is %s\n", n, ft_itoa(n));
-// 	return (0);
-// }

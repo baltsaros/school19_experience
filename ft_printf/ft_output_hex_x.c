@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_output_hex.c                                    :+:      :+:    :+:   */
+/*   ft_output_hexX.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/27 11:56:38 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/27 12:33:03 by abuzdin          ###   ########.fr       */
+/*   Created: 2022/01/27 12:15:04 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/01/27 12:31:14 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	ft_putnbr_un(unsigned int nb, int *r)
 	if (nb < 10)
 		ft_putchar(nb + '0', r);
 	else
-		ft_putchar(nb + 87, r);
+		ft_putchar(nb + 55, r);
 }
 
 static t_par	*ft_check_par(t_par *params, unsigned int nbr, int ch, int *r)
@@ -75,7 +75,7 @@ static t_par	*ft_check_par(t_par *params, unsigned int nbr, int ch, int *r)
 	return (params);
 }
 
-void	ft_output_hex(t_par *params, unsigned int nbr, int *r)
+void	ft_output_hex_x(t_par *params, unsigned int nbr, int *r)
 {
 	int	check;
 
@@ -84,7 +84,7 @@ void	ft_output_hex(t_par *params, unsigned int nbr, int *r)
 		check = 1;
 	params = ft_check_par(params, nbr, check, r);
 	if (params->sharp && nbr)
-		ft_putstr("0x", r);
+		ft_putstr("0X", r);
 	while (params->zero && ft_decrease(&params->width))
 		ft_putchar('0', r);
 	while (params->dot >= 0 && ft_decrease(&params->dot))

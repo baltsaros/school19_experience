@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:11 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/20 16:14:32 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/17 14:34:03 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*ft_strndup(char const *str, size_t size)
 	char	*dest;
 	size_t	i;
 
-	dest = (char *)malloc(sizeof(*dest) * (size + 1));
+	dest = malloc(sizeof(*dest) * (size + 1));
 	if (!dest)
 		return (NULL);
 	i = 0;
@@ -100,31 +100,9 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	i = 0;
 	size = check_str(s, c);
-	spl = (char **)malloc(sizeof(spl) * (size + 1));
+	spl = (char **)malloc(sizeof(*spl) * (size + 1));
 	if (!spl)
 		return (NULL);
 	spl = ft_create_str(spl, s, c, i);
 	return (spl);
 }
-
-// int		main(void)
-// {
-// 	// char	s[] = "b";
-// 	char	s[] = "aaabcaAaAaefaa a";
-// 	// char	s[] = "bac";
-// 	char	c;
-// 	char	**ret;
-// 	int		j;
-
-// 	c = 'a';
-// 	ret = ft_split(s, c);
-// 	j = 0;
-// 	while (ret[j])
-// 	{
-// 		printf("str[%d] is '%s'\n", j, ret[j]);
-// 		++j;
-// 	}
-// 	printf("Final amount of strings is %d\n", j);
-// 	free(ret);
-// 	return (0);
-// }

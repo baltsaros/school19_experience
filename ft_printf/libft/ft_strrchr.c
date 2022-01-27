@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:34:18 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/13 12:49:35 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/14 10:08:24 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,3 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	return (NULL);
 }
-
-// int	main(void)
-// {
-// 	char	str[] = "Hello tworld!";
-// 	char	c;
-// 	char	*ret;
-// 	char	str2[] = "Hello tworld!";
-// 	char	*ret2;
-
-// 	c = '\0';
-// 	ret = ft_strrchr(str, c);
-// 	if (NULL == ret)
-// 		printf("C was not found. Ret(ft) is '%s'\n", ret);
-// 	else
-// 		printf("C was found. Ret(ft) is '%s'\n", ret);
-// 	ret2 = strrchr(str2, c);
-// 	if (NULL == ret2)
-// 		printf("C was not found. Ret(or) is '%s'\n", ret2);
-// 	else
-// 		printf("C was found. Ret(or) is '%s'\n", ret2);
-// 	return (0);
-// }

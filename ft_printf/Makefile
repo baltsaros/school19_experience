@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/01/27 12:08:26 by abuzdin           #+#    #+#              #
+#    Updated: 2022/01/27 12:17:33 by abuzdin          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME	= libftprintf.a
 
 SRCS	= ft_printf.c \
@@ -8,7 +20,7 @@ SRCS	= ft_printf.c \
 			ft_output_nbr.c \
 			ft_output_nbr_un.c \
 			ft_output_hex.c \
-			ft_output_hexX.c \
+			ft_output_hex_x.c \
 			ft_output_ptr.c \
 
 OBJS	= ${SRCS:.c=.o}
@@ -25,7 +37,7 @@ CFLAGS	= -Wall -Wextra -Werror
 			${GCC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
 
 ${NAME}:	${OBJS}
-			make -C ./libft && make -C ./libft bonus 
+			make -C ./libft
 			cp libft/libft.a .
 			mv libft.a ${NAME}
 			${LIB} ${NAME} ${OBJS} 
@@ -41,6 +53,12 @@ clean:
 fclean:		clean
 			${RM} ${NAME}
 			make -C ./libft fclean
+
+bonus:		${OBJS}
+			make -C ./libft bonus
+			cp libft/libft.a .
+			mv libft.a ${NAME}
+			${LIB} ${NAME} ${OBJS} 
 
 re:			fclean all
 

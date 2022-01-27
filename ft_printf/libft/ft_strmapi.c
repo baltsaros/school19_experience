@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:49 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/25 09:55:37 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/24 17:24:40 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,4 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	}
 	s2[i] = '\0';
 	return (s2);
-}
-
-// char	ft_to_uppercase(unsigned int i, char ch)
-// {
-// 	printf("s[%d] is %c\n", i, ch);
-// 	if (ch >= 97 && ch <= 122)
-// 		ch = ch - 32;
-// 	return (ch);
-// }
-
-int		main(void)
-{
-	char	s[] = "Hello world!";
-	char	*s_mapped;
-
-	printf("Initial str is '%s'\n", s);
-	s_mapped = ft_strmapi(s, NULL);
-	printf("Mapped str is '%s'\n", s_mapped);
-	return (0);
 }

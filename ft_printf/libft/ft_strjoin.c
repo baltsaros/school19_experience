@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:32 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/12 14:44:08 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/14 10:07:48 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	unis[j + i] = '\0';
 	return (unis);
 }
-
-// int	main(void)
-// {
-// 	char	s1[] = "Hello";
-// 	char	s2[] = " world!";
-// 	char	*ret;
-
-// 	ret = ft_strjoin(s1, s2);
-// 	if (NULL == ret)
-// 		printf("Ret is null!\n");
-// 	else
-// 		printf("Ret is '%s'\n", ret);
-// 	free(ret);
-// 	return (0);
-// }

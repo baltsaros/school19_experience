@@ -1,4 +1,15 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/27 11:54:26 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/01/27 12:16:57 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static void	ft_set_params(t_par *params)
@@ -16,7 +27,7 @@ static void	ft_set_params(t_par *params)
 static void	ft_check_params(const char **str, t_par *params)
 {
 	while (**str == '#' || **str == '+' || **str == '-' || **str == ' '
-			|| **str == '0')
+		|| **str == '0')
 	{
 		if (**str == '0' && !params->minus)
 			params->zero = 1;
@@ -24,7 +35,7 @@ static void	ft_check_params(const char **str, t_par *params)
 			params->space = 1;
 		else if (**str == '+')
 		{
-			params->space = 0;	
+			params->space = 0;
 			params->plus = 1;
 		}
 		else if (**str == '-')
@@ -36,13 +47,15 @@ static void	ft_check_params(const char **str, t_par *params)
 			params->sharp = 1;
 		++(*str);
 	}
+}
 
+static void	ft_check_params_extra(const char **str, t_par *params)
+{	
 	while (ft_isdigit(**str))
 	{
 		params->width = params->width * 10 + **str - '0';
 		++(*str);
 	}	
-
 	if (**str == '.')
 	{
 		params->zero = 0;
@@ -54,10 +67,9 @@ static void	ft_check_params(const char **str, t_par *params)
 			++(*str);
 		}	
 	}
-
 	if (**str == 'd' || **str == 'i' || **str == 's' || **str == 'c'
-			|| **str == 'x' || **str == 'X' || **str == 'u'
-			|| **str == 'p' || **str == '%')
+		|| **str == 'x' || **str == 'X' || **str == 'u'
+		|| **str == 'p' || **str == '%')
 	{
 		params->type = **str;
 		++(*str);
@@ -68,7 +80,7 @@ static void	ft_output(va_list arg, t_par *params, int *r)
 {
 	if (params->type == 'c')
 		ft_output_char(params, va_arg(arg, unsigned int), r);
-	else if(params->type == 's')
+	else if (params->type == 's')
 		ft_output_str(params, va_arg(arg, char *), r);
 	else if (params->type == 'd' || params->type == 'i')
 		ft_output_nbr(params, va_arg(arg, int), r);
@@ -77,7 +89,7 @@ static void	ft_output(va_list arg, t_par *params, int *r)
 	else if (params->type == 'x')
 		ft_output_hex(params, va_arg(arg, unsigned int), r);
 	else if (params->type == 'X')
-		ft_output_hexX(params, va_arg(arg, unsigned int), r);
+		ft_output_hex_x(params, va_arg(arg, unsigned int), r);
 	else if (params->type == 'p')
 		ft_output_ptr(params, va_arg(arg, unsigned long long), r);
 	else if (params->type == '%')
@@ -99,6 +111,7 @@ int	ft_printf(const char *str, ...)
 			++str;
 			ft_set_params(&params);
 			ft_check_params(&str, &params);
+			ft_check_params_extra(&str, &params);
 			ft_output(arg, &params, &r);
 		}
 		else

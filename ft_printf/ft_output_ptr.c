@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_output_ptr.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/27 12:07:37 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/01/27 12:08:03 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static int	ft_nbrlen(unsigned long long nbr)
@@ -41,7 +53,8 @@ static void	ft_putnbr_un(unsigned long long nb, int *r)
 void	ft_output_ptr(t_par *params, unsigned long long nbr, int *r)
 {
 	params->width = params->width - ft_nbrlen(nbr) - 2;
-	while ((params->dot <= 0) && !params->zero && !params->minus && ft_decrease(&params->width))
+	while ((params->dot <= 0) && !params->zero && !params->minus
+		&& ft_decrease(&params->width))
 		ft_putchar(' ', r);
 	ft_putstr("0x", r);
 	while (params->zero && ft_decrease(&params->width))
