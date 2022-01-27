@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 11:58:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/27 16:14:16 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/01/27 17:05:06 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ static void	ft_putsign(t_par *params, int nbr, int *r)
 {
 	if (params->space && (!params->plus) && params->width <= 0 && nbr >= 0)
 		ft_putchar(' ', r);
+	while (params->width > params->dot && !params->zero
+		&& !params->minus && ft_dec(&params->width))
+		ft_putchar(' ', r);
 	if (params->plus && nbr >= 0)
 		ft_putchar('+', r);
 	if (nbr < 0)
@@ -77,9 +80,6 @@ void	ft_output_nbr(t_par *params, int nbr, int *r)
 	params->dot -= len;
 	if (params->plus && nbr >= 0)
 		--params->width;
-	while (params->width > params->dot && !params->zero
-		&& !params->minus && ft_dec(&params->width))
-		ft_putchar(' ', r);
 	ft_putsign(params, nbr, r);
 	while ((params->zero && params->width > 0) || params->dot > 0)
 	{
