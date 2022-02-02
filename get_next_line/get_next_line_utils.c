@@ -30,33 +30,24 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (len_s);
 }
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+int	ft_strchr(const char *s, int c)
 {
-	size_t	len_d;
-	size_t	len_s;
-	size_t	remain;
+	unsigned char	*str;
+	unsigned char	x;
+	size_t			i;
 
-	remain = size;
-	while (*dst && remain > 0)
+	str = (unsigned char *)s;
+	x = (unsigned char)c;
+	i = 0;
+	while (str[i])
 	{
-		++dst;
-		--remain;
+		if (str[i] == x)
+			return (1);
+		++i;
 	}
-	len_d = size - remain;
-	len_s = 0;
-	while (src[len_s])
-		++len_s;
-	if (remain == 0)
-		return (len_d + len_s);
-	while (*src && remain > 1)
-	{
-		*dst = *src;
-		++dst;
-		++src;
-		--remain;
-	}
-	*dst = '\0';
-	return (len_d + len_s);
+	if (str[i] == x)
+		return (1);
+	return (0);
 }
 
 void	ft_bzero(void *s, size_t n)
@@ -70,4 +61,33 @@ void	ft_bzero(void *s, size_t n)
 		++str_ch;
 		--n;
 	}
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*unis;
+	size_t	i;
+	size_t	j;
+	size_t	l;
+
+	if (!s1 || !s2)
+		return (0);
+	l = ft_strlen(s1) + ft_strlen(s2);
+	unis = (char *)malloc(sizeof(*unis) * (l + 1));
+	if (NULL == unis)
+		return (0);
+	i = 0;
+	while (s1[i])
+	{
+		unis[i] = s1[i];
+		++i;
+	}
+	j = 0;
+	while (s2[j])
+	{
+		unis[i + j] = s2[j];
+		++j;
+	}
+	unis[j + i] = '\0';
+	return (unis);
 }

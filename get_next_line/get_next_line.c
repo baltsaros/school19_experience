@@ -1,89 +1,89 @@
 #include "get_next_line.h"
 
-static size_t	ft_find_line(char	*input)
+static size_t	ft_find_line(char *input)
 {
 	size_t	i;
 
 	i = 0;
-	while (input[i] && i < BUFFER_SIZE)
-	{
+	while (input[i] && input[i] != '\n')
 		++i;
-		if (input[i] == '\n')
-			return (i);
-	}
-	return (0);
+	return (i);
 }
 
+char	*read_line(char *rest, int fd)
+{
+	ssize_t	r_bytes;
+	char	*buf;
 
+	buf = malloc(sizeof *buf * (BUFFER_SIZE + 1));
+	if (!buf)
+		return (0);
+	r_bytes = 1;
+	while (!(ft_strchr(buf, '\n')) && r_bytes > 0)
+	{
+		r_bytes = read(fd, buf, BUFFER_SIZE);
+		if (r_bytes < 0)
+			return (0);
+		buf[r_bytes] = '\0';
+		rest = ft_strjoin(rest, buf);
+		if (!rest)
+		{
+			free(rest);
+			return (0);
+		}
+	}
+	free(buf);
+	return (rest);
+}
 
 char	*get_next_line(int fd)
 {
-	static char		rest[BUFFER_SIZE];
+	static char		*rest;
 	char			*ret;
+	char			*buf;
 	char			*tmp;
-	char			buf[BUFFER_SIZE];
-	ssize_t			r_bytes;
 	ssize_t			len;
+	ssize_t			i;
 
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	// printf("%d\n", ft_find_line(buf));
-	if (ft_find_line(rest))
+	if (!rest)
 	{
-		len = ft_find_line(rest) + 1;
-		ret = malloc(sizeof *ret * (len + 1));
-		if (!ret)
+		// printf("rest1 |%s|\n", rest);
+		rest = malloc(sizeof *rest * 1);
+		if (!rest)
 			return (0);
-		ft_strlcpy(ret, rest, len + 1);
-		ft_strlcpy(buf, rest + len, len + 1);
-		ft_bzero(rest, BUFFER_SIZE);
-		ft_strlcpy(rest, buf, BUFFER_SIZE);
-		return (ret);
+		rest[0] = '\0';
 	}
-	r_bytes = read(fd, buf, BUFFER_SIZE);
-	if (r_bytes < 0)
+	rest = read_line(rest, fd);
+	// printf("rest2 |%s|\n", rest);
+	len = ft_find_line(rest) + 2;
+	ret = malloc(sizeof *ret * (len));
+	if (!ret)
 		return (0);
-	if (ft_strlen(rest))
-	{
-		len = ft_find_line(buf) + 1;
-		ret = malloc(sizeof *ret * (ft_strlen(rest) + len + 1));
-		if (!ret)
-			return (0);
-		ft_strlcpy(ret, rest, ft_strlen(rest) + 1);
-		ft_strlcpy(ret + ft_strlen(rest), buf, len + 1);
-		if (r_bytes > len + 1)
-			ft_strlcpy(rest, buf + len, r_bytes - len);
-		else
-			ft_bzero(rest, BUFFER_SIZE);
-		return (ret);
-	}
-	len = ft_find_line(buf) + 1;
-	printf("%d\n", len);
-	if (ft_find_line(buf))
-	{
-		ret = malloc(sizeof *ret * (len + 1));
-		if (!ret)
-			return (0);
-		ft_strlcpy(ret, buf, len + 1);
-		ft_strlcpy(rest, buf + len, r_bytes - len);
-		return (ret);
-	}
-	else
-	{
-		ft_strlcpy(rest, buf, BUFFER_SIZE);
-		// get_next_line(fd);
-	}	
-	// printf("len %d, read %d\n", len, r_bytes);
-	// printf("%s", rest);
+	ft_strlcpy(ret, rest, len);
+	// printf("ret1 |%s|\n", ret);
+	i = 0;
+	while (rest[len - 1 + i])
+		++i;
+	tmp = malloc(sizeof *tmp * (i + 1));
+	if (!tmp)
+		return (0);
+	ft_strlcpy(tmp, rest + len - 1, i + 1);
+	ft_bzero(rest, len + 1 + i);
+	ft_strlcpy(rest, tmp, i + 1);
+	free(tmp);
+	// printf("ret2 |%s|\n", ret);
 	return (ret);
 }
-
 
 #include <stdio.h>
 #include <fcntl.h>
 int	main(void)
 {
 	char	*ret;
+	char	*ret1;
+	char	*ret2;
 	int		fd;
 	size_t	i;
 
@@ -94,13 +94,18 @@ int	main(void)
 		return (0);
 	}
 	i = 0;
-	get_next_line(fd);
-	while (i < 4)
+	while (i < 3)
 	{
 		ret = get_next_line(fd);
 		printf("str is %s", ret);
 		free(ret);
 		++i;
 	}
+	// ret = get_next_line(fd);
+	// printf("str is %s", ret);
+	// ret1 = get_next_line(fd);
+	// printf("str is %s", ret1);
+	// ret2 = get_next_line(fd);
+	// printf("str is %s", ret2);
 	return (0);
 }

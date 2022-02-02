@@ -1,55 +1,76 @@
 #include "get_next_line.h"
 
-static size_t	ft_find_line(char	*input)
+static size_t	ft_find_line(char *input)
 {
 	size_t	i;
 
 	i = 0;
-	while (input[i] && i < BUFFER_SIZE)
-	{
+	while (input[i] && input[i] != '\n')
 		++i;
-		if (input[i] == '\n')
-			return (i);
-	}
-	return (0);
+	return (i);
 }
-
-
 
 char	*get_next_line(int fd)
 {
-	static char		rest[BUFFER_SIZE];
+	static char		*rest;
 	char			*ret;
-	char			buf[BUFFER_SIZE];
-	ssize_t			r_bytes;
+	char			*buf;
 	ssize_t			len;
+	ssize_t			i;
+	ssize_t			r_bytes;
 
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	// printf("%d\n", ft_find_line(rest));
-	if (ft_find_line(rest))
+	if (!rest)
 	{
-		len = ft_find_line(rest) + 1;
-		ret = malloc(sizeof *ret * (len + 1));
-		if (!ret)
+		printf("rest1 |%s|\n", rest);
+		rest = malloc(sizeof *rest * (BUFFER_SIZE + 1));
+		if (!rest)
 			return (0);
-		ft_strlcpy(ret, rest, len + 1);
-		ft_strlcpy(buf, rest + len, len + 1);
-		ft_bzero(rest, BUFFER_SIZE);
-		ft_strlcpy(rest, buf, BUFFER_SIZE);
-		return (ret);
 	}
-	r_bytes = read(fd, buf, BUFFER_SIZE);
-	if (r_bytes < 0)
+	buf = malloc(sizeof *buf * (BUFFER_SIZE + 1));
+	if (!buf)
 		return (0);
-	len = ft_find_line(buf) + 1;
-	// printf("len %d, read %d\n", len, r_bytes);
-	ret = malloc(sizeof *ret * (len + 1));
+	r_bytes = 1;
+	// printf("buf1 %s\n", buf);
+	// printf("r_bytes %d\nstrchr is %d\n", r_bytes, ft_strchr(buf, '\n'));
+	while (!(ft_strchr(buf, '\n')) && r_bytes > 0)
+	{
+		// printf("loop\n");
+		r_bytes = read(fd, buf, BUFFER_SIZE);
+		if (r_bytes < 0)
+			return (0);
+		buf[r_bytes] = '\0';
+		rest = ft_strjoin(rest, buf);
+		if (!rest)
+		{
+			free(rest);
+			return (0);
+		}
+	}
+	free(buf);
+	// printf("rest |%s|\n", rest);
+	len = ft_find_line(rest) + 2;
+	ret = malloc(sizeof *ret * (len));
 	if (!ret)
 		return (0);
-	ft_strlcpy(ret, buf, len + 1);
-	ft_strlcpy(rest, buf + len, BUFFER_SIZE);
-	// printf("%s", rest);
+	ft_strlcpy(ret, rest, len);
+	// printf("len %d\nret |%s|\n", len, ret);
+	// printf("rest |%s|\n", rest);
+	i = 0;
+	// printf("rest[len - 1 + i] is %c\nrest[len + i] is %c\n", rest[len - 1 + i], rest[len + i]);
+	while (rest[len - 1 + i])
+		++i;
+	buf = malloc(sizeof *buf * (i + 1));
+	if (!buf)
+		return (0);
+	ft_strlcpy(buf, rest + len - 1, i + 1);
+	ft_bzero(rest, len + 1 + i);
+	ft_strlcpy(rest, buf, i + 1);
+	// printf("rest |%s|\n", rest);
+	// printf("buf |%s|\n", buf);
+	free(buf);
+	// printf("rest |%s|\n", rest);
 	return (ret);
 }
 
@@ -69,7 +90,7 @@ int	main(void)
 		return (0);
 	}
 	i = 0;
-	while (i < 4)
+	while (i < 3)
 	{
 		ret = get_next_line(fd);
 		printf("str is %s", ret);
