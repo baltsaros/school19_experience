@@ -34,6 +34,58 @@ char	*read_line(char *rest, int fd)
 	return (rest);
 }
 
+char	*get_new_line(char *rest)
+{
+	char	*ret;
+	ssize_t	i;
+	
+	if (!rest)
+		return (0);
+	ret = malloc(sizeof *ret * (ft_find_line(rest) + 2));
+	if (!ret)
+		return (0);
+	// printf("ret1 |%s|\n", ret);
+	i = 0;
+	while (rest[i] && rest[i] != '\n')
+	{
+		ret[i] = rest[i];
+		++i;
+	}
+	if (rest[i])
+	{
+		ret[i] = '\n';
+		++i;
+	}
+	ret[i] = '\0';
+	return (ret);
+}
+
+char	*get_new_rest(char *rest)
+{
+	char	*tmp;
+	ssize_t	i;
+	ssize_t	j;
+
+	if (!rest)
+		return (0);
+	i = ft_find_line(rest);
+	j = 0;
+	while (rest[i + j])
+		++j;
+	tmp = malloc(sizeof *tmp * (j + 1));
+	if (!tmp)
+		return (0);
+	j = 0;
+	while (rest[i + j])
+	{
+		tmp[j] = rest[i + j];
+		++j;
+	}
+	tmp[j] = '\0';
+	free(rest);
+	return (tmp);
+}
+
 char	*get_next_line(int fd)
 {
 	static char		*rest;
@@ -54,56 +106,9 @@ char	*get_next_line(int fd)
 		rest[0] = '\0';
 	}
 	rest = read_line(rest, fd);
+	ret = get_new_line(rest);
+	rest = get_new_rest(rest);
 	// printf("rest2 |%s|\n", rest);
-	//getting new line
-	len = ft_find_line(rest);
-	ret = malloc(sizeof *ret * (len + 2));
-	if (!ret)
-		return (0);
-	// printf("ret1 |%s|\n", ret);
-	i = 0;
-	while (rest[i] && rest[i] != '\n')
-	{
-		ret[i] = rest[i];
-		++i;
-	}
-	if (rest[i])
-	{
-		ret[i] = '\n';
-		++i;
-	}
-	ret[i] = '\0';
-	///renewing rest
-	j = 0;
-	if (!rest[i])
-	{
-		free(rest);
-		return (ret);
-	}
-	while (rest[i + j])
-		++j;
-	tmp = malloc(sizeof *tmp * (j + 1));
-	if (!tmp)
-		return (0);
-	j = 0;
-	while (rest[i + j])
-	{
-		tmp[j] = rest[i + j];
-		++j;
-	}
-	tmp[j] = '\0';
-	free(rest);
-	rest = malloc(sizeof *rest * (j + 1));
-		if (!rest)
-			return (0);
-	j = 0;
-	while (tmp[j])
-	{
-		rest[j] = tmp[j];
-		++j;
-	}
-	rest[j] = '\0';
-	free(tmp);
 	// printf("ret2 |%s|\n", ret);
 	return (ret);
 }
