@@ -19,7 +19,7 @@ char	*read_line(char *rest, int fd)
 	if (!buf)
 		return (0);
 	r_bytes = 1;
-	while (!ft_strchr(buf, '\n') && r_bytes > 0)
+	while (!ft_strchr(rest, '\n') && r_bytes > 0)
 	{
 		r_bytes = read(fd, buf, BUFFER_SIZE);
 		if (r_bytes < 0)
@@ -55,8 +55,9 @@ char	*get_next_line(int fd)
 	}
 	rest = read_line(rest, fd);
 	// printf("rest2 |%s|\n", rest);
-	len = ft_find_line(rest) + 2;
-	ret = malloc(sizeof *ret * (len));
+	//getting new line
+	len = ft_find_line(rest);
+	ret = malloc(sizeof *ret * (len + 2));
 	if (!ret)
 		return (0);
 	// printf("ret1 |%s|\n", ret);
@@ -72,9 +73,13 @@ char	*get_next_line(int fd)
 		++i;
 	}
 	ret[i] = '\0';
+	///renewing rest
 	j = 0;
 	if (!rest[i])
+	{
+		free(rest);
 		return (ret);
+	}
 	while (rest[i + j])
 		++j;
 	tmp = malloc(sizeof *tmp * (j + 1));
@@ -120,7 +125,7 @@ int	main(void)
 		return (0);
 	}
 	i = 0;
-	while (i < 5)
+	while (i < 7)
 	{
 		ret = get_next_line(fd);
 		printf("str is %s", ret);
