@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 10:31:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/02/03 11:53:07 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/02/03 11:53:17 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_find_line(char *input)
 {
@@ -102,16 +102,16 @@ char	*get_new_rest(char *rest)
 
 char	*get_next_line(int fd)
 {
-	static char	*rest;
+	static char	*rest[OPEN_MAX];
 	char		*ret;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
 		return (0);
-	rest = read_line(rest, fd);
-	if (!rest)
+	rest[fd] = read_line(rest[fd], fd);
+	if (!rest[fd])
 		return (0);
-	ret = get_new_line(rest);
-	rest = get_new_rest(rest);
+	ret = get_new_line(rest[fd]);
+	rest[fd] = get_new_rest(rest[fd]);
 	return (ret);
 }
 
@@ -120,32 +120,43 @@ char	*get_next_line(int fd)
 // int	main(void)
 // {
 // 	char	*ret;
-// 	char	*ret1;
-// 	char	*ret2;
-// 	int		fd;
+// 	int		fd1;
+// 	int		fd2;
+// 	int		fd3;
+// 	int		fd4;
+// 	int		fd5;
 // 	size_t	i;
 
-// 	fd = 0;
-// 	// fd = open("test5.txt", O_RDONLY);
-// 	// if (fd < 0)
-// 	// {
-// 	// 	printf("OPEN ERROR\n");
-// 	// 	return (0);
-// 	// }
-// 	// i = 0;
-// 	while (i < 6)
+// 	fd1 = open("test1.txt", O_RDONLY);
+// 	fd2 = open("test2.txt", O_RDONLY);
+// 	fd3 = open("test3.txt", O_RDONLY);
+// 	fd4 = open("test4.txt", O_RDONLY);
+// 	fd5 = open("test5.txt", O_RDONLY);
+// 	i = 0;
+// 	while (i < 5)
 // 	{
-// 		ret = get_next_line(fd);
-// 		printf("str is %s\n", ret);
+// 		printf("\n++++  ROUND %d  ++++\n", i);
+// 		ret = get_next_line(fd1);
+// 		printf("ret(fd1) is %s\n", ret);
+// 		free(ret);
+// 		ret = get_next_line(fd2);
+// 		printf("ret(fd2) is %s\n", ret);
+// 		free(ret);
+// 		ret = get_next_line(fd3);
+// 		printf("ret(fd3) is %s\n", ret);
+// 		free(ret);
+// 		ret = get_next_line(fd4);
+// 		printf("ret(fd4) is %s\n", ret);
+// 		free(ret);
+// 		ret = get_next_line(fd5);
+// 		printf("ret(fd5) is %s\n", ret);
 // 		free(ret);
 // 		++i;
 // 	}
-// 	// ret = get_next_line(fd);
-// 	// printf("%s", ret);
-// 	// ret1 = get_next_line(fd);
-// 	// printf("str is %s", ret1);
-// 	// ret2 = get_next_line(fd);
-// 	// printf("str is %s", ret2);
-// 	close(fd);
+// 	close(fd1);
+// 	close(fd2);
+// 	close(fd3);
+// 	close(fd4);
+// 	close(fd5);
 // 	return (0);
 // }

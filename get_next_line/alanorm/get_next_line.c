@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 10:31:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/02/03 11:53:07 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/02/03 12:28:58 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ char	*get_new_rest(char *rest)
 	ssize_t	j;
 
 	i = ft_find_line(rest);
-	j = 0;
-	if (!rest[i + j])
+	if (!rest[i])
 	{
 		free(rest);
 		return (0);
 	}
+	j = 0;
 	while (rest[i + 1 + j])
 		++j;
 	tmp = malloc(sizeof(*tmp) * (j + 1));
@@ -114,38 +114,3 @@ char	*get_next_line(int fd)
 	rest = get_new_rest(rest);
 	return (ret);
 }
-
-// #include <stdio.h>
-// #include <fcntl.h>
-// int	main(void)
-// {
-// 	char	*ret;
-// 	char	*ret1;
-// 	char	*ret2;
-// 	int		fd;
-// 	size_t	i;
-
-// 	fd = 0;
-// 	// fd = open("test5.txt", O_RDONLY);
-// 	// if (fd < 0)
-// 	// {
-// 	// 	printf("OPEN ERROR\n");
-// 	// 	return (0);
-// 	// }
-// 	// i = 0;
-// 	while (i < 6)
-// 	{
-// 		ret = get_next_line(fd);
-// 		printf("str is %s\n", ret);
-// 		free(ret);
-// 		++i;
-// 	}
-// 	// ret = get_next_line(fd);
-// 	// printf("%s", ret);
-// 	// ret1 = get_next_line(fd);
-// 	// printf("str is %s", ret1);
-// 	// ret2 = get_next_line(fd);
-// 	// printf("str is %s", ret2);
-// 	close(fd);
-// 	return (0);
-// }

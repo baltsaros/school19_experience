@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 10:31:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/02/03 11:53:07 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/02/03 12:30:06 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_find_line(char *input)
 {
@@ -78,12 +78,12 @@ char	*get_new_rest(char *rest)
 	ssize_t	j;
 
 	i = ft_find_line(rest);
-	j = 0;
-	if (!rest[i + j])
+	if (!rest[i])
 	{
 		free(rest);
 		return (0);
 	}
+	j = 0;
 	while (rest[i + 1 + j])
 		++j;
 	tmp = malloc(sizeof(*tmp) * (j + 1));
@@ -102,50 +102,15 @@ char	*get_new_rest(char *rest)
 
 char	*get_next_line(int fd)
 {
-	static char	*rest;
+	static char	*rest[10240];
 	char		*ret;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 10240)
 		return (0);
-	rest = read_line(rest, fd);
-	if (!rest)
+	rest[fd] = read_line(rest[fd], fd);
+	if (!rest[fd])
 		return (0);
-	ret = get_new_line(rest);
-	rest = get_new_rest(rest);
+	ret = get_new_line(rest[fd]);
+	rest[fd] = get_new_rest(rest[fd]);
 	return (ret);
 }
-
-// #include <stdio.h>
-// #include <fcntl.h>
-// int	main(void)
-// {
-// 	char	*ret;
-// 	char	*ret1;
-// 	char	*ret2;
-// 	int		fd;
-// 	size_t	i;
-
-// 	fd = 0;
-// 	// fd = open("test5.txt", O_RDONLY);
-// 	// if (fd < 0)
-// 	// {
-// 	// 	printf("OPEN ERROR\n");
-// 	// 	return (0);
-// 	// }
-// 	// i = 0;
-// 	while (i < 6)
-// 	{
-// 		ret = get_next_line(fd);
-// 		printf("str is %s\n", ret);
-// 		free(ret);
-// 		++i;
-// 	}
-// 	// ret = get_next_line(fd);
-// 	// printf("%s", ret);
-// 	// ret1 = get_next_line(fd);
-// 	// printf("str is %s", ret1);
-// 	// ret2 = get_next_line(fd);
-// 	// printf("str is %s", ret2);
-// 	close(fd);
-// 	return (0);
-// }
