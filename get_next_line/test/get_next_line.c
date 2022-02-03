@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 10:31:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/02/03 12:57:04 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/02/03 14:37:15 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 size_t	ft_find_line(char *input)
 {
@@ -35,13 +35,8 @@ char	*read_line(char *rest, int fd)
 			return (0);
 		buf[r_bytes] = '\0';
 		if (!rest)
-		{
-			rest = malloc(sizeof(*rest) * 1);
-			if (!rest)
-				return (0);
 			rest[0] = '\0';
-		}
-		rest = ft_strjoin_free(rest, buf);
+		rest = ft_strjoin(rest, buf);
 	}
 	return (rest);
 }
@@ -78,12 +73,9 @@ char	*get_new_rest(char *rest)
 	ssize_t	j;
 
 	i = ft_find_line(rest);
-	j = 0;
-	if (!rest[i + j])
-	{
-		free(rest);
+	if (!rest[i])
 		return (0);
-	}
+	j = 0;
 	while (rest[i + 1 + j])
 		++j;
 	tmp = malloc(sizeof(*tmp) * (j + 1));
@@ -96,69 +88,56 @@ char	*get_new_rest(char *rest)
 		++j;
 	}
 	tmp[j] = '\0';
-	free(rest);
+	ft_bzero(rest, j + 1);
 	return (tmp);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*rest[OPEN_MAX];
+	static char	rest[BUFFER_SIZE + 1];
 	char		*ret;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	rest[fd] = read_line(rest[fd], fd);
-	if (!rest[fd])
+	rest = read_line(rest, fd);
+	if (!rest)
 		return (0);
-	ret = get_new_line(rest[fd]);
-	rest[fd] = get_new_rest(rest[fd]);
+	ret = get_new_line(rest);
+	rest = get_new_rest(rest);
 	return (ret);
 }
 
-// #include <stdio.h>
-// #include <fcntl.h>
-// int	main(void)
-// {
-// 	char	*ret;
-// 	int		fd1;
-// 	int		fd2;
-// 	int		fd3;
-// 	int		fd4;
-// 	int		fd5;
-// 	size_t	i;
+#include <stdio.h>
+#include <fcntl.h>
+int	main(void)
+{
+	char	*ret;
+	char	*ret1;
+	char	*ret2;
+	int		fd;
+	size_t	i;
 
-// 	fd1 = open("test1.txt", O_RDONLY);
-// 	printf("fd1 is %d\n", fd1);
-// 	fd2 = open("test2.txt", O_RDONLY);
-// 	printf("fd1 is %d\n", fd2);
-// 	fd3 = open("test3.txt", O_RDONLY);
-// 	fd4 = open("test4.txt", O_RDONLY);
-// 	fd5 = open("test5.txt", O_RDONLY);
-// 	i = 0;
-// 	while (i < 5)
-// 	{
-// 		printf("\n++++  ROUND %d  ++++\n", i);
-// 		ret = get_next_line(fd1);
-// 		printf("ret(fd1) is %s\n", ret);
-// 		free(ret);
-// 		ret = get_next_line(fd2);
-// 		printf("ret(fd2) is %s\n", ret);
-// 		free(ret);
-// 		ret = get_next_line(fd3);
-// 		printf("ret(fd3) is %s\n", ret);
-// 		free(ret);
-// 		ret = get_next_line(fd4);
-// 		printf("ret(fd4) is %s\n", ret);
-// 		free(ret);
-// 		ret = get_next_line(fd5);
-// 		printf("ret(fd5) is %s\n", ret);
-// 		free(ret);
-// 		++i;
-// 	}
-// 	close(fd1);
-// 	close(fd2);
-// 	close(fd3);
-// 	close(fd4);
-// 	close(fd5);
-// 	return (0);
-// }
+	fd = 0;
+	// fd = open("test5.txt", O_RDONLY);
+	// if (fd < 0)
+	// {
+	// 	printf("OPEN ERROR\n");
+	// 	return (0);
+	// }
+	// i = 0;
+	while (i < 6)
+	{
+		ret = get_next_line(fd);
+		printf("str is %s\n", ret);
+		free(ret);
+		++i;
+	}
+	// ret = get_next_line(fd);
+	// printf("%s", ret);
+	// ret1 = get_next_line(fd);
+	// printf("str is %s", ret1);
+	// ret2 = get_next_line(fd);
+	// printf("str is %s", ret2);
+	close(fd);
+	return (0);
+}
