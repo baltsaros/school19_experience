@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/03 10:45:39 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/02/03 10:53:56 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	i;
 
@@ -12,27 +24,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
-	size_t	len_s;
-
-	len_s = 0;
-	while (src[len_s])
-		++len_s;
-	if (size == 0)
-		return (len_s);
-	i = 0;
-	while (i < (size - 1) && src[i])
-	{
-		dst[i] = src[i];
-		++i;
-	}
-	dst[i] = '\0';
-	return (len_s);
-}
-
-int	ft_strchr(const char *s, int c)
+int	ft_strchr(char *s, int c)
 {
 	unsigned char	*str;
 	unsigned char	x;
@@ -54,44 +46,30 @@ int	ft_strchr(const char *s, int c)
 	return (0);
 }
 
-void	ft_bzero(void *s, size_t n)
-{
-	char	*str_ch;
-
-	str_ch = (char *)s;
-	while (n > 0)
-	{
-		*str_ch = '\0';
-		++str_ch;
-		--n;
-	}
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_free(char *rest, char *buf)
 {
 	char	*unis;
 	size_t	i;
 	size_t	j;
-	size_t	l;
 
-	if (!s1 || !s2)
+	if (!rest || !buf)
 		return (0);
-	l = ft_strlen(s1) + ft_strlen(s2);
-	unis = malloc(sizeof *unis * (l + 1));
+	unis = malloc(sizeof(*unis) * (ft_strlen(rest) + ft_strlen(buf) + 1));
 	if (!unis)
 		return (0);
 	i = 0;
-	while (s1[i])
+	while (rest[i])
 	{
-		unis[i] = s1[i];
+		unis[i] = rest[i];
 		++i;
 	}
 	j = 0;
-	while (s2[j])
+	while (buf[j])
 	{
-		unis[i + j] = s2[j];
+		unis[i + j] = buf[j];
 		++j;
 	}
 	unis[j + i] = '\0';
+	free(rest);
 	return (unis);
 }

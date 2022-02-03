@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/03 10:31:45 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/02/03 10:56:19 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-static size_t	ft_find_line(char *input)
+size_t	ft_find_line(char *input)
 {
 	size_t	i;
 
@@ -13,24 +25,24 @@ static size_t	ft_find_line(char *input)
 char	*read_line(char *rest, int fd)
 {
 	ssize_t	r_bytes;
-	char	*buf;
+	char	buf[BUFFER_SIZE + 1];
 
-	buf = malloc(sizeof *buf * (BUFFER_SIZE + 1));
-	if (!buf)
-		return (0);
 	r_bytes = 1;
 	while (!ft_strchr(rest, '\n') && r_bytes > 0)
 	{
 		r_bytes = read(fd, buf, BUFFER_SIZE);
 		if (r_bytes < 0)
-		{
-			free(buf);
 			return (0);
-		}
 		buf[r_bytes] = '\0';
-		rest = ft_strjoin(rest, buf);
+		if (!rest)
+		{
+			rest = malloc(sizeof(*rest) * 1);
+			if (!rest)
+				return (0);
+			rest[0] = '\0';
+		}
+		rest = ft_strjoin_free(rest, buf);
 	}
-	free(buf);
 	return (rest);
 }
 
@@ -38,13 +50,12 @@ char	*get_new_line(char *rest)
 {
 	char	*ret;
 	ssize_t	i;
-	
-	if (!rest)
+
+	if (!rest[0])
 		return (0);
-	ret = malloc(sizeof *ret * (ft_find_line(rest) + 2));
+	ret = malloc(sizeof(*ret) * (ft_find_line(rest) + 2));
 	if (!ret)
 		return (0);
-	// printf("ret1 |%s|\n", ret);
 	i = 0;
 	while (rest[i] && rest[i] != '\n')
 	{
@@ -66,19 +77,22 @@ char	*get_new_rest(char *rest)
 	ssize_t	i;
 	ssize_t	j;
 
-	if (!rest)
-		return (0);
 	i = ft_find_line(rest);
 	j = 0;
-	while (rest[i + j])
+	if (!rest[i + j])
+	{
+		free(rest);
+		return (0);
+	}
+	while (rest[i + 1 + j])
 		++j;
-	tmp = malloc(sizeof *tmp * (j + 1));
+	tmp = malloc(sizeof(*tmp) * (j + 1));
 	if (!tmp)
 		return (0);
 	j = 0;
-	while (rest[i + j])
+	while (rest[i + 1 + j])
 	{
-		tmp[j] = rest[i + j];
+		tmp[j] = rest[i + 1 + j];
 		++j;
 	}
 	tmp[j] = '\0';
@@ -88,60 +102,48 @@ char	*get_new_rest(char *rest)
 
 char	*get_next_line(int fd)
 {
-	static char		*rest;
-	char			*ret;
-	char			*tmp;
-	ssize_t			len;
-	ssize_t			i;
-	ssize_t			j;
+	static char	*rest;
+	char		*ret;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	if (!rest)
-	{
-		// printf("rest1 |%s|\n", rest);
-		rest = malloc(sizeof *rest * 1);
-		if (!rest)
-			return (0);
-		rest[0] = '\0';
-	}
 	rest = read_line(rest, fd);
+	if (!rest)
+		return (0);
 	ret = get_new_line(rest);
 	rest = get_new_rest(rest);
-	// printf("rest2 |%s|\n", rest);
-	// printf("ret2 |%s|\n", ret);
 	return (ret);
 }
 
-#include <stdio.h>
-#include <fcntl.h>
-int	main(void)
-{
-	char	*ret;
-	char	*ret1;
-	char	*ret2;
-	int		fd;
-	size_t	i;
+// #include <stdio.h>
+// #include <fcntl.h>
+// int	main(void)
+// {
+// 	char	*ret;
+// 	char	*ret1;
+// 	char	*ret2;
+// 	int		fd;
+// 	size_t	i;
 
-	fd = open("test.txt", O_RDONLY);
-	if (fd < 0)
-	{
-		printf("OPEN ERROR\n");
-		return (0);
-	}
-	i = 0;
-	while (i < 7)
-	{
-		ret = get_next_line(fd);
-		printf("str is %s", ret);
-		free(ret);
-		++i;
-	}
-	// ret = get_next_line(fd);
-	// printf("str is %s", ret);
-	// ret1 = get_next_line(fd);
-	// printf("str is %s", ret1);
-	// ret2 = get_next_line(fd);
-	// printf("str is %s", ret2);
-	return (0);
-}
+// 	fd = open("test5.txt", O_RDONLY);
+// 	if (fd < 0)
+// 	{
+// 		printf("OPEN ERROR\n");
+// 		return (0);
+// 	}
+// 	i = 0;
+// 	// while (i < 1)
+// 	// {
+// 	// 	ret = get_next_line(fd);
+// 	// 	printf("str is %s", ret);
+// 	// 	free(ret);
+// 	// 	++i;
+// 	// }
+// 	ret = get_next_line(fd);
+// 	printf("%s", ret);
+// 	// ret1 = get_next_line(fd);
+// 	// printf("str is %s", ret1);
+// 	// ret2 = get_next_line(fd);
+// 	// printf("str is %s", ret2);
+// 	return (0);
+// }
