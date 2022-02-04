@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 10:31:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/02/03 11:53:07 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/02/03 18:08:15 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,37 +115,36 @@ char	*get_next_line(int fd)
 	return (ret);
 }
 
-// #include <stdio.h>
-// #include <fcntl.h>
-// int	main(void)
-// {
-// 	char	*ret;
-// 	char	*ret1;
-// 	char	*ret2;
-// 	int		fd;
-// 	size_t	i;
+#include <stdio.h>
+#include <fcntl.h>
+int	main(void)
+{
+	char	*ret;
+	char	*ret1;
+	char	*ret2;
+	int		fd;
+	size_t	i;
 
-// 	fd = 0;
-// 	// fd = open("test5.txt", O_RDONLY);
-// 	// if (fd < 0)
-// 	// {
-// 	// 	printf("OPEN ERROR\n");
-// 	// 	return (0);
-// 	// }
-// 	// i = 0;
-// 	while (i < 6)
-// 	{
-// 		ret = get_next_line(fd);
-// 		printf("str is %s\n", ret);
-// 		free(ret);
-// 		++i;
-// 	}
-// 	// ret = get_next_line(fd);
-// 	// printf("%s", ret);
-// 	// ret1 = get_next_line(fd);
-// 	// printf("str is %s", ret1);
-// 	// ret2 = get_next_line(fd);
-// 	// printf("str is %s", ret2);
-// 	close(fd);
-// 	return (0);
-// }
+	fd = 0;
+	// fd = open("test5.txt", O_RDONLY);
+	// if (fd < 0)
+	// {
+	// 	printf("OPEN ERROR\n");
+	// 	return (0);
+	// }
+	// i = 0;
+	while (i < 6)
+	{
+		ret = get_next_line(fd);
+		printf("str is %s\n", ret);
+		free(ret);
+		++i;	}
+	// ret = get_next_line(fd);
+	// printf("%s", ret);
+	// ret1 = get_next_line(fd);
+	// printf("str is %s", ret1);
+	// ret2 = get_next_line(fd);
+	// printf("str is %s", ret2);
+	close(fd);
+	return (0);
+}
