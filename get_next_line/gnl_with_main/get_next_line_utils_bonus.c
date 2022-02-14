@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 10:45:39 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/02/03 11:02:08 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/02/14 13:04:30 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,12 @@ int	ft_strchr(char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin_free(char *rest, char *buf)
+char	*ft_copy(char *unis, char *rest, char *buf)
 {
-	char	*unis;
 	size_t	i;
 	size_t	j;
 
-	if (!rest || !buf)
-		return (0);
-	unis = malloc(sizeof(*unis) * (ft_strlen(rest) + ft_strlen(buf) + 1));
+	i = 0;
 	if (!unis)
 		return (0);
 	i = 0;
@@ -70,6 +67,29 @@ char	*ft_strjoin_free(char *rest, char *buf)
 		++j;
 	}
 	unis[j + i] = '\0';
+	return (unis);
+}
+
+char	*ft_strjoin_free(char *rest, char *buf)
+{
+	char	*unis;
+
+	if (!rest)
+	{
+		rest = malloc(sizeof(*rest) * 1);
+		if (!rest)
+			return (0);
+		rest[0] = '\0';
+	}
+	if (!rest || !buf)
+	{
+		free(rest);
+		return (0);
+	}
+	unis = malloc(sizeof(*unis) * (ft_strlen(rest) + ft_strlen(buf) + 1));
+	if (!unis)
+		return (0);
+	unis = ft_copy(unis, rest, buf);
 	free(rest);
 	return (unis);
 }

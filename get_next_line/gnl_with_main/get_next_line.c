@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 10:31:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/02/03 18:08:15 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/02/14 13:05:08 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,24 @@ size_t	ft_find_line(char *input)
 char	*read_line(char *rest, int fd)
 {
 	ssize_t	r_bytes;
-	char	buf[BUFFER_SIZE + 1];
+	char	*buf;
 
+	buf = malloc(sizeof(*buf) * (BUFFER_SIZE + 1));
+	if (!buf)
+		return (0);
 	r_bytes = 1;
 	while (!ft_strchr(rest, '\n') && r_bytes > 0)
 	{
 		r_bytes = read(fd, buf, BUFFER_SIZE);
 		if (r_bytes < 0)
-			return (0);
-		buf[r_bytes] = '\0';
-		if (!rest)
 		{
-			rest = malloc(sizeof(*rest) * 1);
-			if (!rest)
-				return (0);
-			rest[0] = '\0';
+			free(buf);
+			return (0);
 		}
+		buf[r_bytes] = '\0';
 		rest = ft_strjoin_free(rest, buf);
 	}
+	free(buf);
 	return (rest);
 }
 
@@ -115,36 +115,37 @@ char	*get_next_line(int fd)
 	return (ret);
 }
 
-#include <stdio.h>
-#include <fcntl.h>
-int	main(void)
-{
-	char	*ret;
-	char	*ret1;
-	char	*ret2;
-	int		fd;
-	size_t	i;
+// #include <stdio.h>
+// #include <fcntl.h>
+// int	main(void)
+// {
+// 	char	*ret;
+// 	char	*ret1;
+// 	char	*ret2;
+// 	int		fd;
+// 	size_t	i;
 
-	fd = 0;
-	// fd = open("test5.txt", O_RDONLY);
-	// if (fd < 0)
-	// {
-	// 	printf("OPEN ERROR\n");
-	// 	return (0);
-	// }
-	// i = 0;
-	while (i < 6)
-	{
-		ret = get_next_line(fd);
-		printf("str is %s\n", ret);
-		free(ret);
-		++i;	}
-	// ret = get_next_line(fd);
-	// printf("%s", ret);
-	// ret1 = get_next_line(fd);
-	// printf("str is %s", ret1);
-	// ret2 = get_next_line(fd);
-	// printf("str is %s", ret2);
-	close(fd);
-	return (0);
-}
+// 	// fd = 0;
+// 	fd = open("test4.txt", O_RDONLY);
+// 	// if (fd < 0)
+// 	// {
+// 	// 	printf("OPEN ERROR\n");
+// 	// 	return (0);
+// 	// }
+// 	i = 0;
+// 	while (i < 12)
+// 	{
+// 		ret = get_next_line(fd);
+// 		printf("str is %s\n", ret);
+// 		free(ret);
+// 		++i;
+// 	}
+// 	// ret = get_next_line(fd);
+// 	// printf("%s", ret);
+// 	// ret1 = get_next_line(fd);
+// 	// printf("str is %s", ret1);
+// 	// ret2 = get_next_line(fd);
+// 	// printf("str is %s", ret2);
+// 	close(fd);
+// 	return (0);
+// }

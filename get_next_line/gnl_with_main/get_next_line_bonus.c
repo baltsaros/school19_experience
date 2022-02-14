@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 10:31:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/02/03 12:57:04 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/02/14 13:04:59 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,24 @@ size_t	ft_find_line(char *input)
 char	*read_line(char *rest, int fd)
 {
 	ssize_t	r_bytes;
-	char	buf[BUFFER_SIZE + 1];
+	char	*buf;
 
+	buf = malloc(sizeof(*buf) * (BUFFER_SIZE + 1));
+	if (!buf)
+		return (0);
 	r_bytes = 1;
 	while (!ft_strchr(rest, '\n') && r_bytes > 0)
 	{
 		r_bytes = read(fd, buf, BUFFER_SIZE);
 		if (r_bytes < 0)
-			return (0);
-		buf[r_bytes] = '\0';
-		if (!rest)
 		{
-			rest = malloc(sizeof(*rest) * 1);
-			if (!rest)
-				return (0);
-			rest[0] = '\0';
+			free(buf);
+			return (0);
 		}
+		buf[r_bytes] = '\0';
 		rest = ft_strjoin_free(rest, buf);
 	}
+	free(buf);
 	return (rest);
 }
 
