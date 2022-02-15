@@ -167,10 +167,32 @@ int	main(void)
 	// printf("%07.5d|\n", 5);
 	// printf("%+ d|\n", 5);
 
-	printf("%.s %.s|\n", "a", "ab");
-	printf("%.1s %.2s|\n", "a", "ab");
-	printf("%.1s %.1s|\n", "a", "ab");
-	printf("%.2s %.3s|\n", "a", "ab");
+	// printf("%.s %.s|\n", "a", "ab");
+	// printf("%.1s %.2s|\n", "a", "ab");
+	// printf("%.1s %.1s|\n", "a", "ab");
+	printf("%2.2s %2.2s|\n", "a", "ab");
+	printf("%1.2s %4.3s|\n", "a", "ab");
+	printf("%.3s|\n", "c");
+	printf("%1.3s|\n", "c");
+	printf("%2.3s|\n", "c");
+	printf("%3.3s|\n", "c");
+	printf("%3.s|\n", "d");
+	printf("%3.s|\n", "do");
+	printf("%3s|\n", "do");
+	printf("%2.s|\n", "do");
+	printf("%2.s|\n", "hello");
+	printf("%1.1d\n", 5);
+	printf("%1.2d\n", 5);
+	printf("%2.2d\n", 5);
+	printf("%3.2d\n", 5);
+	printf("%2.3d\n", 5);
+	printf("%s|\n", NULL);
+	printf("%5s|\n", NULL);
+	printf("%x\n", 42);
+	printf("%5x\n", 43);
+	printf("%5.5x\n", 44);
+	printf("%6.5x\n", 44);
+	printf("%.5x\n", 45);
 
 	return (0);
 }

@@ -1,59 +1,152 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <mlx.h>
+#include <stdio.h>
 
-typedef struct	s_data
+typedef struct	s_img
 {
-	void	*img;
+	void	*mlx_img;
 	char	*addr;
-	int		bits_per_pixel;
+	int		bpp;
 	int		line_length;
 	int		endian;
+}	t_img;
+
+typedef struct	s_data {
+	void	*mlx;
+	void	*win;
+	t_img	img;
+	int		cur_img;
 }	t_data;
 
-int	encode_rgb(uint8_t red, uint8_t gree, uint8_t blue)
+typedef struct s_rect
 {
-	return (red << 16 | gree << 8 | blue);
+	int	x;
+	int	y;
+	int width;
+	int height;
+	int color;
+}	t_rect;
+
+enum {
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
+
+int	key_hook(int keycode, t_data *data)
+{
+	// if (keycode == EX_Escape)
+	// {
+		mlx_destroy_window(data->mlx, data->win);
+		data->win = NULL;
+	// }
+	// else
+	// 	printf("Key was pressed!\n");
+	return (0);
 }
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+int	encode_rgb(int t, int red, int gree, int blue)
+{
+	return (t << 24 | red << 16 | gree << 8 | blue);
+}
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
+	int		i;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	i = img ->bpp - 8;
+	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
+	// *(unsigned int*)dst = color;
+	while (i >= 0)
+	{
+		/* big endian, MSB is the leftmost bit */
+		if (img->endian != 0)
+			*dst++ = (color >> i) & 0xFF;
+		/* little endian, LSB is the leftmost bit */
+		else
+			*dst++ = (color >> (img->bpp - 8 - i)) & 0xFF;
+		i -= 8;
+	}
+}
+
+int	render_rect(t_img *img, t_rect rect)
+{
+	int	i;
+	int	j;
+
+	i = rect.y;
+	while (i < rect.y + rect.height)
+	{
+		j = rect.x;
+		while (j < rect.x + rect.width)
+			my_mlx_pixel_put(img, j++, i, 0xFF00);
+		++i;
+	}
+	return (0);
+}
+
+void	render_background(t_img *img, int color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 1080)
+	{
+		j = 0;
+		while (j < 1920)
+			my_mlx_pixel_put(img, j++, i, color);
+		++i;
+	}
+}
+
+int	render(t_data *data)
+{
+	if (data->win == NULL)
+		return (1);
+	render_background(&data->img, 0xFFFFFF);
+	render_rect(&data->img, (t_rect){0, 0, 100, 100, 0xFF00});
+	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
+	return (0);
 }
 
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
+	t_data	data;
 
-	mlx = mlx_init();
-	if (!mlx)
+	data.mlx = mlx_init();
+	if (!data.mlx)
 		return (1);
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Test01");
-	if (!mlx_win)
+	data.win = mlx_new_window(data.mlx, 1920, 1080, "Test01");
+	if (!data.win)
 	{
-		free(mlx_win);
+		free(data.win);
 		return (1);
 	}
-	img.img = mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	my_mlx_pixel_put(&img, 10, 5, 0xFF00);
-	my_mlx_pixel_put(&img, 9, 5, 0xFF00);
-	my_mlx_pixel_put(&img, 8, 5, 0xFF00);
-	my_mlx_pixel_put(&img, 7, 5, 0xFF00);
-	my_mlx_pixel_put(&img, 6, 5, 0xFF00);
-	my_mlx_pixel_put(&img, 5, 5, 0xFF00);
-	my_mlx_pixel_put(&img, 4, 5, 0xFF00);
-	my_mlx_pixel_put(&img, 3, 5, 0xFF00);
-	my_mlx_pixel_put(&img, 2, 5, 0xFF00);
-	my_mlx_pixel_put(&img, 1, 5, 0xFF00);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
-	mlx_destroy_window(mlx, mlx_win);
+	data.img.mlx_img = mlx_new_image(data.mlx, 1920, 1080);
+	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_length, &data.img.endian);
+	mlx_loop_hook(data.mlx, &render, &data);
+	mlx_hook(data.win, 2, 1L<<0, key_hook, &data);
+	// mlx_put_image_to_window(data.mlx, data.win, data.img.mlx_img, 0, 0);
+	// my_mlx_pixel_put(&img, 10, 5, 0xFF00);
+	// my_mlx_pixel_put(&img, 9, 5, 0xFF00);
+	// my_mlx_pixel_put(&img, 8, 5, 0xFF00);
+	// my_mlx_pixel_put(&img, 7, 5, 0xFF00);
+	// my_mlx_pixel_put(&img, 6, 5, 0xFF00);
+	// my_mlx_pixel_put(&img, 5, 5, 0xFF00);
+	// my_mlx_pixel_put(&img, 4, 5, 0xFF00);
+	// my_mlx_pixel_put(&img, 3, 5, 0xFF00);
+	// my_mlx_pixel_put(&img, 2, 5, 0xFF00);
+	// my_mlx_pixel_put(&img, 1, 5, 0xFF00);
+	mlx_loop(data.mlx);
+	mlx_destroy_window(data.mlx, data.win);
 	// mlx_destroy_display(mlx);
-	free(mlx);
+	free(data.mlx);
 	return (0);
 }
