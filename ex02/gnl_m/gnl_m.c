@@ -1,4 +1,7 @@
 #include "gnl_m.h"
+
+// NOT GOOD SOLUTION; TOO COMPLEX AND MESS WITH RETURN
+
 size_t	find_line(char *s)
 {
 	size_t i;
@@ -11,26 +14,26 @@ size_t	find_line(char *s)
 	return (i);
 }
 
-char	*read_line(char *rest)
+int		*read_line(char **rest)
 {
 	char	*buf;
 	ssize_t	r_bytes;
 
 	buf = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	r_bytes = 1;
-	while (!ft_strchr(rest, '\n') && r_bytes > 0)
+	while (!ft_strchr(*rest, '\n') && r_bytes > 0)
 	{
 		r_bytes = read(0, buf, BUFFER_SIZE);
 		if (r_bytes < 0)
 		{
 			free(buf);
-			return (0);
+			return (-1);
 		}
 		buf[r_bytes] = '\0';
-		rest = ft_strjoin_free(rest, buf);
+		*rest = ft_strjoin_free(*rest, buf);
 	}
 	free(buf);
-	return (rest);
+	return (r_bytes);
 }
 
 char	*copy_line(char *rest)
@@ -81,11 +84,12 @@ char	*update_rest(char *rest)
 int		get_next_line(char **line)
 {
 	static char	*rest;
+	int			ret;
 
 	if (BUFFER_SIZE <= 0)
 		return (-1);
-	rest = read_line(rest);
-	if (!rest)
+	ret = read_line(&rest);
+	if (ret < 0)
 		return (-1);
 	*line = copy_line(rest);
 	if (!(*line[0]))
