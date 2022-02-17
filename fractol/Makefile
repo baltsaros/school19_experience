@@ -4,6 +4,8 @@ SRCS	= main.c \
 
 OBJS	= ${SRCS:.c=.o}
 
+INCS	= minilibx\
+
 GCC		= gcc
 RM		= rm -rf
 CFLAGS	= -Wall -Wextra -Werror
@@ -15,7 +17,7 @@ ${NAME}:	${OBJS}
 			# make -C ./libft
 			# cp libft/libft.a
 			# ${NAME} ${OBJS}
-			$(GCC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+			$(GCC) $(OBJS) -I ${INCS} -L minilibx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 all:		${NAME}
 

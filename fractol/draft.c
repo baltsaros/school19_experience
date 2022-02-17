@@ -28,15 +28,21 @@ typedef struct s_rect
 	int color;
 }	t_rect;
 
-typedef struct s_round
+typedef struct s_mand
 {
-	int	x;
-	int	y;
-	int width;
-	int height;
-	int	radius;
-	int color;
-}	t_round;
+	double	pr;
+	double	pi;
+	double	newRe;
+	double	newIm;
+	double	oldRe;
+	double	oldIm;
+	double	zoom;
+	double	x;
+	double	y;
+	double	moveX;
+	double	moveY;
+	int		maxIt;
+}	t_mand;
 
 
 enum {
@@ -49,6 +55,21 @@ enum {
 	ON_DESTROY = 17
 };
 
+void	init_mand(t_mand *mand)
+{
+	mand->pr = 0;
+	mand->pi = 0;
+	mand->newRe = 0;
+	mand->newIm = 0;
+	mand->oldRe = 0;
+	mand->oldIm = 0;
+	mand->zoom = 1;
+	mand->x = 0;
+	mand->y = 0;
+	mand->moveX = 0.5;
+	mand->moveY = 0;
+	mand->maxIt = 300;
+}
 
 int	key_hook(int keycode, t_data *data)
 {
@@ -92,8 +113,10 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	// *(unsigned int*)dst = color;
 	while (i >= 0)
 	{
+		/* big endian, MSB is the leftmost bit */
 		if (img->endian != 0)
 			*dst++ = (color >> i) & 0xFF;
+		/* little endian, LSB is the leftmost bit */
 		else
 			*dst++ = (color >> (img->bpp - 8 - i)) & 0xFF;
 		i -= 8;
@@ -116,17 +139,22 @@ int	render_rect(t_img *img, t_rect rect)
 	return (0);
 }
 
-int	render_round(t_img *img, t_round round)
+int	render_mandelbrot(t_img *img, t_mand mand)
 {
 	int	i;
 	int	j;
 
-	i = round.y;
-	while (i < round.y + round.height)
+	i = mand.y;
+	while (i < 1080)
 	{
-		j = round.x;
-		while (j < round.x + round.width)
-			my_mlx_pixel_put(img, j++, i, round.color);
+		j = mand.x;
+		while (j < 1920)
+		{
+			mand.pr = 1.5 * (mand.x - 1920 / 2) / (0.5 * mand.zoom * 1920) + mand.moveX;
+			mand.pi = (mand.y - 1080 / 2) / (0.5 * mand.zoom * 1080) + mand.moveY;
+			mand.newRe = mand.newIm = mand.oldRe = mand.oldIm = 0;
+			my_mlx_pixel_put(img, j++, i, 0xFF00);
+		}
 		++i;
 	}
 	return (0);
