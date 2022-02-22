@@ -19,20 +19,20 @@ void	ft_union(char *s1, char *s2)
 	i = 0;
 	while (s1[i])
 	{
-		if (!(box[s1[i]]))
+		if (!(box[(unsigned int)s1[i]]))
 		{
-			box[s1[i]] = 1;
-			ft_putchar(s1[i]);
+			box[(unsigned int)s1[i]] = 1;
+			ft_putchar((unsigned int)s1[i]);
 		}	
 		++i;
 	}
 	i = 0;
 	while (s2[i])
 	{
-		if (!(box[s2[i]]))
+		if (!(box[(unsigned int)s2[i]]))
 		{
-			box[s2[i]] = 1;
-			ft_putchar(s2[i]);
+			box[(unsigned int)s2[i]] = 1;
+			ft_putchar((unsigned int)s2[i]);
 		}	
 		++i;
 	}

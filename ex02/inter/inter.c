@@ -7,9 +7,9 @@ void	ft_putchar(char c)
 
 void	ft_inter(char *s1, char *s2)
 {
+	int	box[255];
 	int	i;
 	int	j;
-	int	box[255];
 
 	i = 0;
 	while (i < 255)
@@ -21,14 +21,17 @@ void	ft_inter(char *s1, char *s2)
 	while (s1[i])
 	{
 		j = 0;
-		while (s2[j] != s1[i])
-			++j;
-		if (s1[i] == s2[j] && !box[s1[i]])
+		while (s2[j])
 		{
-			ft_putchar(s1[i]);
-			box[s1[i]] = 1;
+			if (s1[i] == s2[j] && !box[(unsigned int)s1[i]])
+			{
+				ft_putchar((unsigned int)s1[i]);
+				box[(unsigned int)s1[i]] = 1;
+			}
+			++j;
 		}
 		++i;
+
 	}
 }
 
