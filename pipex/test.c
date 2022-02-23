@@ -1,6 +1,6 @@
 #include "pipex.h"
 
-static int	error_check(int input, char *str)
+int		error_check(int input, char *str)
 {
 	if (input < 0)
 	{
@@ -10,7 +10,7 @@ static int	error_check(int input, char *str)
 	return (input);
 }
 
-static char	**get_address(char *cmd[], char *envp[])
+char	*access_check(char *cmd[], char *envp[])
 {
 	char	**env;
 	int		i;
@@ -27,19 +27,10 @@ static char	**get_address(char *cmd[], char *envp[])
 		env[i] = ft_strjoin((const char *)env[i], (const char *)cmd[0]);
 		++i;
 	}
-	return (env);
-}
-
-static char	*access_check(char *cmd[], char *envp[])
-{
-	char	**env;
-	int		i;
-	char	*ret;
-
-	env = get_address(cmd, envp);
 	i = 1;
 	while (access(env[i], F_OK) != 0)
 	{
+		// printf("env[%d] is |%s|, access = %d\n", i, env[i], access(env[i], F_OK));
 		++i;
 		if (!env[i])
 			break ;
@@ -51,7 +42,7 @@ static char	*access_check(char *cmd[], char *envp[])
 	return (ret);
 }
 
-static void	child_one(char *argv[], char *envp[], int *fd)
+void	child_one(char *argv[], char *envp[], char *cmd1[], int *fd)
 {
 	int		in;
 	char	*cmd;
@@ -73,14 +64,13 @@ static void	child_one(char *argv[], char *envp[], int *fd)
 		exit (EXIT_FAILURE);
 	}
 	close(fd[0]);
-	cmd = access_check(ft_split(argv[2], ' '), envp);
-	execve(cmd, ft_split(argv[2], ' '), envp);
-	free(cmd);
+	cmd = access_check(cmd1, envp);
+	execve(cmd, cmd1, envp);
 	perror("Execve error");
 	exit (127);
 }
 
-static void	child_two(char *argv[], char *envp[], int *fd)
+void	child_two(char *argv[], char *envp[], char *cmd2[], int *fd)
 {
 	int		out;
 	char	*cmd;
@@ -102,9 +92,8 @@ static void	child_two(char *argv[], char *envp[], int *fd)
 		exit (EXIT_FAILURE);
 	}
 	close(fd[1]);
-	cmd = access_check(ft_split(argv[3], ' '), envp);
-	execve(cmd, ft_split(argv[3], ' '), envp);
-	free(cmd);
+	cmd = access_check(cmd2, envp);
+	execve(cmd, cmd2, envp);
 	perror("Execve error");
 	exit (127);
 }
@@ -116,12 +105,16 @@ int		main(int argc, char *argv[], char *envp[])
 	int		pid2;
 	int		p;
 	int 	status;
+	char	**cmd1;
+	char	**cmd2;
 
 	if (argc != 5)
 	{
 		perror("Incorrect amount of arguments");
 		exit (EXIT_FAILURE);
 	}
+	cmd1 = ft_split(argv[2], ' ');
+	cmd2 = ft_split(argv[3], ' ');
 	p = pipe(fd);
 	if (p < 0)
 	{
@@ -149,5 +142,7 @@ int		main(int argc, char *argv[], char *envp[])
 	// close(out);
 	// close(in);
 	waitpid(pid2, &status, 0);
+	free(cmd1);
+	free(cmd2);
 	return ((status >> 8) & 0x000000ff);
 }
