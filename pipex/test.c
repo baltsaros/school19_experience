@@ -42,11 +42,13 @@ char	*access_check(char *cmd[], char *envp[])
 	return (ret);
 }
 
-void	child_one(char *argv[], char *envp[], char *cmd1[], int *fd)
+void	child_one(char *argv[], char *envp[], int *fd)
 {
 	int		in;
 	char	*cmd;
+	char	**cmd1;
 
+	cmd1 = ft_split(argv[2], ' ');
 	in = open(argv[1], O_RDONLY);
 	if (in < 0)
 	{
@@ -66,15 +68,19 @@ void	child_one(char *argv[], char *envp[], char *cmd1[], int *fd)
 	close(fd[0]);
 	cmd = access_check(cmd1, envp);
 	execve(cmd, cmd1, envp);
+	free(cmd);
+	free(cmd1);
 	perror("Execve error");
 	exit (127);
 }
 
-void	child_two(char *argv[], char *envp[], char *cmd2[], int *fd)
+void	child_two(char *argv[], char *envp[], int *fd)
 {
 	int		out;
 	char	*cmd;
+	char	**cmd2;
 
+	cmd2 = ft_split(argv[3], ' ');
 	out = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0777);
 	if (out < 0)
 	{
@@ -94,6 +100,8 @@ void	child_two(char *argv[], char *envp[], char *cmd2[], int *fd)
 	close(fd[1]);
 	cmd = access_check(cmd2, envp);
 	execve(cmd, cmd2, envp);
+	free(cmd);
+	free(cmd2);
 	perror("Execve error");
 	exit (127);
 }
@@ -105,16 +113,12 @@ int		main(int argc, char *argv[], char *envp[])
 	int		pid2;
 	int		p;
 	int 	status;
-	char	**cmd1;
-	char	**cmd2;
 
 	if (argc != 5)
 	{
 		perror("Incorrect amount of arguments");
 		exit (EXIT_FAILURE);
 	}
-	cmd1 = ft_split(argv[2], ' ');
-	cmd2 = ft_split(argv[3], ' ');
 	p = pipe(fd);
 	if (p < 0)
 	{
@@ -128,7 +132,7 @@ int		main(int argc, char *argv[], char *envp[])
 		exit (EXIT_FAILURE);
 	}
 	if (pid1 == 0)
-		child_one(argv, envp, cmd1, fd);
+		child_one(argv, envp, fd);
 	pid2 = fork();
 	if (pid2 < 0)
 	{
@@ -136,13 +140,9 @@ int		main(int argc, char *argv[], char *envp[])
 		exit (EXIT_FAILURE);
 	}
 	if (pid2 == 0)
-		child_two(argv, envp, cmd2, fd);
+		child_two(argv, envp, fd);
 	close(fd[0]);
 	close(fd[1]);
-	// close(out);
-	// close(in);
 	waitpid(pid2, &status, 0);
-	free(cmd1);
-	free(cmd2);
 	return ((status >> 8) & 0x000000ff);
 }

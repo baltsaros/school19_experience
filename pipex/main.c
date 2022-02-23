@@ -1,16 +1,17 @@
 #include "pipex.h"
 
-int		error_check(int input, char *str)
+static int	error_check(int input, char *str, int n)
 {
 	if (input < 0)
 	{
-		perror("Something went wrong");
+		write(1, str, n);
+		perror("something went wrong");
 		exit (EXIT_FAILURE);
 	}
 	return (input);
 }
 
-char	*access_check(char *cmd[], char *envp[])
+static char	**get_address(char *cmd[], char *envp[])
 {
 	char	**env;
 	int		i;
@@ -27,10 +28,19 @@ char	*access_check(char *cmd[], char *envp[])
 		env[i] = ft_strjoin((const char *)env[i], (const char *)cmd[0]);
 		++i;
 	}
+	return (env);
+}
+
+static char	*access_check(char *cmd[], char *envp[])
+{
+	char	**env;
+	int		i;
+	char	*ret;
+
+	env = get_address(cmd, envp);
 	i = 1;
 	while (access(env[i], F_OK) != 0)
 	{
-		// printf("env[%d] is |%s|, access = %d\n", i, env[i], access(env[i], F_OK));
 		++i;
 		if (!env[i])
 			break ;
@@ -42,7 +52,7 @@ char	*access_check(char *cmd[], char *envp[])
 	return (ret);
 }
 
-void	child_one(char *argv[], char *envp[], int *fd)
+static void	child_one(char *argv[], char *envp[], int *fd)
 {
 	int		in;
 	char	*cmd;
@@ -50,21 +60,9 @@ void	child_one(char *argv[], char *envp[], int *fd)
 
 	cmd1 = ft_split(argv[2], ' ');
 	in = open(argv[1], O_RDONLY);
-	if (in < 0)
-	{
-		perror("Open1 error");
-		exit (EXIT_FAILURE);
-	}
-	if (dup2(in, 0) < 0)
-	{
-		perror("Dup2[in] error");
-		exit (EXIT_FAILURE);
-	}
-	if (dup2(fd[1], 1) < 0)
-	{
-		perror("Dup2[fd[1]] error");
-		exit (EXIT_FAILURE);
-	}
+	error_check(in, "In Open1 ", 9);
+	error_check(dup2(in, 0), "In Dup2_1_1 ", 12);
+	error_check(dup2(fd[1], 1), "In Dup2_1_2 ", 12);
 	close(fd[0]);
 	cmd = access_check(cmd1, envp);
 	execve(cmd, cmd1, envp);
@@ -74,7 +72,7 @@ void	child_one(char *argv[], char *envp[], int *fd)
 	exit (127);
 }
 
-void	child_two(char *argv[], char *envp[], int *fd)
+static void	child_two(char *argv[], char *envp[], int *fd)
 {
 	int		out;
 	char	*cmd;
@@ -82,21 +80,9 @@ void	child_two(char *argv[], char *envp[], int *fd)
 
 	cmd2 = ft_split(argv[3], ' ');
 	out = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0777);
-	if (out < 0)
-	{
-		perror ("Open2 error");
-		exit (EXIT_FAILURE);
-	}
-	if (dup2(fd[0], 0) < 0)
-	{
-		perror("Dup2[fd[0]] error");
-		exit (EXIT_FAILURE);
-	}
-	if (dup2(out, 1) < 0)
-	{
-		perror("Dup2[out] error");
-		exit (EXIT_FAILURE);
-	}
+	error_check(out, "In Open2 ", 9);
+	error_check(dup2(fd[0], 0), "In Dup2_2_1 ", 12);
+	error_check(dup2(out, 1), "In Dup2_2_2 ", 12);
 	close(fd[1]);
 	cmd = access_check(cmd2, envp);
 	execve(cmd, cmd2, envp);
@@ -109,42 +95,27 @@ void	child_two(char *argv[], char *envp[], int *fd)
 int		main(int argc, char *argv[], char *envp[])
 {
 	int		fd[2];
-	int		pid1;
-	int		pid2;
+	int		pid[2];
 	int		p;
 	int 	status;
 
 	if (argc != 5)
 	{
-		perror("Incorrect amount of arguments");
+		write(1, "Invalid amount of arguments\n", 29);
 		exit (EXIT_FAILURE);
 	}
 	p = pipe(fd);
-	if (p < 0)
-	{
-		perror("Pipe error");
-		exit (EXIT_FAILURE);
-	}
-	pid1 = fork();
-	if (pid1 < 0)
-	{
-		perror("Fork1 error");
-		exit (EXIT_FAILURE);
-	}
-	if (pid1 == 0)
+	error_check(p, "In Pipe ", 8);
+	pid[0] = fork();
+	error_check(pid[0], "In Fork1 ", 9);
+	if (pid[0] == 0)
 		child_one(argv, envp, fd);
-	pid2 = fork();
-	if (pid2 < 0)
-	{
-		perror("Fork2 error");
-		exit (EXIT_FAILURE);
-	}
-	if (pid2 == 0)
+	pid[1] = fork();
+	error_check(pid[1], "In Fork2 ", 9);
+	if (pid[1] == 0)
 		child_two(argv, envp, fd);
 	close(fd[0]);
 	close(fd[1]);
-	// close(out);
-	// close(in);
-	waitpid(pid2, &status, 0);
+	waitpid(pid[1], &status, 0);
 	return ((status >> 8) & 0x000000ff);
 }
