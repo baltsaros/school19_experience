@@ -1,3 +1,153 @@
 #include "pipex.h"
 
+static int	error_check(int input, char *str)
+{
+	if (input < 0)
+	{
+		perror("Something went wrong");
+		exit (EXIT_FAILURE);
+	}
+	return (input);
+}
 
+static char	**get_address(char *cmd[], char *envp[])
+{
+	char	**env;
+	int		i;
+	char	*ret;
+
+	i = 0;
+	while (ft_strncmp((const char *)"PATH=", (const char *)envp[i], 5))
+		++i;
+	env = ft_split((const char *)envp[i], ':');
+	i = 1;
+	while (env[i])
+	{
+		env[i] = ft_strjoin((const char *)env[i], "/");
+		env[i] = ft_strjoin((const char *)env[i], (const char *)cmd[0]);
+		++i;
+	}
+	return (env);
+}
+
+static char	*access_check(char *cmd[], char *envp[])
+{
+	char	**env;
+	int		i;
+	char	*ret;
+
+	env = get_address(cmd, envp);
+	i = 1;
+	while (access(env[i], F_OK) != 0)
+	{
+		++i;
+		if (!env[i])
+			break ;
+	}	
+	if (env[i] && access(env[i], X_OK) < 0)
+		return (0);
+	ret = ft_strdup(env[i]);
+	free(env);
+	return (ret);
+}
+
+static void	child_one(char *argv[], char *envp[], int *fd)
+{
+	int		in;
+	char	*cmd;
+
+	in = open(argv[1], O_RDONLY);
+	if (in < 0)
+	{
+		perror("Open1 error");
+		exit (EXIT_FAILURE);
+	}
+	if (dup2(in, 0) < 0)
+	{
+		perror("Dup2[in] error");
+		exit (EXIT_FAILURE);
+	}
+	if (dup2(fd[1], 1) < 0)
+	{
+		perror("Dup2[fd[1]] error");
+		exit (EXIT_FAILURE);
+	}
+	close(fd[0]);
+	cmd = access_check(ft_split(argv[2], ' '), envp);
+	execve(cmd, ft_split(argv[2], ' '), envp);
+	free(cmd);
+	perror("Execve error");
+	exit (127);
+}
+
+static void	child_two(char *argv[], char *envp[], int *fd)
+{
+	int		out;
+	char	*cmd;
+
+	out = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0777);
+	if (out < 0)
+	{
+		perror ("Open2 error");
+		exit (EXIT_FAILURE);
+	}
+	if (dup2(fd[0], 0) < 0)
+	{
+		perror("Dup2[fd[0]] error");
+		exit (EXIT_FAILURE);
+	}
+	if (dup2(out, 1) < 0)
+	{
+		perror("Dup2[out] error");
+		exit (EXIT_FAILURE);
+	}
+	close(fd[1]);
+	cmd = access_check(ft_split(argv[3], ' '), envp);
+	execve(cmd, ft_split(argv[3], ' '), envp);
+	free(cmd);
+	perror("Execve error");
+	exit (127);
+}
+
+int		main(int argc, char *argv[], char *envp[])
+{
+	int		fd[2];
+	int		pid1;
+	int		pid2;
+	int		p;
+	int 	status;
+
+	if (argc != 5)
+	{
+		perror("Incorrect amount of arguments");
+		exit (EXIT_FAILURE);
+	}
+	p = pipe(fd);
+	if (p < 0)
+	{
+		perror("Pipe error");
+		exit (EXIT_FAILURE);
+	}
+	pid1 = fork();
+	if (pid1 < 0)
+	{
+		perror("Fork1 error");
+		exit (EXIT_FAILURE);
+	}
+	if (pid1 == 0)
+		child_one(argv, envp, cmd1, fd);
+	pid2 = fork();
+	if (pid2 < 0)
+	{
+		perror("Fork2 error");
+		exit (EXIT_FAILURE);
+	}
+	if (pid2 == 0)
+		child_two(argv, envp, cmd2, fd);
+	close(fd[0]);
+	close(fd[1]);
+	// close(out);
+	// close(in);
+	waitpid(pid2, &status, 0);
+	return ((status >> 8) & 0x000000ff);
+}

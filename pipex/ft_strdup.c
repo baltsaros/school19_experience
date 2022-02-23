@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 09:33:32 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/02/23 10:17:31 by abuzdin          ###   ########.fr       */
+/*   Created: 2022/01/10 09:33:21 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/02/23 12:22:38 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strdup(const char *s)
 {
-	char	*unis;
+	char	*dest;
 	size_t	i;
-	size_t	j;
-	size_t	l;
+	size_t	size;
 
-	if (!s1 || !s2)
-		return (0);
-	l = ft_strlen(s1) + ft_strlen(s2);
-	unis = (char *)malloc(sizeof(*unis) * (l + 1));
-	if (NULL == unis)
-		return (0);
+	size = ft_strlen(s);
+	dest = (char *)malloc(sizeof(*s) * (size + 1));
+	if (NULL == dest)
+		return (NULL);
 	i = 0;
-	while (s1[i])
+	while (s[i])
 	{
-		unis[i] = s1[i];
+		dest[i] = s[i];
 		++i;
 	}
-	j = 0;
-	while (s2[j])
-	{
-		unis[i + j] = s2[j];
-		++j;
-	}
-	unis[j + i] = '\0';
-	return (unis);
+	dest[i] = '\0';
+	return (dest);
 }

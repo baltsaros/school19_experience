@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 09:33:32 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/02/23 10:17:31 by abuzdin          ###   ########.fr       */
+/*   Created: 2022/01/10 09:34:09 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/02/23 10:24:44 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*unis;
-	size_t	i;
-	size_t	j;
-	size_t	l;
+	size_t			i;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-	if (!s1 || !s2)
-		return (0);
-	l = ft_strlen(s1) + ft_strlen(s2);
-	unis = (char *)malloc(sizeof(*unis) * (l + 1));
-	if (NULL == unis)
-		return (0);
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
 	i = 0;
-	while (s1[i])
-	{
-		unis[i] = s1[i];
+	if (n == 0)
+		return (0);
+	while (str1[i] && str2[i] && str1[i] == str2[i] && i < (n - 1))
 		++i;
-	}
-	j = 0;
-	while (s2[j])
-	{
-		unis[i + j] = s2[j];
-		++j;
-	}
-	unis[j + i] = '\0';
-	return (unis);
+	return (str1[i] - str2[i]);
 }
