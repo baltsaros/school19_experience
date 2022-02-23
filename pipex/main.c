@@ -1,21 +1,21 @@
-#include "pipex.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/23 17:39:22 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/02/23 17:39:35 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static int	error_check(int input, char *str, int n)
-{
-	if (input < 0)
-	{
-		write(1, str, n);
-		perror("something went wrong");
-		exit (EXIT_FAILURE);
-	}
-	return (input);
-}
+#include "pipex.h"
 
 static char	**get_address(char *cmd[], char *envp[])
 {
 	char	**env;
 	int		i;
-	char	*ret;
 
 	i = 0;
 	while (ft_strncmp((const char *)"PATH=", (const char *)envp[i], 5))
@@ -92,12 +92,12 @@ static void	child_two(char *argv[], char *envp[], int *fd)
 	exit (127);
 }
 
-int		main(int argc, char *argv[], char *envp[])
+int	main(int argc, char *argv[], char *envp[])
 {
-	int		fd[2];
-	int		pid[2];
-	int		p;
-	int 	status;
+	int	fd[2];
+	int	pid[2];
+	int	p;
+	int	status;
 
 	if (argc != 5)
 	{

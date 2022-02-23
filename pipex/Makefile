@@ -12,14 +12,15 @@ OBJS	= ${SRCS:.c=.o}
 INCS	= .
 
 GCC		= gcc
+RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror
 
 %.o : %.c
-			@${GCC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
-			@echo Compiling...
-			
-${NAME};	${OBJS}
-			${NAME} ${OBJS}
+			${GCC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
+			@echo "Compiling..."
+
+${NAME}:	${OBJS}
+			${GCC} -o ${NAME} ${OBJS}
 
 all:		${NAME}
 
@@ -29,7 +30,7 @@ all:		${NAME}
 norm:
 			norminette
 clean:
-			${RM} ${OBJS} ${OBJS_b}
+			${RM} ${OBJS}
 
 fclean:		clean
 			${RM} ${NAME}
