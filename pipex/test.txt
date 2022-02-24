@@ -4,3 +4,4 @@ three
 four
 one
 one
+./a.out test.txt "grep one" "wc -l" output.txt
