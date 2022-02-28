@@ -14,5 +14,10 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 int		error_check(int input, char *str, int n);
+void	ft_free(char *str[]);
+void	*ft_calloc(size_t count, size_t size);
+// int		get_next_line(char **line, char *limiter);
+int		get_next_line(char **line);
+
 
 #endif

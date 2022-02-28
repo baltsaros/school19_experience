@@ -12,6 +12,7 @@ SRCS	= ft_split.c \
 			ft_strlen.c \
 			ft_strncmp.c \
 			error_check.c \
+			ft_free.c \
 			pipex.c \
 
 OBJS	= ${SRCS:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:39:22 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/02/24 15:53:21 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/02/28 09:22:24 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char *access_check(char *cmd[], char *envp[])
 	// if (env[i] && access(env[i], X_OK) < 0)
 	// 	error_check(access(env[i], X_OK), "In Access ", 11);
 	ret = ft_strdup(env[i]);
-	free(env);
+	ft_free(env);
 	return (ret);
 }
 
@@ -68,7 +68,7 @@ static void child_one(char *argv[], char *envp[], int *fd)
 	execve(cmd, cmd1, envp);
 	perror("Execve error");
 	free(cmd);
-	free(cmd1);
+	ft_free(cmd1);
 	exit(127);
 }
 
@@ -88,7 +88,7 @@ static void child_two(char *argv[], char *envp[], int *fd)
 	execve(cmd, cmd2, envp);
 	perror("Execve error");
 	free(cmd);
-	free(cmd2);
+	ft_free(cmd2);
 	exit(127);
 }
 

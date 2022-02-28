@@ -1,7 +1,10 @@
 one
 two
+one
 three
 four
 one
 one
-./a.out test.txt "grep one" "wc -l" output.txt
+.pipex test.txt "grep one" "wc -l" output.txt
+./a.out test.txt "head -n 5" "grep one" "wc -l" output1.txt
+./a.out here_doc five "grep one" "wc -l" output.txt
