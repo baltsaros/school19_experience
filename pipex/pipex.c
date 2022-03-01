@@ -6,98 +6,42 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:39:22 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/02/28 09:22:24 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/01 11:13:09 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static char **get_address(char *cmd[], char *envp[])
+static void	child_one(char *argv[], char *envp[], int *fd)
 {
-	char **env;
-	int i;
+	int	in;
 
-	i = 0;
-	while (ft_strncmp((const char *)"PATH=", (const char *)envp[i], 5))
-		++i;
-	env = ft_split((const char *)envp[i], ':');
-	i = 1;
-	while (env[i])
-	{
-		env[i] = ft_strjoin((const char *)env[i], "/");
-		env[i] = ft_strjoin((const char *)env[i], (const char *)cmd[0]);
-		++i;
-	}
-	return (env);
-}
-
-static char *access_check(char *cmd[], char *envp[])
-{
-	char **env;
-	int i;
-	char *ret;
-
-	env = get_address(cmd, envp);
-	i = 1;
-	while (access(env[i], F_OK) != 0)
-	{
-		++i;
-		if (!env[i + 1])
-			break;
-	}
-	// if (env[i] && access(env[i], X_OK) < 0)
-	// 	error_check(access(env[i], X_OK), "In Access ", 11);
-	ret = ft_strdup(env[i]);
-	ft_free(env);
-	return (ret);
-}
-
-static void child_one(char *argv[], char *envp[], int *fd)
-{
-	int in;
-	char *cmd;
-	char **cmd1;
-
-	cmd1 = ft_split(argv[2], ' ');
 	in = open(argv[1], O_RDONLY);
 	error_check(in, "In Open1 ", 9);
 	error_check(dup2(in, STDIN_FILENO), "In Dup2_1_1 ", 12);
 	error_check(dup2(fd[1], STDOUT_FILENO), "In Dup2_1_2 ", 12);
 	close(fd[0]);
-	cmd = access_check(cmd1, envp);
-	execve(cmd, cmd1, envp);
-	perror("Execve error");
-	free(cmd);
-	ft_free(cmd1);
-	exit(127);
+	ft_execve(argv[2], envp);
 }
 
-static void child_two(char *argv[], char *envp[], int *fd)
+static void	child_two(char *argv[], char *envp[], int *fd)
 {
-	int out;
-	char *cmd;
-	char **cmd2;
+	int	out;
 
-	cmd2 = ft_split(argv[3], ' ');
 	out = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0777);
 	error_check(out, "In Open2 ", 9);
 	error_check(dup2(fd[0], STDIN_FILENO), "In Dup2_2_1 ", 12);
 	error_check(dup2(out, STDOUT_FILENO), "In Dup2_2_2 ", 12);
 	close(fd[1]);
-	cmd = access_check(cmd2, envp);
-	execve(cmd, cmd2, envp);
-	perror("Execve error");
-	free(cmd);
-	ft_free(cmd2);
-	exit(127);
+	ft_execve(argv[3], envp);
 }
 
-int main(int argc, char *argv[], char *envp[])
+int	main(int argc, char *argv[], char *envp[])
 {
-	int fd[2];
-	int pid[2];
-	int p;
-	int status;
+	int	fd[2];
+	int	pid[2];
+	int	p;
+	int	status;
 
 	if (argc != 5)
 	{
