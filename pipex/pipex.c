@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:39:22 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/01 11:13:09 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/01 12:26:52 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	child_two(char *argv[], char *envp[], int *fd)
 	int	out;
 
 	out = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0777);
-	error_check(out, "In Open2 ", 9);
+	error_check(out, "In Open2 ", 10);
 	error_check(dup2(fd[0], STDIN_FILENO), "In Dup2_2_1 ", 12);
 	error_check(dup2(out, STDOUT_FILENO), "In Dup2_2_2 ", 12);
 	close(fd[1]);
@@ -45,7 +45,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	if (argc != 5)
 	{
-		write(1, "Invalid amount of arguments\n", 29);
+		write(2, "Invalid amount of arguments\n", 29);
 		exit(EXIT_FAILURE);
 	}
 	p = pipe(fd);

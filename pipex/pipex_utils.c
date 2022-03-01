@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 09:37:06 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/01 11:15:23 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/01 12:18:08 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	error_check(int input, char *str, int n)
 {
 	if (input < 0)
 	{
-		write(1, str, n);
+		write(2, str, n);
 		perror("something went wrong");
 		exit (EXIT_FAILURE);
 	}
@@ -61,9 +61,9 @@ char	*access_check(char *cmd[], char *envp[])
 		if (!env[i + 1])
 			break ;
 	}
-	if (env[i] && access(env[i], X_OK) < 0)
+	if (env[i] && access(env[i], F_OK) < 0)
 	{
-		write(1, "command not found\n", 19);
+		write(2, "command not found\n", 19);
 		ft_free(env);
 		exit(127);
 	}
