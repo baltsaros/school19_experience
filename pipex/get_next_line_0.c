@@ -94,14 +94,33 @@ int			get_next_line(char **line, char *limiter)
 	return (r_bytes);
 }
 
-#include <stdio.h>
-int		main(void)
-{
-	char	*line;
-	int		ret;
+// #include <stdio.h>
+// int		main(void)
+// {
+// 	char	*line;
+// 	int		ret;
 
-	ret = get_next_line(&line, "five");
-	printf("ret is %d\n", ret);
-	printf("line is |%s|\n", line);
-	return (0);
-}
+// 	ret = get_next_line(&line, "five");
+// 	printf("ret is %d\n", ret);
+// 	printf("line is |%s|\n", line);
+// 	return (0);
+// }
+
+// #include <stdio.h>
+// int		main(void)
+// {
+// 	char	*line;
+// 	int		ret;
+// 	int		i;
+
+// 	ret = get_next_line(&line);
+// 	i = 0;
+// 	while (i < 4)
+// 	{
+// 		printf("ret is %d\n", ret);
+// 		printf("line is |%s|\n", line);
+// 		free(line);
+// 		++i;
+// 	}
+// 	return (0);
+// }
