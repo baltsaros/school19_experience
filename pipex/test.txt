@@ -6,7 +6,13 @@ four
 one
 one
 ./pipex test.txt "grep one" "wc -l" output.txt
+< test.txt grep one | wc -l > output.txt
 ./pipex test.txt "head -n 5" "grep one" "wc -l" output1.txt
 < test.txt head -n 5 | grep one | wc -l > output.txt
 ./pipex here_doc five "grep one" "wc -l" output1.txt
 grep one << five | wc -l >> output.txt
+gcc -g ft*.c pipex_utils.c pipex.c
+gcc ft*.c pipex_utils.c pipex.c
+gcc -g ft*.c get_next_line.c pipex_utils.c pipex_bonus.c
+gcc ft*.c get_next_line.c pipex_utils.c pipex_bonus.c
+valgrind --leak-check=full --track-origins=yes ./a.out test.txt "cat   -e" "caaaaa" out

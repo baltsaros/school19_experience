@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 09:37:06 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/01 12:18:08 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/02 17:23:55 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ char	**get_address(char *cmd[], char *envp[])
 	i = 0;
 	while (ft_strncmp("PATH=", envp[i], 5))
 		++i;
-	env = ft_split(envp[i], ':');
-	i = 1;
+	env = ft_split(envp[i] + 5, ':');
+	alloc_check(env);
+	i = 0;
 	while (env[i])
 	{
 		env[i] = ft_strjoin(env[i], "/");
@@ -40,6 +41,7 @@ char	**get_address(char *cmd[], char *envp[])
 		if (!env[i])
 		{
 			ft_free(env);
+			ft_free(cmd);
 			error_check(-1, "In ft_strjoin ", 15);
 		}
 		++i;
@@ -55,19 +57,22 @@ char	*access_check(char *cmd[], char *envp[])
 
 	env = get_address(cmd, envp);
 	i = 1;
-	while (access(env[i], F_OK) != 0)
+	while (access(env[i], X_OK) != 0)
 	{
 		++i;
 		if (!env[i + 1])
 			break ;
 	}
-	if (env[i] && access(env[i], F_OK) < 0)
+	if (env[i] && access(env[i], X_OK) < 0)
 	{
 		write(2, "command not found\n", 19);
 		ft_free(env);
+		ft_free(cmd);
 		exit(127);
 	}
 	ret = ft_strdup(env[i]);
+	if (!ret)
+		error_check(-1, "In strdup ", 11);
 	ft_free(env);
 	return (ret);
 }
@@ -77,7 +82,13 @@ void	ft_execve(char *argv, char *envp[])
 	char	*path;
 	char	**cmd;
 
+	if (!argv || !argv[0])
+	{
+		write(2, "parse error near ""\n", 19);
+		exit(1);
+	}
 	cmd = ft_split(argv, ' ');
+	alloc_check(cmd);
 	path = access_check(cmd, envp);
 	if (execve(path, cmd, envp) < 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:07:39 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/01 14:55:06 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/02 13:47:19 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin_free(char *line, char b)
 	i = 0;
 	while (line[i])
 		++i;
-	unis = malloc(sizeof(unis) * (i + 2));
+	unis = malloc(sizeof(*unis) * (i + 2));
 	if (!unis)
 		return (0);
 	i = 0;
