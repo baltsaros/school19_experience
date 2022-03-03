@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:11 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/02 14:54:44 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/03 12:21:23 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	i = 0;
 	size = check_str(s, c);
-	spl = malloc(sizeof(*spl) * (size + 1));
+	spl = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!spl)
 		return (NULL);
 	spl = ft_create_str(spl, s, c, i);

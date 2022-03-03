@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:06:42 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/02 17:18:23 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/03 09:37:43 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int		get_next_line(char **line);
 void	ft_execve(char *argv, char *envp[]);
 int		ft_open(char *file, int par);
 void	alloc_check(char **str);
+void	alloc_check_small(char *str);
 
 #endif

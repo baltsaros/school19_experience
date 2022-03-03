@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:07:39 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/02 13:47:19 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/03 09:38:27 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,11 @@ int	get_next_line(char **line)
 		if (buf[0] == '\n')
 		{
 			*line = ft_strjoin_free(*line, buf[0]);
+			alloc_check_small(*line);
 			break ;
 		}
 		*line = ft_strjoin_free(*line, buf[0]);
+		alloc_check_small(*line);
 	}
 	return (r_bytes);
 }
