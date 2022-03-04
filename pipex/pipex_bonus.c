@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 09:59:19 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/02 15:45:42 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/04 10:34:34 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static void	ft_heredoc(char *limiter)
 		close(fd[0]);
 		while (get_next_line(&line))
 		{
-			if (ft_strncmp(limiter, line, ft_strlen(limiter)) == 0)
+			if (ft_strncmp(limiter, line, ft_strlen(limiter)) == 0 &&
+				ft_strlen(limiter) == (ft_strlen(line) - 1))
 			{
 				free(line);
 				exit(EXIT_SUCCESS);

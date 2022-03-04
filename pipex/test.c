@@ -1,18 +1,28 @@
 #include <stdio.h>
 #include "pipex.h"
 
-int	main(int argc, char *argv[], char *envp[])
+void	ft_doc(char *limiter)
 {
-	char	*path;
-	char	**cmd;
+	char	*line;
+	int		i;
 
-	if (!argv[1] || !argv[1][0])
+	i = 0;
+	while (get_next_line(&line))
 	{
-		write(2, "parse error near ""\n", 19);
-		exit(1);
+		printf("%d: len lim - %zu, len line - %zu\n", i, ft_strlen(limiter), ft_strlen(line));
+		if (ft_strncmp(limiter, line, ft_strlen(limiter)) == 0 && 
+			ft_strlen(limiter) == (ft_strlen(line) - 1))
+		{
+			free(line);
+			exit(EXIT_SUCCESS);
+		}	
+		write(1, line, ft_strlen(line));
+		free(line);
 	}
-	cmd = ft_split(argv[1], ' ');
-	alloc_check(cmd);
-	path = access_check(cmd, envp);
+}
+
+int	main(int argc, char *argv[])
+{
+	ft_doc(argv[2]);
 	return (0);
 }
