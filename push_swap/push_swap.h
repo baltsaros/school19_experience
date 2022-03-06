@@ -10,6 +10,7 @@
 typedef struct s_node
 {
 	int				ix;
+	int				nb;
 	int				flag;
 	struct s_node	*next;
 	struct s_node	*prev;
@@ -25,5 +26,9 @@ typedef struct s_stacks
 	int		len_b;
 }	t_stacks;
 
+void	alloc_check(char **str);
+void	alloc_check_small(void *str);
+void	ft_free(char *str[]);
+void	error_msg();
 
 #endif

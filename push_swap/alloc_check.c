@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 17:03:11 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/03 15:47:00 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/04 09:40:19 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	alloc_check(char **str)
 	}
 }
 
-void	alloc_check_small(char *str)
+void	alloc_check_small(void *str)
 {
 	if (!str)
 	{
