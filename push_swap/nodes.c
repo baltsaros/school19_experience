@@ -43,26 +43,32 @@ void	ft_node_back(t_node **node, t_node *new)
 	else
 	{
 		last = (*node)->prev;
-		printf("last is %d\n", last->ix);
 		(*node)->prev = new;
 		new->next = *node;
 		last->next = new;
 		new->prev = last;
-		printf("new is %d\n", new->ix);
 	}
 }
 
-void	ft_node_del(t_node *node)
+t_node	*ft_node_del(t_node *node)
 {
 	t_node	*tmp;
-	t_node	*back;
 
 	if (!node)
-		return ;
-	tmp = node->prev;
-	tmp->next = node->next;
-	node->next->prev = tmp;
-	free(node);
+		return (NULL);
+	tmp = node;
+	if (tmp == tmp->next)
+	{
+		free(node);
+		node = NULL;
+		return (node);
+	}
+	node = node->next;
+	node->prev->prev->next = node;
+	node->prev = node->prev->prev;
+	tmp->next = NULL;
+	free(tmp);
+	return (node);
 }
 
 void	ft_node_print(t_node *node)
@@ -77,13 +83,31 @@ void	ft_node_print(t_node *node)
 	}
 	i = 0;
 	head = node;
-	while (node->next != head)
+	while (i == 0 || node != head)
 	{
-		printf("node[%d] is %d\n", i, node->ix);
+		printf("ix for node[%d] is %d\n", i, node->ix);
+		printf("nb for node[%d] is %d\n", i, node->nb);
 		node = node->next;
 		++i;
 	}
-	printf("node[%d] is %d\n", i, node->ix);
+}
+
+int		ft_node_size(t_node *node)
+{
+	int	i;
+	t_node	*head;
+
+	if (!node)
+		return (0);
+	printf("test\n");
+	i = 0;
+	head = node;
+	while (i == 0 || node != head)
+	{
+		node = node->next;
+		++i;
+	}
+	return (i);
 }
 
 t_node	*ft_switch_stack(t_node *one, t_node **two)
@@ -124,34 +148,35 @@ t_node	*ft_switch_stack(t_node *one, t_node **two)
 	return (new_head);
 }
 
-int	main(void)
-{
-	t_node	*node;
-	t_node	*node_b;
-	t_node	*head;
-	t_node	*tmp;
-	int		index[5] = {1, 2, 3, 4, 5};
-	int		number[5] = {9, 4, 12, 77, 11};
+// int	main(void)
+// {
+// 	t_node	*node_a;
+// 	t_node	*node_b;
+// 	t_node	*head;
+// 	t_node	*tmp;
+// 	int		len_a;
+// 	int		len_b;
+// 	int		index[5] = {1, 2, 3, 4, 5};
+// 	int		number[5] = {9, 4, 12, 77, 11};
 
-	node = NULL;
-	head = node;
-	node = ft_node_new(index[0], number[0]);
-	printf("node[0] is %d\n", node->ix);
-	if (node->next)
-		printf("node->next is %d\n", node->next->ix);
-	tmp = ft_node_new(index[1], number[1]);
-	ft_node_back(&node, tmp);
-	printf("node[1] is %d\n", node->next->ix);
-	tmp = ft_node_new(index[2], number[2]);
-	ft_node_back(&node, tmp);
-	printf("node[2] is %d\n", node->next->next->ix);
-	// node_b = ft_node_new(index[3], number[3]);
-	node_b = 0;
-	// printf("node_b[0] is %d\n", node_b->ix);
-	ft_node_print(node);
-	node = ft_switch_stack(node->prev, &node_b);
-	// ft_node_del(node->prev);
-	ft_node_print(node);
-	ft_node_print(node_b);
-	return (0);
-}
+// 	node_a = ft_node_new(index[0], number[0]);
+// 	tmp = ft_node_new(index[1], number[1]);
+// 	ft_node_back(&node_a, tmp);
+// 	tmp = ft_node_new(index[2], number[2]);
+// 	ft_node_back(&node_a, tmp);
+// 	// node_b = ft_node_new(index[3], number[3]);
+// 	len_a = ft_node_size(node_a);
+// 	printf("len_a is %d\n", len_a);
+// 	// len_b = ft_node_size(node_b);
+// 	// printf("len_b is %d\n", len_b);
+// 	// printf("node_a before\n");
+// 	ft_node_print(node_a);
+// 	// node_a = ft_switch_stack(node_a->prev, &node_b);
+// 	// node_a = ft_node_del(node_a);
+// 	// node_a = ft_free_node(node_a);
+// 	// printf("node_a after\n");
+// 	// ft_node_print(node_a);
+// 	// printf("node_b\n");
+// 	// ft_node_print(node_b);
+// 	return (0);
+// }
