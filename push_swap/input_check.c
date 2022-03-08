@@ -1,35 +1,5 @@
 #include "push_swap.h"
 
-void	error_msg()
-{
-	write(1, "Error\n", 6);
-	exit(1);
-}
-
-void	ft_swap(int *a, int *b)
-{
-	int	c;
-
-	c = *b;
-	*b = *a;
-	*a = c;
-}
-
-int		*ft_array_dup(int *old, int *new, int length)
-{
-	int	i;
-
-	if (!old)
-		return (0);
-	i = 0;
-	while (i < length)
-	{
-		new[i] = old[i];
-		++i;
-	}
-	return (new);
-}
-
 void	check_duplicate(int *array, int length)
 {
 	int	i;
@@ -117,14 +87,13 @@ t_node	*ft_init_stack(int *ar, int *ar_s, int length)
 	return (stack);
 }
 
-void	input_check(int argc, char *argv[])
+t_node	*input_check(int argc, char *argv[])
 {
 	int		i;
 	int		len;
 	int		*ar;
 	int		*ar_s;
 	t_node	*stack_a;
-	t_node	*stack_b;
 
 	ar = malloc(sizeof(int) * (argc - 1));
 	alloc_check_small(ar);
@@ -147,19 +116,5 @@ void	input_check(int argc, char *argv[])
 		++i;
 	}
 	stack_a = ft_init_stack(ar, ar_s, len);
-	ft_node_print(stack_a);
-	ft_push(&stack_a, &stack_b);
-	printf("after\n");
-	ft_node_print(stack_a);
-	printf("stack_b\n");
-	ft_node_print(stack_b);
-
-}
-
-int	main(int argc, char *argv[])
-{
-	if (argc == 1)
-		return (0);
-	input_check(argc, argv);
-	return (0);
+	return (stack_a);
 }
