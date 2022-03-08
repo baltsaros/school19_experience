@@ -46,5 +46,16 @@ void	ft_push_node(t_node **from, t_node **to);
 void	ft_swap_node(t_node **node);
 void	ft_rotate_node(t_node **node);
 void	ft_reverse_node(t_node **node);
+void	sa(t_data *data);
+void	sb(t_data *data);
+void	ss(t_data *data);
+void	pa(t_data *data);
+void	pb(t_data *data);
+void	ra(t_data *data);
+void	rb(t_data *data);
+void	rr(t_data *data);
+void	rra(t_data *data);
+void	rrb(t_data *data);
+void	rrr(t_data *data);
 
 #endif
