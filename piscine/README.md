@@ -36,6 +36,7 @@ Selection stage for 19. Done online in September 2021. During the piscine I vali
 * [Google](https://youtu.be/dQw4w9WgXcQ)
 * Peers
 * To better understand [Git](https://git-scm.com/book/en/v2) (first chapter is enough)
+* Interactive [game](https://learngitbranching.js.org/?locale=en_US) on git branching
 * [Neso Academy](https://youtu.be/4OGMB4Fhh50) - helps a lot to understand basics of C programming
 * [GeeksForGeeks](https://www.geeksforgeeks.org/) - some useful articles (Google will lead you there anyway)
 * [Makefile tutorial](https://makefiletutorial.com/)
