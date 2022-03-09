@@ -3,7 +3,7 @@
 void	error_msg()
 {
 	write(2, "Error\n", 6);
-	exit(1);
+	exit(EXIT_FAILURE);
 }
 
 void	ft_swap(int *a, int *b)

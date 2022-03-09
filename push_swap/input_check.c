@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	check_duplicate(int *array, int length)
+void	check_duplicate(int *array, int length, int *error)
 {
 	int	i;
 	int	j;
@@ -12,7 +12,7 @@ void	check_duplicate(int *array, int length)
 		while (j < length && array[i] != array[j])
 			++j;
 		if (array[i] == array[j])
-			error_msg();
+			*error = 1;
 		++i;
 	}
 }
@@ -31,7 +31,7 @@ void	check_sort(int *array, int length)
 	}
 }
 
-int		*ft_sort_array(int *array, int length)
+int	*ft_sort_array(int *array, int length)
 {
 	int	*ar_s;
 	int	i;
@@ -89,7 +89,7 @@ t_node	*ft_init_stack(int *ar, int *ar_s, int length)
 
 t_node	*input_check(int argc, char *argv[])
 {
-	int		i;
+	int		error;
 	int		len;
 	int		*ar;
 	int		*ar_s;
@@ -97,24 +97,21 @@ t_node	*input_check(int argc, char *argv[])
 
 	ar = malloc(sizeof(int) * (argc - 1));
 	alloc_check_small(ar);
-	i = 1;
 	len = 0;
-	while (argv[i])
+	error = 0;
+	while (argv[len + 1])
 	{
-		ar[len] = ft_atoi(argv[i]);
-		// printf("ar[%d] is %d, argv[%d] is %s\n", len, ar[len], i, argv[i]);
-		++i;
+		ar[len] = ft_atoi(argv[len + 1], &error);
 		++len;
 	}
-	check_duplicate(ar, len);
+	check_duplicate(ar, len, &error);
+	if (error)
+	{
+		free(ar);
+		error_msg();
+	}
 	check_sort(ar, len);
 	ar_s = ft_sort_array(ar, len);
-	i = 0;
-	while (i < len)
-	{
-		printf("ar[%d] is %d, ar_s[%d] is %d\n", i, ar[i], i, ar_s[i]);
-		++i;
-	}
 	stack_a = ft_init_stack(ar, ar_s, len);
 	return (stack_a);
 }

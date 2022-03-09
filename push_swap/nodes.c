@@ -94,17 +94,17 @@ void	ft_node_print(t_node *node)
 int		ft_node_size(t_node *node)
 {
 	int	i;
-	t_node	*head;
+	t_node	*last;
 
 	if (!node)
 		return (0);
-	i = 0;
-	head = node;
-	head->prev->next = NULL;
-	while (head != NULL)
+	i = 1;
+	last = node->prev;
+	// head->prev->next = NULL;
+	while (node != last)
 	{
-		head = head->next;
 		++i;
+		node = node->next;
 	}
 	return (i);
 }

@@ -25,3 +25,12 @@
 // 		exit(EXIT_SUCCESS);
 // 	}
 // }
+
+// void	check_error(int error, int *array)
+// {
+// 	if (error)
+// 	{
+// 		free(array);
+// 		error_msg();
+// 	}
+// }
