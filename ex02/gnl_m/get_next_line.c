@@ -4,7 +4,6 @@
 char	*ft_strjoin_free(char *line, char b)
 {
 	size_t	i;
-	size_t	j;
 	char	*unis;
 
 	i = 0;
@@ -27,14 +26,11 @@ char	*ft_strjoin_free(char *line, char b)
 
 int		get_next_line(char **line)
 {
-	char	*buf;
+	char	buf[1];
 	ssize_t	r_bytes;
 
-	buf = malloc(sizeof(buf) * 2);
-	if (!line | !buf)
-		return (-1);
 	*line = malloc(sizeof(char));
-	if (!*line)
+	if (!line || *line)
 		return (-1);
 	*line[0] = 0;
 	while ((r_bytes = read(0, buf, 1)) > 0)
@@ -43,7 +39,6 @@ int		get_next_line(char **line)
 		{
 			break;
 		}
-		buf[r_bytes] = 0;
 		*line = ft_strjoin_free(*line, buf[0]);
 	}
 	free(buf);

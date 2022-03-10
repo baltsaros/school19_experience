@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:28:57 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/20 10:50:30 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/08 17:04:52 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	ft_atoi(const char *str)
 // 	char	str10[] = "500000000000000000";
 // 	char	str11[] = "50000000000000000000000";
 // 	char	str12[] = "-500000000000000000000000000000000000000000";
+// 	char	str13[] = "-9223372036854775807";
 // 	int		ret;
 // 	int		ret2;
 
@@ -110,5 +111,9 @@ int	ft_atoi(const char *str)
 // 	printf("FT: Test 12 %s\n%d\n", str12, ret);
 // 	ret2 = atoi("-500000000000000000000000000000000000000000");
 // 	printf("OR: Test 12 %s\n%d\n", str12, ret2);
+// 	ret = ft_atoi("-9223372036854775807");
+// 	printf("FT: Test 13 %s\n%d\n", str13, ret);
+// 	ret2 = atoi("-9223372036854775807");
+// 	printf("OR: Test 13 %s\n%d\n", str13, ret2);
 // 	return (0);
 // }

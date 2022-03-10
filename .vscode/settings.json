@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"fcntl.h": "c",
-		"pipex.h": "c"
+		"pipex.h": "c",
+		"stdlib.h": "c",
+		"push_swap.h": "c"
 	}
 }
