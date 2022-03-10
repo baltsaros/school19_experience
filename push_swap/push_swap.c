@@ -12,15 +12,14 @@ int	ft_find_med(t_node *stack)
 	tmp = stack;
 	len = ft_node_size(tmp);
 	sum = 0;
-	sum = i;
+	i = 0;
 	while (i < len)
 	{
-		++i;
 		sum += tmp->ix;
-		printf("sum[%d] is %d\n", i, sum);
 		tmp = tmp->next;
+		++i;
 	}
-	return (sum / 2);
+	return (sum / i);
 }
 
 t_data	*ft_init_data(t_node *stack)
@@ -36,20 +35,38 @@ t_data	*ft_init_data(t_node *stack)
 	return (data);
 }
 
-// void	ft_sort(t_data *data)
-// {
-// 	while (1)
+void	ft_sort(t_data *data)
+{
+	if (data->len_a == 2)
+	{
+		ft_node_print(data->a);
+		sa(data);
+		ft_node_print(data->a);
+		ft_exit(data, 0);
+	}
+	if (data->len_a == 3)
+	{
+		ft_node_print(data->a);
+		if (data->a->ix < data->med)
+			sa(data);
+		ft_node_print(data->a);
+		if (data->a->ix > data->med)
+			ra(data);
+		ft_node_print(data->a);
+		// if (!ft_isSorted_node(data->a, data->len_a))
+		// 	sa(data);
+		// ft_node_print(data->a);
+		ft_exit(data, 0);
+	}
+// 	if (data->a->ix > data->med)
 // 	{
-// 		if (data->a->ix > data->med)
-// 		{
-// 			pb;
-// 			--data->len_a;
-// 			++data->len_b;
-// 		}
-// 		if (data->a->ix <= data->med)
-// 			ra;
+// 		pb;
+// 		--data->len_a;
+// 		++data->len_b;
 // 	}
-// }
+// 	if (data->a->ix <= data->med)
+// 		ra;
+}
 
 int	main(int argc, char *argv[])
 {
@@ -64,6 +81,7 @@ int	main(int argc, char *argv[])
 	else
 		stack_a = input_check(argc, argv);
 	data = ft_init_data(stack_a);
+	ft_sort(data);
 	printf("med is %d\n", data->med);
 	return (0);
 }

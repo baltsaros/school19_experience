@@ -32,17 +32,14 @@ void	ft_push_node(t_node **from, t_node **to)
 void	ft_swap_node(t_node **node)
 {
 	t_node	*new_head;
-	t_node	*last;
 
-	if ((*node)->next == *node)
+	if (!*node || (*node)->next == *node)
 		return ;
 	new_head = (*node)->next;
-	last = (*node)->prev;
+	new_head->next->prev = *node;
+	new_head->prev = (*node)->prev;
 	(*node)->next = new_head->next;
 	(*node)->prev = new_head;
-	last->next = new_head;
-	new_head->next->prev = *node;
-	new_head->prev = last;
 	new_head->next = *node;
 	*node = new_head;
 }
@@ -59,4 +56,24 @@ void	ft_reverse_node(t_node **node)
 	if (!*node)
 		return ;
 	*node = (*node)->prev;
+}
+
+int		ft_isSorted_node(t_node *stack, int len)
+{
+	t_node	*tmp;
+	int		i;
+	
+	if (!stack)
+		return (-1);
+	i = 0; 
+	tmp = stack;
+	while (tmp->ix < tmp->next->ix && i < len - 1)
+	{
+		tmp = tmp->next;
+		++i;
+	}
+	if (i == len - 1)
+		return (1);
+	else
+		return (0);
 }

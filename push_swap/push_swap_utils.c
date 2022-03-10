@@ -6,6 +6,13 @@ void	error_msg()
 	exit(EXIT_FAILURE);
 }
 
+void	ft_exit(t_data *data, int code)
+{
+	ft_free_node(data->a);
+	ft_free_node(data->b);
+	exit(code);
+}
+
 void	ft_swap(int *a, int *b)
 {
 	int	c;

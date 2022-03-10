@@ -100,7 +100,6 @@ int		ft_node_size(t_node *node)
 		return (0);
 	i = 1;
 	last = node->prev;
-	// head->prev->next = NULL;
 	while (node != last)
 	{
 		++i;

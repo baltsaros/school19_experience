@@ -31,6 +31,8 @@ void	alloc_check_small(void *str);
 void	alloc_check_node(t_node *new, t_node **node);
 void	ft_free(char *str[]);
 void	error_msg();
+void	ft_exit(t_data *data, int code);
+int		ft_isSorted_node(t_node *stack, int len);
 void	ft_swap(int *a, int *b);
 int		ft_atoi(const char *str, int *error);
 char	**ft_split(char const *s, char c);
