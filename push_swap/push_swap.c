@@ -35,37 +35,70 @@ t_data	*ft_init_data(t_node *stack)
 	return (data);
 }
 
-void	ft_sort(t_data *data)
+void	ft_sort_three(t_data *data)
 {
-	if (data->len_a == 2)
-	{
-		ft_node_print(data->a);
+	data->med = ft_find_med(data->a);
+	if (data->a->ix == data->med && data->a->next->ix < data->med)
 		sa(data);
-		ft_node_print(data->a);
-		ft_exit(data, 0);
-	}
-	if (data->len_a == 3)
+	else if (data->a->ix == data->med)
+		ra(data);
+	if (data->a->ix < data->med && !ft_isSorted_node(data->a, data->len_a))
+		sa(data);
+	if (data->a->ix > data->med)
+		ra(data);
+	if (!ft_isSorted_node(data->a, data->len_a))
+		sa(data);
+}
+
+void	ft_sort_three_b(t_data *data)
+{
+	if (data->len_b == 1)
 	{
-		ft_node_print(data->a);
-		if (data->a->ix < data->med)
-			sa(data);
-		ft_node_print(data->a);
-		if (data->a->ix > data->med)
-			ra(data);
-		ft_node_print(data->a);
-		// if (!ft_isSorted_node(data->a, data->len_a))
-		// 	sa(data);
-		// ft_node_print(data->a);
-		ft_exit(data, 0);
+		pa(data);
+		return ;
 	}
-// 	if (data->a->ix > data->med)
-// 	{
-// 		pb;
-// 		--data->len_a;
-// 		++data->len_b;
-// 	}
-// 	if (data->a->ix <= data->med)
-// 		ra;
+	data->med = ft_find_med(data->b);
+	if (data->b->ix > data->med)
+		pa(data);
+	if (data->b->ix < data->med && data->b->prev->ix > data->med)
+		rrb(data);
+	if (data->b->ix < data->med && data->b->prev->ix == data->med)
+		rb(data);
+	if (data->b->ix == data->med && data->a->next->ix > data->med)
+		sb(data);
+	if (data->b->ix == data->med && !ft_isSorted_node_r(data->b, data->len_b))
+		rrb(data);
+	if (ft_isSorted_node_r(data->b, data->len_b))
+	{
+		while (data->len_b)
+			pa(data);
+	}
+	else
+		ft_sort_three_b(data);
+}
+
+void	ft_sort(t_data *data)
+{	
+	if (data->len_a == 5)
+		++data->med;
+	if (data->len_a == 2)
+		sa(data);
+	else if (data->len_a == 3)
+		ft_sort_three(data);
+	else if (data->len_a > 3 && data->len_a < 7)
+	{
+		while (data->len_a != 3)
+		{
+			if (data->a->ix > data->med)
+				ra(data);
+			else
+				pb(data);
+		}
+		ft_sort_three(data);
+		ft_sort_three_b(data);
+	}
+	ft_node_print(data->a);
+	ft_exit(data, 0);
 }
 
 int	main(int argc, char *argv[])

@@ -81,7 +81,7 @@ void	ft_node_print(t_node *node)
 	}
 	head = node;
 	i = 0;
-	len = ft_node_size(head);
+	len = ft_node_size(node);
 	while (i < len)
 	{
 		printf("ix for node[%d] is %d\n", i, head->ix);
@@ -95,15 +95,17 @@ int		ft_node_size(t_node *node)
 {
 	int	i;
 	t_node	*last;
+	t_node	*tmp;
 
 	if (!node)
 		return (0);
 	i = 1;
-	last = node->prev;
-	while (node != last)
+	tmp = node;
+	last = tmp->prev;
+	while (tmp != last)
 	{
 		++i;
-		node = node->next;
+		tmp = tmp->next;
 	}
 	return (i);
 }

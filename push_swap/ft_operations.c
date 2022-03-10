@@ -22,12 +22,16 @@ void	ss(t_data *data)
 void	pa(t_data *data)
 {
 	ft_push_node(&(data->b), &(data->a));
+	--data->len_b;
+	++data->len_a;
 	write(1, "pa\n", 3);
 }
 
 void	pb(t_data *data)
 {
 	ft_push_node(&(data->a), &(data->b));
+	++data->len_b;
+	--data->len_a;
 	write(1, "pb\n", 3);
 }
 
