@@ -25,6 +25,7 @@ typedef struct s_data
 	int		min;
 	int		med;
 	int		iter;
+	int		rb;
 }	t_data;
 
 void	alloc_check(char **str);
@@ -36,6 +37,7 @@ void	ft_exit(t_data *data, int code);
 int		ft_isSorted_node(t_node *stack, int len);
 int		ft_isSorted_node_r(t_node *stack, int len);
 int		ft_find_limit(t_data *data);
+int		ft_chunk_len(t_node *node, int flag);
 void	ft_swap(int *a, int *b);
 int		ft_atoi(const char *str, int *error);
 char	**ft_split(char const *s, char c);
@@ -60,6 +62,7 @@ t_node	*ft_init_stack(int *ar, int *ar_s, int length);
 t_node	*input_check(int argc, char *argv[]);
 t_node	*input_check_spl(int length, char *split[]);
 int		find_med(t_node *stack);
+int		ft_find_med_chunk(t_node *stack, int flag);
 void	ft_push_node(t_node **from, t_node **to);
 void	ft_swap_node(t_node **node);
 void	ft_rotate_node(t_node **node);

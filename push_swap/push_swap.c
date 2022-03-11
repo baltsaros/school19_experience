@@ -22,6 +22,28 @@ int	ft_find_med(t_node *stack)
 	return (sum / i);
 }
 
+int	ft_find_med_chunk(t_node *stack, int flag)
+{
+	int		i;
+	int		sum;
+	int		len;
+	t_node *tmp;
+
+	if (!stack)
+		return (-1);
+	tmp = stack;
+	len = ft_chunk_len(stack, flag);
+	sum = 0;
+	i = 0;
+	while (i < len && tmp->flag == flag)
+	{
+		sum += tmp->ix;
+		tmp = tmp->next;
+		++i;
+	}
+	return (sum / i);
+}
+
 t_data	*ft_init_data(t_node *stack)
 {
 	t_data	*data;
@@ -33,6 +55,7 @@ t_data	*ft_init_data(t_node *stack)
 	data->min = 1;
 	data->med = ft_find_med(data->a);
 	data->iter = 1;
+	data->rb = 0;
 	return (data);
 }
 
@@ -78,6 +101,13 @@ void	ft_sort_three_b(t_data *data)
 		ft_sort_three_b(data);
 }
 
+void	ft_check_a(t_data *data)
+{
+	if (ft_isSorted_node(data->a, data->len_a))
+		return ;
+	
+}
+
 void	ft_sort_small(t_data *data)
 {	
 	if (data->len_a == 2)
@@ -102,10 +132,52 @@ void	ft_sort_small(t_data *data)
 
 void	ft_sort_big_b(t_data *data)
 {
-	int	limit;
+	int	chunk;
 
-	data->med = ft_find_med(data->b);
-
+	data->med = ft_find_med_chunk(data->b, data->b->flag);
+	chunk = ft_chunk_len(data->b, data->b->flag);
+	while (chunk && data->len_b > 3)
+	{
+		if (chunk == 1)
+		{
+			pa(data);
+			--chunk;
+		}
+		else if (chunk == 2)
+		{
+			if (data->b->ix < data->b->next->ix)
+				sb(data);
+			pa(data);
+			pa(data);
+			chunk -= 2;
+		}
+		else
+		{
+			while (data->b->ix <= data->med)
+			{
+				rb(data);
+				++data->rb;
+			}
+			// if (data->b->next->ix > data->med)
+			// 	sb(data);
+			while (data->b->ix > data->med)
+			{
+				pa(data);
+				--chunk;
+			}
+			while(data->rb > 0)
+			{
+				rrb(data);
+				--data->rb;
+			}
+		}
+	}
+	if (data->len_b > 3)
+	{
+		ft_sort_big_b(data);
+		return ;
+	}
+	ft_sort_three_b(data);
 }
 
 void	ft_sort_big(t_data *data)
@@ -134,8 +206,11 @@ void	ft_sort_big(t_data *data)
 		return ;
 	}
 	ft_node_print(data->b);
+	ft_sort_big_b(data);
+	// ft_node_print(data->a);
+	// printf("chunk size is %d\n", ft_chunk_len(data->b, data->b->flag));
 	// ft_sort_big_b(data);
-	// ft_exit(data, 0);
+	ft_exit(data, 0);
 }
 
 void	ft_sort(t_data *data)

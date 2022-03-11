@@ -85,9 +85,9 @@ void	ft_node_print(t_node *node)
 	printf("===== NODE =====\n");
 	while (i < len)
 	{
-		printf("ix for node[%d] is %d\n", i, head->ix);
+		printf("ix for node[%d] is %d, flag is %d\n", i, head->ix, head->flag);
 		// printf("nb for node[%d] is %d\n", i, head->nb);
-		printf("flag for node[%d] is %d\n", i, head->flag);
+		// printf("flag for node[%d] is %d\n", i, head->flag);
 		head = head->next;
 		++i;
 	}

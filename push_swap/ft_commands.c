@@ -127,3 +127,22 @@ int		ft_find_limit(t_data *data)
 	}
 	return (ret);
 }
+
+int		ft_chunk_len(t_node *node, int flag)
+{
+	int	i;
+	t_node	*last;
+	t_node	*tmp;
+
+	if (!node)
+		return (0);
+	i = 0;
+	tmp = node;
+	last = tmp->prev;
+	while (tmp != last && tmp->flag == flag)
+	{
+		++i;
+		tmp = tmp->next;
+	}
+	return (i);
+}
