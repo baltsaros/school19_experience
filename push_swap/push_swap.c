@@ -32,6 +32,7 @@ t_data	*ft_init_data(t_node *stack)
 	data->len_b = 0;
 	data->min = 1;
 	data->med = ft_find_med(data->a);
+	data->iter = 1;
 	return (data);
 }
 
@@ -77,19 +78,17 @@ void	ft_sort_three_b(t_data *data)
 		ft_sort_three_b(data);
 }
 
-void	ft_sort(t_data *data)
+void	ft_sort_small(t_data *data)
 {	
-	if (data->len_a == 5)
-		++data->med;
 	if (data->len_a == 2)
 		sa(data);
 	else if (data->len_a == 3)
 		ft_sort_three(data);
 	else if (data->len_a > 3 && data->len_a < 7)
 	{
-		while (data->len_a != 3)
+		while (data->len_a - 3 > 0)
 		{
-			if (data->a->ix > data->med)
+			if (data->a->ix > data->len_a + data->len_b - 3)
 				ra(data);
 			else
 				pb(data);
@@ -97,8 +96,55 @@ void	ft_sort(t_data *data)
 		ft_sort_three(data);
 		ft_sort_three_b(data);
 	}
-	ft_node_print(data->a);
+	// ft_node_print(data->a);
 	ft_exit(data, 0);
+}
+
+void	ft_sort_big_b(t_data *data)
+{
+	int	limit;
+
+	data->med = ft_find_med(data->b);
+
+}
+
+void	ft_sort_big(t_data *data)
+{
+	int	limit;
+	
+	data->med = ft_find_med(data->a);
+	limit = ft_find_limit(data);
+	while (limit > 0)
+	{
+		if (data->a->ix >= data->med)
+			ra(data);
+		else
+		{
+			data->a->flag += data->iter;
+			pb(data);
+			--limit;
+		}
+	}
+	++data->iter;
+	if (data->len_a <= 3)
+		ft_sort_three(data);
+	if (data->len_a > 3)
+	{
+		ft_sort_big(data);
+		return ;
+	}
+	ft_node_print(data->b);
+	// ft_sort_big_b(data);
+	// ft_exit(data, 0);
+}
+
+void	ft_sort(t_data *data)
+{
+	if (data->len_a < 7)
+		ft_sort_small(data);
+	else
+		ft_sort_big(data);
+	
 }
 
 int	main(int argc, char *argv[])
@@ -115,6 +161,6 @@ int	main(int argc, char *argv[])
 		stack_a = input_check(argc, argv);
 	data = ft_init_data(stack_a);
 	ft_sort(data);
-	printf("med is %d\n", data->med);
+	// printf("med is %d\n", data->med);
 	return (0);
 }

@@ -82,10 +82,12 @@ void	ft_node_print(t_node *node)
 	head = node;
 	i = 0;
 	len = ft_node_size(node);
+	printf("===== NODE =====\n");
 	while (i < len)
 	{
 		printf("ix for node[%d] is %d\n", i, head->ix);
-		printf("nb for node[%d] is %d\n", i, head->nb);
+		// printf("nb for node[%d] is %d\n", i, head->nb);
+		printf("flag for node[%d] is %d\n", i, head->flag);
 		head = head->next;
 		++i;
 	}

@@ -24,6 +24,7 @@ typedef struct s_data
 	int		len_b;
 	int		min;
 	int		med;
+	int		iter;
 }	t_data;
 
 void	alloc_check(char **str);
@@ -34,10 +35,14 @@ void	error_msg();
 void	ft_exit(t_data *data, int code);
 int		ft_isSorted_node(t_node *stack, int len);
 int		ft_isSorted_node_r(t_node *stack, int len);
+int		ft_find_limit(t_data *data);
 void	ft_swap(int *a, int *b);
 int		ft_atoi(const char *str, int *error);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlen(const char *s);
+void	ft_sort_small(t_data *data);
+void	ft_sort_big(t_data *data);
+void	ft_sort(t_data *data);
 t_node	*ft_argv_split(int argc, char *argv);
 int		*ft_array_dup(int *old, int *new, int length);
 t_node	*ft_node_new(int index, int number);
