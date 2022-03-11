@@ -101,13 +101,6 @@ void	ft_sort_three_b(t_data *data)
 		ft_sort_three_b(data);
 }
 
-void	ft_check_a(t_data *data)
-{
-	if (ft_isSorted_node(data->a, data->len_a))
-		return ;
-	
-}
-
 void	ft_sort_small(t_data *data)
 {	
 	if (data->len_a == 2)
@@ -130,13 +123,44 @@ void	ft_sort_small(t_data *data)
 	ft_exit(data, 0);
 }
 
+void	ft_check_a(t_data *data)
+{
+	int	limit;
+
+	if (ft_isSorted_node(data->a, data->len_a))
+		return ;
+	data->med = ft_find_med_chunk(data->a, data->a->flag);
+	limit = ft_find_limit_f(data, data->a->flag);
+	while (limit > 0)
+	{
+		if (data->a->ix >= data->med)
+		{
+			ra(data);
+			++data->rb;
+		}
+		else
+		{
+			data->a->flag += data->iter;
+			pb(data);
+			--limit;
+		}
+	}
+	++data->iter;
+	while (data->rb > 0)
+	{
+		rra(data);
+		--data->rb;
+	}
+	ft_sort_big_b(data);
+}
+
 void	ft_sort_big_b(t_data *data)
 {
 	int	chunk;
 
 	data->med = ft_find_med_chunk(data->b, data->b->flag);
 	chunk = ft_chunk_len(data->b, data->b->flag);
-	while (chunk && data->len_b > 3)
+	while (chunk > 0 && data->len_b > 3)
 	{
 		if (chunk == 1)
 		{
@@ -165,13 +189,14 @@ void	ft_sort_big_b(t_data *data)
 				pa(data);
 				--chunk;
 			}
-			while(data->rb > 0)
-			{
-				rrb(data);
-				--data->rb;
-			}
 		}
 	}
+	while(data->rb > 0)
+	{
+		rrb(data);
+		--data->rb;
+	}
+	ft_check_a(data);
 	if (data->len_b > 3)
 	{
 		ft_sort_big_b(data);
@@ -219,7 +244,6 @@ void	ft_sort(t_data *data)
 		ft_sort_small(data);
 	else
 		ft_sort_big(data);
-	
 }
 
 int	main(int argc, char *argv[])

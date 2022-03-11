@@ -107,6 +107,27 @@ int		ft_isSorted_node_r(t_node *stack, int len)
 		return (0);
 }
 
+int		ft_find_limit_f(t_data *data, int flag)
+{
+	int		ret;
+	int		i;
+	t_node	*tmp;
+
+	if (!data)
+		return (-1);
+	i = 0;
+	ret = 0;
+	tmp = data->a;
+	while (i < data->len_a && data->a->flag == flag)
+	{
+		if (tmp->ix < data->med)
+			++ret;
+		++i;
+		tmp = tmp->next;
+	}
+	return (ret);
+}
+
 int		ft_find_limit(t_data *data)
 {
 	int		ret;
