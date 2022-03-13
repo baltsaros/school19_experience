@@ -43,7 +43,7 @@ Selection stage for 19. Done online in September 2021. During the piscine I vali
 * Add [colors](https://gist.github.com/vratiu/9780109) to your Makefile! 
 * Morning [exercises](https://youtu.be/ECxYJcnvyMw) to warm-up
 * [Some](https://youtu.be/5qap5aO4i9A) (and [extra](https://youtu.be/KyHl1YQH7xI), [extra2](https://www.youtube.com/channel/UCXgxNzAgZ1GExhTW4X1mUrg)) background music for coding
-* If you know Russian - [the link is coming]
+* If you know Russian there is a nice [book] (https://metanit.com/cpp/c/)
 
 ## **Tips**
 * Ask peers
