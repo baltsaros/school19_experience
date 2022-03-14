@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 14:59:42 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 14:59:43 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/14 16:22:08 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 void	ft_push_node(t_node **from, t_node **to)
 {
@@ -19,7 +19,7 @@ void	ft_push_node(t_node **from, t_node **to)
 	if (from == NULL || *from == NULL)
 		return ;
 	new_head = NULL;
-	if(*from != (*from)->next)
+	if (*from != (*from)->next)
 	{
 		new_head = (*from)->next;
 		new_head->prev = (*from)->prev;
@@ -79,14 +79,14 @@ void	ft_reverse_node(t_node **node)
 	*node = (*node)->prev;
 }
 
-int		ft_isSorted_node(t_node *stack, int len)
+int	ft_sorted_node(t_node *stack, int len)
 {
 	t_node	*tmp;
 	int		i;
-	
+
 	if (!stack)
 		return (-1);
-	i = 0; 
+	i = 0;
 	tmp = stack;
 	while (tmp->ix < tmp->next->ix && i < len - 1)
 	{

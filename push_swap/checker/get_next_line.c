@@ -6,13 +6,13 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:07:39 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 14:21:40 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/14 16:50:47 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
-char	*ft_strjoin_free(char *line, char b)
+static char	*ft_strjoin_free(char *line, char b)
 {
 	size_t	i;
 	char	*unis;

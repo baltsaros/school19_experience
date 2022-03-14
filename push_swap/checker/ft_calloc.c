@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:29:58 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 14:20:56 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/14 15:19:43 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {

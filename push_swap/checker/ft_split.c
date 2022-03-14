@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:11 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/09 10:23:52 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/14 15:20:47 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 static size_t	check_str(char const *s, char c)
 {

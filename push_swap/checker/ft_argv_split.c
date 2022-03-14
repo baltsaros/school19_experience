@@ -1,4 +1,16 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_argv_split.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/14 15:19:19 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/03/14 16:55:11 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "checker.h"
 
 int	ft_check_char(char *argv)
 {
@@ -40,12 +52,7 @@ t_node	*input_check_spl(int length, char *split[])
 		++i;
 	}
 	check_duplicate(ar, length, &error);
-	if (error)
-	{
-		free(ar);
-		ft_free(split);
-		error_msg();
-	}
+	check_error(ar, split, error);
 	check_sort(ar, length);
 	ar_s = ft_sort_array(ar, length);
 	i = 0;
@@ -53,7 +60,7 @@ t_node	*input_check_spl(int length, char *split[])
 	return (stack_a);
 }
 
-t_node	*ft_argv_split(int argc, char *argv)
+t_node	*ft_argv_split(char *argv)
 {
 	int		len;
 	char	**split;

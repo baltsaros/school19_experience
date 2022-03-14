@@ -6,21 +6,18 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 14:57:29 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 14:59:55 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/14 17:10:26 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
-t_data	*ft_init_data(t_node *stack)
+void	ft_init_data(t_data *data, t_node *stack)
 {
-	t_data	*data;
-
 	data->a = stack;
 	data->b = NULL;
 	data->len_a = ft_node_size(stack);
 	data->len_b = 0;
-	return (data);
 }
 
 void	ft_check_operation(char *op, t_data *data)
@@ -51,9 +48,9 @@ void	ft_check_operation(char *op, t_data *data)
 		error_msg();
 }
 
-void	ft_checker_sort(t_data *data)
+void	ft_checker_sort(t_data data)
 {
-	if (ft_isSorted_node(data->a, data->len_a) && !data->b)
+	if (ft_sorted_node(data.a, data.len_a) && !data.b)
 		write(1, "OK\n", 3);
 	else
 		write (1, "KO\n", 3);
@@ -62,18 +59,17 @@ void	ft_checker_sort(t_data *data)
 int	main(int argc, char *argv[])
 {
 	t_node	*stack_a;
-	t_data	*data;
+	t_data	data;
 	char	*line;
-	int		*array;
 	int		ret;
 
 	if (argc == 1)
 		return (0);
 	else if (argc == 2)
-		stack_a = ft_argv_split(argc, argv[1]);
+		stack_a = ft_argv_split(argv[1]);
 	else
 		stack_a = input_check(argc, argv);
-	data = ft_init_data(stack_a);
+	ft_init_data(&data, stack_a);
 	ret = 1;
 	line = NULL;
 	while (ret > 0)
@@ -81,7 +77,7 @@ int	main(int argc, char *argv[])
 		ret = get_next_line(&line);
 		if (ret <= 0 || !line)
 			break ;
-		ft_check_operation(line, data);
+		ft_check_operation(line, &data);
 		free(line);
 	}
 	ft_checker_sort(data);

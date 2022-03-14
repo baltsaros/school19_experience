@@ -1,44 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   checker_utils_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 11:06:30 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 16:23:00 by abuzdin          ###   ########.fr       */
+/*   Created: 2022/03/14 16:30:53 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/03/14 16:31:42 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	ft_free(char *str[])
+void	check_error(int *array, char **split, int error)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
+	if (error)
 	{
-		free(str[i]);
-		++i;
+		free(array);
+		ft_free(split);
+		error_msg();
 	}
-	free(str);
 }
 
-t_node	*ft_free_node(t_node *node)
+void	check_duplicate(int *array, int length, int *error)
 {
-	int	len;
 	int	i;
+	int	j;
 
-	if (!node)
-		return (NULL);
 	i = 0;
-	len = ft_node_size(node);
-	while (i < len)
+	while (i < length)
 	{
-		node = ft_node_del(node);
+		j = i + 1;
+		while (j < length && array[i] != array[j])
+			++j;
+		if (array[i] == array[j])
+			*error = 1;
 		++i;
 	}
-	node = NULL;
-	return (node);
+}
+
+void	check_sort(int *array, int length)
+{
+	int	i;
+
+	i = 0;
+	while (i + 1 < length && array[i] < array[i + 1])
+		++i;
+	if (i + 1 == length)
+	{
+		write(1, "OK\n", 3);
+		exit(EXIT_SUCCESS);
+	}
 }

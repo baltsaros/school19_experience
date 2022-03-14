@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 17:03:11 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/07 14:33:55 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/14 15:19:27 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 void	alloc_check(char **str)
 {

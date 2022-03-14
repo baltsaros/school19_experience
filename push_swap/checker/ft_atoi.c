@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:28:57 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/09 11:07:08 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/14 15:19:39 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 static int	ft_size_control(int sign)
 {

@@ -1,25 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   checker_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 09:33:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 15:21:02 by abuzdin          ###   ########.fr       */
+/*   Created: 2022/03/14 15:26:02 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/03/14 16:45:15 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-size_t	ft_strlen(const char *s)
+void	error_msg(void)
 {
-	size_t	i;
+	write(2, "Error\n", 6);
+	exit(EXIT_FAILURE);
+}
 
-	if (!s)
+void	ft_exit(t_data *data, int code)
+{
+	ft_free_node(data->a);
+	ft_free_node(data->b);
+	exit(code);
+}
+
+void	ft_swap(int *a, int *b)
+{
+	int	c;
+
+	c = *b;
+	*b = *a;
+	*a = c;
+}
+
+int	*ft_array_dup(int *old, int *new, int length)
+{
+	int	i;
+
+	if (!old)
 		return (0);
 	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	while (i < length)
+	{
+		new[i] = old[i];
+		++i;
+	}
+	return (new);
 }

@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:07:10 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 14:31:34 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/14 15:21:09 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
