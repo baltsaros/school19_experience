@@ -6,13 +6,13 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 14:57:29 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 17:10:26 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/14 17:21:05 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	ft_init_data(t_data *data, t_node *stack)
+static void	ft_init_data(t_data *data, t_node *stack)
 {
 	data->a = stack;
 	data->b = NULL;
@@ -20,7 +20,7 @@ void	ft_init_data(t_data *data, t_node *stack)
 	data->len_b = 0;
 }
 
-void	ft_check_operation(char *op, t_data *data)
+static void	ft_check_operation(char *op, t_data *data)
 {
 	if (ft_strncmp(op, "sa", 3) == 0)
 		sa(data);
@@ -48,7 +48,7 @@ void	ft_check_operation(char *op, t_data *data)
 		error_msg();
 }
 
-void	ft_checker_sort(t_data data)
+static void	ft_checker_sort(t_data data)
 {
 	if (ft_sorted_node(data.a, data.len_a) && !data.b)
 		write(1, "OK\n", 3);

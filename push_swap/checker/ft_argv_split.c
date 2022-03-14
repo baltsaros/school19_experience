@@ -6,13 +6,13 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:19:19 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 16:55:11 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/14 17:16:21 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-int	ft_check_char(char *argv)
+static int	ft_check_char(char *argv)
 {
 	int	i;
 	int	space;
@@ -34,7 +34,7 @@ int	ft_check_char(char *argv)
 	}
 }
 
-t_node	*input_check_spl(int length, char *split[])
+static t_node	*input_check_spl(int length, char *split[])
 {
 	int		i;
 	int		error;
