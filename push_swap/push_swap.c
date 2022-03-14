@@ -132,16 +132,13 @@ void	ft_check_a(t_data *data)
 	int	limit;
 	int	chunk;
 
-	// printf("ret sort is %d\n", ft_isSorted_node(data->a, data->len_a));
-	// ft_node_print(data->a);
-	// printf("flag is %d, med is %d, limit is %d, chunk is %d\n", data->a->flag, data->med, limit, chunk);
 	while (!ft_isSorted_node(data->a, data->len_a))
 	{
 		chunk = ft_chunk_len(data->a, data->a->flag);
 		if (chunk == 2)
 		{
 			sa(data);
-			return ;
+			return;
 		}
 		data->med = ft_find_med_chunk(data->a, data->a->flag);
 		limit = ft_find_limit_f(data, data->a->flag);
@@ -166,8 +163,6 @@ void	ft_check_a(t_data *data)
 			--data->rb;
 		}
 	}
-	// ft_node_print(data->a);
-	// ft_node_print(data->b);
 }
 
 void	ft_sort_big_b(t_data *data)
@@ -175,6 +170,8 @@ void	ft_sort_big_b(t_data *data)
 	int	chunk;
 	int	limit;
 	
+	if (!data->b)
+		return ;
 	while (data->len_b > 3)
 	{
 		chunk = ft_chunk_len(data->b, data->b->flag);
@@ -215,13 +212,14 @@ void	ft_sort_big_b(t_data *data)
 				ft_check_a(data);
 		}
 	}
+	ft_sort_three_b(data);
 }
 
 void	ft_sort_big(t_data *data)
 {
 	int	limit;
 	
-	while (data->len_a > 3)
+	while (data->a->flag >= 0)
 	{
 		data->med = ft_find_med(data->a);
 		limit = ft_find_limit(data);
@@ -238,11 +236,10 @@ void	ft_sort_big(t_data *data)
 		}
 		++data->iter;
 	}
-	ft_sort_three(data);
+	// ft_sort_three(data);
 	ft_sort_big_b(data);
-	ft_sort_three_b(data);
-	// ft_node_print(data->a);
-	// ft_node_print(data->b);
+	ft_node_print(data->a);
+	ft_node_print(data->b);
 	// printf("chunk size is %d\n", ft_chunk_len(data->b, data->b->flag));
 	// ft_sort_big_b(data);
 	ft_exit(data, 0);
