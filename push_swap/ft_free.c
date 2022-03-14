@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:06:30 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/08 10:30:01 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/14 16:22:59 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	ft_free(char *str[])
 
 t_node	*ft_free_node(t_node *node)
 {
-	int		len;
-	int		i = 0;
-	
+	int	len;
+	int	i ;
+
 	if (!node)
 		return (NULL);
 	i = 0;
