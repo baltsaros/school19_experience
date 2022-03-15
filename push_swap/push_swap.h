@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/15 10:09:46 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/03/15 10:56:27 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -5,7 +17,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-// # include "./libft/libft.h"
 
 typedef struct s_node
 {
@@ -36,16 +47,19 @@ void	alloc_check_node(t_node *new, t_node **node);
 
 void	ft_free(char *str[]);
 t_node	*ft_free_node(t_node *node);
-void	error_msg();
+void	error_msg(void);
 void	ft_exit(t_data *data, int code);
 void	ft_swap(int *a, int *b);
 int		ft_atoi(const char *str, int *error);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlen(const char *s);
+
 void	ft_sort_small(t_data *data);
 void	ft_sort_big(t_data *data);
 void	ft_sort_big_b(t_data *data);
 void	ft_check_a(t_data *data);
+void	ft_sort_three_a(t_data *data);
+void	ft_sort_three_b(t_data *data);
 void	ft_sort(t_data *data);
 int		*ft_array_dup(int *old, int *new, int length);
 
@@ -56,7 +70,6 @@ int		*ft_sort_array(int *array, int length);
 void	ft_fill_stack(int i, int j, int *array, t_node **stack);
 t_node	*ft_init_stack(int *ar, int *ar_s, int length);
 t_node	*input_check(int argc, char *argv[]);
-
 t_node	*ft_argv_split(char *argv);
 
 int		ft_sorted_node(t_node *stack, int len);
@@ -65,7 +78,7 @@ int		ft_find_limit(t_data *data);
 int		ft_find_limit_f(t_data *data, int flag);
 int		ft_find_limit_b(t_data *data, int flag);
 int		ft_chunk_len(t_node *node, int flag);
-int		find_med(t_node *stack);
+int		ft_find_med(t_node *stack);
 int		ft_find_med_chunk(t_node *stack, int flag);
 
 t_node	*ft_node_new(int index, int number);

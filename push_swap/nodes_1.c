@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   nodes.c                                            :+:      :+:    :+:   */
+/*   nodes_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:36:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 17:40:07 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/15 10:41:03 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,16 @@ void	ft_node_print(t_node *node)
 	while (i < len)
 	{
 		printf("ix for node[%d] is %d, flag is %d\n", i, head->ix, head->flag);
-		// printf("nb for node[%d] is %d\n", i, head->nb);
-		// printf("flag for node[%d] is %d\n", i, head->flag);
+		printf("nb for node[%d] is %d\n", i, head->nb);
+		printf("flag for node[%d] is %d\n", i, head->flag);
 		head = head->next;
 		++i;
 	}
 }
 
-int		ft_node_size(t_node *node)
+int	ft_node_size(t_node *node)
 {
-	int	i;
+	int		i;
 	t_node	*last;
 	t_node	*tmp;
 

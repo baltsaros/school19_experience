@@ -1,33 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   push_swap_utils_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 09:33:40 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/01/14 10:07:57 by abuzdin          ###   ########.fr       */
+/*   Created: 2022/03/15 10:10:16 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/03/15 10:41:36 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+void	error_msg(void)
 {
-	size_t	i;
-	size_t	len_s;
+	write(2, "Error\n", 6);
+	exit(EXIT_FAILURE);
+}
 
-	len_s = 0;
-	while (src[len_s])
-		++len_s;
-	if (size == 0)
-		return (len_s);
+void	ft_exit(t_data *data, int code)
+{
+	ft_free_node(data->a);
+	ft_free_node(data->b);
+	exit(code);
+}
+
+void	ft_swap(int *a, int *b)
+{
+	int	c;
+
+	c = *b;
+	*b = *a;
+	*a = c;
+}
+
+int	*ft_array_dup(int *old, int *new, int length)
+{
+	int	i;
+
+	if (!old)
+		return (0);
 	i = 0;
-	while (i < (size - 1) && src[i])
+	while (i < length)
 	{
-		dst[i] = src[i];
+		new[i] = old[i];
 		++i;
 	}
-	dst[i] = '\0';
-	return (len_s);
+	return (new);
 }
