@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:19:19 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 17:16:21 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/15 12:35:02 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static t_node	*input_check_spl(int length, char *split[])
 	ar_s = ft_sort_array(ar, length);
 	i = 0;
 	stack_a = ft_init_stack(ar, ar_s, length);
+	free(ar);
+	free(ar_s);
 	return (stack_a);
 }
 
@@ -73,6 +75,6 @@ t_node	*ft_argv_split(char *argv)
 	while (split[len])
 		++len;
 	stack_a = input_check_spl(len, split);
-	free(split);
+	ft_free(split);
 	return (stack_a);
 }

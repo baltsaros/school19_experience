@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 14:57:29 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 17:21:05 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/15 12:27:46 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ int	main(int argc, char *argv[])
 		free(line);
 	}
 	ft_checker_sort(data);
+	ft_exit(&data, 0);
 	return (0);
 }

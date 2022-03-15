@@ -6,7 +6,7 @@
 #    By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:16:10 by abuzdin           #+#    #+#              #
-#    Updated: 2022/03/14 16:53:58 by abuzdin          ###   ########.fr        #
+#    Updated: 2022/03/15 12:25:21 by abuzdin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ INCS	= .
 
 GCC		= gcc
 RM		= rm -f
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g
 
 %.o : %.c
 			@echo "$(C_YELLOW_B)Compiling...$(C_RESET)";
