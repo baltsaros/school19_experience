@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:29:51 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 17:22:29 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/15 12:11:13 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int		*ft_array_dup(int *old, int *new, int length);
 void	check_duplicate(int *array, int length, int *error);
 void	check_sort(int *array, int length);
 void	check_error(int *array, char **split, int error);
+void	check_error_array(int *array, int error);
 void	ft_push_node(t_node **from, t_node **to);
 void	ft_swap_node(t_node **node);
 void	ft_rotate_node(t_node **node);

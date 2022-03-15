@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:21:28 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 17:22:23 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/15 12:13:05 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,11 @@ t_node	*input_check(int argc, char *argv[])
 		++len;
 	}
 	check_duplicate(ar, len, &error);
-	if (error)
-	{
-		free(ar);
-		error_msg();
-	}
+	check_error_array(ar, error);
 	check_sort(ar, len);
 	ar_s = ft_sort_array(ar, len);
 	stack_a = ft_init_stack(ar, ar_s, len);
+	free(ar_s);
+	free(ar);
 	return (stack_a);
 }

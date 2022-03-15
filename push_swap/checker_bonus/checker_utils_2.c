@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 16:30:53 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 16:31:42 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/15 12:11:45 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ void	check_error(int *array, char **split, int error)
 	}
 }
 
+void	check_error_array(int *array, int error)
+{
+	if (error)
+	{
+		free(array);
+		error_msg();
+	}
+}
+
 void	check_duplicate(int *array, int length, int *error)
 {
 	int	i;
@@ -33,7 +42,7 @@ void	check_duplicate(int *array, int length, int *error)
 		j = i + 1;
 		while (j < length && array[i] != array[j])
 			++j;
-		if (array[i] == array[j])
+		if (j < length && array[i] == array[j])
 			*error = 1;
 		++i;
 	}

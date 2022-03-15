@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:21:57 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 16:44:51 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/15 12:09:00 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,19 @@ t_node	*ft_node_del(t_node *node)
 		return (NULL);
 	tmp = node;
 	if (tmp == tmp->next)
-	{
-		free(node);
 		node = NULL;
-		return (node);
+	else if (tmp->prev == tmp->next)
+	{
+		node = node->next;
+		node->prev = node;
+		node->next = node;
 	}
-	node = node->next;
-	node->prev->prev->next = node;
-	node->prev = node->prev->prev;
-	tmp->next = NULL;
+	else
+	{
+		node->prev->next = node->next;
+		node->next->prev = node->prev;
+		node = node->next;
+	}
 	free(tmp);
 	return (node);
 }
