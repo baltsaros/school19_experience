@@ -6,7 +6,7 @@
 #    By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:16:10 by abuzdin           #+#    #+#              #
-#    Updated: 2022/03/15 10:53:51 by abuzdin          ###   ########.fr        #
+#    Updated: 2022/03/15 11:22:10 by abuzdin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,11 @@ ${NAME}:	${OBJS}
 
 all:		${NAME}
 
+bonus:		
+			@echo "$(C_YELLOW_B)Compiling the checker...$(C_RESET)";
+			@make -C ./checker_bonus
+			@cp ./checker_bonus/checker .
+
 norm:
 			@echo "$(C_PURPLE_B)Let's test the Norm!$(C_RESET)";
 			@norminette
@@ -64,13 +69,15 @@ norm:
 clean:
 			@echo "$(C_RED_B)Deleting...$(C_RESET)";
 			@${RM} ${OBJS} ${OBJS_b}
+			@make -C ./checker_bonus clean
 			@echo "$(C_RED_B)o-files have been deleted!$(C_RESET)";
 
 fclean:		clean
 			@echo "$(C_RED_B)Deleting...$(C_RESET)";
-			@${RM} ${NAME}
+			@${RM} ${NAME} checker
+			@make -C ./checker_bonus fclean
 			@echo "$(C_RED_B)The program has been deleted!$(C_RESET)";
 
 re:			fclean all
 
-.PHONY:		all clean fclean re .c.o norm
+.PHONY:		all clean fclean re .c.o norm bonus
