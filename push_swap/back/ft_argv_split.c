@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_argv_split.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/14 17:26:52 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/03/15 12:34:55 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int	ft_check_char(char *argv)
+static int	ft_check_char(char *argv)
 {
 	int	i;
 	int	space;
@@ -22,7 +34,7 @@ int	ft_check_char(char *argv)
 	}
 }
 
-t_node	*input_check_spl(int length, char *split[])
+static t_node	*input_check_spl(int length, char *split[])
 {
 	int		i;
 	int		error;
@@ -40,20 +52,17 @@ t_node	*input_check_spl(int length, char *split[])
 		++i;
 	}
 	check_duplicate(ar, length, &error);
-	if (error)
-	{
-		free(ar);
-		ft_free(split);
-		error_msg();
-	}
+	check_error(ar, split, error);
 	check_sort(ar, length);
 	ar_s = ft_sort_array(ar, length);
 	i = 0;
 	stack_a = ft_init_stack(ar, ar_s, length);
+	free(ar);
+	free(ar_s);
 	return (stack_a);
 }
 
-t_node	*ft_argv_split(int argc, char *argv)
+t_node	*ft_argv_split(char *argv)
 {
 	int		len;
 	char	**split;
@@ -66,6 +75,6 @@ t_node	*ft_argv_split(int argc, char *argv)
 	while (split[len])
 		++len;
 	stack_a = input_check_spl(len, split);
-	free(split);
+	ft_free(split);
 	return (stack_a);
 }

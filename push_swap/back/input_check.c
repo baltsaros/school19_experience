@@ -1,35 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_check.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/15 10:10:30 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/03/15 12:12:12 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
-
-void	check_duplicate(int *array, int length, int *error)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < length)
-	{
-		j = i + 1;
-		while (j < length && array[i] != array[j])
-			++j;
-		if (array[i] == array[j])
-			*error = 1;
-		++i;
-	}
-}
-
-void	check_sort(int *array, int length)
-{
-	int	i;
-
-	i = 0;
-	while (i + 1 < length && array[i] < array[i + 1])
-		++i;
-	if (i + 1 == length)
-	{
-		write(1, "OK\n", 3);
-		exit(EXIT_SUCCESS);
-	}
-}
 
 int	*ft_sort_array(int *array, int length)
 {
@@ -55,10 +36,27 @@ int	*ft_sort_array(int *array, int length)
 	return (ar_s);
 }
 
+void	ft_fill_stack(int i, int j, int *array, t_node **stack)
+{
+	t_node	*tmp;
+
+	tmp = NULL;
+	if (i == 0)
+	{
+		*stack = ft_node_new(j + 1, array[i]);
+		alloc_check_small(stack);
+	}
+	else
+	{
+		tmp = ft_node_new(j + 1, array[i]);
+		alloc_check_node(tmp, stack);
+		ft_node_back(stack, tmp);
+	}
+}
+
 t_node	*ft_init_stack(int *ar, int *ar_s, int length)
 {
 	t_node	*stack;
-	t_node	*tmp;
 	int		i;
 	int		j;
 
@@ -69,19 +67,7 @@ t_node	*ft_init_stack(int *ar, int *ar_s, int length)
 		while (ar_s[j] != ar[i])
 			++j;
 		if (ar_s[j] == ar[i])
-		{
-			if (i == 0)
-			{
-				stack = ft_node_new(j + 1, ar[i]);
-				alloc_check_small(stack);
-			}
-			else
-			{
-				tmp = ft_node_new(j + 1, ar[i]);
-				alloc_check_node(tmp, &stack);
-				ft_node_back(&stack, tmp);
-			}
-		}
+			ft_fill_stack(i, j, ar, &stack);
 		++i;
 	}
 	return (stack);
@@ -105,13 +91,11 @@ t_node	*input_check(int argc, char *argv[])
 		++len;
 	}
 	check_duplicate(ar, len, &error);
-	if (error)
-	{
-		free(ar);
-		error_msg();
-	}
+	check_error_array(ar, error);
 	check_sort(ar, len);
 	ar_s = ft_sort_array(ar, len);
 	stack_a = ft_init_stack(ar, ar_s, len);
+	free(ar_s);
+	free(ar);
 	return (stack_a);
 }

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 10:09:46 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/15 12:10:57 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/15 17:42:15 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <limits.h>
 
 typedef struct s_node
 {

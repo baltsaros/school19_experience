@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:26:52 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/15 12:34:55 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/15 17:39:25 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ static int	ft_check_char(char *argv)
 	if (space)
 		return (1);
 	else
-	{
-		write(2, "Invalid delimeter\n", 18);
 		exit(EXIT_FAILURE);
-	}
 }
 
 static t_node	*input_check_spl(int length, char *split[])
