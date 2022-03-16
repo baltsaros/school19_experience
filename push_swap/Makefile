@@ -6,7 +6,7 @@
 #    By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:16:10 by abuzdin           #+#    #+#              #
-#    Updated: 2022/03/15 12:09:15 by abuzdin          ###   ########.fr        #
+#    Updated: 2022/03/16 17:12:49 by abuzdin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,17 +39,21 @@ SRCS	= ft_split.c \
 			push_swap_utils_4.c \
 			push_swap.c \
 
-OBJS	= ${SRCS:.c=.o}
+OBJS	= ${addprefix ${OBJDIR}/,${SRCS:.c=.o}}
+
+OBJDIR	= objs
 
 INCS	= .
 
 GCC		= gcc
 RM		= rm -f
+RMF		= rm -rf
 CFLAGS	= -Wall -Wextra -Werror
 
-%.o : %.c
+$(OBJDIR)/%.o : %.c
+			@mkdir -p $(OBJDIR)
 			@echo "$(C_YELLOW_B)Compiling...$(C_RESET)";
-			@${GCC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
+			@${GCC} ${CFLAGS} -c $< -o ${<:%.c=${OBJDIR}/%.o} -I ${INCS}
 
 ${NAME}:	${OBJS}
 			@${GCC} -o ${NAME} ${OBJS}
@@ -69,6 +73,7 @@ norm:
 clean:
 			@echo "$(C_RED_B)Deleting...$(C_RESET)";
 			@${RM} ${OBJS} ${OBJS_b}
+			@${RMF} ${OBJDIR}
 			@make -C ./checker_bonus clean
 			@echo "$(C_RED_B)o-files have been deleted!$(C_RESET)";
 
