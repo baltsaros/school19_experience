@@ -6,7 +6,7 @@
 #    By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:16:10 by abuzdin           #+#    #+#              #
-#    Updated: 2022/03/16 17:12:56 by abuzdin          ###   ########.fr        #
+#    Updated: 2022/03/17 09:39:40 by abuzdin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,15 +65,15 @@ norm:
 			@norminette
 			@echo "$(C_PURPLE_B)Done!$(C_RESET)";
 clean:
-			@echo "$(C_RED_B)Deleting...$(C_RESET)";
+			@echo "$(C_RED_B)Deleting checker o-files...$(C_RESET)";
 			@${RM} ${OBJS} ${OBJS_b}
 			@${RMF} ${OBJDIR}
-			@echo "$(C_RED_B)o-files have been deleted!$(C_RESET)";
+			@echo "$(C_RED_B)Checker o-files have been deleted!$(C_RESET)";
 
 fclean:		clean
-			@echo "$(C_RED_B)Deleting...$(C_RESET)";
+			@echo "$(C_RED_B)Deleting checker...$(C_RESET)";
 			@${RM} ${NAME}
-			@echo "$(C_RED_B)The program has been deleted!$(C_RESET)";
+			@echo "$(C_RED_B)Checker has been deleted!$(C_RESET)";
 
 re:			fclean all
 
