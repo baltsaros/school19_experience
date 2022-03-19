@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 15:21:28 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/19 10:58:54 by abuzdin          ###   ########.fr       */
+/*   Created: 2022/03/15 10:10:30 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/03/15 12:12:12 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 int	*ft_sort_array(int *array, int length)
 {
@@ -92,6 +92,7 @@ t_node	*input_check(int argc, char *argv[])
 	}
 	check_duplicate(ar, len, &error);
 	check_error_array(ar, error);
+	check_sort(ar, len);
 	ar_s = ft_sort_array(ar, len);
 	stack_a = ft_init_stack(ar, ar_s, len);
 	free(ar_s);

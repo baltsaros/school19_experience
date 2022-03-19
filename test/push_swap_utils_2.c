@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 10:10:07 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/19 11:07:24 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/15 12:10:32 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,7 @@ void	check_sort(int *array, int length)
 		++i;
 	if (i + 1 == length)
 	{
-		free(array);
-		exit(EXIT_SUCCESS);
-	}
-}
-
-void	check_sort_split(int *array, int length, char **split)
-{
-	int	i;
-
-	i = 0;
-	while (i + 1 < length && array[i] < array[i + 1])
-		++i;
-	if (i + 1 == length)
-	{
-		free(array);
-		ft_free(split);
+		write(1, "OK\n", 3);
 		exit(EXIT_SUCCESS);
 	}
 }

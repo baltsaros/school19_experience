@@ -6,11 +6,22 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:19:19 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/15 17:39:52 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/19 11:30:40 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
+
+static void	ft_check_argv(char *argv)
+{
+	int	nb;
+	int	error;
+
+	error = 0;
+	nb = ft_atoi(argv, &error);
+	if (error)
+		error_msg();
+}
 
 static int	ft_check_char(char *argv)
 {
@@ -28,7 +39,10 @@ static int	ft_check_char(char *argv)
 	if (space)
 		return (1);
 	else
-		exit(EXIT_FAILURE);
+	{
+		ft_check_argv(argv);
+		return (1);
+	}
 }
 
 static t_node	*input_check_spl(int length, char *split[])
@@ -50,7 +64,6 @@ static t_node	*input_check_spl(int length, char *split[])
 	}
 	check_duplicate(ar, length, &error);
 	check_error(ar, split, error);
-	check_sort(ar, length);
 	ar_s = ft_sort_array(ar, length);
 	i = 0;
 	stack_a = ft_init_stack(ar, ar_s, length);

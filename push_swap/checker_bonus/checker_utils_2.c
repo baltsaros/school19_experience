@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 16:30:53 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/15 12:25:12 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/19 11:09:21 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	check_duplicate(int *array, int length, int *error)
 	}
 }
 
-void	check_sort(int *array, int length)
+void	check_sort_split(int *array, int length, char **split)
 {
 	int	i;
 
@@ -57,7 +57,8 @@ void	check_sort(int *array, int length)
 		++i;
 	if (i + 1 == length)
 	{
-		write(1, "OK\n", 3);
+		free(array);
+		ft_free(split);
 		exit(EXIT_SUCCESS);
 	}
 }

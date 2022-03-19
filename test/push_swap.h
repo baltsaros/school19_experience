@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 10:09:46 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/19 11:07:36 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/17 17:46:29 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_data
 	t_node	*b;
 	int		len_a;
 	int		len_b;
-	int		min;
+	int		max;
 	int		med;
 	int		iter;
 	int		rb;
@@ -56,9 +56,6 @@ char	**ft_split(char const *s, char c);
 size_t	ft_strlen(const char *s);
 
 void	ft_sort_small(t_data *data);
-void	ft_sort_big(t_data *data);
-void	ft_sort_big_b(t_data *data);
-void	ft_check_a(t_data *data);
 void	ft_sort_three_a(t_data *data);
 void	ft_sort_three_b(t_data *data);
 void	ft_sort(t_data *data);
@@ -66,7 +63,6 @@ int		*ft_array_dup(int *old, int *new, int length);
 
 void	check_duplicate(int *array, int length, int *error);
 void	check_sort(int *array, int length);
-void	check_sort_split(int *array, int length, char **split);
 void	check_error(int *array, char **split, int error);
 void	check_error_array(int *array, int error);
 int		*ft_sort_array(int *array, int length);
