@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:28:57 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/15 17:57:50 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/19 13:36:11 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	ft_check_i(int *i, int *sign, const char *str)
 int	ft_atoi(const char *str, int *error)
 {
 	int		i;
+	int		j;
 	int		sign;
 	long	n;
 
@@ -33,8 +34,13 @@ int	ft_atoi(const char *str, int *error)
 	sign = 1;
 	n = 0;
 	ft_check_i(&i, &sign, str);
-	if (str[i] < 48 || str[i] > 57)
-		*error = 1;
+	j = i;
+	while (str[j])
+	{
+		if (str[j] < 48 || str[j] > 57)
+			*error = 1;
+		++j;
+	}
 	while (str[i] >= 48 && str[i] <= 57)
 	{
 		n = n * 10 + str[i] - '0';
