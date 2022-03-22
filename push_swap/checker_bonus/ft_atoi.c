@@ -6,13 +6,13 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:28:57 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/19 13:36:11 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/22 09:38:10 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-static void	ft_check_i(int *i, int *sign, const char *str)
+static void	ft_check_i(int *i, int *sign, const char *str, int *error)
 {
 	while ((str[*i] >= 9 && str[*i] <= 13) || str[*i] == ' ')
 		++*i;
@@ -21,6 +21,8 @@ static void	ft_check_i(int *i, int *sign, const char *str)
 		*sign = 1 - 2 * (str[*i] == '-');
 		++*i;
 	}
+	if (!str[*i])
+		*error = 1;
 }
 
 int	ft_atoi(const char *str, int *error)
@@ -33,7 +35,7 @@ int	ft_atoi(const char *str, int *error)
 	i = 0;
 	sign = 1;
 	n = 0;
-	ft_check_i(&i, &sign, str);
+	ft_check_i(&i, &sign, str, error);
 	j = i;
 	while (str[j])
 	{

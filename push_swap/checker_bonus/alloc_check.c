@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 17:03:11 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/14 15:19:27 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/22 09:42:14 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	alloc_check(char **str)
 	}
 	if ((!str[0]))
 	{
-		write(2, "Invalid cmd\n", 12);
+		write(2, "Invalid arg\n", 12);
 		ft_free(str);
 		exit(1);
 	}
