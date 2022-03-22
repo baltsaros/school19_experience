@@ -28,6 +28,21 @@ typedef struct s_rect
 	int color;
 }	t_rect;
 
+typedef struct s_set
+{
+	double	pr;
+	double	pi;
+	double	newRe;
+	double	newIm;
+	double	oldRe;
+	double	oldIm;
+	double	zoom;
+	double	moveX;
+	double	moveY;
+	int		color;
+	int		maxIter;
+}	t_set;
+
 typedef struct s_round
 {
 	int	x;
@@ -49,6 +64,14 @@ enum {
 	ON_DESTROY = 17
 };
 
+void	init_set(t_set *mb)
+{
+	mb->zoom = 1;
+	mb->moveX = -0.5;
+	mb->moveY = 0;
+	mb->maxIter = 50;
+	mb->color = 10000;
+}
 
 int	key_hook(int keycode, t_data *data)
 {
@@ -116,6 +139,45 @@ int	render_rect(t_img *img, t_rect rect)
 	return (0);
 }
 
+int	render_mandelbrot(t_img *img, t_set mb)
+{
+	int		x;
+	int		y;
+	int		i;
+	int		iter;
+	long	color;
+
+	y = 0;
+	iter = 100;
+	color = 50;
+	while (y < 800)
+	{
+		x = 0;
+		while (x < 900)
+		{
+			mb.pr = 1.5 * (x - 900 / 2) / (0.5 * mb.zoom * 900) + mb.moveX;
+			mb.pi = (y - 800 / 2) / (0.5 * mb.zoom * 800) + mb.moveY;
+			mb.newRe = mb.newIm = mb.oldRe = mb.oldIm = 0;
+			i = 0;
+			while (i < iter)
+			{
+				mb.oldRe = mb.newRe;
+				mb.oldIm = mb.newIm;
+				mb.newRe = mb.oldRe * mb.oldRe - mb.oldIm * mb.oldIm + mb.pr;
+				mb.newIm = 2 * mb.oldRe * mb.oldIm + mb.pi;
+				if ((mb.newRe * mb.newRe + mb.newIm * mb.newIm) > 4)
+					break ;
+				my_mlx_pixel_put(img, x, y, color);
+				color += 50;
+				++i;
+			}
+			++x;
+		}
+		++y;
+	}
+	return (0);
+}
+
 int	render_round(t_img *img, t_round round)
 {
 	int	i;
@@ -149,14 +211,17 @@ void	render_background(t_img *img, int color)
 
 int	render(t_data *data)
 {
+	t_set	mandelbrot;
+
 	if (data->win == NULL)
 		return (1);
 	render_background(&data->img, 0xFFFFFF);
 	// render_rect(&data->img, (t_rect){0, 0, 100, 100, 0xFF00});
 	// render_rect(&data->img, (t_rect){1720, 880, 200, 200, 0xFF0000});
 	// render_rect(&data->img, (t_rect){500, 500, 200, 200, 203569230});
-	
-	render_rect(&data->img, (t_rect){500, 500, 200, 200, 203569230});
+	init_set(&mandelbrot);
+	render_mandelbrot(&data->img, mandelbrot);
+	// render_rect(&data->img, (t_rect){500, 500, 200, 200, 203569230});
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
 	return (0);
 }

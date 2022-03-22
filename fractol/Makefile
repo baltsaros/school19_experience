@@ -4,32 +4,27 @@ SRCS	= main.c \
 
 OBJS	= ${SRCS:.c=.o}
 
-INCS	= minilibx\
+INCS	= -I minilibx\
 
 GCC		= gcc
 RM		= rm -rf
 CFLAGS	= -Wall -Wextra -Werror
 
 %.o : %.c
-			${GCC} ${CFLAGS} -c $< -o {<:.c=.o} -Imlx
+			${GCC} ${CFLAGS} ${INCS} -c $< -o $@
 
 ${NAME}:	${OBJS}
-			# make -C ./libft
-			# cp libft/libft.a
-			# ${NAME} ${OBJS}
-			$(GCC) $(OBJS) -I ${INCS} -L minilibx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+			$(GCC) $(OBJS) ${INCS} -L minilibx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 all:		${NAME}
 
 clean:
 			${RM} ${OBJS}
-			make -C ./libft clean
 
 fclean:		clean
 			${RM} ${NAME}
-			make -C ./libft	fclean
 
-bonus:
+# bonus:
 
 re:			fclean all
 
