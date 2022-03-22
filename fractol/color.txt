@@ -1,0 +1,1 @@
+color = encode_rgb((1499 + i) % 256, 155, 200 * (i < iter)) - pink - purple

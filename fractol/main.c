@@ -70,7 +70,7 @@ void	init_set(t_set *mb)
 	mb->moveX = -0.5;
 	mb->moveY = 0;
 	mb->maxIter = 50;
-	mb->color = 10000;
+	mb->color = 55;
 }
 
 int	key_hook(int keycode, t_data *data)
@@ -100,9 +100,9 @@ int	key_hook(int keycode, t_data *data)
 // 	return (0);
 // }
 
-int	encode_rgb(int t, int red, int green, int blue)
+int	encode_rgb(int red, int green, int blue)
 {
-	return (t << 24 | red << 16 | green << 8 | blue);
+	return (red << 16 | green << 8 | blue);
 }
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
@@ -112,7 +112,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 	i = img ->bpp - 8;
 	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	// *(unsigned int*)dst = color;
+	*(unsigned int*)dst = color;
 	while (i >= 0)
 	{
 		if (img->endian != 0)
@@ -145,17 +145,17 @@ int	render_mandelbrot(t_img *img, t_set mb)
 	int		y;
 	int		i;
 	int		iter;
-	long	color;
+	int	color;
 
 	y = 0;
-	iter = 100;
+	iter = 200;
 	color = 50;
 	while (y < 800)
 	{
 		x = 0;
 		while (x < 900)
 		{
-			mb.pr = 1.5 * (x - 900 / 2) / (0.5 * mb.zoom * 900) + mb.moveX;
+			mb.pr = (x - 900 / 2) / (0.5 * mb.zoom * 900) + mb.moveX;
 			mb.pi = (y - 800 / 2) / (0.5 * mb.zoom * 800) + mb.moveY;
 			mb.newRe = mb.newIm = mb.oldRe = mb.oldIm = 0;
 			i = 0;
@@ -165,10 +165,14 @@ int	render_mandelbrot(t_img *img, t_set mb)
 				mb.oldIm = mb.newIm;
 				mb.newRe = mb.oldRe * mb.oldRe - mb.oldIm * mb.oldIm + mb.pr;
 				mb.newIm = 2 * mb.oldRe * mb.oldIm + mb.pi;
+				color = encode_rgb((1499 + i) % 256, 155, 200 * (i < iter));
 				if ((mb.newRe * mb.newRe + mb.newIm * mb.newIm) > 4)
+				{
+					my_mlx_pixel_put(img, x, y, color);
 					break ;
+				}
+				// my_mlx_pixel_put(img, x, y, 0xF);
 				my_mlx_pixel_put(img, x, y, color);
-				color += 50;
 				++i;
 			}
 			++x;
