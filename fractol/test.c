@@ -28,6 +28,16 @@ typedef struct s_rect
 	int color;
 }	t_rect;
 
+typedef struct s_round
+{
+	int	x;
+	int	y;
+	int width;
+	int height;
+	int	radius;
+	int color;
+}	t_round;
+
 enum {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
@@ -101,6 +111,22 @@ int	render_rect(t_img *img, t_rect rect)
 		j = rect.x;
 		while (j < rect.x + rect.width)
 			my_mlx_pixel_put(img, j++, i, rect.color);
+		++i;
+	}
+	return (0);
+}
+
+int	render_round(t_img *img, t_round round)
+{
+	int	i;
+	int	j;
+
+	i = round.y;
+	while (i < round.y + round.height)
+	{
+		j = round.x;
+		while (j < round.x + round.width)
+			my_mlx_pixel_put(img, j++, i, round.color);
 		++i;
 	}
 	return (0);

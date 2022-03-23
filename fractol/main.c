@@ -3,6 +3,9 @@
 #include <mlx.h>
 #include <stdio.h>
 
+#define WIDTH 1000
+#define HEIGHT 1000
+
 typedef struct	s_img
 {
 	void	*mlx_img;
@@ -11,22 +14,6 @@ typedef struct	s_img
 	int		line_length;
 	int		endian;
 }	t_img;
-
-typedef struct	s_data {
-	void	*mlx;
-	void	*win;
-	t_img	img;
-	int		cur_img;
-}	t_data;
-
-typedef struct s_rect
-{
-	int	x;
-	int	y;
-	int width;
-	int height;
-	int color;
-}	t_rect;
 
 typedef struct s_set
 {
@@ -41,18 +28,19 @@ typedef struct s_set
 	double	moveY;
 	int		color;
 	int		maxIter;
+	int		check;
+	int		posX;
+	int		posY;
 }	t_set;
 
-typedef struct s_round
-{
-	int	x;
-	int	y;
-	int width;
-	int height;
-	int	radius;
-	int color;
-}	t_round;
-
+typedef struct	s_data {
+	void	*mlx;
+	void	*win;
+	t_img	img;
+	t_set	mb;
+	int		cur_img;
+	int		iter;
+}	t_data;
 
 enum {
 	ON_KEYDOWN = 2,
@@ -64,26 +52,16 @@ enum {
 	ON_DESTROY = 17
 };
 
-void	init_set(t_set *mb)
+void	init_set(t_data *data)
 {
-	mb->zoom = 1;
-	mb->moveX = -0.5;
-	mb->moveY = 0;
-	mb->maxIter = 50;
-	mb->color = 55;
-}
-
-int	key_hook(int keycode, t_data *data)
-{
-	if (keycode == 53)
-	{
-		mlx_destroy_window(data->mlx, data->win);
-		data->win = NULL;
-		exit(0);
-	}
-	else
-		printf("Key %d was pressed!\n", keycode);
-	return (0);
+	data->mb.zoom = 0.1;
+	data->mb.moveX = -0.1;
+	data->mb.moveY = 0.1;
+	data->mb.maxIter = 150;
+	data->mb.color = 55;
+	data->mb.check = 0;
+	data->mb.posX = 0;
+	data->mb.posY = 0;
 }
 
 // int	exit_hook(int keycode, t_data *data)
@@ -105,6 +83,11 @@ int	encode_rgb(int red, int green, int blue)
 	return (red << 16 | green << 8 | blue);
 }
 
+int	encode_trgb(int t, int red, int green, int blue)
+{
+	return (t << 24 | red << 16 | green << 8 | blue);
+}
+
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
@@ -123,50 +106,35 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	}
 }
 
-int	render_rect(t_img *img, t_rect rect)
+int	render_mandelbrot(t_img *img, t_set *mb)
 {
+	int	x;
+	int	y;
 	int	i;
-	int	j;
-
-	i = rect.y;
-	while (i < rect.y + rect.height)
-	{
-		j = rect.x;
-		while (j < rect.x + rect.width)
-			my_mlx_pixel_put(img, j++, i, rect.color);
-		++i;
-	}
-	return (0);
-}
-
-int	render_mandelbrot(t_img *img, t_set mb)
-{
-	int		x;
-	int		y;
-	int		i;
-	int		iter;
+	int	iter;
 	int	color;
 
 	y = 0;
-	iter = 200;
+	iter = 150;
 	color = 50;
-	while (y < 800)
+	while (y < HEIGHT)
 	{
 		x = 0;
-		while (x < 900)
+		while (x < WIDTH)
 		{
-			mb.pr = (x - 900 / 2) / (0.5 * mb.zoom * 900) + mb.moveX;
-			mb.pi = (y - 800 / 2) / (0.5 * mb.zoom * 800) + mb.moveY;
-			mb.newRe = mb.newIm = mb.oldRe = mb.oldIm = 0;
+			mb->pr = 1 + (x - WIDTH / 2) / (mb->zoom * WIDTH) + mb->moveX;
+			mb->pi = (y - HEIGHT / 2) / (mb->zoom * HEIGHT) + mb->moveY;
+			mb->newRe = mb->newIm = mb->oldRe = mb->oldIm = 0;
 			i = 0;
 			while (i < iter)
 			{
-				mb.oldRe = mb.newRe;
-				mb.oldIm = mb.newIm;
-				mb.newRe = mb.oldRe * mb.oldRe - mb.oldIm * mb.oldIm + mb.pr;
-				mb.newIm = 2 * mb.oldRe * mb.oldIm + mb.pi;
-				color = encode_rgb((1499 + i) % 256, 155, 200 * (i < iter));
-				if ((mb.newRe * mb.newRe + mb.newIm * mb.newIm) > 4)
+				mb->oldRe = mb->newRe;
+				mb->oldIm = mb->newIm;
+				mb->newRe = mb->oldRe * mb->oldRe - mb->oldIm * mb->oldIm + mb->pr;
+				mb->newIm = 2 * mb->oldRe * mb->oldIm + mb->pi;
+				// color = encode_rgb((1499 + i) % 256, 155, 200 * (i < iter));
+				color = encode_rgb((1433 + i) % 250, 190 - i, 80 * (i < iter));
+				if ((mb->newRe * mb->newRe + mb->newIm * mb->newIm) > 4)
 				{
 					my_mlx_pixel_put(img, x, y, color);
 					break ;
@@ -182,32 +150,16 @@ int	render_mandelbrot(t_img *img, t_set mb)
 	return (0);
 }
 
-int	render_round(t_img *img, t_round round)
-{
-	int	i;
-	int	j;
-
-	i = round.y;
-	while (i < round.y + round.height)
-	{
-		j = round.x;
-		while (j < round.x + round.width)
-			my_mlx_pixel_put(img, j++, i, round.color);
-		++i;
-	}
-	return (0);
-}
-
 void	render_background(t_img *img, int color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < 1080)
+	while (i < HEIGHT)
 	{
 		j = 0;
-		while (j < 1920)
+		while (j < WIDTH)
 			my_mlx_pixel_put(img, j++, i, color);
 		++i;
 	}
@@ -215,18 +167,49 @@ void	render_background(t_img *img, int color)
 
 int	render(t_data *data)
 {
-	t_set	mandelbrot;
 
 	if (data->win == NULL)
 		return (1);
-	render_background(&data->img, 0xFFFFFF);
-	// render_rect(&data->img, (t_rect){0, 0, 100, 100, 0xFF00});
-	// render_rect(&data->img, (t_rect){1720, 880, 200, 200, 0xFF0000});
-	// render_rect(&data->img, (t_rect){500, 500, 200, 200, 203569230});
-	init_set(&mandelbrot);
-	render_mandelbrot(&data->img, mandelbrot);
-	// render_rect(&data->img, (t_rect){500, 500, 200, 200, 203569230});
+	// render_background(&data->img, 0xFFFFFF);
+	render_mandelbrot(&data->img, &data->mb);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
+	return (0);
+}
+
+int	key_hook(int keycode, t_data *data)
+{
+	if (keycode == 53)
+	{
+		mlx_destroy_window(data->mlx, data->win);
+		data->win = NULL;
+		exit(0);
+	}
+	else if (keycode == 123)
+		data->mb.moveX *= 1.1;
+	else if (keycode == 124)
+		data->mb.moveX *= 0.9;
+	else if (keycode == 125)
+		data->mb.moveY *= 1.1;
+	else if (keycode == 126)
+		data->mb.moveY *= 0.9;
+	else if (keycode == 24)
+		data->mb.zoom *= 1.5;
+	else if (keycode == 27)
+		data->mb.zoom *= 0.9;
+	else
+		printf("Key %d was pressed!\n", keycode);
+	render(data);
+	return (0);
+}
+
+int	mouse_hook(int keycode, int x, int y, t_data *data)
+{
+	if (keycode == 4)
+		data->mb.zoom *= 0.9;
+	else if (keycode == 5)
+		data->mb.zoom *= 1.1;
+	render(data);
+	printf("x is %d, y is %d\n", x, y);
 	return (0);
 }
 
@@ -237,32 +220,25 @@ int	main(void)
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		return (1);
-	data.win = mlx_new_window(data.mlx, 1920, 1080, "Test01");
+	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Test01");
 	if (!data.win)
 	{
 		free(data.win);
 		return (1);
 	}
-	data.img.mlx_img = mlx_new_image(data.mlx, 1920, 1080);
+	data.img.mlx_img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_length, &data.img.endian);
-	mlx_loop_hook(data.mlx, &render, &data);
-	mlx_hook(data.win, 2, 3, key_hook, &data);
+	init_set(&data);
+	data.iter = 1;
+	// mlx_loop_hook(data.mlx, &render, &data);
+	// mlx_hook(data.win, 2, 3, mlx_key_hook, &data);
+	mlx_key_hook(data.win, key_hook, &data);
+	mlx_mouse_hook(data.win, mouse_hook, &data);
 	// mlx_hook(data.win, 2, 17, exit_hook, &data);
-	// mlx_put_image_to_window(data.mlx, data.win, data.img.mlx_img, 0, 0);
-	// my_mlx_pixel_put(&img, 10, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 9, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 8, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 7, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 6, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 5, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 4, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 3, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 2, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 1, 5, 0xFF00);
+	mlx_put_image_to_window(data.mlx, data.win, data.img.mlx_img, 0, 0);
 	mlx_loop(data.mlx);
 	mlx_destroy_window(data.mlx, data.win);
 	// mlx_destroy_display(mlx);
-	printf("01\n");
 	free(data.mlx);
 	return (0);
 }

@@ -8,7 +8,7 @@ INCS	= -I minilibx\
 
 GCC		= gcc
 RM		= rm -rf
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g
 
 %.o : %.c
 			${GCC} ${CFLAGS} ${INCS} -c $< -o $@
