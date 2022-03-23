@@ -122,7 +122,7 @@ int	render_mandelbrot(t_img *img, t_set *mb)
 		x = 0;
 		while (x < WIDTH)
 		{
-			mb->pr = 1 + (x - WIDTH / 2) / (mb->zoom * WIDTH) + mb->moveX;
+			mb->pr = (x - WIDTH / 2) / (mb->zoom * WIDTH) + mb->moveX;
 			mb->pi = (y - HEIGHT / 2) / (mb->zoom * HEIGHT) + mb->moveY;
 			mb->newRe = mb->newIm = mb->oldRe = mb->oldIm = 0;
 			i = 0;
@@ -205,11 +205,19 @@ int	key_hook(int keycode, t_data *data)
 int	mouse_hook(int keycode, int x, int y, t_data *data)
 {
 	if (keycode == 4)
-		data->mb.zoom *= 0.9;
-	else if (keycode == 5)
+	{
 		data->mb.zoom *= 1.1;
+		data->mb.moveX = (x - WIDTH / 2) / (data->mb.zoom * WIDTH) - data->mb.pr;
+		data->mb.moveY = (y - HEIGHT / 2) / (data->mb.zoom * HEIGHT) - data->mb.pi;
+	}
+	else if (keycode == 5)
+	{
+		data->mb.zoom *= 0.9;
+
+	}
 	render(data);
 	printf("x is %d, y is %d\n", x, y);
+	printf("pi is %f, pr is %f\n", data->mb.pi, data->mb.pr);
 	return (0);
 }
 
