@@ -1,15 +1,14 @@
-#include <stdio.h>
+#include "fractol.h"
 
-int	encode_rgb(int t, int red, int green, int blue)
+int	encode_rgb(int i, int iter, int *setting)
 {
-	return (t << 24 | red << 16 | green << 8 | blue);
-}
-
-int	main(void)
-{
-	int	color;
-
-	color = encode_rgb(12, 34, 56, 78);
-	printf("TRGB is %d\n", color);
-	return (0);
+	if (setting[1] == 1)
+		return (((1433 + i) % 250) << 16 | (190 - i) << 8 | 80 * (i < iter));
+	else if (setting[1] == 2)
+		return (((1499 + i) % 256) << 16 | (155 - i) << 8 | 200 * (i < iter));
+	else if (setting[1] == 3)
+		// return (((419 + i) % 150) << 16 | (150 - i) << 8 | 130 * (i < iter));
+		return (((133 + i) % 150) << 16 | (235 - i) << 8 | 170 * (i < iter));
+	else
+		exit(EXIT_FAILURE);
 }

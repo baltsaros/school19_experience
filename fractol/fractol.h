@@ -47,5 +47,6 @@ typedef struct	s_data {
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_mini_atoi(const char *str);
+int		encode_rgb(int i, int iter, int *setting);
 
 #endif
