@@ -27,10 +27,7 @@ typedef struct s_set
 	double	moveX;
 	double	moveY;
 	int		color;
-	int		maxIter;
-	int		check;
-	int		posX;
-	int		posY;
+	int		iter;
 }	t_set;
 
 typedef struct	s_data {
@@ -55,13 +52,8 @@ enum {
 void	init_set(t_data *data)
 {
 	data->mb.zoom = 0.1;
-	data->mb.moveX = -0.1;
+	data->mb.moveX = 0.1;
 	data->mb.moveY = 0.1;
-	data->mb.maxIter = 150;
-	data->mb.color = 55;
-	data->mb.check = 0;
-	data->mb.posX = 0;
-	data->mb.posY = 0;
 }
 
 // int	exit_hook(int keycode, t_data *data)
@@ -111,12 +103,9 @@ int	render_mandelbrot(t_img *img, t_set *mb)
 	int	x;
 	int	y;
 	int	i;
-	int	iter;
-	int	color;
 
 	y = 0;
-	iter = 150;
-	color = 50;
+	mb->iter = 30;
 	while (y < HEIGHT)
 	{
 		x = 0;
@@ -126,21 +115,21 @@ int	render_mandelbrot(t_img *img, t_set *mb)
 			mb->pi = (y - HEIGHT / 2) / (mb->zoom * HEIGHT) + mb->moveY;
 			mb->newRe = mb->newIm = mb->oldRe = mb->oldIm = 0;
 			i = 0;
-			while (i < iter)
+			while (i < mb->iter)
 			{
 				mb->oldRe = mb->newRe;
 				mb->oldIm = mb->newIm;
 				mb->newRe = mb->oldRe * mb->oldRe - mb->oldIm * mb->oldIm + mb->pr;
 				mb->newIm = 2 * mb->oldRe * mb->oldIm + mb->pi;
 				// color = encode_rgb((1499 + i) % 256, 155, 200 * (i < iter));
-				color = encode_rgb((1433 + i) % 250, 190 - i, 80 * (i < iter));
+				mb->color = encode_rgb((1433 + i) % 250, 190 - i, 80 * (i < mb->iter));
 				if ((mb->newRe * mb->newRe + mb->newIm * mb->newIm) > 4)
 				{
-					my_mlx_pixel_put(img, x, y, color);
+					my_mlx_pixel_put(img, x, y, mb->color);
 					break ;
 				}
 				// my_mlx_pixel_put(img, x, y, 0xF);
-				my_mlx_pixel_put(img, x, y, color);
+				my_mlx_pixel_put(img, x, y, mb->color);
 				++i;
 			}
 			++x;
@@ -205,19 +194,14 @@ int	key_hook(int keycode, t_data *data)
 int	mouse_hook(int keycode, int x, int y, t_data *data)
 {
 	if (keycode == 4)
-	{
 		data->mb.zoom *= 1.1;
-		data->mb.moveX = (x - WIDTH / 2) / (data->mb.zoom * WIDTH) - data->mb.pr;
-		data->mb.moveY = (y - HEIGHT / 2) / (data->mb.zoom * HEIGHT) - data->mb.pi;
-	}
 	else if (keycode == 5)
-	{
 		data->mb.zoom *= 0.9;
-
-	}
+	data->mb.pr = (x - WIDTH / 2) / (data->mb.zoom * WIDTH) + data->mb.moveX;
+	data->mb.pi = (y - HEIGHT / 2) / (data->mb.zoom * HEIGHT) + data->mb.moveY;
+	data->mb.moveX = data->mb.pr;
+	data->mb.moveY = data->mb.pi;
 	render(data);
-	printf("x is %d, y is %d\n", x, y);
-	printf("pi is %f, pr is %f\n", data->mb.pi, data->mb.pr);
 	return (0);
 }
 
