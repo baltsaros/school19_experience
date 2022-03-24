@@ -1,59 +1,20 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <mlx.h>
-#include <stdio.h>
+#include "fractol.h"
 
-#define WIDTH 1000
-#define HEIGHT 1000
-
-typedef struct	s_img
+void	init_mb(t_data *data)
 {
-	void	*mlx_img;
-	char	*addr;
-	int		bpp;
-	int		line_length;
-	int		endian;
-}	t_img;
+	data->set.zoom = 0.1;
+	data->set.move_x = 0.1;
+	data->set.move_y = 0.1;
+}
 
-typedef struct s_set
+void	init_julia(t_data *data)
 {
-	double	pr;
-	double	pi;
-	double	newRe;
-	double	newIm;
-	double	oldRe;
-	double	oldIm;
-	double	zoom;
-	double	moveX;
-	double	moveY;
-	int		color;
-	int		iter;
-}	t_set;
-
-typedef struct	s_data {
-	void	*mlx;
-	void	*win;
-	t_img	img;
-	t_set	mb;
-	int		cur_img;
-	int		iter;
-}	t_data;
-
-enum {
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
-
-void	init_set(t_data *data)
-{
-	data->mb.zoom = 0.1;
-	data->mb.moveX = 0.1;
-	data->mb.moveY = 0.1;
+	data->set.zoom = 0.1;
+	data->set.move_x = 0.1;
+	data->set.move_y = 0.1;
+	data->set.color = 251231;
+	data->set.c_re = -0.743;
+	data->set.c_im = 0.32;
 }
 
 // int	exit_hook(int keycode, t_data *data)
@@ -98,6 +59,46 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	}
 }
 
+int	render_julia(t_img *img, t_set *jul)
+{
+	int	x;
+	int	y;
+	int	i;
+
+	y = 0;
+	jul->iter = 150;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			jul->new_re = (x - WIDTH / 2) / (jul->zoom * WIDTH) + jul->move_x;
+			jul->new_im = (y - HEIGHT / 2) / (jul->zoom * HEIGHT) + jul->move_y;
+			i = 0;
+			while (i < jul->iter)
+			{
+				jul->old_re = jul->new_re;
+				jul->old_im = jul->new_im;
+				jul->new_re = jul->old_re * jul->old_re - jul->old_im * jul->old_im + jul->c_re;
+				jul->new_im = 2 * jul->old_re * jul->old_im + jul->c_im;
+				// color = encode_rgb((1499 + i) % 256, 155, 200 * (i < iter));
+				jul->color = encode_rgb((1433 + i) % 250, 190 - i, 80 * (i < jul->iter));
+				if ((jul->new_re * jul->new_re + jul->new_im * jul->new_im) > 4)
+				{
+					my_mlx_pixel_put(img, x, y, jul->color);
+					break ;
+				}
+				// my_mlx_pixel_put(img, x, y, 0xFF);
+				// my_mlx_pixel_put(img, x, y, jul->color);
+				++i;
+			}
+			++x;
+		}
+		++y;
+	}
+	return (0);
+}
+
 int	render_mandelbrot(t_img *img, t_set *mb)
 {
 	int	x;
@@ -105,25 +106,25 @@ int	render_mandelbrot(t_img *img, t_set *mb)
 	int	i;
 
 	y = 0;
-	mb->iter = 30;
+	mb->iter = 50;
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			mb->pr = (x - WIDTH / 2) / (mb->zoom * WIDTH) + mb->moveX;
-			mb->pi = (y - HEIGHT / 2) / (mb->zoom * HEIGHT) + mb->moveY;
-			mb->newRe = mb->newIm = mb->oldRe = mb->oldIm = 0;
+			mb->pr = (x - WIDTH / 2) / (mb->zoom * WIDTH) + mb->move_x;
+			mb->pi = (y - HEIGHT / 2) / (mb->zoom * HEIGHT) + mb->move_y;
+			mb->new_re = mb->new_im = mb->old_re = mb->old_im = 0;
 			i = 0;
 			while (i < mb->iter)
 			{
-				mb->oldRe = mb->newRe;
-				mb->oldIm = mb->newIm;
-				mb->newRe = mb->oldRe * mb->oldRe - mb->oldIm * mb->oldIm + mb->pr;
-				mb->newIm = 2 * mb->oldRe * mb->oldIm + mb->pi;
+				mb->old_re = mb->new_re;
+				mb->old_im = mb->new_im;
+				mb->new_re = mb->old_re * mb->old_re - mb->old_im * mb->old_im + mb->pr;
+				mb->new_im = 2 * mb->old_re * mb->old_im + mb->pi;
 				// color = encode_rgb((1499 + i) % 256, 155, 200 * (i < iter));
 				mb->color = encode_rgb((1433 + i) % 250, 190 - i, 80 * (i < mb->iter));
-				if ((mb->newRe * mb->newRe + mb->newIm * mb->newIm) > 4)
+				if ((mb->new_re * mb->new_re + mb->new_im * mb->new_im) > 4)
 				{
 					my_mlx_pixel_put(img, x, y, mb->color);
 					break ;
@@ -160,7 +161,11 @@ int	render(t_data *data)
 	if (data->win == NULL)
 		return (1);
 	// render_background(&data->img, 0xFFFFFF);
-	render_mandelbrot(&data->img, &data->mb);
+	
+	if (data->setting[0] == 1)
+		render_mandelbrot(&data->img, &data->set);
+	else if (data->setting[0] == 2)
+		render_julia(&data->img, &data->set);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
 	return (0);
 }
@@ -174,17 +179,17 @@ int	key_hook(int keycode, t_data *data)
 		exit(0);
 	}
 	else if (keycode == 123)
-		data->mb.moveX *= 1.1;
+		data->set.move_x *= 1.1;
 	else if (keycode == 124)
-		data->mb.moveX *= 0.9;
+		data->set.move_x *= 0.9;
 	else if (keycode == 125)
-		data->mb.moveY *= 1.1;
+		data->set.move_y *= 1.1;
 	else if (keycode == 126)
-		data->mb.moveY *= 0.9;
+		data->set.move_y *= 0.9;
 	else if (keycode == 24)
-		data->mb.zoom *= 1.5;
+		data->set.zoom *= 1.5;
 	else if (keycode == 27)
-		data->mb.zoom *= 0.9;
+		data->set.zoom *= 0.9;
 	else
 		printf("Key %d was pressed!\n", keycode);
 	render(data);
@@ -194,25 +199,59 @@ int	key_hook(int keycode, t_data *data)
 int	mouse_hook(int keycode, int x, int y, t_data *data)
 {
 	if (keycode == 4)
-		data->mb.zoom *= 1.1;
+		data->set.zoom *= 1.1;
 	else if (keycode == 5)
-		data->mb.zoom *= 0.9;
-	data->mb.pr = (x - WIDTH / 2) / (data->mb.zoom * WIDTH) + data->mb.moveX;
-	data->mb.pi = (y - HEIGHT / 2) / (data->mb.zoom * HEIGHT) + data->mb.moveY;
-	data->mb.moveX = data->mb.pr;
-	data->mb.moveY = data->mb.pi;
+		data->set.zoom *= 0.9;
+	data->set.pr = (x - WIDTH / 2) / (data->set.zoom * WIDTH) + data->set.move_x;
+	data->set.pi = (y - HEIGHT / 2) / (data->set.zoom * HEIGHT) + data->set.move_y;
+	data->set.move_x = data->set.pr;
+	data->set.move_y = data->set.pi;
 	render(data);
 	return (0);
 }
 
-int	main(void)
+void	error_msg(void)
+{
+	printf("Invalid parameter(s)!\nThe porgram should be execution in the following way:\n");
+	printf("./fractol <fractal set> <color set> <constant set>\n");
+	printf("<fractal set> values: Mandelbrot, Julia, Newton\n");
+	printf("<color set> values: 1, 2, 3\n");
+	printf("<constant set> is only used for Julia set. It can be: 1, 2 3\n");
+	printf("Please, try again\n");
+	exit(EXIT_FAILURE);
+}
+
+void	check_input(char *argv[], t_data *data)
+{
+	if (ft_strncmp(argv[1], "Mandelbrot", 11) == 0)
+		data->setting[0] = 1;
+	else if (ft_strncmp(argv[1], "Julia", 6) == 0)
+		data->setting[0] = 2;
+	else if (ft_strncmp(argv[1], "Newton", 7) == 0)
+		data->setting[0] = 3;
+	else
+		data->setting[0] = -1;
+	data->setting[1] = ft_mini_atoi(argv[2]);
+	data->setting[2] = 0;
+	if (data->setting[0] == 2)
+		data->setting[2] = ft_mini_atoi(argv[3]);
+	printf("setting: %d | %d | %d \n", data->setting[0], data->setting[1], data->setting[2]);
+	if (data->setting[0] < 0 || data->setting[1] < 0 || data->setting[2] < 0)
+		error_msg();
+}
+
+int	main(int argc, char *argv[])
 {
 	t_data	data;
 
+	printf("argc is %d\n", argc);
+	if (argc < 3 || argc > 4)
+		error_msg();
+	check_input(argv, &data);
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		return (1);
-	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Test01");
+	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Fractol");
 	if (!data.win)
 	{
 		free(data.win);
@@ -220,13 +259,13 @@ int	main(void)
 	}
 	data.img.mlx_img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_length, &data.img.endian);
-	init_set(&data);
-	data.iter = 1;
+	if (data.setting[0] == 1)
+		init_mb(&data);
+	else if (data.setting[0] == 2)
+		init_julia(&data);
 	// mlx_loop_hook(data.mlx, &render, &data);
-	// mlx_hook(data.win, 2, 3, mlx_key_hook, &data);
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_mouse_hook(data.win, mouse_hook, &data);
-	// mlx_hook(data.win, 2, 17, exit_hook, &data);
 	mlx_put_image_to_window(data.mlx, data.win, data.img.mlx_img, 0, 0);
 	mlx_loop(data.mlx);
 	mlx_destroy_window(data.mlx, data.win);

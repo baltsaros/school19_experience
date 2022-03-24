@@ -1,6 +1,8 @@
 NAME	= fractol
 
 SRCS	= main.c \
+			ft_mini_atoi.c \
+			ft_strncmp.c \
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -8,7 +10,7 @@ INCS	= -I minilibx\
 
 GCC		= gcc
 RM		= rm -rf
-CFLAGS	= 
+CFLAGS	= -Wall -Wextra -Werror
 
 %.o : %.c
 			${GCC} ${CFLAGS} ${INCS} -c $< -o $@
