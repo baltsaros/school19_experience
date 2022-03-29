@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:34:33 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/29 14:35:29 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/29 17:47:06 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../include/fractol.h"
 
 void	error_msg(void)
 {

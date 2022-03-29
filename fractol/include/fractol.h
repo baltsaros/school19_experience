@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:43:46 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/29 14:49:01 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/29 14:58:40 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,16 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_mini_atoi(const char *str);
 int		encode_rgb(int i, int iter, int *setting);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+
 // hooks
 int		key_hook(int keycode, t_data *data);
 int		mouse_hook(int keycode, int x, int y, t_data *data);
+
 // set initialization
 void	init_mb(t_data *data);
 void	init_julia(t_data *data);
 void	init_newton(t_data *data);
+
 // render
 int		render_mandelbrot(t_data *data, t_img *img, t_set *mb, int *setting);
 int		render_julia(t_data *data, t_img *img, t_set *jul, int *setting);

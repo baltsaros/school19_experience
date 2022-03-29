@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:13:02 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/29 14:55:42 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/29 17:47:28 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../include/fractol.h"
 
 int	render_mandelbrot(t_data *data, t_img *img, t_set *mb, int *setting)
 {

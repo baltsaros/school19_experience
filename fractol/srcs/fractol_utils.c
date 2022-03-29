@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:54:27 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/29 14:43:16 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/29 17:47:15 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../include/fractol.h"
 
 int	encode_rgb(int i, int iter, int *setting)
 {
