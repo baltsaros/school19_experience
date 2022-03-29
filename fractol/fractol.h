@@ -6,6 +6,7 @@
 # include <mlx.h>
 # include <stdio.h>
 # include <limits.h>
+# include <math.h>
 
 #define WIDTH 1000
 #define HEIGHT 1000

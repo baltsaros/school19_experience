@@ -12,6 +12,28 @@ void	init_julia(t_data *data)
 	data->set.zoom = 0.1;
 	data->set.move_x = 0.1;
 	data->set.move_y = 0.1;
+	if (data->setting[2] == 1)
+	{
+		data->set.c_re = -0.7;
+		data->set.c_im = 0.27;
+	}
+	else if (data->setting[2] == 2)
+	{
+		data->set.c_re = -0.7;
+		data->set.c_im = 0.32;
+	}
+	else if (data->setting[2] == 3)
+	{
+		data->set.c_re = -0.77;
+		data->set.c_im = -0.08;
+	}
+}
+
+void	init_newton(t_data *data)
+{
+	data->set.zoom = 0.1;
+	data->set.move_x = 0.1;
+	data->set.move_y = 0.1;
 	data->set.color = 251231;
 	if (data->setting[2] == 1)
 	{
@@ -25,8 +47,8 @@ void	init_julia(t_data *data)
 	}
 	else if (data->setting[2] == 3)
 	{
-		data->set.c_re = -0.743;
-		data->set.c_im = 0.32;
+		data->set.c_re = -0.77;
+		data->set.c_im = -0.08;
 	}
 }
 
@@ -67,6 +89,40 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	}
 }
 
+int	render_mandelbrot(t_img *img, t_set *mb, int *setting)
+{
+	int	x;
+	int	y;
+	int	i;
+
+	y = 0;
+	mb->iter = 150;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			mb->pr = (x - WIDTH / 2) / (mb->zoom * WIDTH) + mb->move_x;
+			mb->pi = (y - HEIGHT / 2) / (mb->zoom * HEIGHT) + mb->move_y;
+			mb->new_re = mb->new_im = mb->old_re = mb->old_im = 0;
+			i = 0;
+			while ((mb->new_re * mb->new_re + mb->new_im * mb->new_im) <= 4 && i < mb->iter)
+			{
+				mb->old_re = mb->new_re;
+				mb->old_im = mb->new_im;
+				mb->new_re = mb->old_re * mb->old_re - mb->old_im * mb->old_im + mb->pr;
+				mb->new_im = 2 * mb->old_re * mb->old_im + mb->pi;
+				mb->color = encode_rgb(i, mb->iter, setting);
+				my_mlx_pixel_put(img, x, y, mb->color);
+				++i;
+			}
+			++x;
+		}
+		++y;
+	}
+	return (0);
+}
+
 int	render_julia(t_img *img, t_set *jul, int *setting)
 {
 	int	x;
@@ -105,37 +161,75 @@ int	render_julia(t_img *img, t_set *jul, int *setting)
 	return (0);
 }
 
-int	render_mandelbrot(t_img *img, t_set *mb, int *setting)
+int	render_ship(t_img *img, t_set *ship, int *setting)
 {
 	int	x;
 	int	y;
 	int	i;
 
 	y = 0;
-	mb->iter = 150;
+	ship->iter = 100;
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			mb->pr = (x - WIDTH / 2) / (mb->zoom * WIDTH) + mb->move_x;
-			mb->pi = (y - HEIGHT / 2) / (mb->zoom * HEIGHT) + mb->move_y;
-			mb->new_re = mb->new_im = mb->old_re = mb->old_im = 0;
+			ship->new_re = 0; 
+			ship->new_im = 0;
+			ship->pr = (x - WIDTH / 2) / (ship->zoom * WIDTH) + ship->move_x;
+			ship->pi = (y - HEIGHT / 2) / (ship->zoom * HEIGHT) + ship->move_y;
 			i = 0;
-			while (i < mb->iter)
+			while ((ship->new_re * ship->new_re + ship->new_im * ship->new_im) <= 4 && i < ship->iter)
 			{
-				mb->old_re = mb->new_re;
-				mb->old_im = mb->new_im;
-				mb->new_re = mb->old_re * mb->old_re - mb->old_im * mb->old_im + mb->pr;
-				mb->new_im = 2 * mb->old_re * mb->old_im + mb->pi;
-				mb->color = encode_rgb(i, mb->iter, setting);
-				if ((mb->new_re * mb->new_re + mb->new_im * mb->new_im) > 4)
+				ship->old_re = ship->new_re;
+				ship->old_im = ship->new_im;
+				ship->new_re = ship->old_re * ship->old_re - ship->old_im * ship->old_im + ship->pr;
+				ship->new_im = 2 * fabs(ship->old_re * ship->old_im) + ship->pi;
+				ship->color = encode_rgb(i, ship->iter, setting);
+				// if ((ship->new_re * ship->new_re + ship->new_im * ship->new_im) > 4)
+				// {
+				// 	my_mlx_pixel_put(img, x, y, ship->color);
+				// 	break ;
+				// }
+				my_mlx_pixel_put(img, x, y, ship->color);
+				++i;
+			}
+			++x;
+		}
+		++y;
+	}
+	return (0);
+}
+
+int	render_newton(t_img *img, t_set *new, int *setting)
+{
+	int	x;
+	int	y;
+	int	i;
+
+	y = 0;
+	new->iter = 150;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			new->new_re = (x - WIDTH / 2) / (new->zoom * WIDTH) + new->move_x;
+			new->new_im = (y - HEIGHT / 2) / (new->zoom * HEIGHT) + new->move_y;
+			i = 0;
+			while (i < new->iter)
+			{
+				new->old_re = new->new_re;
+				new->old_im = new->new_im;
+				new->new_re = new->old_re * new->old_re - new->old_im * new->old_im + new->c_re;
+				new->new_im = 2 * new->old_re * new->old_im + new->c_im;
+				new->color = encode_rgb(i, new->iter, setting);
+				if ((new->new_re * new->new_re + new->new_im * new->new_im) > 4)
 				{
-					my_mlx_pixel_put(img, x, y, mb->color);
+					my_mlx_pixel_put(img, x, y, new->color);
 					break ;
 				}
-				// my_mlx_pixel_put(img, x, y, 0xF);
-				my_mlx_pixel_put(img, x, y, mb->color);
+				my_mlx_pixel_put(img, x, y, new->color);
 				++i;
 			}
 			++x;
@@ -168,12 +262,12 @@ int	render(t_data *data)
 		perror("Window is broken\n");
 		exit(EXIT_FAILURE);
 	}
-	// render_background(&data->img, 0xFFFFFF);
-	
 	if (data->setting[0] == 1)
 		render_mandelbrot(&data->img, &data->set, data->setting);
 	else if (data->setting[0] == 2)
 		render_julia(&data->img, &data->set, data->setting);
+	else if (data->setting[0] == 3)
+		render_ship(&data->img, &data->set, data->setting);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
 	return (0);
 }
@@ -220,9 +314,9 @@ int	mouse_hook(int keycode, int x, int y, t_data *data)
 
 void	error_msg(void)
 {
-	printf("Invalid parameter(s)!\nThe porgram should be execution in the following way:\n");
+	printf("Invalid parameter(s)!\nThe porgram should be executed in the following way:\n");
 	printf("./fractol <fractal set> <color set> <constant set>\n");
-	printf("<fractal set> values: Mandelbrot, Julia, Newton\n");
+	printf("<fractal set> values: Mandelbrot, Julia, Ship\n");
 	printf("<color set> values: 1, 2, 3\n");
 	printf("<constant set> is only used for Julia set. It can be: 1, 2, 3\n");
 	printf("Please, try again\n");
@@ -235,7 +329,7 @@ void	check_input(char *argv[], t_data *data)
 		data->setting[0] = 1;
 	else if (ft_strncmp(argv[1], "Julia", 6) == 0)
 		data->setting[0] = 2;
-	else if (ft_strncmp(argv[1], "Newton", 7) == 0)
+	else if (ft_strncmp(argv[1], "Ship", 5) == 0)
 		data->setting[0] = 3;
 	else
 		data->setting[0] = -1;
@@ -258,7 +352,7 @@ int	main(int argc, char *argv[])
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		return (1);
-	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, argv[data.setting[0]]);
+	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, argv[1]);
 	if (!data.win)
 	{
 		free(data.win);
@@ -266,7 +360,7 @@ int	main(int argc, char *argv[])
 	}
 	data.img.mlx_img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_length, &data.img.endian);
-	if (data.setting[0] == 1)
+	if (data.setting[0] == 1 || data.setting[0] == 3)
 		init_mb(&data);
 	else if (data.setting[0] == 2)
 		init_julia(&data);
