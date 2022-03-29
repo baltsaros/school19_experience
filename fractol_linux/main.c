@@ -1,89 +1,33 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "./mlx_linux/mlx.h"
-#include <stdio.h>
+#include "fractol.h"
 
-typedef struct	s_img
+void	init_mb(t_data *data)
 {
-	void	*mlx_img;
-	char	*addr;
-	int		bpp;
-	int		line_length;
-	int		endian;
-}	t_img;
-
-typedef struct	s_data {
-	void	*mlx;
-	void	*win;
-	t_img	img;
-	int		cur_img;
-}	t_data;
-
-typedef struct s_rect
-{
-	int	x;
-	int	y;
-	int width;
-	int height;
-	int color;
-}	t_rect;
-
-typedef struct s_set
-{
-	double	pr;
-	double	pi;
-	double	newRe;
-	double	newIm;
-	double	oldRe;
-	double	oldIm;
-	double	zoom;
-	double	moveX;
-	double	moveY;
-	int		color;
-	int		maxIter;
-}	t_set;
-
-typedef struct s_round
-{
-	int	x;
-	int	y;
-	int width;
-	int height;
-	int	radius;
-	int color;
-}	t_round;
-
-
-enum {
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
-
-void	init_set(t_set *mb)
-{
-	mb->zoom = 1;
-	mb->moveX = -0.5;
-	mb->moveY = 0;
-	mb->maxIter = 50;
-	mb->color = 10000;
+	data->set.zoom = 0.1;
+	data->set.move_x = 0.1;
+	data->set.move_y = 0.1;
 }
 
-int	key_hook(int keycode, t_data *data)
+void	init_julia(t_data *data)
 {
-	if (keycode == 53 || keycode == 65307)
+	data->set.zoom = 0.1;
+	data->set.move_x = 0.1;
+	data->set.move_y = 0.1;
+	data->set.color = 251231;
+	if (data->setting[2] == 1)
 	{
-		mlx_destroy_window(data->mlx, data->win);
-		data->win = NULL;
-		exit(0);
+		data->set.c_re = -0.7;
+		data->set.c_im = 0.27;
 	}
-	else
-		printf("Key %d was pressed!\n", keycode);
-	return (0);
+	else if (data->setting[2] == 2)
+	{
+		data->set.c_re = -0.7;
+		data->set.c_im = 0.32;
+	}
+	else if (data->setting[2] == 3)
+	{
+		data->set.c_re = -0.743;
+		data->set.c_im = 0.32;
+	}
 }
 
 // int	exit_hook(int keycode, t_data *data)
@@ -100,7 +44,7 @@ int	key_hook(int keycode, t_data *data)
 // 	return (0);
 // }
 
-int	encode_rgb(int t, int red, int green, int blue)
+int	encode_trgb(int t, int red, int green, int blue)
 {
 	return (t << 24 | red << 16 | green << 8 | blue);
 }
@@ -112,7 +56,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 	i = img ->bpp - 8;
 	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	// *(unsigned int*)dst = color;
+	*(unsigned int*)dst = color;
 	while (i >= 0)
 	{
 		if (img->endian != 0)
@@ -123,52 +67,35 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	}
 }
 
-int	render_rect(t_img *img, t_rect rect)
-{
-	int	i;
-	int	j;
-
-	i = rect.y;
-	while (i < rect.y + rect.height)
-	{
-		j = rect.x;
-		while (j < rect.x + rect.width)
-			my_mlx_pixel_put(img, j++, i, rect.color);
-		++i;
-	}
-	return (0);
-}
-
-int	render_mandelbrot(t_img *img, t_set mb)
+int	render_julia(t_img *img, t_set *jul, int *setting)
 {
 	int	x;
 	int	y;
 	int	i;
-	int	iter;
-	int	color;
 
 	y = 0;
-	iter = 200;
-	color = 9999;
-	while (y < 800)
+	jul->iter = 50;
+	while (y < HEIGHT)
 	{
 		x = 0;
-		while (x < 900)
+		while (x < WIDTH)
 		{
-			mb.pr = 1.5 * (x - 900 / 2) / (0.5 * mb.zoom * 900) + mb.moveX;
-			mb.pi = (y - 800 / 2) / (0.5 * mb.zoom * 800) + mb.moveY;
-			mb.newRe = mb.newIm = mb.oldRe = mb.oldIm = 0;
+			jul->new_re = (x - WIDTH / 2) / (jul->zoom * WIDTH) + jul->move_x;
+			jul->new_im = (y - HEIGHT / 2) / (jul->zoom * HEIGHT) + jul->move_y;
 			i = 0;
-			while (i < iter)
+			while (i < jul->iter)
 			{
-				mb.oldRe = mb.newRe;
-				mb.oldIm = mb.newIm;
-				mb.newRe = mb.oldRe * mb.oldRe - mb.oldIm + mb.pr;
-				mb.newIm = 2 * mb.oldRe * mb.oldIm + mb.pi;
-				if ((mb.newRe * mb.newRe + mb.newIm * mb.newIm) > 4)
+				jul->old_re = jul->new_re;
+				jul->old_im = jul->new_im;
+				jul->new_re = jul->old_re * jul->old_re - jul->old_im * jul->old_im + jul->c_re;
+				jul->new_im = 2 * jul->old_re * jul->old_im + jul->c_im;
+				jul->color = encode_rgb(i, jul->iter, setting);
+				if ((jul->new_re * jul->new_re + jul->new_im * jul->new_im) > 4)
+				{
+					my_mlx_pixel_put(img, x, y, jul->color);
 					break ;
-				color += 250;
-				my_mlx_pixel_put(img, x, y, color);
+				}
+				my_mlx_pixel_put(img, x, y, jul->color);
 				++i;
 			}
 			++x;
@@ -178,18 +105,42 @@ int	render_mandelbrot(t_img *img, t_set mb)
 	return (0);
 }
 
-int	render_round(t_img *img, t_round round)
+int	render_mandelbrot(t_img *img, t_set *mb, int *setting)
 {
+	int	x;
+	int	y;
 	int	i;
-	int	j;
 
-	i = round.y;
-	while (i < round.y + round.height)
+	y = 0;
+	mb->iter = 150;
+	while (y < HEIGHT)
 	{
-		j = round.x;
-		while (j < round.x + round.width)
-			my_mlx_pixel_put(img, j++, i, round.color);
-		++i;
+		x = 0;
+		while (x < WIDTH)
+		{
+			mb->pr = (x - WIDTH / 2) / (mb->zoom * WIDTH) + mb->move_x;
+			mb->pi = (y - HEIGHT / 2) / (mb->zoom * HEIGHT) + mb->move_y;
+			mb->new_re = mb->new_im = mb->old_re = mb->old_im = 0;
+			i = 0;
+			while (i < mb->iter)
+			{
+				mb->old_re = mb->new_re;
+				mb->old_im = mb->new_im;
+				mb->new_re = mb->old_re * mb->old_re - mb->old_im * mb->old_im + mb->pr;
+				mb->new_im = 2 * mb->old_re * mb->old_im + mb->pi;
+				mb->color = encode_rgb(i, mb->iter, setting);
+				if ((mb->new_re * mb->new_re + mb->new_im * mb->new_im) > 4)
+				{
+					my_mlx_pixel_put(img, x, y, mb->color);
+					break ;
+				}
+				// my_mlx_pixel_put(img, x, y, 0xF);
+				my_mlx_pixel_put(img, x, y, mb->color);
+				++i;
+			}
+			++x;
+		}
+		++y;
 	}
 	return (0);
 }
@@ -200,10 +151,10 @@ void	render_background(t_img *img, int color)
 	int	j;
 
 	i = 0;
-	while (i < 800)
+	while (i < HEIGHT)
 	{
 		j = 0;
-		while (j < 900)
+		while (j < WIDTH)
 			my_mlx_pixel_put(img, j++, i, color);
 		++i;
 	}
@@ -211,54 +162,120 @@ void	render_background(t_img *img, int color)
 
 int	render(t_data *data)
 {
-	t_set	mandelbrot;
 
 	if (data->win == NULL)
-		return (1);
-	render_background(&data->img, 0xFFFFFF);
-	// render_rect(&data->img, (t_rect){0, 0, 100, 100, 0xFF00});
-	// render_rect(&data->img, (t_rect){1720, 880, 200, 200, 0xFF0000});
-	// render_rect(&data->img, (t_rect){500, 500, 200, 200, 203569230});
-	// render_rect(&data->img, (t_rect){500, 500, 200, 200, 203569230});
-	init_set(&mandelbrot);
-	render_mandelbrot(&data->img, mandelbrot);
+	{
+		perror("Window is broken\n");
+		exit(EXIT_FAILURE);
+	}
+	// render_background(&data->img, 0xFFFFFF);
+	
+	if (data->setting[0] == 1)
+		render_mandelbrot(&data->img, &data->set, data->setting);
+	else if (data->setting[0] == 2)
+		render_julia(&data->img, &data->set, data->setting);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
 	return (0);
 }
 
-int	main(void)
+int	key_hook(int keycode, t_data *data)
+{
+	if (keycode == 65307)
+	{
+		mlx_destroy_window(data->mlx, data->win);
+		data->win = NULL;
+		exit(EXIT_SUCCESS);
+	}
+	else if (keycode == 65361)
+		data->set.move_x *= 1.1;
+	else if (keycode == 65363)
+		data->set.move_x *= 0.9;
+	else if (keycode == 65362)
+		data->set.move_y *= 1.1;
+	else if (keycode == 65364)
+		data->set.move_y *= 0.9;
+	else if (keycode == 45)
+		data->set.zoom *= 1.5;
+	else if (keycode == 61)
+		data->set.zoom *= 0.9;
+	else
+		printf("Key %d was pressed!\n", keycode);
+	render(data);
+	return (0);
+}
+
+int	mouse_hook(int keycode, int x, int y, t_data *data)
+{
+	if (keycode == 4)
+		data->set.zoom *= 1.1;
+	else if (keycode == 5)
+		data->set.zoom *= 0.9;
+	data->set.pr = (x - WIDTH / 2) / (data->set.zoom * WIDTH) + data->set.move_x;
+	data->set.pi = (y - HEIGHT / 2) / (data->set.zoom * HEIGHT) + data->set.move_y;
+	data->set.move_x = data->set.pr;
+	data->set.move_y = data->set.pi;
+	render(data);
+	return (0);
+}
+
+void	error_msg(void)
+{
+	printf("Invalid parameter(s)!\nThe porgram should be execution in the following way:\n");
+	printf("./fractol <fractal set> <color set> <constant set>\n");
+	printf("<fractal set> values: Mandelbrot, Julia, Newton\n");
+	printf("<color set> values: 1, 2, 3\n");
+	printf("<constant set> is only used for Julia set. It can be: 1, 2, 3\n");
+	printf("Please, try again\n");
+	exit(EXIT_FAILURE);
+}
+
+void	check_input(char *argv[], t_data *data)
+{
+	if (ft_strncmp(argv[1], "Mandelbrot", 11) == 0)
+		data->setting[0] = 1;
+	else if (ft_strncmp(argv[1], "Julia", 6) == 0)
+		data->setting[0] = 2;
+	else if (ft_strncmp(argv[1], "Newton", 7) == 0)
+		data->setting[0] = 3;
+	else
+		data->setting[0] = -1;
+	data->setting[1] = ft_mini_atoi(argv[2]);
+	data->setting[2] = 0;
+	if (data->setting[0] == 2)
+		data->setting[2] = ft_mini_atoi(argv[3]);
+	printf("setting: %d | %d | %d \n", data->setting[0], data->setting[1], data->setting[2]);
+	if (data->setting[0] < 0 || data->setting[1] < 0 || data->setting[2] < 0)
+		error_msg();
+}
+
+int	main(int argc, char *argv[])
 {
 	t_data	data;
 
+	if (argc < 3 || argc > 4)
+		error_msg();
+	check_input(argv, &data);
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		return (1);
-	data.win = mlx_new_window(data.mlx, 900, 800, "Test01");
+	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, argv[data.setting[0]]);
 	if (!data.win)
 	{
 		free(data.win);
 		return (1);
 	}
-	data.img.mlx_img = mlx_new_image(data.mlx, 900, 800);
+	data.img.mlx_img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_length, &data.img.endian);
-	mlx_loop_hook(data.mlx, &render, &data);
-	mlx_hook(data.win, 2, 3, key_hook, &data);
-	// mlx_hook(data.win, 2, 17, exit_hook, &data);
+	if (data.setting[0] == 1)
+		init_mb(&data);
+	else if (data.setting[0] == 2)
+		init_julia(&data);
+	// mlx_loop_hook(data.mlx, &render, &data);
+	mlx_key_hook(data.win, key_hook, &data);
+	mlx_mouse_hook(data.win, mouse_hook, &data);
 	// mlx_put_image_to_window(data.mlx, data.win, data.img.mlx_img, 0, 0);
-	// my_mlx_pixel_put(&img, 10, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 9, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 8, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 7, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 6, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 5, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 4, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 3, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 2, 5, 0xFF00);
-	// my_mlx_pixel_put(&img, 1, 5, 0xFF00);
 	mlx_loop(data.mlx);
 	mlx_destroy_window(data.mlx, data.win);
-	// mlx_destroy_display(mlx);
-	printf("01\n");
 	free(data.mlx);
 	return (0);
 }

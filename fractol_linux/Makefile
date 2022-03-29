@@ -1,6 +1,9 @@
 NAME	= fractol
 
 SRCS	= main.c \
+			ft_mini_atoi.c \
+			ft_strncmp.c \
+			color.c \
 
 OBJS	= ${SRCS:.c=.o}
 
