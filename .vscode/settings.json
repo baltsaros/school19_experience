@@ -3,6 +3,7 @@
 		"fcntl.h": "c",
 		"pipex.h": "c",
 		"stdlib.h": "c",
-		"push_swap.h": "c"
+		"push_swap.h": "c",
+		"fractol.h": "c"
 	}
 }

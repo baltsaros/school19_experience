@@ -6,7 +6,7 @@
 #    By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:16:10 by abuzdin           #+#    #+#              #
-#    Updated: 2022/03/22 09:28:36 by abuzdin          ###   ########.fr        #
+#    Updated: 2022/03/22 10:05:44 by abuzdin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ INCS	= .
 GCC		= gcc
 RM		= rm -f
 RMF		= rm -rf
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror
 
 $(OBJDIR)/%.o : %.c
 			@mkdir -p $(OBJDIR)
