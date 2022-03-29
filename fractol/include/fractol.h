@@ -46,8 +46,31 @@ typedef struct	s_data {
 	int		setting[3];
 }	t_data;
 
+// errors
+void	error_msg(void);
+void	check_mlx(void *mlx);
+void	check_win(void *win);
+
+// utils
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_mini_atoi(const char *str);
 int		encode_rgb(int i, int iter, int *setting);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+// hooks
+int		key_hook(int keycode, t_data *data);
+int		mouse_hook(int keycode, int x, int y, t_data *data);
+// set initialization
+void	init_mb(t_data *data);
+void	init_julia(t_data *data);
+void	init_newton(t_data *data);
+// render
+int		render_mandelbrot(int x, int y, t_img *img, t_set *mb, int *setting);
+int		render_julia(int x, int y, t_img *img, t_set *jul, int *setting);
+int		render_ship(int x, int y, t_img *img, t_set *ship, int *setting);
+
+// fractol
+int		render(t_data *data);
+void	check_input(int argc, char *argv[], t_data *data);
+int		main(int argc, char *argv[]);
 
 #endif
