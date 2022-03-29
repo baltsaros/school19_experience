@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:57:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/29 13:37:35 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/29 14:54:12 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fractol.h>
+#include "fractol.h"
 
 void	init_mb(t_data *data)
 {
@@ -63,4 +63,3 @@ void	init_newton(t_data *data)
 		data->set.c_im = -0.08;
 	}
 }
-

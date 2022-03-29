@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/29 13:37:27 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/29 14:53:29 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fractol.h>
+#include "fractol.h"
 
 int	key_hook(int keycode, t_data *data)
 {
@@ -44,8 +44,10 @@ int	mouse_hook(int keycode, int x, int y, t_data *data)
 		data->set.zoom *= 1.1;
 	else if (keycode == 5)
 		data->set.zoom *= 0.9;
-	data->set.pr = (x - WIDTH / 2) / (data->set.zoom * WIDTH) + data->set.move_x;
-	data->set.pi = (y - HEIGHT / 2) / (data->set.zoom * HEIGHT) + data->set.move_y;
+	data->set.pr = (x - WIDTH / 2) / (data->set.zoom * WIDTH)
+		+ data->set.move_x;
+	data->set.pi = (y - HEIGHT / 2) / (data->set.zoom * HEIGHT)
+		+ data->set.move_y;
 	data->set.move_x = data->set.pr;
 	data->set.move_y = data->set.pi;
 	render(data);

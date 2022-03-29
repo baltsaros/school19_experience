@@ -6,34 +6,31 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:30:50 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/29 13:55:30 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/29 14:48:35 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fractol.h>
+#include "fractol.h"
 
 int	render(t_data *data)
 {
-	int	x;
-	int	y;
-
 	check_win(data->win);
-	y = 0;
+	data->y = 0;
 	data->set.iter = 150;
-	while (y < HEIGHT)
+	while (data->y < HEIGHT)
 	{
-		x = 0;
-		while (x < WIDTH)
+		data->x = 0;
+		while (data->x < WIDTH)
 		{
 			if (data->setting[0] == 1)
-				render_mandelbrot(x, y, &data->img, &data->set, data->setting);
+				render_mandelbrot(data, &data->img, &data->set, data->setting);
 			else if (data->setting[0] == 2)
-				render_julia(x, y, &data->img, &data->set, data->setting);
+				render_julia(data, &data->img, &data->set, data->setting);
 			else if (data->setting[0] == 3)
-				render_ship(x, y, &data->img, &data->set, data->setting);
-			++x;
+				render_ship(data, &data->img, &data->set, data->setting);
+			++data->x;
 		}
-		++y;
+		++data->y;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
 	return (0);
