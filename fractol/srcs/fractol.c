@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:30:50 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/31 09:54:27 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/31 13:11:24 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	render(t_data *data)
 {
-	check_win(data->win);
+	check_win(data);
 	data->y = 0;
 	data->set.iter = 150;
 	while (data->y < HEIGHT)
@@ -66,7 +66,7 @@ int	main(int argc, char *argv[])
 	data.mlx = mlx_init();
 	check_mlx(data.mlx);
 	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, argv[1]);
-	check_win(data.win);
+	check_win(&data);
 	data.img.mlx_img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp,
 			&data.img.line_length, &data.img.endian);
@@ -77,7 +77,5 @@ int	main(int argc, char *argv[])
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_mouse_hook(data.win, mouse_hook, &data);
 	mlx_loop(data.mlx);
-	mlx_destroy_window(data.mlx, data.win);
-	free(data.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:43:46 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/31 09:27:51 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/31 11:36:21 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_data {
 // errors
 void	error_msg(void);
 void	check_mlx(void *mlx);
-void	check_win(void *win);
+void	check_win(t_data *data);
 
 // utils
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

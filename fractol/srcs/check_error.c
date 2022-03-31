@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:34:33 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/29 17:47:06 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/31 12:14:34 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	error_msg(void)
 {
 	printf("Invalid parameter(s)!\n");
-	printf("The porgram should be executed in the following way:\n");
+	printf("The program should be executed in the following way:\n");
 	printf("./fractol <fractal set> <color set> <constant set>\n");
 	printf("<fractal set> values: Mandelbrot, Julia, Ship\n");
 	printf("<color set> values: 1, 2, 3\n");
@@ -29,16 +29,18 @@ void	check_mlx(void *mlx)
 	if (!mlx)
 	{
 		perror("Mlx init error\n");
+		free(mlx);
 		exit(EXIT_FAILURE);
 	}
 }
 
-void	check_win(void *win)
+void	check_win(t_data *data)
 {
-	if (!win)
+	if (!data->win)
 	{
 		perror("Window is borken!\n");
-		free(win);
+		free(data->mlx);
+		free(data->win);
 		exit(EXIT_FAILURE);
 	}
 }
