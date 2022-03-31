@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:30:50 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/31 13:11:24 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/31 16:11:16 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	main(int argc, char *argv[])
 		init_julia(&data);
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_mouse_hook(data.win, mouse_hook, &data);
+	mlx_hook(data.win, 17, 1L << 17, ft_exit, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }

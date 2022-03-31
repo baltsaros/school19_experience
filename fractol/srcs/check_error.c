@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:34:33 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/31 12:14:34 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/31 16:02:33 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	check_win(t_data *data)
 	if (!data->win)
 	{
 		perror("Window is borken!\n");
+		mlx_destroy_image(data->mlx, data->img.mlx_img);
+		mlx_destroy_window(data->mlx, data->win);
 		free(data->mlx);
 		free(data->win);
 		exit(EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:54:27 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/29 17:47:15 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/31 16:10:10 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,12 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 			*dst++ = (color >> (img->bpp - 8 - i)) & 0xFF;
 		i -= 8;
 	}
+}
+
+int	ft_exit(t_data *data)
+{
+	mlx_destroy_image(data->mlx, data->img.mlx_img);
+	mlx_destroy_window(data->mlx, data->win);
+	free(data->mlx);
+	exit(EXIT_SUCCESS);
 }
