@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:43:46 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/29 14:58:40 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/31 09:27:51 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ typedef struct s_set
 	double	move_y;
 	int		color;
 	int		iter;
-	double	c_re;
-	double	c_im;
 }	t_set;
 
 typedef struct s_data {

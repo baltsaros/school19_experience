@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:30:50 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/29 17:46:52 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/31 09:54:27 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	check_input(int argc, char *argv[], t_data *data)
 		data->setting[0] = -1;
 	data->setting[1] = ft_mini_atoi(argv[2]);
 	data->setting[2] = 0;
+	if (argc == 3 && data->setting[0] == 2)
+		error_msg();
 	if (data->setting[0] == 2)
 		data->setting[2] = ft_mini_atoi(argv[3]);
 	if (data->setting[0] < 0 || data->setting[1] < 0 || data->setting[2] < 0)

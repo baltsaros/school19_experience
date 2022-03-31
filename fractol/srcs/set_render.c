@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:13:02 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/29 17:47:28 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/31 09:22:54 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	render_julia(t_data *data, t_img *img, t_set *jul, int *setting)
 		jul->old_re = jul->new_re;
 		jul->old_im = jul->new_im;
 		jul->new_re = jul->old_re * jul->old_re - jul->old_im
-			* jul->old_im + jul->c_re;
-		jul->new_im = 2 * jul->old_re * jul->old_im + jul->c_im;
+			* jul->old_im + jul->pr;
+		jul->new_im = 2 * jul->old_re * jul->old_im + jul->pi;
 		jul->color = encode_rgb(i, jul->iter, setting);
 		if ((jul->new_re * jul->new_re + jul->new_im * jul->new_im) > 4)
 		{

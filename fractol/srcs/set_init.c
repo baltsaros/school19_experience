@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:57:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/29 17:47:25 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/03/31 09:22:11 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ void	init_julia(t_data *data)
 	data->set.move_y = 0.1;
 	if (data->setting[2] == 1)
 	{
-		data->set.c_re = -0.7;
-		data->set.c_im = 0.27;
+		data->set.pr = -0.7;
+		data->set.pi = 0.27;
 	}
 	else if (data->setting[2] == 2)
 	{
-		data->set.c_re = -0.7;
-		data->set.c_im = 0.32;
+		data->set.pr = -0.7;
+		data->set.pi = 0.32;
 	}
 	else if (data->setting[2] == 3)
 	{
-		data->set.c_re = -0.77;
-		data->set.c_im = -0.08;
+		data->set.pr = -0.77;
+		data->set.pi = -0.08;
 	}
 }
 
@@ -49,17 +49,17 @@ void	init_newton(t_data *data)
 	data->set.color = 251231;
 	if (data->setting[2] == 1)
 	{
-		data->set.c_re = -0.7;
-		data->set.c_im = 0.27;
+		data->set.pr = -0.7;
+		data->set.pi = 0.27;
 	}
 	else if (data->setting[2] == 2)
 	{
-		data->set.c_re = -0.7;
-		data->set.c_im = 0.32;
+		data->set.pr = -0.7;
+		data->set.pi = 0.32;
 	}
 	else if (data->setting[2] == 3)
 	{
-		data->set.c_re = -0.77;
-		data->set.c_im = -0.08;
+		data->set.pr = -0.77;
+		data->set.pi = -0.08;
 	}
 }

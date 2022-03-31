@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/29 12:50:23 by abuzdin           #+#    #+#              #
-#    Updated: 2022/03/30 10:42:45 by abuzdin          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 C_PURPLE_B		=\033[1;95m
 C_YELLOW_B		=\033[1;33m
 C_RED_B			=\033[1;31m
@@ -17,14 +5,7 @@ C_WHITE			=\033[0;97m
 C_GREEN_B		=\033[1;32m
 C_RESET			=\033[0m
 
-NAME	= fractol
-
-# SRC_FILES	= fractol.c \
-# 				fractol_utils.c \
-# 				hooks.c \
-# 				check_error.c \
-# 				set_init.c \
-# 				set_render.c \
+NAME		= fractol
 
 SRC_DIR		= srcs
 SRC_FILES	= ${shell find ${SRC_DIR} -name '*.c'}
@@ -34,21 +15,23 @@ OBJ_DIR		= objs
 OBJ_FILES	= ${SRCS:.c=.o}
 OBJS		= ${addprefix ${OBJ_DIR}/,${OBJ_FILES}}
 
-INCS	= -Iminilibx -Iinclude
+INCS		= -Iminilibx -Iinclude
 
-GCC		= gcc
-RM		= rm -f
-RMF		= rm -rf
-CFLAGS	= -Wall -Wextra -Werror
+GCC			= gcc
+RM			= rm -f
+RMF			= rm -rf
+CFLAGS		= -Wall -Wextra -Werror
 
-${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
-			mkdir -p ${OBJ_DIR}
+${OBJ_DIR}/%.o : ${SRC_DIR}/%.c
+			@mkdir -p ${OBJ_DIR}
 			@echo "${C_YELLOW_B}Compiling...${C_RESET}";
-			${GCC} ${CFLAGS} -c $< ${INCS} -o $@
+			@${GCC} ${CFLAGS} -c $< ${INCS} -o $@
 
 ${NAME}:	${OBJS}
-			${GCC} ${OBJS} ${INCS} -Lminilibx -lmlx -framework OpenGL -framework AppKit -o ${NAME}
+			@${GCC} ${OBJS} ${INCS} -Lminilibx -lmlx -framework OpenGL -framework AppKit -o ${NAME}
 			@echo "${C_GREEN_B}Finished!${C_RESET}";
+
+all:		${NAME}
 
 norm:
 			@echo "${C_PURPLE_B}Let's test the Norm!${C_RESET}";
@@ -56,8 +39,8 @@ norm:
 			@echo "${C_PURPLE_B}Done!${C_RESET}";
 clean:
 			@echo "${C_RED_B}Deleting fractol o-files...${C_RESET}";
-			@${RM} ${OBJS} ${OBJS_b}
-			@${RMF} ${OBJDIR}
+			@${RM} ${OBJS}
+			@${RMF} ${OBJ_DIR}
 			@echo "${C_RED_B}Fractol o-files have been deleted!${C_RESET}";
 
 fclean:		clean
