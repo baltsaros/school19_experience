@@ -52,4 +52,4 @@ The project was tested by myself and peers
 ![alt text](https://github.com/baltsaros/school19_experience/blob/main/fractol/pics/2.jpeg)
 ![alt text](https://github.com/baltsaros/school19_experience/blob/main/fractol/pics/3.jpeg)
 ![alt text](https://github.com/baltsaros/school19_experience/blob/main/fractol/pics/4.png)
-![alt text](https://github.com/baltsaros/school19_experience/blob/main/fractol/pics/4.png)
+![alt text](https://github.com/baltsaros/school19_experience/blob/main/fractol/pics/5.png)
