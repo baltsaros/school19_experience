@@ -50,4 +50,4 @@ The project was tested by myself, [tester](https://github.com/LeoFu9487/push_swa
 	(2) argc == 2, i.e.: ./pipex "3 4 1 5 6"
 * Dublicates, non-numeric characters, too big/small integers should not be accepted. Note that if you want to use ft_atoi from libft, you need to modify it to handle cases such as "12aa", "2147483648", etc.
 * I used doubly circular linked lists, but I believe that linked lists are a better option for this project, since they are simpler
-* I used two algos: one for a small dataset (less than 7, hard coding) and another one for a bigger dataset 
+* I used two algos: one for a small dataset (less than 7, hard coding) and another one for a bigger dataset
