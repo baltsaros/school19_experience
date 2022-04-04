@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:30:50 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/04 14:40:13 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/04 14:45:14 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	render(t_data *data)
 {
 	check_win(data);
 	data->y = 0;
-	data->set.iter = 150;
+	data->set.iter = 450;
 	while (data->y < HEIGHT)
 	{
 		data->x = 0;

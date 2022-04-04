@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/04 12:40:00 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/04 14:43:21 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	key_hook(int keycode, t_data *data)
 	else if (keycode == 27)
 		data->set.zoom *= 0.9;
 	else
-		printf("Key %d was pressed!\n", keycode);
+		ft_printf("Key %d was pressed!\n", keycode);
 	render(data);
 	return (0);
 }

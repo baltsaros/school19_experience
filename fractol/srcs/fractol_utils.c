@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:54:27 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/04 13:55:23 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/04 12:39:55:23abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@ int	encode_rgb(int i, int iter, int *setting)
 	else
 		exit(EXIT_FAILURE);
 }
+
+// for i more than 150
+// int	encode_rgb(int i, int iter, int *setting)
+// {
+// 	if (setting[1] == 1)
+// 		return (((1433 + i) % 250) << 16 | 190 << 8
+// 			| 80 * (i < iter));
+// 	else if (setting[1] == 2)
+// 		return (((1499 + i) % 256) << 16 | 155 << 8
+// 			| 200 * (i < iter));
+// 	else if (setting[1] == 3)
+// 		return (((133 + i) % 150) << 16 | 235 << 8
+// 			| 170 * (i < iter));
+// 	else
+// 		exit(EXIT_FAILURE);
+// }
 
 int	ft_mini_atoi(const char *str)
 {
