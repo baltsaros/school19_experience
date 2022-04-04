@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:34:33 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/04 13:37:36 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/04 15:31:05 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	check_mlx(void *mlx)
 	if (!mlx)
 	{
 		perror("Mlx init error\n");
-		free(mlx);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -40,9 +39,6 @@ void	check_win(t_data *data)
 	{
 		perror("Window is borken!\n");
 		mlx_destroy_image(data->mlx, data->img.mlx_img);
-		mlx_destroy_window(data->mlx, data->win);
-		free(data->mlx);
-		free(data->win);
 		exit(EXIT_FAILURE);
 	}
 }
