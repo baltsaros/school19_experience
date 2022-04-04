@@ -46,3 +46,10 @@ The project was tested by myself and peers
 * It is possible to trace operation with the window by using _mlx-hook_. Read more [here](https://harm-smits.github.io/42docs/libs/minilibx/events.html) about X11 events and [masks](https://tronche.com/gui/x/xlib/events/mask.html)
 * Julia and Burning ship are highly similar to Mandelbrot, so just some minor adjustments are required to get them
 * The bigger is your _max-iteration_, more laggy is your program. I think 100-150 is the best number. Same for the window size
+
+## **Pics**
+![alt text](https://github.com/baltsaros/school19_experience/blob/main/fractol/pics/1.jpeg)
+![alt text](https://github.com/baltsaros/school19_experience/blob/main/fractol/pics/2.jpeg)
+![alt text](https://github.com/baltsaros/school19_experience/blob/main/fractol/pics/3.jpeg)
+![alt text](https://github.com/baltsaros/school19_experience/blob/main/fractol/pics/4.png)
+![alt text](https://github.com/baltsaros/school19_experience/blob/main/fractol/pics/4.png)
