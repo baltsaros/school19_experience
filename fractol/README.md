@@ -36,6 +36,8 @@ The project was tested by myself and peers
 
 **include** - header
 
+**pics** - pics
+
 ## **Useful resources**
 * [Tutorial](https://harm-smits.github.io/42docs/libs/minilibx/introduction.html) on _minilibX_
 * Another [one](https://aurelienbrabant.fr/blog/pixel-drawing-with-the-minilibx#)
