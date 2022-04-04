@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:54:27 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/04 12:39:56 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/04 13:55:23 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,6 @@ int	ft_mini_atoi(const char *str)
 		return (-1);
 	n = n * 10 + str[0] - '0';
 	return (n);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t			i;
-	unsigned char	*str1;
-	unsigned char	*str2;
-
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (str1[i] && str2[i] && str1[i] == str2[i] && i < (n - 1))
-		++i;
-	return (str1[i] - str2[i]);
 }
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)

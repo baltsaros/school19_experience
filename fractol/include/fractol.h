@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:43:46 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/31 16:06:21 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/04 13:55:28 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <mlx.h>
 # include <limits.h>
 # include <math.h>
+# include "../libft/libft.h"
 
 # define WIDTH 1000
 # define HEIGHT 1000
@@ -64,7 +65,6 @@ void	check_win(t_data *data);
 int		ft_exit(t_data *data);
 
 // utils
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_mini_atoi(const char *str);
 int		encode_rgb(int i, int iter, int *setting);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
