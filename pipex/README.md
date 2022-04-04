@@ -6,6 +6,7 @@
 > $> < file1 cmd1 | cmd2 > file2
 * For the main part the program should handle only two commands, while for the bonus part it should manage several commands (1) and here_doc (2)
 > (1) $> ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
+> 
 > (2) $> ./pipex here_doc LIMITER cmd cmd1 file
 
 ## **Testing**
