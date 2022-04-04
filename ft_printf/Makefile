@@ -6,7 +6,7 @@
 #    By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 12:08:26 by abuzdin           #+#    #+#              #
-#    Updated: 2022/01/31 17:32:17 by abuzdin          ###   ########.fr        #
+#    Updated: 2022/04/04 12:57:29 by abuzdin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,13 +36,15 @@ CFLAGS	= -Wall -Wextra -Werror
 %.o : %.c 
 			${GCC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
 
+all:		libft ${NAME}
+
 ${NAME}:	${OBJS}
+			${LIB} ${NAME} ${OBJS} 
+
+libft:
 			make -C ./libft
 			cp libft/libft.a .
 			mv libft.a ${NAME}
-			${LIB} ${NAME} ${OBJS} 
-
-all:		${NAME}
 
 norm:
 			norminette
@@ -62,4 +64,4 @@ bonus:		${OBJS}
 
 re:			fclean all
 
-.PHONY:		all clean fclean re .c.o norm
+.PHONY:		all clean fclean re .c.o norm libft
