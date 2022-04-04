@@ -15,7 +15,7 @@
 The project was tested by myself and peers
 
 ## **Attempts**
-**_1st try_**: 123% (one peer dislike colors)
+**_1st try_**: 123% (one peer found colors not good enough for max score)
 
 ## **Folders**
 **srcs** - source files
