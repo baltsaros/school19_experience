@@ -1,8 +1,6 @@
 ## **Project summary** 
 > This project aims to code a C library regrouping usual functions that you’ll be use for all your next projects
 
-For more info check _libft.pdf_
-
 ## **Testing**
 The project was tested by myself, peers and three testers ([libft-war-machine](https://github.com/y3ll0w42/libft-war-machine), [libft-unit-tests](https://github.com/alelievr/libft-unit-test) and [libft-Tripouille](https://github.com/Tripouille/libftTester))
 
@@ -32,7 +30,7 @@ The project was tested by myself, peers and three testers ([libft-war-machine](h
 * Keep going
 * Test
 * Rewrite
-* Test
+* Test against original functions. Try to write as many tests as possible. Only after this use testers
 * Protect functions in part 2 and bonus part
 * For part 1 copy prototypes from _man_
 * Add _ft_free_ in your ft_split to free every created string (including an array for strings) in case of error
