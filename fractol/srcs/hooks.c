@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/31 16:10:39 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/04 12:40:00 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	key_hook(int keycode, t_data *data)
 	{
 		mlx_destroy_image(data->mlx, data->img.mlx_img);
 		mlx_destroy_window(data->mlx, data->win);
-		free(data->win);
 		data->win = NULL;
 		exit(EXIT_SUCCESS);
 	}
