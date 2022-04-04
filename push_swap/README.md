@@ -31,7 +31,7 @@ Instructions:
 >	
 >• rrr : rra and rrb at the same time.
 
-* Bonus part is about writing _checker_ program that will check whether the data was properly sorted or not
+Bonus part is about writing _checker_ program that will check whether the data was properly sorted or not
 
 ## **Testing**
 The project was tested by myself, [tester](https://github.com/LeoFu9487/push_swap_tester) and peers
