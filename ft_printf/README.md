@@ -18,8 +18,7 @@ The project was tested by myself, [Tripouille tester](https://github.com/Tripoui
 **_1st try_**: 120% (for some reasons Moulinette could not compile test executable with my library; i might have some issues with my Makefil)
 
 ## **Useful resources**
-* [Article](https://www.geeksforgeeks.org/input-output-system-calls-c-create-open-close-read-write/#:~:text=File%20descriptor%20is%20integer%20that,pointers%20to%20file%20table%20entries.) about file descriptors, open, close, read and write functions
-* Valgrind start [guide](https://valgrind.org/docs/manual/quick-start.html)
+* [Article](https://www.geeksforgeeks.org/variadic-functions-in-c/) about variadic functions
 
 ## **Folders**
 **libft** - libft library
