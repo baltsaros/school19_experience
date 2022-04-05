@@ -32,4 +32,4 @@ The project was tested by myself, [Tripouille tester](https://github.com/Tripoui
 * Rewrite
 * Test
 * My approach to this project: read until new line and save everyting into static string. I return all characters until a new line (including) and save the rest (if any) in the static string (only what is left after the new line)
-* It is important to check for memory leaks, so install valgrind
+* It is important to check for memory leaks, so install [valgrind](https://github.com/LouisBrunner/valgrind-macos)
