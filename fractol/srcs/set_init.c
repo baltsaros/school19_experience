@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:57:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/03/31 09:22:11 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/05 16:22:33 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	init_julia(t_data *data)
 	}
 	else if (data->setting[2] == 3)
 	{
-		data->set.pr = -0.77;
-		data->set.pi = -0.08;
+		data->set.pr = -0.778;
+		data->set.pi = -0.116;
 	}
 }
 

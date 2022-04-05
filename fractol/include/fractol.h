@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:43:46 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/04 13:55:28 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/05 16:09:11 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 // hooks
 int		key_hook(int keycode, t_data *data);
 int		mouse_hook(int keycode, int x, int y, t_data *data);
+int	move_julia(int keycode, t_data *data);
 
 // set initialization
 void	init_mb(t_data *data);

@@ -21,6 +21,15 @@
 >• The use of images of the minilibX is strongly recommended.
 >
 
+## **How to use**
+* The program works only on Mac OS. Linux version require some minor modifications
+* Execute in the following way:
+> ./fractol <set name: Mandelbrot, Julia, Ship> <number for color from 1 to 3> <number for c; from 1 to 3, works only for Julia Set>
+* Move position with arrows, left and right mouse buttons
+* Zome with _-_ and _=_ or mouse wheel
+* For Julia Set it is possible to change value for c with _q_ and _w_ or _a_ and _s_
+* If you want to run more than 150 iteration, you should change the function for color (it is under comments inside fractol_utils.c)
+
 ## **Testing**
 The project was tested by myself and peers
 

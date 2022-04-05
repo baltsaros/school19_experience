@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/04 14:43:21 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/05 16:11:16 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,35 @@ int	key_hook(int keycode, t_data *data)
 		data->set.zoom *= 0.9;
 	else
 		ft_printf("Key %d was pressed!\n", keycode);
+	move_julia(keycode, data);
 	render(data);
+	return (0);
+}
+
+int	move_julia(int keycode, t_data *data)
+{
+	if (data->setting[0] != 2)
+		return (0);
+	if (keycode == 12)
+	{
+		data->set.pi -= 0.001; 
+		data->set.pr -= 0.001; 
+	}
+	else if (keycode == 13)
+	{
+		data->set.pi += 0.001; 
+		data->set.pr += 0.001; 
+	}
+	else if (keycode == 0)
+	{
+		data->set.pi -= 0.01; 
+		data->set.pr -= 0.01; 
+	}
+	else if (keycode == 1)
+	{
+		data->set.pi += 0.01; 
+		data->set.pr += 0.01; 
+	}
 	return (0);
 }
 
