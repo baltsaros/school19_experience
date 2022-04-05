@@ -12,19 +12,19 @@ Requirements:
 For bonus part it is required to use only one static variable and manage multiple fds
 
 ## **Testing**
-The project was tested by myself, [Tripouille tester](https://github.com/Tripouille/gnlTester) and peers
+The project was tested by myself, [Tripouille tester](https://github.com/Tripouille/printfTester), [Paulo-Santana](https://github.com/paulo-santana/ft_printf_tester)(really good one to test the bonus part) and peers
 
 ## **Attempts**
-**_1st try_**: 125%
+**_1st try_**: 120% (for some reasons Moulinette could not compile test executable with my library; i might have some issues with my Makefil)
 
 ## **Useful resources**
 * [Article](https://www.geeksforgeeks.org/input-output-system-calls-c-create-open-close-read-write/#:~:text=File%20descriptor%20is%20integer%20that,pointers%20to%20file%20table%20entries.) about file descriptors, open, close, read and write functions
 * Valgrind start [guide](https://valgrind.org/docs/manual/quick-start.html)
 
 ## **Folders**
-**gnl_with_main** - get_next_line with main functions inside
+**libft** - libft library
 
-**alanorm** - submitted folder edited according to the Norm
+**no_bonus** - version without the bonus part, where I didn't use structures
 
 ## **Tips**
 * Ask peers
@@ -33,5 +33,6 @@ The project was tested by myself, [Tripouille tester](https://github.com/Tripoui
 * Test
 * Rewrite
 * Test against the orinigal printf(). Write as many tests as possible, this will help to better understand how printf works
+* Main part is pretty straightforward, but for the bonus assignment you need to use a structure to hande various flags
 * My approach to this project: read until new line and save everyting into static string. Then I return all characters until a new line (including; in a new string) and save the rest (if any) in the static string (only what is left after the new line)
 * It is important to check for memory leaks, so install [valgrind](https://github.com/LouisBrunner/valgrind-macos)
