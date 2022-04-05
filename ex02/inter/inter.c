@@ -7,7 +7,7 @@ void	ft_putchar(char c)
 
 void	ft_inter(char *s1, char *s2)
 {
-	int	box[255];
+	int	box[256];
 	int	i;
 	int	j;
 

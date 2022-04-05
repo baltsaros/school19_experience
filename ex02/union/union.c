@@ -8,7 +8,7 @@ void	ft_putchar(char c)
 void	ft_union(char *s1, char *s2)
 {
 	int	i;
-	int	box[255];
+	int	box[256];
 
 	i = 0;
 	while (i < 255)
