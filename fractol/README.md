@@ -54,6 +54,7 @@ The project was tested by myself and peers
 * For better [understanding](https://www.wikihow.com/Plot-the-Mandelbrot-Set-By-Hand) on how to plot Mandelbrot set. Really useful
 * Mandelbrot and Julia sets [tutorial](https://lodev.org/cgtutor/juliamandelbrot.html). Really handy, but with spolilers
 * Just cool videos about Mandelbrot set: [one](https://youtu.be/p2jeFDjdJ-s) and [two](https://www.youtube.com/watch?v=JbN1vRmhox0)
+* Nice [video](https://www.youtube.com/watch?v=mjqswwqE1RQ) about bit-shifting and colors
 
 ## **Tips**
 * Ask peers
