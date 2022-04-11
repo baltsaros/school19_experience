@@ -19,7 +19,7 @@ The project was tested by myself, peers and three testers ([libft-war-machine](h
 ## **Useful resources**
 * Google
 * Peers
-* Neso Academy - great [videos](https://youtu.be/xLetJpcjHS0) about linked lists
+* Neso Academy - great [videos](https://www.youtube.com/playlist?list=PLBlnK6fEyqRj9lld8sWIUNwlKfdUoPd1Y) about linked lists
 * [GeeksForGeeks](https://www.geeksforgeeks.org/) - some useful articles (Google will lead you there anyway)
 * [Manual](https://www.gnu.org/software/make/manual/make.html#Suffix-Rules) on _make_ (enjoy)
 * Morning [exercises](https://youtu.be/ECxYJcnvyMw) to warm-up
