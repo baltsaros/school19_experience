@@ -15,6 +15,12 @@ typedef struct timeval	t_timeval;
 
 typedef struct s_philo
 {
+	int			n;
+	int			die;
+	int			eat;
+	int			sleep;
+	int			each;
+	int			dead;
 	pthread_t	p_thread;
 	int			p_i;
 	mutex_t		*left;
@@ -34,6 +40,7 @@ typedef struct s_input
 	mutex_t		*fm;
 	pthread_t	control;
 	mutex_t		mutex;
+	t_timeval	t_start;
 	t_timeval	t_time;
 }	t_input;
 
@@ -48,6 +55,9 @@ int		error_check(int nbr);
 void	ft_states(void *args, int philo, int par);
 
 // philo
+int	philo_init(t_input *t_in);
+void	philo(void *args);
 
 
+int	free_all(t_input t_in);
 #endif

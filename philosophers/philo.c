@@ -1,9 +1,10 @@
 #include "philo.h"
 
-void	philo_init(t_input *t_in)
+int	philo_init(t_input *t_in)
 {
 	int	i;
 
+	t_in->dead = 0;
 	i = 0;
 	while (i < t_in->n)
 	{
@@ -15,56 +16,56 @@ void	philo_init(t_input *t_in)
 			return (-1);
 		++i;
 	}
+	return (0);
 }
 
 void	philo(void *args)
 {
+	if (args->t_p)
 	while(1)
 	{
-		pthread_mutex_lock(&args)
+		pthread_mutex_lock(&args);
 	}
 }
 
 int	main(int argc, char *argv[])
 {
-	t_input			t_in;
-	struct timeval	start;
-	int				i;
+	t_input		t_in;
+	int			i;
+	int			ret;
 
-	t_in.error = 0;
 	t_in = input_check(t_in, argc, argv);
-	if (t_in.error)
+	if (t_in.error < 0)
 	{
 		error_msg(t_in.error);
 		return (-1);
 	}
+	ret = 0;
 	t_in.t_p = malloc(sizeof(t_philo) * t_in.n);
 	t_in.fm = malloc(sizeof(mutex_t) * t_in.n);
 	if (!t_in.t_p || !t_in.fm)
 		return (-1);
 	i = 0;
-	gettimeofday(&start, NULL);
 	while (i < t_in.n)
 	{
 		pthread_mutex_init(&t_in.fm[i], NULL);
 		++i;
 	}
+	gettimeofday(&t_in.t_start, NULL);
+	ret = philo_init(&t_in);
+	if (!ret)
+		return (-1);
 	i = 0;
 	while (i < t_in.n)
 	{
-		pthread_create(&t_in.p[i], NULL, philo, (void *)&t_in);
+		pthread_create(&t_in.t_p[i].p_thread, NULL, philo, &t_in);
 		++i;
 	}
-	while (i > 0)
-	{
-		--i;
-		pthread_detach(t_in.p[i]);
-	}
-	free(t_in.p);
-	free(t_in.fm);
+	free_all(t_in);
 	return (0);
 }
 
 	// printf("n %d, f %d, die %d, eat %d, sleep %d, each %d\n", 
 		// in.n, in.f, in.die, in.eat, in.sleep, in.each);
 	// printf("seconds: %ld, microseconds %d\n", time.tv_sec + time.tv_usec, time.tv_usec);
+		// printf("philo[%d]: left - %d, right - %d\n", i + 1, i + 1, i + t_in->n * (i == 0));

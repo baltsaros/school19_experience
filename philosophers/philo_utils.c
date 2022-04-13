@@ -10,7 +10,7 @@ static void	check_i(int *i, int *sign, const char *str, int *error)
 		++*i;
 	}
 	if (!str[*i] || *sign < 0)
-		*error = 1;
+		*error = -1;
 }
 
 int	ft_atoi(const char *str, int *error)
@@ -28,7 +28,7 @@ int	ft_atoi(const char *str, int *error)
 	while (str[j])
 	{
 		if (str[j] < 48 || str[j] > 57)
-			*error = 1;
+			*error = -1;
 		++j;
 	}
 	while (str[i] >= 48 && str[i] <= 57)
@@ -36,14 +36,14 @@ int	ft_atoi(const char *str, int *error)
 		n = n * 10 + str[i] - '0';
 		++i;
 		if ((n > INT_MAX && sign > 0) || (n > (long)INT_MAX + 1 && sign < 0))
-			*error = 1;
+			*error = -1;
 	}
 	return (sign * n);
 }
 
 void	error_msg(int nbr)
 {
-	if (nbr)
+	if (nbr < 0)
 	{
 		printf("ERROR!\n");
 		printf("Input should be in the following form:\n");
