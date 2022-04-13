@@ -11,19 +11,30 @@
 # include <string.h>
 
 typedef pthread_mutex_t	mutex_t;
+typedef struct timeval	t_timeval;
+
+typedef struct s_philo
+{
+	pthread_t	p_thread;
+	int			p_i;
+	mutex_t		*left;
+	mutex_t		*right;
+}	t_philo;
+
 typedef struct s_input
 {
 	int			n;
-	int			f;
 	int			die;
 	int			eat;
 	int			sleep;
 	int			each;
 	int			error;
-	pthread_t	*p;
+	int			dead;
+	t_philo		*t_p;
 	mutex_t		*fm;
 	pthread_t	control;
 	mutex_t		mutex;
+	t_timeval	t_time;
 }	t_input;
 
 // input_check
