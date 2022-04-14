@@ -25,6 +25,7 @@ typedef struct s_philo
 	mutex_t		*left;
 	mutex_t		*right;
 	t_timeval	t_meal;
+	t_timeval	t_st;
 }	t_philo;
 
 typedef struct s_input
@@ -40,7 +41,7 @@ typedef struct s_input
 	mutex_t		*fm;
 	pthread_t	control;
 	mutex_t		mutex;
-	t_timeval	t_start;
+	t_timeval	t_st;
 }	t_input;
 
 // input_check
@@ -55,7 +56,7 @@ void	ft_states(void *args, int philo, int par);
 
 // philo
 int		philo_init(t_input *t_in);
-void	philo(void *args);
+void	*philo(void *args);
 void	set_params(t_input *t_in, t_philo *t_p);
 int		check_death(void *args);
 

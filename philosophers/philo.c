@@ -7,6 +7,7 @@ void	set_params(t_input *t_in, t_philo *t_p)
 	t_p->sleep = t_in->sleep;
 	t_p->each = t_in->each;
 	t_p->dead = t_in->dead;
+	t_p->t_st = t_in->t_st;
 	gettimeofday(&t_p->t_meal, NULL);
 }
 
@@ -22,9 +23,6 @@ int	philo_init(t_input *t_in)
 		t_in->t_p[i].right = &t_in->fm[i + t_in->n * (i == 0)];
 		t_in->t_p[i].left = &t_in->fm[i + 1];
 		t_in->t_p[i].p_i = i + 1;
-		t_in->t_p[i].p_thread = malloc(sizeof(pthread_t));
-		if (!t_in->t_p[i].p_thread)
-			return (-1);
 		++i;
 	}
 	return (0);
@@ -44,7 +42,7 @@ int	check_death(void *args)
 }
 
 
-void	philo(void *args)
+void	*philo(void *args)
 {
 	t_philo	*t_p;
 
@@ -91,16 +89,18 @@ int	main(int argc, char *argv[])
 		pthread_mutex_init(&t_in.fm[i], NULL);
 		++i;
 	}
+	gettimeofday(&t_in.t_st, NULL);
+	printf("philo init\n");
 	ret = philo_init(&t_in);
-	if (!ret)
-		return (-1);
 	i = 0;
+	printf("threading\n");
 	while (i < t_in.n)
 	{
 		pthread_create(&t_in.t_p[i].p_thread, NULL, philo, (void *)&t_in.t_p[i]);
 		++i;
 	}
 	i = 0;
+	printf("death loop\n");
 	while (1)
 	{
 		i = (t_in.n + i) % t_in.n;
@@ -112,6 +112,7 @@ int	main(int argc, char *argv[])
 		}
 		++i;
 	}
+	printf("free and exit\n");
 	free_all(t_in);
 	return (0);
 }
