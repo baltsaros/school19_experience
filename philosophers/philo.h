@@ -1,7 +1,6 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
@@ -25,6 +24,7 @@ typedef struct s_philo
 	int			p_i;
 	mutex_t		*left;
 	mutex_t		*right;
+	t_timeval	t_meal;
 }	t_philo;
 
 typedef struct s_input
@@ -41,7 +41,6 @@ typedef struct s_input
 	pthread_t	control;
 	mutex_t		mutex;
 	t_timeval	t_start;
-	t_timeval	t_time;
 }	t_input;
 
 // input_check
@@ -55,9 +54,12 @@ int		error_check(int nbr);
 void	ft_states(void *args, int philo, int par);
 
 // philo
-int	philo_init(t_input *t_in);
+int		philo_init(t_input *t_in);
 void	philo(void *args);
+void	set_params(t_input *t_in, t_philo *t_p);
+int		check_death(void *args);
 
 
 int	free_all(t_input t_in);
+
 #endif
