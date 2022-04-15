@@ -15,7 +15,7 @@ typedef struct timeval	t_timeval;
 typedef struct s_philo
 {
 	int			n;
-	int			die;
+	long		die;
 	int			eat;
 	int			sleep;
 	int			each;
@@ -26,12 +26,13 @@ typedef struct s_philo
 	mutex_t		*right;
 	t_timeval	t_meal;
 	t_timeval	t_st;
+	t_timeval	t_act;
 }	t_philo;
 
 typedef struct s_input
 {
 	int			n;
-	int			die;
+	long		die;
 	int			eat;
 	int			sleep;
 	int			each;
