@@ -32,7 +32,7 @@ void	test_time(int n)
 // 	i = 0;
 // 	n = 9;
 // 	// test_time(n);
-// 	while (1)
+// 	while (i < n)
 // 	{
 // 		// printf("[%d]: %d\n", i, i + 5 * (i == 0));
 // 		i = (n + i) % n;

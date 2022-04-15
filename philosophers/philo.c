@@ -22,10 +22,10 @@ int	philo_init(t_input *t_in)
 	{
 		set_params(t_in, &t_in->t_p[i]);
 		if (t_in->n > 1)
-			t_in->t_p[i].right = &t_in->fm[i + t_in->n * (i == 0)];
+			t_in->t_p[i].left = &t_in->fm[(t_in->n + i + 1) % t_in->n];
 		else
-			t_in->t_p[i].right = NULL;
-		t_in->t_p[i].left = &t_in->fm[i + 1];
+			t_in->t_p[i].left = NULL;
+		t_in->t_p[i].right = &t_in->fm[i];
 		t_in->t_p[i].p_i = i + 1;
 		++i;
 	}
@@ -77,8 +77,8 @@ void	*philo(void *args)
 		printf("%ld %d is eating\n", check_time(t_p), t_p->p_i);
 		gettimeofday(&t_p->t_meal, NULL);
 		usleep(t_p->eat * 1000);
-		pthread_mutex_unlock(t_p->left);
 		pthread_mutex_unlock(t_p->right);
+		pthread_mutex_unlock(t_p->left);
 		printf("%ld %d is sleeping\n", check_time(t_p), t_p->p_i);
 		usleep(t_p->sleep * 1000);
 		printf("%ld %d is thinking\n", check_time(t_p), t_p->p_i);
