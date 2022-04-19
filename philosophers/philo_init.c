@@ -6,7 +6,7 @@ void	set_params(t_input *t_in, t_philo *t_p)
 	t_p->die = t_in->die;
 	t_p->eat = t_in->eat;
 	t_p->sleep = t_in->sleep;
-	t_p->each = t_in->each;
+	t_p->each = 0;
 	t_p->dead = t_in->dead;
 	t_p->t_st = t_in->t_st;
 	gettimeofday(&t_p->t_meal, NULL);

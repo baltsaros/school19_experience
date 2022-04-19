@@ -6,7 +6,10 @@ void	ft_print(t_philo *t_p, int par)
 	if (par == 1)
 		printf("%ld %d has taken a fork\n", check_time(t_p), t_p->p_i);
 	else if (par == 2)
+	{
+		++t_p->each;
 		printf("%ld %d is eating\n", check_time(t_p), t_p->p_i);
+	}
 	else if (par == 3)
 		printf("%ld %d is sleeping\n", check_time(t_p), t_p->p_i);
 	else if (par == 4)

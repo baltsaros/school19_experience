@@ -11,6 +11,21 @@ long	check_time(t_philo *t_p)
 	return (time);
 }
 
+int		check_each(t_input *t_in)
+{
+	int	i;
+
+	i = 0;
+	while (i < t_in->n)
+	{
+		if (t_in->t_p[i].each < t_in->each)
+			return (-1);
+		++i;
+	}
+	// if (i == t_in->n)
+	return (0);
+}
+
 int	check_death(void *args)
 {
 	t_input		*t_in;
@@ -36,6 +51,8 @@ int	check_death(void *args)
 			// printf("%ld %d died\n", check_time(&t_in->t_p[i]), t_in->t_p[i].p_i);
 			return (0);
 		}
+		if (t_in->each > 0 && check_each(t_in) == 0)
+			break ;
 		++i;
 	}
 	// printf("time %ld - die %ld\n", time, t_p->die);
@@ -79,18 +96,17 @@ int	main(int argc, char *argv[])
 		error_msg(-1);
 		return (-1);
 	}
-	printf("threading\n");
 	i = 0;
 	while (i < t_in.n)
 	{
 		pthread_create(&t_in.t_p[i].p_thread, NULL, philo, (void *)&t_in.t_p[i]);
 		++i;
 	}
-	printf("death loop\n");
+	// printf("death loop\n");
 	pthread_mutex_lock(&t_in.mutex);
 	check_death(&t_in);
 	pthread_mutex_unlock(&t_in.mutex);
-	printf("free and exit\n");
+	// printf("free and exit\n");
 	// free_all(&t_in);
 	return (0);
 }

@@ -18,6 +18,6 @@ t_input	input_check(t_input t_in, int argc, char *argv[])
 	if (argv[5])
 		t_in.each = ft_atoi(argv[5], &t_in.error);
 	else
-		t_in.each = 0;
+		t_in.each = -1;
 	return (t_in);
 }
