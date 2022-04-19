@@ -1,17 +1,19 @@
 #include "philo.h"
 
-void	ft_states(void *args, int philo, int par)
+void	ft_print(t_philo *t_p, int par)
 {
+	pthread_mutex_lock(&t_p->print);
 	if (par == 1)
-		printf("%d has taken a fork\n", philo);
+		printf("%ld %d has taken a fork\n", check_time(t_p), t_p->p_i);
 	else if (par == 2)
-		printf("%d is eating\n", philo);
+		printf("%ld %d is eating\n", check_time(t_p), t_p->p_i);
 	else if (par == 3)
-		printf("%d is sleeping\n", philo);
+		printf("%ld %d is sleeping\n", check_time(t_p), t_p->p_i);
 	else if (par == 4)
-		printf("%d is thinking\n", philo);
+		printf("%ld %d is thinking\n", check_time(t_p), t_p->p_i);
 	else if (par == 5)
-		printf("%d died\n", philo);
+		printf("%ld %d died\n", check_time(t_p), t_p->p_i);
 	else
 		printf("Error! Invalid parameter!\n");
+	pthread_mutex_unlock(&t_p->print);
 }

@@ -52,6 +52,27 @@ void	error_msg(int nbr)
 	}
 }
 
+void	ft_usleep(long ms)
+{
+	t_timeval	start;
+	t_timeval	now;
+	long		time;
+
+	gettimeofday(&start, NULL);
+	gettimeofday(&now, NULL);
+	time  = (now.tv_sec - start.tv_sec) * 1000
+		+ (now.tv_usec - start.tv_usec) / 1000;
+	// printf("time is %ld, ms is %ld\n", time, ms);
+	while (time < ms)
+	{
+		usleep(10);
+		gettimeofday(&now, NULL);
+		// printf("time is %ld, ms is %ld\n", time, ms);
+		time  = (now.tv_sec - start.tv_sec) * 1000
+			+ (now.tv_usec - start.tv_usec) / 1000;
+	}
+}
+
 int	error_check(int nbr)
 {
 	if (nbr < 0)

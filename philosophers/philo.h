@@ -24,6 +24,7 @@ typedef struct s_philo
 	int			p_i;
 	mutex_t		*left;
 	mutex_t		*right;
+	mutex_t		print;
 	t_timeval	t_meal;
 	t_timeval	t_st;
 	t_timeval	t_act;
@@ -52,16 +53,20 @@ t_input	input_check(t_input in, int argc, char *argv[]);
 int		ft_atoi(const char *str, int *error);
 t_input	input_check(t_input in, int argc, char *argv[]);
 void	error_msg(int nbr);
+void	ft_usleep(long ms);
 int		error_check(int nbr);
-void	ft_states(void *args, int philo, int par);
+
+// philo_init
+void	set_params(t_input *t_in, t_philo *t_p);
+int		philo_init(t_input *t_in);
 
 // philo
-int		philo_init(t_input *t_in);
 void	*philo(void *args);
-void	set_params(t_input *t_in, t_philo *t_p);
 int		check_death(void *args);
+long	check_time(t_philo *t_p);
 
 
-int	free_all(t_input t_in);
+int	free_all(t_input *t_in);
+void	ft_print(t_philo *t_p, int par);
 
 #endif
