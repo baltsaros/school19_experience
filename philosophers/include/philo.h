@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 10:25:25 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/20 10:31:44 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <limits.h>
 # include <string.h>
 
-typedef pthread_mutex_t	mutex_t;
+typedef pthread_mutex_t	t_mutex;
 typedef struct timeval	t_timeval;
 
 typedef struct s_philo
@@ -34,9 +34,9 @@ typedef struct s_philo
 	int			dead;
 	pthread_t	p_thread;
 	int			p_i;
-	mutex_t		*left;
-	mutex_t		*right;
-	mutex_t		print;
+	t_mutex		*left;
+	t_mutex		*right;
+	t_mutex		print;
 	t_timeval	t_meal;
 	t_timeval	t_st;
 	t_timeval	t_act;
@@ -52,9 +52,9 @@ typedef struct s_input
 	int			error;
 	int			dead;
 	t_philo		*t_p;
-	mutex_t		*fm;
+	t_mutex		*fm;
 	pthread_t	control;
-	mutex_t		mutex;
+	t_mutex		mutex;
 	t_timeval	t_st;
 }	t_input;
 
@@ -76,8 +76,7 @@ void	*philo(void *args);
 int		check_death(void *args);
 long	check_time(t_philo *t_p);
 
-
-int	free_all(t_input *t_in);
+int		free_all(t_input *t_in);
 void	ft_print(t_philo *t_p, int par);
 
 #endif
