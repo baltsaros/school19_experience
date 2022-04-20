@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:43 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 11:49:21 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/20 13:01:29 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	*philo(void *args)
 
 	t_p = (t_philo *) args;
 	if ((t_p->p_i % 2) == 0)
-		ft_usleep(1);
+		ft_usleep(2);
 	while (1)
 	{
 		pthread_mutex_lock(t_p->right);

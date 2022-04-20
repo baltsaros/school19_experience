@@ -34,6 +34,8 @@ ${NAME}:	${OBJS}
 			@${GCC} ${OBJS} ${INCS} -o ${NAME}
 			@echo "${C_GREEN_B}Finished!${C_RESET}";
 
+all:		${NAME}
+
 bonus:
 			
 norm:
