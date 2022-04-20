@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:43 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 12:44:42 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/20 16:45:36 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ long	check_time(t_philo *t_p)
 {
 	long	time;
 
-	time = 0;
 	gettimeofday(&t_p->t_act, NULL);
 	time = (t_p->t_act.tv_sec - t_p->t_st.tv_sec) * 1000
 		+ (t_p->t_act.tv_usec - t_p->t_st.tv_usec) / 1000;
@@ -71,15 +70,11 @@ void	*philo(void *args)
 		ft_usleep(1);
 	while (1)
 	{
-		pthread_mutex_lock(t_p->right);
 		ft_print(t_p, 1);
-		pthread_mutex_lock(t_p->left);
 		ft_print(t_p, 1);
 		ft_print(t_p, 2);
 		gettimeofday(&t_p->t_meal, NULL);
 		ft_usleep(t_p->eat);
-		pthread_mutex_unlock(t_p->right);
-		pthread_mutex_unlock(t_p->left);
 		ft_print(t_p, 3);
 		ft_usleep(t_p->sleep);
 		ft_print(t_p, 4);
@@ -106,9 +101,7 @@ int	main(int argc, char *argv[])
 			return (-1);
 		++i;
 	}
-	pthread_mutex_lock(&t_in.mutex);
 	check_death(&t_in);
-	pthread_mutex_unlock(&t_in.mutex);
 	if (t_in.free != 1)
 		free_all(&t_in);
 	return (0);

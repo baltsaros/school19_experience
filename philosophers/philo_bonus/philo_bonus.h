@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 12:44:36 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/20 16:49:56 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <sys/time.h>
 # include <limits.h>
 # include <string.h>
+# include <semaphore.h>
 
-typedef pthread_mutex_t	t_mutex;
 typedef struct timeval	t_timeval;
 
 typedef struct s_philo
@@ -33,9 +33,8 @@ typedef struct s_philo
 	int			each;
 	pthread_t	p_thread;
 	int			p_i;
-	t_mutex		*left;
-	t_mutex		*right;
-	t_mutex		print;
+	sem_t		**print;
+	sem_t		**take;
 	t_timeval	t_meal;
 	t_timeval	t_st;
 	t_timeval	t_act;
@@ -43,17 +42,18 @@ typedef struct s_philo
 
 typedef struct s_input
 {
-	int			n;
-	long		die;
-	int			eat;
-	int			sleep;
-	int			each;
-	int			error;
-	int			free;
-	t_philo		*t_p;
-	t_mutex		*fm;
-	t_mutex		mutex;
-	t_timeval	t_st;
+	int				n;
+	long			die;
+	int				eat;
+	int				sleep;
+	int				each;
+	int				error;
+	int				free;
+	sem_t			*print;
+	sem_t			*take;
+	unsigned int	forks;
+	t_philo			*t_p;
+	t_timeval		t_st;
 }	t_input;
 
 // utils

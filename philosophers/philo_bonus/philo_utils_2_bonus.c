@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:34:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 12:44:53 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/20 16:51:23 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,11 @@ int	free_all(t_input *t_in)
 	while (i < t_in->n)
 	{
 		pthread_detach(t_in->t_p->p_thread);
-		pthread_mutex_destroy(&t_in->t_p[i].print);
-		pthread_mutex_destroy(&t_in->fm[i]);
 		++i;
 	}
-	pthread_mutex_destroy(&t_in->mutex);
 	free(t_in->t_p);
-	free(t_in->fm);
+	sem_close(t_in->take);
+	sem_close(t_in->print);
 	return (0);
 }
 
@@ -43,6 +41,7 @@ t_input	input_check(int argc, char *argv[])
 		return (t_in);
 	}
 	t_in.n = ft_atoi(argv[1], &t_in.error);
+	t_in.forks = t_in.n / 2;
 	t_in.die = ft_atoi(argv[2], &t_in.error);
 	t_in.eat = ft_atoi(argv[3], &t_in.error);
 	t_in.sleep = ft_atoi(argv[4], &t_in.error);
