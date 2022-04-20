@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 11:41:04 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/20 12:12:47 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,5 @@ void	*philo(void *args);
 int		check_death(t_input *t_in);
 int		check_each(t_input *t_in);
 long	check_time(t_philo *t_p);
-
 
 #endif

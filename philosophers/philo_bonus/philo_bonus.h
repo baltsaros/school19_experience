@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 10:56:41 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/20 12:44:36 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_philo
 	int			eat;
 	int			sleep;
 	int			each;
-	int			dead;
 	pthread_t	p_thread;
 	int			p_i;
 	t_mutex		*left;
@@ -50,22 +49,20 @@ typedef struct s_input
 	int			sleep;
 	int			each;
 	int			error;
-	int			dead;
+	int			free;
 	t_philo		*t_p;
 	t_mutex		*fm;
-	pthread_t	control;
 	t_mutex		mutex;
 	t_timeval	t_st;
 }	t_input;
-
-// input_check
-t_input	input_check(int argc, char *argv[]);
 
 // utils
 int		ft_atoi(const char *str, int *error);
 void	error_msg(int nbr);
 void	ft_usleep(long ms);
-int		error_check(int nbr);
+void	ft_print(t_philo *t_p, int par);
+t_input	input_check(int argc, char *argv[]);
+int		free_all(t_input *t_in);
 
 // philo_init
 void	set_params(t_input *t_in, t_philo *t_p);
@@ -73,10 +70,8 @@ int		philo_init(t_input *t_in);
 
 // philo
 void	*philo(void *args);
-int		check_death(void *args);
+int		check_death(t_input *t_in);
+int		check_each(t_input *t_in);
 long	check_time(t_philo *t_p);
-
-int		free_all(t_input *t_in);
-void	ft_print(t_philo *t_p, int par);
 
 #endif

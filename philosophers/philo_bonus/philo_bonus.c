@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:43 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 11:20:35 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/20 12:44:42 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,11 @@ int	check_each(t_input *t_in)
 	return (0);
 }
 
-int	check_death(void *args)
+int	check_death(t_input *t_in)
 {
-	t_input		*t_in;
 	t_timeval	t_check;
 	int			i;
 
-	t_in = (t_input *) args;
 	i = 0;
 	while (1)
 	{
@@ -104,13 +102,14 @@ int	main(int argc, char *argv[])
 	while (i < t_in.n)
 	{
 		if (pthread_create(&t_in.t_p[i].p_thread, NULL, philo,
-			(void *)&t_in.t_p[i]) != 0)
-				return (-1);
+				(void *)&t_in.t_p[i]) != 0)
+			return (-1);
 		++i;
 	}
 	pthread_mutex_lock(&t_in.mutex);
 	check_death(&t_in);
 	pthread_mutex_unlock(&t_in.mutex);
-	free_all(&t_in);
+	if (t_in.free != 1)
+		free_all(&t_in);
 	return (0);
 }

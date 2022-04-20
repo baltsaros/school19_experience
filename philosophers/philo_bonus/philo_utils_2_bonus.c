@@ -1,22 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_check.c                                      :+:      :+:    :+:   */
+/*   philo_utils_2_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 09:48:31 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 10:57:18 by abuzdin          ###   ########.fr       */
+/*   Created: 2022/04/20 11:34:26 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/04/20 12:44:53 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+int	free_all(t_input *t_in)
+{
+	int	i;
+
+	i = 0;
+	t_in->free = 1;
+	while (i < t_in->n)
+	{
+		pthread_detach(t_in->t_p->p_thread);
+		pthread_mutex_destroy(&t_in->t_p[i].print);
+		pthread_mutex_destroy(&t_in->fm[i]);
+		++i;
+	}
+	pthread_mutex_destroy(&t_in->mutex);
+	free(t_in->t_p);
+	free(t_in->fm);
+	return (0);
+}
 
 t_input	input_check(int argc, char *argv[])
 {
 	t_input	t_in;
 
 	t_in.error = 0;
+	t_in.free = 0;
 	if (argc != 5 && argc != 6)
 	{
 		t_in.error = -1;
