@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:24 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 11:42:36 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/20 11:24:37 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 void	set_params(t_input *t_in, t_philo *t_p)
 {

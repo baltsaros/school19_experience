@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 11:41:04 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/20 10:56:41 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -31,6 +31,7 @@ typedef struct s_philo
 	int			eat;
 	int			sleep;
 	int			each;
+	int			dead;
 	pthread_t	p_thread;
 	int			p_i;
 	t_mutex		*left;
@@ -49,20 +50,22 @@ typedef struct s_input
 	int			sleep;
 	int			each;
 	int			error;
-	int			free;
+	int			dead;
 	t_philo		*t_p;
 	t_mutex		*fm;
+	pthread_t	control;
 	t_mutex		mutex;
 	t_timeval	t_st;
 }	t_input;
+
+// input_check
+t_input	input_check(int argc, char *argv[]);
 
 // utils
 int		ft_atoi(const char *str, int *error);
 void	error_msg(int nbr);
 void	ft_usleep(long ms);
-void	ft_print(t_philo *t_p, int par);
-t_input	input_check(int argc, char *argv[]);
-int		free_all(t_input *t_in);
+int		error_check(int nbr);
 
 // philo_init
 void	set_params(t_input *t_in, t_philo *t_p);
@@ -70,9 +73,10 @@ int		philo_init(t_input *t_in);
 
 // philo
 void	*philo(void *args);
-int		check_death(t_input *t_in);
-int		check_each(t_input *t_in);
+int		check_death(void *args);
 long	check_time(t_philo *t_p);
 
+int		free_all(t_input *t_in);
+void	ft_print(t_philo *t_p, int par);
 
 #endif

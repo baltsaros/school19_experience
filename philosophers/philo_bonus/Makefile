@@ -5,13 +5,14 @@ C_WHITE			=\033[0;97m
 C_GREEN_B		=\033[1;32m
 C_RESET			=\033[0m
 
-NAME		= philo
+NAME		= philo_bonus
 
 SRC_DIR		= srcs
-SRC_FILES	= philo.c \
+SRC_FILES	= free.c \
+				input_check.c \
 				philo_init.c \
-				philo_utils_1.c \
-				philo_utils_2.c 
+				philo_utils.c \
+				philo.c
 SRCS		= ${notdir ${SRC_FILES}}
 
 OBJ_DIR		= objs
@@ -33,8 +34,6 @@ ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
 ${NAME}:	${OBJS} 
 			@${GCC} ${OBJS} ${INCS} -o ${NAME}
 			@echo "${C_GREEN_B}Finished!${C_RESET}";
-
-bonus:
 			
 norm:
 			@echo "${C_PURPLE_B}Let's test the Norm!${C_RESET}";

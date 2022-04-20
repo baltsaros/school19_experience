@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:31 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 10:24:21 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/20 10:57:18 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 t_input	input_check(int argc, char *argv[])
 {
