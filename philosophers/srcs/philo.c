@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/20 09:48:43 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/04/20 10:24:39 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 long	check_time(t_philo *t_p)
@@ -89,7 +101,7 @@ int	main(int argc, char *argv[])
 	t_input		t_in;
 	int			i;
 
-	t_in = input_check(t_in, argc, argv);
+	t_in = input_check(argc, argv);
 	i = philo_init(&t_in);
 	if (t_in.error < 0 || i < 0)
 	{

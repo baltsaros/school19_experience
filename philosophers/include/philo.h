@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/20 09:48:47 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/04/20 10:25:25 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -47,11 +59,10 @@ typedef struct s_input
 }	t_input;
 
 // input_check
-t_input	input_check(t_input in, int argc, char *argv[]);
+t_input	input_check(int argc, char *argv[]);
 
 // utils
 int		ft_atoi(const char *str, int *error);
-t_input	input_check(t_input in, int argc, char *argv[]);
 void	error_msg(int nbr);
 void	ft_usleep(long ms);
 int		error_check(int nbr);
