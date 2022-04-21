@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:43 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 13:01:29 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/21 16:55:13 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,26 @@ int	check_death(t_input *t_in)
 {
 	t_timeval	t_check;
 	int			i;
+	long		time;
 
 	i = 0;
+	time = 0;
 	while (1)
 	{
 		i = (t_in->n + i) % t_in->n;
+		pthread_mutex_lock(&t_in->mutex);
 		gettimeofday(&t_check, NULL);
-		if (((t_check.tv_sec - t_in->t_p[i].t_meal.tv_sec) * 1000
-				+ (t_check.tv_usec - t_in->t_p[i].t_meal.tv_usec) / 1000)
-			> t_in->die)
+		time = ((t_check.tv_sec - t_in->t_p[i].t_meal.tv_sec) * 1000
+				+ (t_check.tv_usec - t_in->t_p[i].t_meal.tv_usec) / 1000);
+		pthread_mutex_unlock(&t_in->mutex);
+		// if (time > t_in->die)
+		if (time > t_in->die && t_check.tv_sec != t_in->t_p[i].t_meal.tv_sec)
 		{
+			printf("[%d] time is %ld\n", i, time);
+			printf("c.tv_sec is %ld, m.tv_sec is %ld\n", t_check.tv_sec * 1000
+				, t_in->t_p[i].t_meal.tv_sec * 1000);
+			printf("c.tv_usec is %d, m.tv_usec is %d\n", t_check.tv_usec / 1000
+				, t_in->t_p[i].t_meal.tv_usec / 1000);
 			free_all(t_in);
 			ft_print(&t_in->t_p[i], 5);
 			return (0);
@@ -106,9 +116,7 @@ int	main(int argc, char *argv[])
 			return (-1);
 		++i;
 	}
-	pthread_mutex_lock(&t_in.mutex);
 	check_death(&t_in);
-	pthread_mutex_unlock(&t_in.mutex);
 	if (t_in.free != 1)
 		free_all(&t_in);
 	return (0);

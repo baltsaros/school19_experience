@@ -6,6 +6,7 @@ C_GREEN_B		=\033[1;32m
 C_RESET			=\033[0m
 
 NAME		= philo
+NAME_b		= philo_bonus
 
 SRC_DIR		= srcs
 SRC_FILES	= philo.c \
@@ -37,23 +38,27 @@ ${NAME}:	${OBJS}
 all:		${NAME}
 
 bonus:
-			
+			@make -C ./philo_b
+			@cp ./philo_b/philo_bonus .
+
 norm:
 			@echo "${C_PURPLE_B}Let's test the Norm!${C_RESET}";
 			@norminette
 			@echo "${C_PURPLE_B}Done!${C_RESET}";
 clean:
+			@make -C ./philo_b clean
 			@echo "${C_RED_B}Deleting philo o-files...${C_RESET}";
 			@${RM} ${OBJS}
 			@${RMF} ${OBJ_DIR}
 			@echo "${C_RED_B}Philo o-files have been deleted!${C_RESET}";
 
 fclean:		clean
+			@make -C ./philo_b fclean
 			@echo "${C_RED_B}Deleting philo program...${C_RESET}";
-			@${RM} ${NAME}
+			@${RM} ${NAME} ${NAME_b}
 			@echo "${C_RED_B}Philo program has been deleted!${C_RESET}";
 
 re:			fclean all
 			@echo "${C_PURPLE_B}Recompiling!${C_RESET}";
 
-.PHONY:		all clean fclean bonus re .c.o
+.PHONY:		all clean fclean philo_b bonus re .c.o
