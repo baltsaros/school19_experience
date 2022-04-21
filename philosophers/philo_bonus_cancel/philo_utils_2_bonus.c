@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils_2.c                                    :+:      :+:    :+:   */
+/*   philo_utils_2_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:34:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/21 14:48:44 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/21 15:43:37 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 int	free_all(t_input *t_in)
 {
@@ -18,16 +18,15 @@ int	free_all(t_input *t_in)
 
 	i = 0;
 	t_in->free = 1;
+	kill(0, 2);
 	while (i < t_in->n)
 	{
 		pthread_detach(t_in->t_p[i].p_thread);
-		pthread_mutex_destroy(&t_in->t_p[i].print);
-		pthread_mutex_destroy(&t_in->fm[i]);
 		++i;
 	}
-	pthread_mutex_destroy(&t_in->mutex);
+	sem_unlink("take");
+	sem_close(t_in->take);
 	free(t_in->t_p);
-	free(t_in->fm);
 	return (0);
 }
 
@@ -43,6 +42,7 @@ t_input	input_check(int argc, char *argv[])
 		return (t_in);
 	}
 	t_in.n = ft_atoi(argv[1], &t_in.error);
+	t_in.forks = t_in.n;
 	t_in.die = ft_atoi(argv[2], &t_in.error);
 	t_in.eat = ft_atoi(argv[3], &t_in.error);
 	t_in.sleep = ft_atoi(argv[4], &t_in.error);
@@ -53,4 +53,12 @@ t_input	input_check(int argc, char *argv[])
 	else
 		t_in.each = -1;
 	return (t_in);
+}
+
+void	close_unlink(t_input *t_in)
+{
+	sem_unlink("control");
+	sem_close(t_in->control);
+	sem_unlink("print");
+	sem_close(t_in->print);
 }

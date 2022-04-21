@@ -1,4 +1,5 @@
-#include "philo.h"
+#include <semaphore.h>
+#include "include/philo.h"
 
 void	test_time(int n)
 {
@@ -22,22 +23,39 @@ void	test_time(int n)
 	printf("dif: %ld\n", (end.tv_sec * 1000 + end.tv_usec / 1000)
 		-(st.tv_sec * 1000 + st.tv_usec / 1000));
 }
+	sem_t	*print;
 
-// int	main(void)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	n;
+void	*tt_print(void *args)
+{
+	int	i;
 
-// 	i = 0;
-// 	n = 9;
-// 	// test_time(n);
-// 	while (i < n)
-// 	{
-// 		// printf("[%d]: %d\n", i, i + 5 * (i == 0));
-// 		i = (n + i) % n;
-// 		printf("[%d]: %d\n", i, (n + i) % n);
-// 		++i;
-// 	}
-// 	return (0);
-// }
+	i = *(int*)args;
+	sem_wait(print);
+	printf("thread num is %d\n", i);
+	usleep(20000);
+	sem_post(print);
+}
+
+int	main(void)
+{
+	int	i;
+	int	j;
+	int	n;
+	pthread_t	p[2];
+
+	i = 0;
+	n = 2;
+	print = sem_open("print", O_CREAT, 0644, 1);
+	// test_time(n);
+	while (i < n)
+	{
+		// printf("[%d]: %d\n", i, i + 5 * (i == 0));
+		i = (n + i) % n;
+		pthread_create(&p[i], NULL, tt_print, (void *)&i);
+		printf("[%d]: %d\n", i, (n + i) % n);
+		++i;
+	}
+	usleep(400000);
+	sem_close(print);
+	return (0);
+}

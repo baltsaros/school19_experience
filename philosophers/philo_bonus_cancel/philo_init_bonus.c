@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:24 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/21 11:56:56 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/21 15:43:20 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	set_params(t_input *t_in, t_philo *t_p)
 	t_p->t_st = t_in->t_st;
 	gettimeofday(&t_p->t_meal, NULL);
 	t_p->t_st = t_in->t_st;
-	// t_p->print = &t_in->print;
-	// t_p->take = &t_in->take;
 	t_p->t_inp = t_in;
 }
 

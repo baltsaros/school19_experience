@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:34:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 16:51:23 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/21 15:10:32 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,19 @@ int	free_all(t_input *t_in)
 {
 	int	i;
 
+	// printf("freeing\n");
 	i = 0;
 	t_in->free = 1;
 	while (i < t_in->n)
 	{
-		pthread_detach(t_in->t_p->p_thread);
+		kill t_in->t_p[i].pid;
+		// printf("thread %d was freed\n", i);
 		++i;
 	}
-	free(t_in->t_p);
+	// printf("unlinking and closing\n");
+	sem_unlink("take");
 	sem_close(t_in->take);
-	sem_close(t_in->print);
+	free(t_in->t_p);
 	return (0);
 }
 
@@ -42,6 +45,7 @@ t_input	input_check(int argc, char *argv[])
 	}
 	t_in.n = ft_atoi(argv[1], &t_in.error);
 	t_in.forks = t_in.n / 2;
+	// printf("pair of forks: %d\n", t_in.forks);
 	t_in.die = ft_atoi(argv[2], &t_in.error);
 	t_in.eat = ft_atoi(argv[3], &t_in.error);
 	t_in.sleep = ft_atoi(argv[4], &t_in.error);

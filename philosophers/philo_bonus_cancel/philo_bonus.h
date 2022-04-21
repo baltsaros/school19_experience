@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/21 15:42:57 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/21 15:42:52 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_philo
 	int				eat;
 	int				sleep;
 	int				each;
+	pthread_t		p_thread;
 	int				p_i;
-	pid_t			pid;
 	struct s_input	*t_inp;
 	t_timeval		t_meal;
 	t_timeval		t_st;
@@ -64,6 +64,7 @@ void	ft_usleep(long ms);
 void	ft_print(t_philo *t_p, int par);
 t_input	input_check(int argc, char *argv[]);
 int		free_all(t_input *t_in);
+void	close_unlink(t_input *t_in);
 
 // philo_init
 void	set_params(t_input *t_in, t_philo *t_p);
