@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:43 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/21 15:41:01 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/22 08:59:14 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,18 @@ int	check_death(t_input *t_in)
 {
 	t_timeval	t_check;
 	int			i;
+	long		time;
 
 	i = 0;
 	while (1)
 	{
+		sem_wait(t_in->control);
 		i = (t_in->n + i) % t_in->n;
 		gettimeofday(&t_check, NULL);
-		if (((t_check.tv_sec - t_in->t_p[i].t_meal.tv_sec) * 1000
-				+ (t_check.tv_usec - t_in->t_p[i].t_meal.tv_usec) / 1000)
-			> t_in->die)
+		time = ((t_check.tv_sec - t_in->t_p[i].t_meal.tv_sec) * 1000
+				+ (t_check.tv_usec - t_in->t_p[i].t_meal.tv_usec) / 1000);
+		sem_post(t_in->control);
+		if (time > t_in->die)
 		{
 			ft_print(&t_in->t_p[i], 5);
 			free_all(t_in);
@@ -74,8 +77,8 @@ void	*philo(void *args)
 		ft_print(t_p, 1);
 		sem_wait(t_p->t_inp->take);
 		ft_print(t_p, 1);
-		ft_print(t_p, 2);
 		gettimeofday(&t_p->t_meal, NULL);
+		ft_print(t_p, 2);
 		ft_usleep(t_p->eat);
 		sem_post(t_p->t_inp->take);
 		sem_post(t_p->t_inp->take);
@@ -105,9 +108,7 @@ int	main(int argc, char *argv[])
 			return (-1);
 		++i;
 	}
-	sem_wait(t_in.control);
 	check_death(&t_in);
-	sem_post(t_in.control);
 	if (t_in.free != 1)
 		free_all(&t_in);
 	close_unlink(&t_in);
