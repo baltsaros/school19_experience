@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:43 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/22 08:59:14 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/22 12:21:04 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ void	*philo(void *args)
 		ft_print(t_p, 1);
 		sem_wait(t_p->t_inp->take);
 		ft_print(t_p, 1);
+		sem_wait(t_p->t_inp->time);
 		gettimeofday(&t_p->t_meal, NULL);
+		sem_post(t_p->t_inp->time);
 		ft_print(t_p, 2);
 		ft_usleep(t_p->eat);
 		sem_post(t_p->t_inp->take);
@@ -111,6 +113,5 @@ int	main(int argc, char *argv[])
 	check_death(&t_in);
 	if (t_in.free != 1)
 		free_all(&t_in);
-	close_unlink(&t_in);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:43 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/22 08:59:48 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/22 12:46:11 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,10 @@ int	check_death(t_input *t_in)
 	long		time;
 
 	i = 0;
-	time = 0;
 	while (1)
 	{
-		i = (t_in->n + i) % t_in->n;
 		pthread_mutex_lock(&t_in->mutex);
+		i = (t_in->n + i) % t_in->n;
 		gettimeofday(&t_check, NULL);
 		time = ((t_check.tv_sec - t_in->t_p[i].t_meal.tv_sec) * 1000
 				+ (t_check.tv_usec - t_in->t_p[i].t_meal.tv_usec) / 1000);
@@ -62,6 +61,7 @@ int	check_death(t_input *t_in)
 		if (t_in->each > 0 && check_each(t_in) == 0)
 			break ;
 		++i;
+		ft_usleep(1);
 	}
 	return (0);
 }
@@ -79,7 +79,9 @@ void	*philo(void *args)
 		ft_print(t_p, 1);
 		pthread_mutex_lock(t_p->left);
 		ft_print(t_p, 1);
+		pthread_mutex_lock(&t_p->time);
 		gettimeofday(&t_p->t_meal, NULL);
+		pthread_mutex_unlock(&t_p->time);
 		ft_print(t_p, 2);
 		ft_usleep(t_p->eat);
 		pthread_mutex_unlock(t_p->right);

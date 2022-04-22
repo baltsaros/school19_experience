@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:24 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/21 15:43:20 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/22 12:12:57 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,14 @@ int	philo_init(t_input *t_in)
 	int	i;
 
 	sem_unlink("print");
+	sem_unlink("time");
 	sem_unlink("take");
 	sem_unlink("control");
 	t_in->t_p = malloc(sizeof(t_philo) * t_in->n);
 	if (!t_in->t_p)
 		return (-1);
 	t_in->print = sem_open("print", O_CREAT | O_EXCL, 0644, 1);
+	t_in->time = sem_open("time", O_CREAT | O_EXCL, 0644, 1);
 	t_in->control = sem_open("control", O_CREAT | O_EXCL, 0644, 1);
 	t_in->take = sem_open("take", O_CREAT | O_EXCL, 0644, t_in->forks);
 	gettimeofday(&t_in->t_st, NULL);

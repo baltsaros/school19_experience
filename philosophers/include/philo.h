@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/20 12:12:47 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/22 12:09:27 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_philo
 	t_mutex		*left;
 	t_mutex		*right;
 	t_mutex		print;
+	t_mutex		time;
 	t_timeval	t_meal;
 	t_timeval	t_st;
 	t_timeval	t_act;
@@ -65,7 +66,7 @@ t_input	input_check(int argc, char *argv[]);
 int		free_all(t_input *t_in);
 
 // philo_init
-void	set_params(t_input *t_in, t_philo *t_p);
+int		set_params(t_input *t_in, t_philo *t_p);
 int		philo_init(t_input *t_in);
 
 // philo

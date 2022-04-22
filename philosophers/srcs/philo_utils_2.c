@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:34:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/21 14:48:44 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/22 12:24:57 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	free_all(t_input *t_in)
 	{
 		pthread_detach(t_in->t_p[i].p_thread);
 		pthread_mutex_destroy(&t_in->t_p[i].print);
+		pthread_mutex_destroy(&t_in->t_p[i].time);
 		pthread_mutex_destroy(&t_in->fm[i]);
 		++i;
 	}
