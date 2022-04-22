@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:43 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/22 12:21:04 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/22 13:29:13 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	check_death(t_input *t_in)
 		if (t_in->each > 0 && check_each(t_in) == 0)
 			break ;
 		++i;
+		ft_usleep(1);
 	}
 	return (0);
 }
