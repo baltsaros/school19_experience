@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:34:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/22 13:44:21 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/25 16:07:02 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,12 @@ int	free_all(t_input *t_in)
 
 	i = 0;
 	t_in->free = 1;
-	while (i < t_in->n)
-	{
-		pthread_detach(t_in->t_p[i].p_thread);
-		++i;
-	}
 	kill(0, 2);
 	free(t_in->t_p);
 	sem_unlink("take");
 	sem_close(t_in->take);
 	sem_unlink("time");
 	sem_close(t_in->time);
-	sem_unlink("control");
-	sem_close(t_in->control);
 	sem_unlink("print");
 	sem_close(t_in->print);
 	return (0);

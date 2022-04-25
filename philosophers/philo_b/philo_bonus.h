@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/22 12:21:07 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/25 16:06:45 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <pthread.h>
 # include <unistd.h>
 # include <sys/time.h>
+# include <sys/wait.h>
 # include <limits.h>
 # include <string.h>
 # include <semaphore.h>
@@ -32,8 +33,10 @@ typedef struct s_philo
 	int				eat;
 	int				sleep;
 	int				each;
-	pthread_t		p_thread;
+	int				alive;
 	int				p_i;
+	pid_t			pid;
+	pthread_t		check;
 	struct s_input	*t_inp;
 	t_timeval		t_meal;
 	t_timeval		t_st;
@@ -51,9 +54,9 @@ typedef struct s_input
 	int				free;
 	sem_t			*print;
 	sem_t			*take;
-	sem_t			*control;
 	sem_t			*time;
 	unsigned int	forks;
+	pthread_t		con;
 	t_philo			*t_p;
 	t_timeval		t_st;
 }	t_input;
@@ -71,8 +74,9 @@ void	set_params(t_input *t_in, t_philo *t_p);
 int		philo_init(t_input *t_in);
 
 // philo
-void	*philo(void *args);
-int		check_death(t_input *t_in);
+void	philo(t_philo *t_p);
+// int		check_death(t_philo *t_p);
+void	*check_death(void *args);
 int		check_each(t_input *t_in);
 long	check_time(t_philo *t_p);
 
