@@ -25,10 +25,9 @@ RM			= rm -f
 RMF			= rm -rf
 CFLAGS		= -Wall -Wextra -Werror
 
-# ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
 ${OBJ_DIR}/%.o: %.c
 			@mkdir -p ${OBJ_DIR}
-			@echo "${C_YELLOW_B}Compiling...${C_RESET}";
+			@echo "${C_YELLOW_B}Compiling bonus...${C_RESET}";
 			@${GCC} ${CFLAGS} -c $< ${INCS} -o $@
 
 ${NAME}:	${OBJS} 
@@ -42,17 +41,17 @@ norm:
 			@norminette
 			@echo "${C_PURPLE_B}Done!${C_RESET}";
 clean:
-			@echo "${C_RED_B}Deleting philo o-files...${C_RESET}";
+			@echo "${C_RED_B}Deleting philo_bonus o-files...${C_RESET}";
 			@${RM} ${OBJS}
 			@${RMF} ${OBJ_DIR}
-			@echo "${C_RED_B}Philo o-files have been deleted!${C_RESET}";
+			@echo "${C_RED_B}Philo_bonus o-files have been deleted!${C_RESET}";
 
 fclean:		clean
-			@echo "${C_RED_B}Deleting philo program...${C_RESET}";
+			@echo "${C_RED_B}Deleting philo_bonus program...${C_RESET}";
 			@${RM} ${NAME}
-			@echo "${C_RED_B}Philo program has been deleted!${C_RESET}";
+			@echo "${C_RED_B}Philo_bonus program has been deleted!${C_RESET}";
 
 re:			fclean all
-			@echo "${C_PURPLE_B}Recompiling!${C_RESET}";
+			@echo "${C_PURPLE_B}Recompiling bonus!${C_RESET}";
 
 .PHONY:		all clean fclean bonus re .c.o

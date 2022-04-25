@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:39 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/21 11:53:56 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/25 11:04:51 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_usleep(long ms)
 		+ (now.tv_usec - start.tv_usec) / 1000;
 	while (time < ms)
 	{
-		usleep(10);
+		usleep(900);
 		gettimeofday(&now, NULL);
 		time = (now.tv_sec - start.tv_sec) * 1000
 			+ (now.tv_usec - start.tv_usec) / 1000;
