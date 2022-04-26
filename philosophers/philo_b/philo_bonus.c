@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 10:56:36 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/26 11:04:23 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/26 11:55:17 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,19 @@ void	*check_death(void *args)
 			t_p->alive = 0;
 			free_all(t_p->t_inp);
 		}
-		if (t_p->t_inp->each > 0 && t_p->t_inp->each + 1 == t_p->each)
-			free_all(t_p->t_inp);
 		ft_usleep(1, t_p->t_inp);
+		if (t_p->t_inp->each > 0 && t_p->t_inp->each + 1 <= t_p->each)
+			free_all(t_p->t_inp);
 	}
+	return (NULL);
 }
 
 void	philo(t_philo *t_p)
 {
-	if (pthread_create(&t_p->check, NULL, check_death, t_p) < 0)
-		exit(EXIT_FAILURE);
 	if ((t_p->p_i % 2) == 0)
 		ft_usleep(1, t_p->t_inp);
+	if (pthread_create(&t_p->check, NULL, check_death, t_p) < 0)
+		exit(EXIT_FAILURE);
 	while (1)
 	{
 		sem_wait(t_p->t_inp->take);
@@ -110,7 +111,7 @@ int	main(int argc, char *argv[])
 		}
 		++i;
 	}
-	waitpid(0, NULL, 0);
+	waitpid(-1, NULL, 0);
 	free_all(&t_in);
 	return (0);
 }
