@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:34:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/22 12:24:57 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/25 16:23:59 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ t_input	input_check(int argc, char *argv[])
 	t_in.die = ft_atoi(argv[2], &t_in.error);
 	t_in.eat = ft_atoi(argv[3], &t_in.error);
 	t_in.sleep = ft_atoi(argv[4], &t_in.error);
-	if (t_in.n == 0 || t_in.die == 0)
-		t_in.error = -1;
 	if (argv[5])
 		t_in.each = ft_atoi(argv[5], &t_in.error);
 	else
 		t_in.each = -1;
+	if (t_in.n == 0 || t_in.die == 0 || t_in.each == 0)
+		t_in.error = -1;
 	return (t_in);
 }

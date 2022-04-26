@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:34:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/25 16:07:02 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/26 10:59:19 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 int	free_all(t_input *t_in)
 {
-	int	i;
-
-	i = 0;
-	t_in->free = 1;
 	kill(0, 2);
 	free(t_in->t_p);
 	sem_unlink("take");
@@ -29,27 +25,48 @@ int	free_all(t_input *t_in)
 	return (0);
 }
 
-t_input	input_check(int argc, char *argv[])
+void	error_msg(int nbr)
 {
-	t_input	t_in;
-
-	t_in.error = 0;
-	t_in.free = 0;
-	if (argc != 5 && argc != 6)
+	if (nbr < 0)
 	{
-		t_in.error = -1;
-		return (t_in);
+		printf("ERROR!\n");
+		printf("Input should be in the following form:\n");
+		printf("./philo <n_of_philos> <time_to_die> <time_to_eat> ");
+		printf("<time_to_sleep> [n_of_times_each_philo_should_eat]\n");
+		exit(EXIT_FAILURE);
 	}
-	t_in.n = ft_atoi(argv[1], &t_in.error);
-	t_in.forks = t_in.n;
-	t_in.die = ft_atoi(argv[2], &t_in.error);
-	t_in.eat = ft_atoi(argv[3], &t_in.error);
-	t_in.sleep = ft_atoi(argv[4], &t_in.error);
-	if (t_in.n == 0 || t_in.die == 0)
-		t_in.error = -1;
-	if (argv[5])
-		t_in.each = ft_atoi(argv[5], &t_in.error);
-	else
-		t_in.each = -1;
-	return (t_in);
+}
+
+void	error_check_exit(int nbr, char *str, size_t len, t_input *t_in)
+{
+	if (nbr < 0)
+	{
+		write(2, "Error in ", 9);
+		write(2, str, len);
+		free(t_in->t_p);
+		sem_unlink("take");
+		sem_close(t_in->take);
+		sem_unlink("time");
+		sem_close(t_in->time);
+		sem_unlink("print");
+		sem_close(t_in->print);
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	error_check_kill(int nbr, char *str, size_t len, t_input *t_in)
+{
+	if (nbr < 0)
+	{
+		write(2, "Error in ", 9);
+		write(2, str, len);
+		free(t_in->t_p);
+		sem_unlink("take");
+		sem_close(t_in->take);
+		sem_unlink("time");
+		sem_close(t_in->time);
+		sem_unlink("print");
+		sem_close(t_in->print);
+		kill(0, 2);
+	}
 }

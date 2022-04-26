@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:39 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/25 11:04:51 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/26 10:56:22 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,31 +53,48 @@ int	ft_atoi(const char *str, int *error)
 	return (sign * n);
 }
 
-void	error_msg(int nbr)
+t_input	input_check(int argc, char *argv[])
 {
-	if (nbr < 0)
+	t_input	t_in;
+
+	t_in.error = 0;
+	if (argc != 5 && argc != 6)
 	{
-		printf("ERROR!\n");
-		printf("Input should be in the following form:\n");
-		printf("./philo <n_of_philos> <time_to_die> <time_to_eat> ");
-		printf("<time_to_sleep> [n_of_times_each_philo_should_eat]\n");
+		t_in.error = -1;
+		return (t_in);
 	}
+	t_in.n = ft_atoi(argv[1], &t_in.error);
+	t_in.forks = t_in.n;
+	t_in.die = ft_atoi(argv[2], &t_in.error);
+	t_in.eat = ft_atoi(argv[3], &t_in.error);
+	t_in.sleep = ft_atoi(argv[4], &t_in.error);
+	if (t_in.n == 0 || t_in.die == 0)
+		t_in.error = -1;
+	if (argv[5])
+		t_in.each = ft_atoi(argv[5], &t_in.error);
+	else
+		t_in.each = -1;
+	return (t_in);
 }
 
-void	ft_usleep(long ms)
+void	ft_usleep(long ms, t_input *t_in)
 {
 	t_timeval	start;
 	t_timeval	now;
 	long		time;
 
-	gettimeofday(&start, NULL);
-	gettimeofday(&now, NULL);
+	if (gettimeofday(&start, NULL) < 0)
+		error_check_kill(-1, "getting time", 12, t_in);
+	if (gettimeofday(&now, NULL) < 0)
+		error_check_kill(-1, "getting time", 12, t_in);
 	time = (now.tv_sec - start.tv_sec) * 1000
 		+ (now.tv_usec - start.tv_usec) / 1000;
 	while (time < ms)
 	{
-		usleep(900);
-		gettimeofday(&now, NULL);
+		if (usleep(900) < 0)
+			error_check_kill(-1, "usleep", 6, t_in);
+		if (gettimeofday(&now, NULL) < 0)
+			error_check_kill(-1, "getting time", 12, t_in);
 		time = (now.tv_sec - start.tv_sec) * 1000
 			+ (now.tv_usec - start.tv_usec) / 1000;
 	}

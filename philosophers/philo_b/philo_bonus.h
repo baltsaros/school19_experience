@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/25 16:06:45 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/26 10:55:13 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_input
 	int				sleep;
 	int				each;
 	int				error;
-	int				free;
 	sem_t			*print;
 	sem_t			*take;
 	sem_t			*time;
@@ -63,11 +62,13 @@ typedef struct s_input
 
 // utils
 int		ft_atoi(const char *str, int *error);
-void	error_msg(int nbr);
-void	ft_usleep(long ms);
-void	ft_print(t_philo *t_p, int par);
 t_input	input_check(int argc, char *argv[]);
+void	ft_usleep(long ms, t_input *t_in);
+void	ft_print(t_philo *t_p, int par);
 int		free_all(t_input *t_in);
+void	error_msg(int nbr);
+void	error_check_exit(int nbr, char *str, size_t len, t_input *t_in);
+void	error_check_kill(int nbr, char *str, size_t len, t_input *t_in);
 
 // philo_init
 void	set_params(t_input *t_in, t_philo *t_p);
