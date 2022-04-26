@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:24 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/26 10:46:26 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/26 11:16:39 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	philo_init(t_input *t_in)
 {
 	int	i;
 
-	error_check_exit(sem_unlink("print"), "unlink", 6, t_in);
-	error_check_exit(sem_unlink("time"), "unlink", 6, t_in);
-	error_check_exit(sem_unlink("take"), "unlink", 6, t_in);
+	sem_unlink("print");
+	sem_unlink("time");
+	sem_unlink("take");
 	t_in->t_p = malloc(sizeof(t_philo) * t_in->n);
 	if (!t_in->t_p)
 		return (-1);
