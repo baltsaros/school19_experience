@@ -42,6 +42,7 @@ The project was tested by myself and peers
 
 ## **Attempts**
 **_1st try_**: 0% (there was an issue with my ft_usleep that led to the CPU overload when a big number of philosophers was too big)
+
 **_2nd try_**: 125% 
 
 ## **Folders**
