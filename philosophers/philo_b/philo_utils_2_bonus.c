@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:34:26 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/26 10:59:19 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/28 09:46:57 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	free_all(t_input *t_in)
 	sem_close(t_in->time);
 	sem_unlink("print");
 	sem_close(t_in->print);
+	sem_unlink("control");
+	sem_close(t_in->control);
 	return (0);
 }
 
@@ -50,6 +52,8 @@ void	error_check_exit(int nbr, char *str, size_t len, t_input *t_in)
 		sem_close(t_in->time);
 		sem_unlink("print");
 		sem_close(t_in->print);
+		sem_unlink("control");
+		sem_close(t_in->control);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -67,6 +71,8 @@ void	error_check_kill(int nbr, char *str, size_t len, t_input *t_in)
 		sem_close(t_in->time);
 		sem_unlink("print");
 		sem_close(t_in->print);
+		sem_unlink("control");
+		sem_close(t_in->control);
 		kill(0, 2);
 	}
 }

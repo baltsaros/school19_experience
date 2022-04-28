@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 10:56:36 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/26 11:55:17 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/28 09:48:28 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	*check_death(void *args)
 	t_p = (t_philo *) args;
 	while (1)
 	{
+		sem_wait(t_p->t_inp->control);
 		if (gettimeofday(&t_check, NULL) < 0)
 			error_check_kill(-1, "getting time", 12, t_p->t_inp);
 		time = ((t_check.tv_sec - t_p->t_meal.tv_sec) * 1000
@@ -54,8 +55,10 @@ void	*check_death(void *args)
 		{
 			ft_print(t_p, 5);
 			t_p->alive = 0;
+			sem_post(t_p->t_inp->control);
 			free_all(t_p->t_inp);
 		}
+		sem_post(t_p->t_inp->control);
 		ft_usleep(1, t_p->t_inp);
 		if (t_p->t_inp->each > 0 && t_p->t_inp->each + 1 <= t_p->each)
 			free_all(t_p->t_inp);

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:48:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/04/26 12:03:06 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/04/28 09:45:38 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_input
 	sem_t			*print;
 	sem_t			*take;
 	sem_t			*time;
+	sem_t			*control;
 	unsigned int	forks;
 	pthread_t		con;
 	t_philo			*t_p;
