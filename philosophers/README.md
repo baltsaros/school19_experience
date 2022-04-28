@@ -36,6 +36,18 @@ The program take the following arguments:
 * *time_to_sleep* (in milliseconds): The time a philosopher will spend sleeping.
 * *number_of_times_each_philosopher_must_eat* (optional argument): If all philosophers have eaten at least number_of_times_each_philosopher_must_eat times, the simulation stops. If not specified, the simulation stops when a philosopher dies.
 
+## **My approach**
+* Two structures: one is global (for all data and philosophers) and another one is for a philosopher(s)
+* Parse input
+* Initializae data and mutex
+* I decided to protect only the most important functions (_malloc_, *pthread_create*, *mutex_init*) for the following reasons:
+	* I am limited by the Norm. Almost every allowed function can return a non-zero value on error (even _usleep_, *mutex_lock/unlock*), so error management would take a lot of space
+	* _Exit()_ is not allowed for the obligatory part
+* For every philosopher I create a thread, while my main process is checking whether philosophers are still alive
+* Since my *death_check* function contains an infinite loop, I added to it *ft_usleep* for 1 ms to reduce CPU load
+* To avoid gridlock, uneven philosphers start eating first
+* With mutex I protect forks, printing, *death_check* and *gettimeofday* for the last meal
+* In the bonus part the best solution to hande the last argument (*number_of_times_each_philosopher_must_eat*) that I found was simply to stop the program when a philo eats *each+1* times
 
 ## **Testing**
 The project was tested by myself and peers
