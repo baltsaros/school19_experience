@@ -41,8 +41,9 @@ int	data_init(FILE *stream)
 		return (1);
 	}
 	ret = fscanf(stream, "%c %f %f %f %f %c\n", &rect.type, &rect.x, &rect.y, &rect.w, &rect.h, &rect.border);
-	if (ret != 6 || rect.type != 'R' || rect.type != 'r' || rect.x <= 0.000000 || rect.y <= 0.000000 || rect.border < 26 || rect.border > 126)
+	if (ret != 6 || (rect.type != 'R' && rect.type != 'r') || rect.x <= 0.000000 || rect.y <= 0.000000 || rect.border < 26 || rect.border > 126)
 	{
+		printf("Second\n");
 		printf("Error: wrong input\n");
 		return (1);
 	}
