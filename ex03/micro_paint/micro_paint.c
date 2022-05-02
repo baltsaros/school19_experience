@@ -59,7 +59,6 @@ int	draw_front(t_input *params, t_rect *rect)
 		++i;
 		++y;
 	}
-	printf("%s", params->pic);
 	return (0);
 }
 
@@ -75,26 +74,31 @@ int	data_init(FILE *stream)
 		printf("Error: wrong input\n");
 		return (1);
 	}
-	ret = fscanf(stream, "%c %f %f %f %f %c\n", &rect.type, &rect.x, &rect.y, &rect.w, &rect.h, &rect.border);
-	if (ret != 6 || (rect.type != 'R' && rect.type != 'r') || rect.x <= 0.000000 || rect.y <= 0.000000 || rect.border < 26 || rect.border > 126)
-	{
-		printf("Second\n");
-		printf("Error: wrong input\n");
-		return (1);
-	}
-	if (rect.type == 82)
-		rect.inside = rect.border;
-	else if (rect.type == 114)
-		rect.inside = params.back;
-	else
-		return (1);
 	params.pic = malloc(sizeof(char) * (params.h * params.w + params.h));
 	if (!params.pic)
 		return (1);
+	draw_back(&params);
+	ret = fscanf(stream, "%c %f %f %f %f %c\n", &rect.type, &rect.x, &rect.y, &rect.w, &rect.h, &rect.border);
+	// while (ret == 6 && (rect.type == 'R' || rect.type == 'r') && rect.x > 0.000000 && rect.y > 0.000000 && (rect.border >= 26 && rect.border <= 126))
+	while (ret == 6)
+	{
+		if (rect.type == 82)
+			rect.inside = rect.border;
+		else if (rect.type == 114)
+			rect.inside = params.back;
+		else
+		{
+			free(params.pic);
+			printf("Error: wrong input\n");
+			return (1);
+		}
+		if ((rect.type == 'R' || rect.type == 'r') && rect.w > 0.000000 && rect.h > 0.000000 && (rect.border >= 26 && rect.border <= 126))
+			draw_front(&params, &rect);
+		ret = fscanf(stream, "%c %f %f %f %f %c\n", &rect.type, &rect.x, &rect.y, &rect.w, &rect.h, &rect.border);
+	}
 	printf("input: %d %d %c\n", params.w, params.h, params.back);
 	printf("rect: %c %f %f %f %f %c %c\n", rect.type, rect.x, rect.y, rect.w, rect.h, rect.border, rect.inside);
-	draw_back(&params);
-	draw_front(&params, &rect);
+	printf("%s", params.pic);
 	free(params.pic);
 	return (0);
 }
