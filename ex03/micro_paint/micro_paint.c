@@ -27,24 +27,25 @@ int	draw(t_input *params, t_rect *rect)
 		x = 0.000000;
 		while (x < params->w)
 		{
+			// if ((x >= rect->x && (y == rect->y || y == rect->y + rect->h))
+			// 		|| (y >= rect->y && (x == rect->x || x == rect->x + rect->w)))
 			if (rect->x <= x && rect->y <= y && x <= (rect->x + rect->w) && y <= (rect->y + rect->h))
 			{
-				pic[i] = rect->inside;
-				if ((x >= rect->x && (y == rect->y || y == rect->y + rect->h))
-					|| (y >= rect->y && (x == rect->x || x == rect->x + rect->w)))
-					pic[i] = rect->border;
+				pic[i] = rect->border;
+				if (rect->x <= x - 1 && rect->y <= y - 1 && x + 1 <= (rect->x + rect->w) && y + 1 <= (rect->y + rect->h))
+				// if ((rect->w - x) > rect->x && (rect->h - y) > rect->y)
+					pic[i] = rect->inside;
+				//  printf("x is %f, y is %f\n", x, y);
 			}
 			else
 				pic[i] = params->back;
 			++i;
-			printf("x is %f\n", x);
 			++x;
 		}
 		pic[i] = '\n';
 		++i;
 		++y;
 	}
-	printf("y is %f\n", y);
 	printf("%s", pic);
 	free(pic);
 	return (0);
