@@ -50,8 +50,12 @@ int	draw_front(t_input *params, t_rect *rect)
 			if (rect->x <= x && rect->y <= y && x <= (rect->x + rect->w) && y <= (rect->y + rect->h))
 			{
 				params->pic[i] = rect->border;
-				if (rect->x <= x - 1 && rect->y <= y - 1 && x + 1 <= (rect->x + rect->w) && y + 1 <= (rect->y + rect->h))
+				if (rect->x > x - 1 && rect->y > y - 1
+					&& x + 1 > (rect->x + rect->w) && y + 1 > (rect->y + rect->h))
 					params->pic[i] = rect->inside;
+				// if (rect->type == 'R' && rect->x <= x - 1 && rect->y <= y - 1
+				// 	&& x + 1 <= (rect->x + rect->w) && y + 1 <= (rect->y + rect->h))
+				// 	params->pic[i] = rect->inside;
 			}
 			++i;
 			++x;
@@ -67,7 +71,9 @@ int	data_init(FILE *stream)
 	t_input	params;
 	t_rect	rect;
 	int		ret;
+	int		i;
 
+	i = 1;
 	ret = fscanf(stream, "%d %d %c\n", &params.w, &params.h, &params.back);
 	if (ret != 3 || !(params.w > 0 && params.w <= 300) || !(params.h > 0 && params.h <= 300) || !(params.back >= 32 && params.back <= 126))
 	{
@@ -93,7 +99,11 @@ int	data_init(FILE *stream)
 			return (1);
 		}
 		if ((rect.type == 'R' || rect.type == 'r') && rect.w > 0.000000 && rect.h > 0.000000 && (rect.border >= 26 && rect.border <= 126))
+		{
 			draw_front(&params, &rect);
+			printf("[%d]\n", i);
+			++i;
+		}
 		ret = fscanf(stream, "%c %f %f %f %f %c\n", &rect.type, &rect.x, &rect.y, &rect.w, &rect.h, &rect.border);
 	}
 	printf("input: %d %d %c\n", params.w, params.h, params.back);
