@@ -7,8 +7,22 @@
 # include <stdlib.h>
 # include <string.h>
 
-// utils
-void	error_msg_arg();
-void	error_msg_of();
+typedef struct s_input
+{
+	int		w;
+	int		h;
+	char	back;
+} 	t_input;
+
+typedef struct s_rect
+{
+	char	type;
+	float	x;
+	float	y;
+	float	w;
+	float	h;
+	char	border;
+	char	inside;
+}	t_rect;
 
 #endif

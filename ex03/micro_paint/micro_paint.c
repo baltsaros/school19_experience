@@ -1,23 +1,5 @@
 #include "micro_paint.h"
 
-typedef struct s_input
-{
-	int		w;
-	int		h;
-	char	back;
-} 	t_input;
-
-typedef struct s_rect
-{
-	char	type;
-	float	x;
-	float	y;
-	float	w;
-	float	h;
-	char	border;
-	char	inside;
-}	t_rect;
-
 void	error_msg(int num)
 {
 	if (num == 0)
@@ -26,6 +8,46 @@ void	error_msg(int num)
 		write (1, "Error: Operation file corrupted\n", 32);
 	else if (num == 2)
 		write (1, "Error: invalid line\n", 20);
+}
+
+int	draw(t_input *params, t_rect *rect)
+{
+	int		i;
+	float	x;
+	float	y;
+	char *pic;
+
+	pic = malloc(sizeof(pic) * (params->h * params->w + 1));
+	if (!pic)
+		return (1);
+	i = 0;
+	y = 0.000000;
+	while (y < params->h)
+	{
+		x = 0.000000;
+		while (x < params->w)
+		{
+			if (rect->x <= x && rect->y <= y && x <= (rect->x + rect->w) && y <= (rect->y + rect->h))
+			{
+				pic[i] = rect->inside;
+				if ((x >= rect->x && (y == rect->y || y == rect->y + rect->h))
+					|| (y >= rect->y && (x == rect->x || x == rect->x + rect->w)))
+					pic[i] = rect->border;
+			}
+			else
+				pic[i] = params->back;
+			++i;
+			printf("x is %f\n", x);
+			++x;
+		}
+		pic[i] = '\n';
+		++i;
+		++y;
+	}
+	printf("y is %f\n", y);
+	printf("%s", pic);
+	free(pic);
+	return (0);
 }
 
 int	data_init(FILE *stream)
@@ -55,6 +77,7 @@ int	data_init(FILE *stream)
 		return (1);
 	printf("input: %d %d %c\n", params.w, params.h, params.back);
 	printf("rect: %c %f %f %f %f %c %c\n", rect.type, rect.x, rect.y, rect.w, rect.h, rect.border, rect.inside);
+	draw(&params, &rect);
 	return (0);
 }
 
