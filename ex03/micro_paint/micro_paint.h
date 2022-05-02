@@ -12,7 +12,8 @@ typedef struct s_input
 	int		w;
 	int		h;
 	char	back;
-} 	t_input;
+	char	*pic;
+}	t_input;
 
 typedef struct s_rect
 {

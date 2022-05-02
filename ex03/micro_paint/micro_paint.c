@@ -10,16 +10,11 @@ void	error_msg(int num)
 		write (1, "Error: invalid line\n", 20);
 }
 
-int	draw(t_input *params, t_rect *rect)
+int	draw_back(t_input *params)
 {
 	int		i;
 	float	x;
 	float	y;
-	char *pic;
-
-	pic = malloc(sizeof(pic) * (params->h * params->w + 1));
-	if (!pic)
-		return (1);
 	i = 0;
 	y = 0.000000;
 	while (y < params->h)
@@ -27,27 +22,44 @@ int	draw(t_input *params, t_rect *rect)
 		x = 0.000000;
 		while (x < params->w)
 		{
-			// if ((x >= rect->x && (y == rect->y || y == rect->y + rect->h))
-			// 		|| (y >= rect->y && (x == rect->x || x == rect->x + rect->w)))
-			if (rect->x <= x && rect->y <= y && x <= (rect->x + rect->w) && y <= (rect->y + rect->h))
-			{
-				pic[i] = rect->border;
-				if (rect->x <= x - 1 && rect->y <= y - 1 && x + 1 <= (rect->x + rect->w) && y + 1 <= (rect->y + rect->h))
-				// if ((rect->w - x) > rect->x && (rect->h - y) > rect->y)
-					pic[i] = rect->inside;
-				//  printf("x is %f, y is %f\n", x, y);
-			}
-			else
-				pic[i] = params->back;
+			params->pic[i] = params->back;
 			++i;
 			++x;
 		}
-		pic[i] = '\n';
+		params->pic[i] = '\n';
 		++i;
 		++y;
 	}
-	printf("%s", pic);
-	free(pic);
+	params->pic[i] = '\0';
+	return (0);
+}
+
+int	draw_front(t_input *params, t_rect *rect)
+{
+	int		i;
+	float	x;
+	float	y;
+
+	i = 0;
+	y = 0.000000;
+	while (y < params->h)
+	{
+		x = 0.000000;
+		while (x < params->w)
+		{
+			if (rect->x <= x && rect->y <= y && x <= (rect->x + rect->w) && y <= (rect->y + rect->h))
+			{
+				params->pic[i] = rect->border;
+				if (rect->x <= x - 1 && rect->y <= y - 1 && x + 1 <= (rect->x + rect->w) && y + 1 <= (rect->y + rect->h))
+					params->pic[i] = rect->inside;
+			}
+			++i;
+			++x;
+		}
+		++i;
+		++y;
+	}
+	printf("%s", params->pic);
 	return (0);
 }
 
@@ -76,9 +88,14 @@ int	data_init(FILE *stream)
 		rect.inside = params.back;
 	else
 		return (1);
+	params.pic = malloc(sizeof(char) * (params.h * params.w + params.h));
+	if (!params.pic)
+		return (1);
 	printf("input: %d %d %c\n", params.w, params.h, params.back);
 	printf("rect: %c %f %f %f %f %c %c\n", rect.type, rect.x, rect.y, rect.w, rect.h, rect.border, rect.inside);
-	draw(&params, &rect);
+	draw_back(&params);
+	draw_front(&params, &rect);
+	free(params.pic);
 	return (0);
 }
 
