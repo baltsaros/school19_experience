@@ -6,8 +6,6 @@ void	error_msg(int num)
 		write(1, "Error: argument\n", 16);
 	else if (num == 1)
 		write (1, "Error: Operation file corrupted\n", 32);
-	else if (num == 2)
-		write (1, "Error: invalid line\n", 20);
 }
 
 int	draw_back(t_input *params)
@@ -64,24 +62,30 @@ int	draw_front(t_input *params, t_rect *rect)
 	return (0);
 }
 
+// int	render(t_input *params, t_rect *rect)
+// {
+// 	return (0);
+// }
+
 int	data_init(FILE *stream)
 {
 	t_input	params;
 	t_rect	rect;
 	int		ret;
-	int		i;
-
-	i = 1;
+	
 	ret = fscanf(stream, "%d %d %c\n", &params.w, &params.h, &params.back);
 	if (ret != 3 || !(params.w > 0 && params.w <= 300) || !(params.h > 0
 		&& params.h <= 300) || !(params.back >= 32 && params.back <= 126))
 	{
-		printf("Error: wrong input\n");
+		error_msg(1);
 		return (1);
 	}
 	params.pic = malloc(sizeof(char) * (params.h * params.w + params.h));
 	if (!params.pic)
+	{
+		error_msg(1);
 		return (1);
+	}
 	draw_back(&params);
 	ret = fscanf(stream, "%c %f %f %f %f %c\n", &rect.type, &rect.x, &rect.y, &rect.w
 		, &rect.h, &rect.border);
@@ -89,23 +93,26 @@ int	data_init(FILE *stream)
 	{
 		if ((rect.type == 'R' || rect.type == 'r') && rect.w > 0.000000 && rect.h > 0.000000
 			&& (rect.border >= 32 && rect.border <= 126))
-		{
 			draw_front(&params, &rect);
-			printf("[%d]\n", i);
-			++i;
-		}
 		else
 		{
 			free(params.pic);
-			printf("Error: wrong input\n");
+			error_msg(1);
 			return (1);
 		}
 		ret = fscanf(stream, "%c %f %f %f %f %c\n", &rect.type, &rect.x, &rect.y, &rect.w
 			, &rect.h, &rect.border);
 	}
-	printf("input: %d %d %c\n", params.w, params.h, params.back);
-	printf("rect: %c %f %f %f %f %c\n", rect.type, rect.x, rect.y, rect.w, rect.h, rect.border);
-	printf("%s", params.pic);
+	// if (ret != 6)
+	// {
+	// 	free(params.pic);
+	// 	error_msg(1);
+	// 	return (1);
+	// }
+	// printf("input: %d %d %c\n", params.w, params.h, params.back);
+	// printf("rect: %c %f %f %f %f %c\n", rect.type, rect.x, rect.y, rect.w, rect.h, rect.border);
+	// printf("%s", params.pic);
+	write(1, params.pic, params.h * params.w + params.h);
 	free(params.pic);
 	return (0);
 }
@@ -113,7 +120,6 @@ int	data_init(FILE *stream)
 int	main(int argc, char *argv[])
 {
 	FILE	*path;
-	int		i;
 
 	if (argc <= 1 || argc > 2)
 	{
@@ -126,7 +132,11 @@ int	main(int argc, char *argv[])
 		error_msg(1);
 		return (1);
 	}
-	data_init(path);
+	if (data_init(path))
+	{
+		fclose(path);
+		return (1);
+	}
 	fclose(path);
 	return (0);
 }

@@ -91,10 +91,11 @@ int	data_init(FILE *stream)
 		ret = fscanf(stream, "%c %f %f %f %c\n", &circle.type, &circle.x, &circle.y,
 			&circle.r, &circle.border);
 	}
-	printf("input: %d %d %c\n", params.w, params.h, params.back);
-	printf("circle: %c %f %f %f %c\n", circle.type, circle.x, circle.y
-		, circle.r, circle.border);
-	printf("%s", params.pic);
+	// printf("input: %d %d %c\n", params.w, params.h, params.back);
+	// printf("circle: %c %f %f %f %c\n", circle.type, circle.x, circle.y
+	// 	, circle.r, circle.border);
+	// printf("%s", params.pic);
+	write(1, params.pic, params.w * params.h + params.h);
 	free(params.pic);
 	return (0);
 }
@@ -102,7 +103,6 @@ int	data_init(FILE *stream)
 int	main(int argc, char *argv[])
 {
 	FILE	*path;
-	int		i;
 
 	if (argc != 2)
 	{
