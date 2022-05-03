@@ -23,7 +23,6 @@ typedef struct s_rect
 	float	w;
 	float	h;
 	char	border;
-	char	inside;
 }	t_rect;
 
 #endif
