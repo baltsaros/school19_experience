@@ -22,7 +22,6 @@ typedef struct s_circle
 	float	y;
 	float	r;
 	char	border;
-	char	inside;
 }	t_circle;
 
 #endif
