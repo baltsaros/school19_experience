@@ -6,8 +6,6 @@ void	error_msg(int num)
 		write(1, "Error: argument\n", 16);
 	else if (num == 1)
 		write (1, "Error: Operation file corrupted\n", 32);
-	else if (num == 2)
-		write (1, "Error: invalid line\n", 20);
 }
 
 int	draw_back(t_input *params)
@@ -74,7 +72,7 @@ int	data_init(FILE *stream)
 	if (ret != 3 || !(params.w > 0 && params.w <= 300) || !(params.h > 0
 		&& params.h <= 300) || !(params.back >= 32 && params.back <= 126))
 	{
-		error_msg(2);
+		error_msg(1);
 		return (1);
 	}
 	params.pic = malloc(sizeof(char) * (params.w * params.h + params.h));
@@ -86,10 +84,22 @@ int	data_init(FILE *stream)
 	while (ret == 5)
 	{
 		if (circle.r > 0.000000 && (circle.type == 'c' || circle.type == 'C') 
-			&& (circle.border >= 32 && circle.border <= 126))
+			&& (circle.border >= 33 && circle.border <= 126))
 			draw_front(&params, &circle);
+		else
+		{
+			free(params.pic);
+			error_msg(1);
+			return (1);
+		}
 		ret = fscanf(stream, "%c %f %f %f %c\n", &circle.type, &circle.x, &circle.y,
 			&circle.r, &circle.border);
+	}
+	if (ret != 5 && ret != EOF)
+	{
+		free(params.pic);
+		error_msg(1);
+		return (1);
 	}
 	// printf("input: %d %d %c\n", params.w, params.h, params.back);
 	// printf("circle: %c %f %f %f %c\n", circle.type, circle.x, circle.y
@@ -115,7 +125,11 @@ int	main(int argc, char *argv[])
 		error_msg(1);
 		return (1);
 	}
-	data_init(path);
+	if (data_init(path))
+	{
+		fclose(path);
+		return (1);
+	}
 	fclose(path);
 	return (0);
 }

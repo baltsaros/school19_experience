@@ -62,11 +62,6 @@ int	draw_front(t_input *params, t_rect *rect)
 	return (0);
 }
 
-// int	render(t_input *params, t_rect *rect)
-// {
-// 	return (0);
-// }
-
 int	data_init(FILE *stream)
 {
 	t_input	params;
@@ -103,12 +98,12 @@ int	data_init(FILE *stream)
 		ret = fscanf(stream, "%c %f %f %f %f %c\n", &rect.type, &rect.x, &rect.y, &rect.w
 			, &rect.h, &rect.border);
 	}
-	// if (ret != 6)
-	// {
-	// 	free(params.pic);
-	// 	error_msg(1);
-	// 	return (1);
-	// }
+	if (ret != 6 && ret != EOF)
+	{
+		free(params.pic);
+		error_msg(1);
+		return (1);
+	}
 	// printf("input: %d %d %c\n", params.w, params.h, params.back);
 	// printf("rect: %c %f %f %f %f %c\n", rect.type, rect.x, rect.y, rect.w, rect.h, rect.border);
 	// printf("%s", params.pic);
