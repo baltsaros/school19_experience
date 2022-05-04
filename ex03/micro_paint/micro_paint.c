@@ -75,7 +75,7 @@ int	data_init(FILE *stream)
 		error_msg(1);
 		return (1);
 	}
-	params.pic = malloc(sizeof(char) * (params.h * params.w + params.h));
+	params.pic = malloc(sizeof(char) * (params.h * params.w + params.h + 1));
 	if (!params.pic)
 	{
 		error_msg(1);

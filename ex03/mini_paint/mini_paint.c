@@ -75,7 +75,7 @@ int	data_init(FILE *stream)
 		error_msg(1);
 		return (1);
 	}
-	params.pic = malloc(sizeof(char) * (params.w * params.h + params.h));
+	params.pic = malloc(sizeof(char) * (params.w * params.h + params.h + 1));
 	if (!params.pic)
 		return (1);
 	draw_back(&params);
@@ -84,7 +84,7 @@ int	data_init(FILE *stream)
 	while (ret == 5)
 	{
 		if (circle.r > 0.000000 && (circle.type == 'c' || circle.type == 'C') 
-			&& (circle.border >= 33 && circle.border <= 126))
+			&& (circle.border >= 32 && circle.border <= 126))
 			draw_front(&params, &circle);
 		else
 		{
