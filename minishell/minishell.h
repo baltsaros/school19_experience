@@ -14,4 +14,13 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+typedef struct s_input
+{
+	int		argc;
+	char	**argv;
+	char	**env;
+	char	*buf;
+}	t_input;
+
+
 #endif

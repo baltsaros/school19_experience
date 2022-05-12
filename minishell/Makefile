@@ -8,14 +8,14 @@ C_RESET			=\033[0m
 NAME		= minishell
 
 SRC_DIR		= srcs
-SRC_FILES	= 
+SRC_FILES	= main.c
 SRCS		= ${notdir ${SRC_FILES}}
 
 OBJ_DIR		= objs
 OBJ_FILES	= ${SRCS:.c=.o}
 OBJS		= ${addprefix ${OBJ_DIR}/,${OBJ_FILES}}
 
-INCS		= -Iinclude -Ilibft
+INCS		= -Iinclude -Ilibft -lreadline
 
 GCC			= gcc
 RM			= rm -f
