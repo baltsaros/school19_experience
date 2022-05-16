@@ -80,7 +80,7 @@ t_node	*ft_token_del(t_node *node);
 void	ft_token_print(t_node *node);
 int		ft_token_size(t_node *node);
 
-// envp_tokens
+// envp tokens
 t_env	*ft_envp_new(char *type, char *value);
 void	ft_envp_back(t_env **node, t_env *new);
 t_env	*ft_envp_del(t_env *node);
@@ -92,5 +92,8 @@ void	ft_free(char *str[]);
 t_node	*ft_free_token(t_node *node);
 t_env	*ft_free_envp(t_env *node);
 
+// utils
+char	*ft_strndup(char const *str, size_t size);
+char	**ft_split_op(char const *s, char c);
 
 #endif

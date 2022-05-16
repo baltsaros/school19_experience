@@ -9,10 +9,12 @@ NAME		= minishell
 
 SRC_DIR		= srcs
 SRC_FILES	= minishell.c \
+				minishell_utils.c \
 				nodes_1.c \
 				nodes_2.c \
 				alloc_check.c \
-				ft_free.c
+				ft_free.c \
+				ft_split_op.c
 SRCS		= ${notdir ${SRC_FILES}}
 
 OBJ_DIR		= objs

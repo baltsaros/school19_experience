@@ -1,22 +1,4 @@
-#include "minishell.h"
-
-static char	*ft_strndup(char const *str, size_t size)
-{
-	char	*dest;
-	size_t	i;
-
-	dest = malloc(sizeof(*dest) * (size + 1));
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (str[i] && i < size)
-	{
-		dest[i] = str[i];
-		++i;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
+#include "include/minishell.h"
 
 void	create_envp(t_input *data, char *envp[])
 {
@@ -66,8 +48,17 @@ void	data_init(t_input *data, int argc, char *argv[], char *envp[])
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_input	data;
+	int		i;
 
-	data_init(&data, argc, argv, envp);
+	// data_init(&data, argc, argv, envp);
+	i = 0;
+	data.argv = ft_split_op("one \" two     \" three \"four\"", ' ');
+	while (data.argv[i])
+	{
+		printf("argv[%d] is |%s|\n", i, data.argv[i]);
+		++i;
+	}
+	ft_free(data.argv);
 	// system("leaks out");
 	return (0);
 }

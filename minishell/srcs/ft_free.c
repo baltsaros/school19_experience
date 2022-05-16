@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:06:30 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/05/16 12:32:35 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/05/16 15:45:48 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 void	ft_free(char *str[])
 {

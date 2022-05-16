@@ -6,11 +6,11 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:36:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/05/16 11:57:39 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/05/16 15:45:13 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 t_node	*ft_token_new(int type, char *value)
 {
