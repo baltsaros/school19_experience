@@ -8,7 +8,10 @@ C_RESET			=\033[0m
 NAME		= minishell
 
 SRC_DIR		= srcs
-SRC_FILES	= main.c
+SRC_FILES	= main.c \
+				nodes_1.c \
+				alloc_check.c
+				 
 SRCS		= ${notdir ${SRC_FILES}}
 
 OBJ_DIR		= objs
