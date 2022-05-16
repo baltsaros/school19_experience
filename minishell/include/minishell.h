@@ -13,7 +13,8 @@
 # include <term.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "libft/libft.h"
+# include <libft.h>
+// # include "libft/libft.h"
 
 // # define SEPAR 1
 // # define WORD 2

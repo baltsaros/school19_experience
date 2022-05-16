@@ -52,9 +52,8 @@ void	data_init(t_input *data, int argc, char *argv[], char *envp[])
 	data->status = 0;
 	data->envp_n = NULL;
 	create_envp(data, envp);
-	ft_envp_print(data->envp_n);
-	ft_free_envp(data->envp_n);
-	ft_envp_print(data->envp_n);
+	// ft_envp_print(data->envp_n);
+	// data->envp_n = ft_free_envp(data->envp_n);
 }
 
 int	main(int argc, char *argv[], char *envp[])

@@ -8,17 +8,18 @@ C_RESET			=\033[0m
 NAME		= minishell
 
 SRC_DIR		= srcs
-SRC_FILES	= main.c \
+SRC_FILES	= minishell.c \
 				nodes_1.c \
-				alloc_check.c
-				 
+				nodes_2.c \
+				alloc_check.c \
+				ft_free.c
 SRCS		= ${notdir ${SRC_FILES}}
 
 OBJ_DIR		= objs
 OBJ_FILES	= ${SRCS:.c=.o}
 OBJS		= ${addprefix ${OBJ_DIR}/,${OBJ_FILES}}
 
-INCS		= -Iinclude -Ilibft -lreadline
+INCS		= -Iinclude -Ilibft
 
 GCC			= gcc
 RM			= rm -f
@@ -27,13 +28,13 @@ CFLAGS		= -Wall -Wextra -Werror
 
 all:		libft ${NAME}
 
-${OBJ_DIR}/%.o : ${SRC_DIR}/%.c
+${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
 			@mkdir -p ${OBJ_DIR}
 			@echo "${C_YELLOW_B}Compiling minishell...${C_RESET}";
 			@${GCC} ${CFLAGS} -c $< ${INCS} -o $@
 
 ${NAME}:	${OBJS} 
-			@${GCC} ${OBJS} ${INCS} libft/libft.a -o ${NAME}
+			@${GCC} ${OBJS} ${INCS} libft/libft.a -lreadline -o ${NAME}
 			@echo "${C_GREEN_B}Finished!${C_RESET}";
 
 libft:
