@@ -13,6 +13,7 @@
 # include <term.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "libft/libft.h"
 
 // # define SEPAR 1
 // # define WORD 2
@@ -45,27 +46,50 @@ typedef struct s_node
 	struct s_node	*prev;
 }	t_node;
 
+typedef struct s_env
+{
+	char			*type;
+	char			*value;
+	struct s_env	*next;
+	struct s_env	*prev;
+}	t_env;
+
 typedef struct s_input
 {
 	int		argc;
 	char	**argv;
 	char	**envp;
-	t_node	envp_n;
+	t_env	*envp_n;
+	t_node	*args;
 	char	*buf;
+	int		status;
 }	t_input;
 
 
 // allocation check
 void	alloc_check(char **str);
 void	alloc_check_small(void *str);
-void	alloc_check_node(t_node *new, t_node **node);
+void	alloc_check_token(t_node *new, t_node **node);
+void	alloc_check_envp(t_env *new, t_env **node);
 
-// nodes
-t_node	*ft_node_new(int type, char *value);
-void	ft_node_back(t_node **node, t_node *new);
-t_node	*ft_node_del(t_node *node);
-void	ft_node_print(t_node *node);
-int		ft_node_size(t_node *node);
+// tokens
+t_node	*ft_token_new(int type, char *value);
+void	ft_token_back(t_node **node, t_node *new);
+t_node	*ft_token_del(t_node *node);
+void	ft_token_print(t_node *node);
+int		ft_token_size(t_node *node);
+
+// envp_tokens
+t_env	*ft_envp_new(char *type, char *value);
+void	ft_envp_back(t_env **node, t_env *new);
+t_env	*ft_envp_del(t_env *node);
+void	ft_envp_print(t_env *node);
+int		ft_envp_size(t_env *node);
+
+// free
+void	ft_free(char *str[]);
+t_node	*ft_free_token(t_node *node);
+t_env	*ft_free_envp(t_env *node);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 17:03:11 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/05/16 09:37:09 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/05/16 12:03:50 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,22 @@ void	alloc_check_small(void *str)
 	}
 }
 
-void	alloc_check_node(t_node *new, t_node **node)
+void	alloc_check_token(t_node *new, t_node **node)
 {
 	if (!new)
 	{
 		write(2, "Allocation failed\n", 18);
-		*node = ft_free_node(*node);
+		*node = ft_free_token(*node);
+		exit(1);
+	}
+}
+
+void	alloc_check_envp(t_env *new, t_env **node)
+{
+	if (!new)
+	{
+		write(2, "Allocation failed\n", 18);
+		*node = ft_free_envp(*node);
 		exit(1);
 	}
 }

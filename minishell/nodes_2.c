@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   nodes_1.c                                          :+:      :+:    :+:   */
+/*   nodes_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 17:36:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/05/16 11:57:39 by abuzdin          ###   ########.fr       */
+/*   Created: 2022/05/16 11:40:56 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/05/16 11:58:18 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_node	*ft_token_new(int type, char *value)
+t_env	*ft_envp_new(char *type, char *value)
 {
-	t_node	*node;
+	t_env	*node;
 
-	node = malloc(sizeof(t_node));
+	node = malloc(sizeof(t_env));
 	alloc_check_small(node);
 	node->type = type;
 	node->value = value;
@@ -25,7 +25,7 @@ t_node	*ft_token_new(int type, char *value)
 	return (node);
 }
 
-void	ft_token_back(t_node **node, t_node *new)
+void	ft_envp_back(t_env **node, t_env *new)
 {
 	if (!node || !new)
 		return ;
@@ -40,9 +40,9 @@ void	ft_token_back(t_node **node, t_node *new)
 	}
 }
 
-t_node	*ft_token_del(t_node *node)
+t_env	*ft_envp_del(t_env *node)
 {
-	t_node	*tmp;
+	t_env	*tmp;
 
 	if (!node)
 		return (NULL);
@@ -61,16 +61,17 @@ t_node	*ft_token_del(t_node *node)
 		node->next->prev = node->prev;
 		node = node->next;
 	}
+	free(tmp->type);
 	free(tmp->value);
 	free(tmp);
 	return (node);
 }
 
-void	ft_token_print(t_node *node)
+void	ft_envp_print(t_env *node)
 {
 	int		i;
 	int		len;
-	t_node	*head;
+	t_env	*head;
 
 	if (!node)
 	{
@@ -79,22 +80,22 @@ void	ft_token_print(t_node *node)
 	}
 	head = node;
 	i = 0;
-	len = ft_token_size(head);
+	len = ft_envp_size(head);
 	printf("===== NODE =====\n");
 	while (i < len)
 	{
-		printf("type for node[%d] is %d\n", i, head->type);
+		printf("type for node[%d] is %s\n", i, head->type);
 		printf("value for node[%d] is %s\n", i, head->value);
 		head = head->next;
 		++i;
 	}
 }
 
-int	ft_token_size(t_node *node)
+int	ft_envp_size(t_env *node)
 {
 	int		i;
-	t_node	*last;
-	t_node	*tmp;
+	t_env	*last;
+	t_env	*tmp;
 
 	if (!node)
 		return (0);
