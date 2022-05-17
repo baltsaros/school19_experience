@@ -26,19 +26,46 @@ void	create_envp(t_input *data, char *envp[])
 	}
 }
 
-// void	create_args(t_input *data)
-// {
-// 	t_node	*tmp;
-// 	int		i;
-// 	int		j;
+int		define_token(char *argv)
+{
+	int	i;
 
-// 	i = 0;
-// 	j = 0;
-// 	while (data->buf[i])
-// 	{
+	i = 0;
+	if (strncmp(argv, "<", 2) == 0)
+		return (REDIR_OUT);
+	else if (strncmp(argv, ">", 2) == 0)
+		return (REDIR_IN);
+	else if (strncmp(argv, "<<", 3) == 0)
+		return (REDIR_HD);
+	else if (strncmp(argv, ">>", 3) == 0)
+		return (REDIR_AP);
+	else if (strncmp(argv, "|", 2) == 0)
+		return (PIPE);
+	else if (strncmp(argv, "$", 2) == 0)
+		return (SEPAR);
+	else if (argv[0] == '\'')
+		return (QUOTE);
+	else if (argv[0] == '\"')
+		return (QUOTE_D);
+	else
+		return (WORD);
+}
 
-// 	}
-// }
+void	create_token(t_input *data)
+{
+	t_node	*tmp;
+	int		i;
+	int		type;
+
+	i = 0;
+	while (data->argv[i])
+	{
+		type = define_token(data->argv[i]);
+		tmp = ft_token_new(type, data->argv[i]);
+		ft_token_back(&data->args, tmp);
+		++i;
+	}
+}
 
 void	data_init(t_input *data, char *envp[])
 {
@@ -47,6 +74,8 @@ void	data_init(t_input *data, char *envp[])
 	data->envp_n = NULL;
 	data->args = NULL;
 	create_envp(data, envp);
+	// ft_envp_print(data->envp_n);
+	// data->envp_n = ft_free_envp(data->envp_n);
 	data->argv = ft_split_op(data->buf, ' ');
 	data->argc = 0;
 	while (data->argv[data->argc])
@@ -54,12 +83,10 @@ void	data_init(t_input *data, char *envp[])
 		// printf("argv[%d] is |%s|\n", data->argc, data->argv[data->argc]);
 		++data->argc;
 	}
-	// create_args(data);
-	// data->argc = argc;
-	// data->argv = argv;
-	// ft_envp_print(data->envp_n);
-	// data->envp_n = ft_free_envp(data->envp_n);
-	ft_free(data->argv);
+	create_token(data);
+	ft_token_print(data->args);
+	data->args = ft_free_token(data->args);
+	// ft_free(data->argv);
 }
 
 int	main(int argc, char *argv[], char *envp[])
