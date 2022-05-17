@@ -15,4 +15,4 @@ gcc -g ft*.c pipex_utils.c pipex.c
 gcc ft*.c pipex_utils.c pipex.c
 gcc -g ft*.c get_next_line.c pipex_utils.c pipex_bonus.c
 gcc ft*.c get_next_line.c pipex_utils.c pipex_bonus.c
-valgrind --leak-check=full --track-origins=yes ./a.out test.txt "cat   -e" "caaaaa" out
+valgrind --leak-check=full --track-origins=yes ./a.out test.txt "cat   -e" "caaaaa" out       9
