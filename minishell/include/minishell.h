@@ -96,4 +96,6 @@ t_env	*ft_free_envp(t_env *node);
 char	*ft_strndup(char const *str, size_t size);
 char	**ft_split_op(char const *s, char c);
 
+// minishell
+
 #endif

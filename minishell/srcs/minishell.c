@@ -1,5 +1,25 @@
 #include "../include/minishell.h"
 
+int		check_field(char *buf)
+{
+	int	i;
+	int	quote;
+	int	quote_d;
+
+	i = 0;
+	quote = 0;
+	quote_d = 0;
+	while (buf[i])
+	{
+		if (buf[i] == '\'')
+			++quote;
+		else if (buf[i] == '\"')
+			++quote_d;
+		++i;
+	}
+	if (quote && quote_d && (quote % 2 !=))
+}
+
 void	create_envp(t_input *data, char *envp[])
 {
 	int		i;
@@ -19,7 +39,7 @@ void	create_envp(t_input *data, char *envp[])
 		while (envp[i][end])
 			++end;
 		type = ft_strndup(envp[i], start + 1);
-		value = ft_strndup(envp[i] + start, end - start - 1);
+		value = ft_strndup(envp[i] + start + 1, end - start - 1);
 		tmp = ft_envp_new(type, value);
 		ft_envp_back(&data->envp_n, tmp);
 		++i;
@@ -74,8 +94,8 @@ void	data_init(t_input *data, char *envp[])
 	data->envp_n = NULL;
 	data->args = NULL;
 	create_envp(data, envp);
-	// ft_envp_print(data->envp_n);
-	// data->envp_n = ft_free_envp(data->envp_n);
+	ft_envp_print(data->envp_n);
+	data->envp_n = ft_free_envp(data->envp_n);
 	data->argv = ft_split_op(data->buf, ' ');
 	data->argc = 0;
 	while (data->argv[data->argc])
