@@ -94,7 +94,12 @@ t_env	*ft_free_envp(t_env *node);
 
 // utils
 char	*ft_strndup(char const *str, size_t size);
+int		error_check(int input, char *str, int n);
+char	*ft_strjoin_free(char *rest, char *buf);
+char	*ft_charjoin_free(char *line, char b);
+
 char	**ft_split_op(char const *s, char c);
+int		get_next_line(char **line);
 
 // minishell
 

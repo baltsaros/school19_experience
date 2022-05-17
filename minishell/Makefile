@@ -14,7 +14,8 @@ SRC_FILES	= minishell.c \
 				nodes_2.c \
 				alloc_check.c \
 				ft_free.c \
-				ft_split_op.c
+				ft_split_op.c \
+				get_next_line.c
 SRCS		= ${notdir ${SRC_FILES}}
 
 OBJ_DIR		= objs
