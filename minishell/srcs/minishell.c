@@ -141,6 +141,7 @@ void	data_init(t_input *data, char *envp[])
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_input data;
+	int		pid;
 
 	if (argc != 1)
 		exit(EXIT_FAILURE);
@@ -151,8 +152,12 @@ int	main(int argc, char *argv[], char *envp[])
 		if (data.buf)
 			add_history(data.buf);
 		check_field(&data.buf);
-		printf("buf is %s\n", data.buf);
+		// printf("buf is %s\n", data.buf);
 		data_init(&data, envp);
+		pid = fork();
+		if (pid == 0)
+			ft_execve(data.buf, envp);
+		waitpid(pid, &data.status, 0);
 		if (ft_strncmp(data.buf, "exit", 5) == 0)
 		{
 			// rl_clear_history(data.buf);
@@ -160,5 +165,5 @@ int	main(int argc, char *argv[], char *envp[])
 			exit(EXIT_SUCCESS);
 		}
 	}
-	return (0);
+	return ((data.status >> 8) & 0xff);
 }
