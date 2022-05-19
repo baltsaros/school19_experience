@@ -8,6 +8,9 @@
 # include <sys/types.h>
 # include <dirent.h>
 # include <sys/ioctl.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include <termios.h>
 # include <curses.h>
 # include <term.h>
@@ -97,6 +100,11 @@ char	*ft_strndup(char const *str, size_t size);
 int		error_check(int input, char *str, int n);
 char	*ft_strjoin_free(char *rest, char *buf);
 char	*ft_charjoin_free(char *line, char b);
+
+char	**get_address(char *cmd[], char *envp[]);
+char	*access_check(char *cmd[], char *envp[]);
+void	ft_execve(char *argv, char *envp[]);
+int		ft_open(char *file, int par);
 
 char	**ft_split_op(char const *s, char c);
 int		get_next_line(char **line);

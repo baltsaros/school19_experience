@@ -19,7 +19,7 @@ int		check_field(char **buf)
 			++quote_d;
 		++i;
 	}
-	if ((quote || quote_d) && (quote % 2 != 0 || quote_d % 2 != 0))
+	if (quote && quote % 2 != 0)
 	{
 		while (1)
 		{
@@ -27,6 +27,21 @@ int		check_field(char **buf)
 			*buf = ft_charjoin_free(*buf, '\n');
 			*buf = ft_strjoin_free(*buf, tmp);
 			if (ft_strchr(tmp, '\''))
+			{
+				free(tmp);
+				break;
+			}
+			free(tmp);
+		}
+	}
+	else if (quote_d &&quote_d % 2 != 0)
+	{
+		while (1)
+		{
+			tmp = readline("dquote>");
+			*buf = ft_charjoin_free(*buf, '\n');
+			*buf = ft_strjoin_free(*buf, tmp);
+			if (ft_strchr(tmp, '\"'))
 			{
 				free(tmp);
 				break;
@@ -65,9 +80,6 @@ void	create_envp(t_input *data, char *envp[])
 
 int		define_token(char *argv)
 {
-	int	i;
-
-	i = 0;
 	if (strncmp(argv, "<", 2) == 0)
 		return (REDIR_OUT);
 	else if (strncmp(argv, ">", 2) == 0)

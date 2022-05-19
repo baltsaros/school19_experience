@@ -15,6 +15,7 @@ SRC_FILES	= minishell.c \
 				alloc_check.c \
 				ft_free.c \
 				ft_split_op.c \
+				execute.c \
 				get_next_line.c
 SRCS		= ${notdir ${SRC_FILES}}
 
