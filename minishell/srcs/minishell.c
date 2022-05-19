@@ -92,6 +92,8 @@ int		define_token(char *argv)
 		return (PIPE);
 	else if (strncmp(argv, "$", 2) == 0)
 		return (SEPAR);
+	else if (strncmp(argv, "=", 2) == 0)
+		return (EQUAL);
 	else if (argv[0] == '\'')
 		return (QUOTE);
 	else if (argv[0] == '\"')
@@ -133,8 +135,8 @@ void	data_init(t_input *data, char *envp[])
 		++data->argc;
 	}
 	create_token(data);
-	// ft_token_print(data->args);
-	// data->args = ft_free_token(data->args);
+	ft_token_print(data->args);
+	data->args = ft_free_token(data->args);
 	// ft_free(data->argv);
 }
 

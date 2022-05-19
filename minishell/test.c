@@ -52,8 +52,11 @@ int	main(int argc, char *argv[], char *envp[])
 
 	// data_init(&data, argc, argv, envp);
 	i = 0;
-	data.buf = malloc(5);
-	exit(0);
+	while (argv[i])
+	{
+		printf("argv[%d] is |%s|\n", i, argv[i]);
+		++i;
+	}
 	// system("leaks out");
 	return (0);
 }
