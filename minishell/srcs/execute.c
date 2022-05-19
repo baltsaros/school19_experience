@@ -49,7 +49,7 @@ void	ft_heredoc(char *limiter)
 	error_check(dup2(fd[0], STDIN_FILENO), "In Dup2_pr ", 12);
 }
 
-int	pipe(int argc, char *argv[], char *envp[])
+int	pipex(int argc, char *argv[], char *envp[])
 {
 	int	in;
 	int	out;

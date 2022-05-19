@@ -17,7 +17,7 @@
 # include <term.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-// # include <libft.h>
+# include <libft.h>
 // # include "libft/libft.h"
 
 // # define SEPAR 1
@@ -114,7 +114,7 @@ int		get_next_line(char **line);
 // minishell
 
 // execute
-int	pipe(int argc, char *argv[], char *envp[]);
+int		pipex(int argc, char *argv[], char *envp[]);
 void	ft_heredoc(char *limiter);
 void	ft_fork(char *argv, char *envp[]);
 
