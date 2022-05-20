@@ -118,6 +118,17 @@ void	create_token(t_input *data)
 	}
 }
 
+struct builtin builtins[] =
+{
+	{"pwd", &yo_pwd},
+	{"cd", &yo_cd},
+	{"echo", &yo_echo},
+	{"export", &yo_export},
+	{"env", &yo_env},
+	{"unset", &yo_unset},
+	{"exit", &yo_exit}
+};
+
 void	data_init(t_input *data, char *envp[])
 {
 	data->envp = envp;
@@ -129,14 +140,15 @@ void	data_init(t_input *data, char *envp[])
 	// data->envp_n = ft_free_envp(data->envp_n);
 	data->argv = ft_split_op(data->buf, ' ');
 	data->argc = 0;
+	data->builtins = builtins;
 	while (data->argv[data->argc])
 	{
-		// printf("argv[%d] is |%s|\n", data->argc, data->argv[data->argc]);
+		printf("argv[%d] is |%s|\n", data->argc, data->argv[data->argc]);
 		++data->argc;
 	}
 	create_token(data);
-	ft_token_print(data->args);
-	data->args = ft_free_token(data->args);
+	// ft_token_print(data->args);
+	// data->args = ft_free_token(data->args);
 	// ft_free(data->argv);
 }
 
@@ -156,16 +168,12 @@ int	main(int argc, char *argv[], char *envp[])
 		check_field(&data.buf);
 		// printf("buf is %s\n", data.buf);
 		data_init(&data, envp);
+		if (ft_strncmp(data.argv[0], "exit", 5) == 0)
+			data.builtins[6].func(&data);
 		pid = fork();
 		if (pid == 0)
-			ft_execve(data.buf, envp);
+			execute(&data);
 		waitpid(pid, &data.status, 0);
-		if (ft_strncmp(data.buf, "exit", 5) == 0)
-		{
-			// rl_clear_history(data.buf);
-			free(data.buf);
-			exit(EXIT_SUCCESS);
-		}
 	}
 	return ((data.status >> 8) & 0xff);
 }

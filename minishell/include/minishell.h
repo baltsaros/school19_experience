@@ -62,15 +62,21 @@ typedef struct s_env
 
 typedef struct s_input
 {
-	int		argc;
-	char	**argv;
-	char	**envp;
-	t_env	*envp_n;
-	t_node	*args;
-	char	*buf;
-	int		status;
+	int				argc;
+	char			**argv;
+	char			**envp;
+	t_env			*envp_n;
+	t_node			*args;
+	char			*buf;
+	struct builtin	*builtins;
+	int				status;
 }	t_input;
 
+struct builtin
+{
+	char	*name;
+	void	(*func)(t_input *data);
+};
 
 // allocation check
 void	alloc_check(char **str);
@@ -117,5 +123,15 @@ int		get_next_line(char **line);
 int		pipex(int argc, char *argv[], char *envp[]);
 void	ft_heredoc(char *limiter);
 void	ft_fork(char *argv, char *envp[]);
+int	execute(t_input *data);
+
+// builtins
+void	yo_pwd(t_input *data);
+void	yo_cd(t_input *data);
+void	yo_echo(t_input *data);
+void	yo_export(t_input *data);
+void	yo_env(t_input *data);
+void	yo_unset(t_input *data);
+void	yo_exit(t_input *data);
 
 #endif
