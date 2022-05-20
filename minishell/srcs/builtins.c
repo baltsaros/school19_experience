@@ -24,7 +24,16 @@ void	yo_cd(t_input *data)
 
 void	yo_echo(t_input *data)
 {
-	ft_printf("%s\n", data->buf + 5);
+	int	size;
+	int	i;
+
+	i = 0;
+	size = ft_token_size(data->args);
+	printf("argv[1] is %s\n", data->argv[1]);
+	if (strncmp(data->argv[1], "-n", 3) == 0)
+		ft_printf("%s", data->buf + 8);
+	else
+		ft_printf("%s\n", data->buf + 5);
 	exit ((data->status >> 8) & 0xFF);
 }
 

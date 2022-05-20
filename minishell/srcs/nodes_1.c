@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:36:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/05/16 15:45:13 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/05/20 17:41:51 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,28 @@ t_node	*ft_token_new(int type, char *value)
 	alloc_check_small(node);
 	node->type = type;
 	node->value = value;
-	node->next = node;
-	node->prev = node;
+	node->next = NULL;
+	node->prev = NULL;
 	return (node);
 }
 
 void	ft_token_back(t_node **node, t_node *new)
 {
+	t_node *tmp;
+	
+	tmp = NULL;
 	if (!node || !new)
 		return ;
 	if (!*node)
 		*node = new;
 	else
 	{
-		new->next = *node;
-		new->prev = (*node)->prev;
-		(*node)->prev->next = new;
-		(*node)->prev = new;
+		tmp = *node;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+		new->prev = tmp;
+		new->next = NULL;
 	}
 }
 
@@ -47,19 +52,12 @@ t_node	*ft_token_del(t_node *node)
 	if (!node)
 		return (NULL);
 	tmp = node;
-	if (tmp == tmp->next)
+	if (!tmp->next)
 		node = NULL;
-	else if (tmp->prev == tmp->next)
-	{
-		node = node->next;
-		node->prev = node;
-		node->next = node;
-	}
 	else
 	{
-		node->prev->next = node->next;
-		node->next->prev = node->prev;
 		node = node->next;
+		node->prev = NULL;
 	}
 	free(tmp->value);
 	free(tmp);
@@ -69,42 +67,34 @@ t_node	*ft_token_del(t_node *node)
 void	ft_token_print(t_node *node)
 {
 	int		i;
-	int		len;
-	t_node	*head;
 
 	if (!node)
 	{
 		printf("There are no nodes in the list\n");
 		return ;
 	}
-	head = node;
 	i = 0;
-	len = ft_token_size(head);
 	printf("===== NODE =====\n");
-	while (i < len)
+	while (node)
 	{
-		printf("type for node[%d] is %d\n", i, head->type);
-		printf("value for node[%d] is %s\n", i, head->value);
-		head = head->next;
+		printf("type for node[%d] is %d\n", i, node->type);
+		printf("value for node[%d] is %s\n", i, node->value);
+		node = node->next;
 		++i;
 	}
 }
 
 int	ft_token_size(t_node *node)
 {
-	int		i;
-	t_node	*last;
-	t_node	*tmp;
+	int	i;
 
 	if (!node)
 		return (0);
 	i = 1;
-	tmp = node;
-	last = tmp->prev;
-	while (tmp != last)
+	while (node->next)
 	{
 		++i;
-		tmp = tmp->next;
+		node = node->next;
 	}
 	return (i);
 }
