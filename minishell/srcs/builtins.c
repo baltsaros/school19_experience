@@ -1,5 +1,16 @@
 #include "minishell.h"
 
+// char	*prepare_str(t_input *data)
+// {
+// 	char	*ret;
+
+// 	while (data->args)
+// 	{
+// 		data->args = data->args->next;
+// 	}
+// 	return (ret);
+// }
+
 void	yo_pwd(t_input *data)
 {
 	char	*ret;
@@ -24,14 +35,18 @@ void	yo_cd(t_input *data)
 
 void	yo_echo(t_input *data)
 {
-	int	size;
-	int	i;
+	int		size;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	size = ft_token_size(data->args);
 	printf("argv[1] is %s\n", data->argv[1]);
 	if (strncmp(data->argv[1], "-n", 3) == 0)
+	{
+
 		ft_printf("%s", data->buf + 8);
+	}
 	else
 		ft_printf("%s\n", data->buf + 5);
 	exit ((data->status >> 8) & 0xFF);
