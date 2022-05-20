@@ -2,20 +2,29 @@
 
 void	yo_pwd(t_input *data)
 {
+	char	*ret;
+
+	ret = NULL;
+	ret = getcwd(NULL, 0);
+	if (!ret)
+		perror("pwd");
+	else
+		ft_printf("%s\n", ret);
 	exit ((data->status >> 8) & 0xFF);
 }
 
 void	yo_cd(t_input *data)
 {
-	printf("ENTERING CD FUNC\n");
 	if (!data->argv[1])
 		write(2, "cd: missing an argument\n", 24);
 	else if (chdir(data->argv[1]))
 		perror("cd");
+	return ;
 }
 
 void	yo_echo(t_input *data)
 {
+	ft_printf("%s\n", data->buf + 5);
 	exit ((data->status >> 8) & 0xFF);
 }
 

@@ -91,8 +91,14 @@ int	pipex(int argc, char *argv[], char *envp[])
 int	execute(t_input *data)
 {
 
-	if (ft_strncmp(data->argv[0], "cd", 3) == 0)
+	if (ft_strncmp(data->argv[0], "pwd", 4) == 0)
+		data->builtins[0].func(data);
+	else if (ft_strncmp(data->argv[0], "cd", 3) == 0)
 		data->builtins[1].func(data);
+	else if (ft_strncmp(data->argv[0], "echo", 5) == 0)
+		data->builtins[2].func(data);
+	else if (ft_strncmp(data->argv[0], "exit", 5) == 0)
+		data->builtins[6].func(data);
 	else
 		ft_execve(data->buf, data->envp);
 	return (0);

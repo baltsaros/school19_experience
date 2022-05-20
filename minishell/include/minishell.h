@@ -123,7 +123,7 @@ int		get_next_line(char **line);
 int		pipex(int argc, char *argv[], char *envp[]);
 void	ft_heredoc(char *limiter);
 void	ft_fork(char *argv, char *envp[]);
-int	execute(t_input *data);
+int		execute(t_input *data);
 
 // builtins
 void	yo_pwd(t_input *data);

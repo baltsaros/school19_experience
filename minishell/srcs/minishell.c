@@ -70,7 +70,7 @@ void	create_envp(t_input *data, char *envp[])
 			++start;
 		while (envp[i][end])
 			++end;
-		type = ft_strndup(envp[i], start + 1);
+		type = ft_strndup(envp[i], start);
 		value = ft_strndup(envp[i] + start + 1, end - start - 1);
 		tmp = ft_envp_new(type, value);
 		ft_envp_back(&data->envp_n, tmp);
@@ -136,14 +136,14 @@ void	data_init(t_input *data, char *envp[])
 	data->envp_n = NULL;
 	data->args = NULL;
 	create_envp(data, envp);
-	// ft_envp_print(data->envp_n);
-	// data->envp_n = ft_free_envp(data->envp_n);
+	ft_envp_print(data->envp_n);
+	data->envp_n = ft_free_envp(data->envp_n);
 	data->argv = ft_split_op(data->buf, ' ');
 	data->argc = 0;
 	data->builtins = builtins;
 	while (data->argv[data->argc])
 	{
-		printf("argv[%d] is |%s|\n", data->argc, data->argv[data->argc]);
+		// printf("argv[%d] is |%s|\n", data->argc, data->argv[data->argc]);
 		++data->argc;
 	}
 	create_token(data);
