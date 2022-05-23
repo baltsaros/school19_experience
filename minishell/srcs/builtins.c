@@ -46,8 +46,10 @@ int	yo_echo(t_input *data)
 
 	i = 0;
 	size = ft_token_size(data->args);
-	printf("argv[1] is %s\n", data->argv[1]);
-	if (strncmp(data->argv[1], "-n", 3) == 0)
+	// printf("argv[1] is %s\n", data->argv[1]);
+	if (!data->argv[1])
+		write(1, "\n", 1);
+	else if (strncmp(data->argv[1], "-n", 3) == 0)
 		ft_printf("%s", data->buf + 8);
 	else
 		ft_printf("%s\n", data->buf + 5);
