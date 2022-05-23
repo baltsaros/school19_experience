@@ -136,8 +136,8 @@ void	data_init(t_input *data, char *envp[])
 	data->envp_n = NULL;
 	data->args = NULL;
 	create_envp(data, envp);
-	// ft_envp_print(data->envp_n);
-	// data->envp_n = ft_free_envp(data->envp_n);
+	ft_envp_print(data->envp_n);
+	data->envp_n = ft_free_envp(data->envp_n);
 	data->argv = ft_split_op(data->buf, ' ');
 	data->argc = 0;
 	data->builtins = builtins;
@@ -147,8 +147,8 @@ void	data_init(t_input *data, char *envp[])
 		++data->argc;
 	}
 	create_token(data);
-	// ft_token_print(data->args);
-	// data->args = ft_free_token(data->args);
+	ft_token_print(data->args);
+	data->args = ft_free_token(data->args);
 	// ft_free(data->argv);
 }
 

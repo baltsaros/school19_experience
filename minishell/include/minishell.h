@@ -75,7 +75,7 @@ typedef struct s_input
 struct builtin
 {
 	char	*name;
-	void	(*func)(t_input *data);
+	int		(*func)(t_input *data);
 };
 
 // allocation check
