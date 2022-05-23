@@ -155,7 +155,6 @@ void	data_init(t_input *data, char *envp[])
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_input data;
-	int		pid;
 
 	if (argc != 1)
 		exit(EXIT_FAILURE);
@@ -168,12 +167,7 @@ int	main(int argc, char *argv[], char *envp[])
 		check_field(&data.buf);
 		// printf("buf is %s\n", data.buf);
 		data_init(&data, envp);
-		if (ft_strncmp(data.argv[0], "exit", 5) == 0)
-			data.builtins[6].func(&data);
-		pid = fork();
-		if (pid == 0)
-			execute(&data);
-		waitpid(pid, &data.status, 0);
+		execute(&data);
 	}
 	return ((data.status >> 8) & 0xff);
 }

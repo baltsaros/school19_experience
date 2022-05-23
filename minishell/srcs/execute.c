@@ -91,6 +91,9 @@ int	pipex(int argc, char *argv[], char *envp[])
 int	execute(t_input *data)
 {
 
+	int	pid;
+
+	pid = 0;
 	if (ft_strncmp(data->argv[0], "pwd", 4) == 0)
 		data->builtins[0].func(data);
 	else if (ft_strncmp(data->argv[0], "cd", 3) == 0)
@@ -100,6 +103,11 @@ int	execute(t_input *data)
 	else if (ft_strncmp(data->argv[0], "exit", 5) == 0)
 		data->builtins[6].func(data);
 	else
-		ft_execve(data->buf, data->envp);
+	{
+		pid = fork();
+		if (pid == 0)
+			ft_execve(data->buf, data->envp);
+	}
+	waitpid(pid, &data->status, 0);
 	return (0);
 }

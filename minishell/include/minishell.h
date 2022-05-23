@@ -126,12 +126,12 @@ void	ft_fork(char *argv, char *envp[]);
 int		execute(t_input *data);
 
 // builtins
-void	yo_pwd(t_input *data);
-void	yo_cd(t_input *data);
-void	yo_echo(t_input *data);
-void	yo_export(t_input *data);
-void	yo_env(t_input *data);
-void	yo_unset(t_input *data);
-void	yo_exit(t_input *data);
+int		yo_pwd(t_input *data);
+int		yo_cd(t_input *data);
+int		yo_echo(t_input *data);
+int		yo_export(t_input *data);
+int		yo_env(t_input *data);
+int		yo_unset(t_input *data);
+int		yo_exit(t_input *data);
 
 #endif
