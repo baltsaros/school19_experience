@@ -24,7 +24,7 @@ void	Contact::add(){
 	std::getline(std::cin, this->_secret);
 }
 
-void	Contact::printContacts(){
+void	Contact::printContact(){
 		std::cout << this->_first_name << std::endl;
 		std::cout << this->_last_name << std::endl;
 		std::cout << this->_nickname << std::endl;

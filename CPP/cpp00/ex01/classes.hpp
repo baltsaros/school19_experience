@@ -16,7 +16,7 @@ class	Contact {
 
 	public:
 		void		add(void);
-		void		printContacts(void);
+		void		printContact(void);
 		std::string	getFname(void);
 		std::string	getLname(void);
 		std::string	getNname(void);
@@ -27,6 +27,7 @@ class	PhoneBook {
 		Contact		_pb[8];
 	public:
 		void		fillContact(size_t i);
+		void		displayList(void);
 		Contact		getContact(size_t i);
 		// PhoneBook(void);
 		// ~PhoneBook(void);
