@@ -30,7 +30,7 @@ void	error_msg(void)
 	std::cout << "3) EXIT to exit;" << std::endl;
 }
 
-void	search_contact(PhoneBook *phonebook, size_t i)
+void	search_contact(PhoneBook phonebook, size_t i)
 {
 	std::string	input;
 	Contact		contact;
@@ -42,7 +42,7 @@ void	search_contact(PhoneBook *phonebook, size_t i)
 		std::getline(std::cin, input);
 		j = stoi(input) - 1;
 		if (j >= 0 && j <= 7 && j < i){
-			contact = phonebook->getContact(j);
+			contact = phonebook.getContact(j);
 			contact.printContact();
 			break ;
 		}
@@ -50,7 +50,7 @@ void	search_contact(PhoneBook *phonebook, size_t i)
 			std::cout << "Wrong input! Try again." << std::endl;
 	}
 	if (i == 0)
-		std::cout << "The PhoneBook is empty! Fill is with ADD command." << std::endl;
+		std::cout << "The PhoneBook is empty! Fill it with ADD command." << std::endl;
 
 }
 
@@ -72,7 +72,7 @@ int	main(int argc, char *argv[]){
 		}
 		else if (input.compare("SEARCH") == 0){
 			phonebook.displayList();
-			search_contact(&phonebook, i);
+			search_contact(phonebook, i);
 		}
 		else if (input.compare("EXIT") == 0){
 			std::cout << "Bye!" << std::endl;
