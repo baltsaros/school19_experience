@@ -35,12 +35,20 @@ void	error_msg(void)
 	std::cout << "Bam!" << std::endl;
 	usleep(1000000);
 	std::cout << "Just kidding (:: Choose a proper command please:" << std::endl;
-	usleep(1000000);
 	std::cout << "1) ADD to add a new contact;" << std::endl;
-	usleep(1000000);
 	std::cout << "2) SEARCH to search for a contact;" << std::endl;
-	usleep(1000000);
 	std::cout << "3) EXIT to exit;" << std::endl;
+}
+
+void	PhoneBook::fillContact(size_t i)
+{
+	this->_pb[i].add();
+	std::cout << "The contact was added!" << std::endl;
+}
+
+Contact	PhoneBook::getContact(size_t i)
+{
+	return (this->_pb[i]);
 }
 
 std::string	format_str(std::string str)
@@ -58,27 +66,30 @@ std::string	format_str(std::string str)
 void	search_contact(PhoneBook *phonebook, size_t i)
 {
 	std::string	input;
+	Contact		contact;
 	size_t		j;
 
 	j = 0;
-	while (j < i){
+	while (j < 8){
+		contact = phonebook->getContact(j);
 		std::cout << std::right << "|";
-		std::cout.width(10); std::cout << std::right << j;
+		std::cout.width(10); std::cout << std::right << j + 1;
 		std::cout << std::right << "|";
-		std::cout.width(10); std::cout << std::right << format_str(phonebook->_pb[j].getFname());
+		std::cout.width(10); std::cout << std::right << format_str(contact.getFname());
 		std::cout << std::right << "|";
-		std::cout.width(10); std::cout << std::right << format_str(phonebook->_pb[j].getLname());
+		std::cout.width(10); std::cout << std::right << format_str(contact.getLname());
 		std::cout << std::right << "|";
-		std::cout.width(10); std::cout << std::right << format_str(phonebook->_pb[j].getNname());
+		std::cout.width(10); std::cout << std::right << format_str(contact.getNname());
 		std::cout << std::right << "|\n";
 		++j;
 	}
 	while (i > 0){
 		std::cout << "Write index of the entry to display:" << std::endl;
 		std::getline(std::cin, input);
-		j = stoi(input);
+		j = stoi(input) - 1;
 		if (j >= 0 && j <= 7 && j < i){
-			phonebook->_pb[j].printContacts();
+			contact = phonebook->getContact(j);
+			contact.printContacts();
 			break ;
 		}
 		else
@@ -92,7 +103,6 @@ void	search_contact(PhoneBook *phonebook, size_t i)
 int	main(int argc, char *argv[]){
 	std::string	input;
 	PhoneBook	phonebook;
-	Contacts	contact;
 	size_t		i;
 
 	if (argc != 1)
@@ -103,10 +113,7 @@ int	main(int argc, char *argv[]){
 	while (19){
 		std::getline(std::cin, input);
 		if (input.compare("ADD") == 0){
-			if (i == 8)
-				i = 0;
-			phonebook._pb[i].add();
-			std::cout << "The contact was added!" << std::endl;
+			phonebook.fillContact(i % 8);
 			++i;
 		}
 		else if (input.compare("SEARCH") == 0){

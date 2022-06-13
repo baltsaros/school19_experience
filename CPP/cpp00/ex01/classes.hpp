@@ -6,7 +6,7 @@
 # include <string>
 # include <unistd.h>
 
-class	Contacts {
+class	Contact {
 	private:
 		std::string	_first_name;
 		std::string	_last_name;
@@ -24,8 +24,10 @@ class	Contacts {
 
 class	PhoneBook {
 	private:
+		Contact		_pb[8];
 	public:
-		Contacts	_pb[8];
+		void		fillContact(size_t i);
+		Contact		getContact(size_t i);
 		// PhoneBook(void);
 		// ~PhoneBook(void);
 };

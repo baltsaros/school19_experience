@@ -1,17 +1,17 @@
 #include "classes.hpp"
 
-// Contacts::Contacts(std::string fname, std::string lname, std::string nname, std::string num, std::string dsecret){
-// Contacts::Contacts(void){
+// Contact::Contact(std::string fname, std::string lname, std::string nname, std::string num, std::string dsecret){
+// Contact::Contact(void){
 // 	std::cout << "Contact constructor" << std::endl;
 // 	return ;
 // }
 
-// Contacts::~Contacts(void){
+// Contact::~Contact(void){
 // 	std::cout << "Contact destructor" << std::endl;
 // 	return ;
 // }
 
-void	Contacts::add(){
+void	Contact::add(){
 	std::cout << "Enter first name:" << std::endl;
 	std::getline(std::cin, this->_first_name);
 	std::cout << "Enter last name:" << std::endl;
@@ -24,7 +24,7 @@ void	Contacts::add(){
 	std::getline(std::cin, this->_secret);
 }
 
-void	Contacts::printContacts(){
+void	Contact::printContacts(){
 		std::cout << this->_first_name << std::endl;
 		std::cout << this->_last_name << std::endl;
 		std::cout << this->_nickname << std::endl;
@@ -32,15 +32,15 @@ void	Contacts::printContacts(){
 		std::cout << this->_secret << std::endl;
 }
 
-std::string	Contacts::getFname(void){
+std::string	Contact::getFname(void){
 	return (_first_name);
 }
 
-std::string	Contacts::getLname(void){
+std::string	Contact::getLname(void){
 	return (_last_name);
 }
 
-std::string	Contacts::getNname(void){
+std::string	Contact::getNname(void){
 	return (_nickname);
 }
 
