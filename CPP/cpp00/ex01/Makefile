@@ -10,8 +10,7 @@ NAME	= phonebook
 
 # SRC_DIR	= srcs
 SRCS	= phonebook.cpp \
-			contact.cpp \
-			main.cpp
+			contact.cpp
 # SRCS	= ${notdir ${SRCS_F}}
 
 OBJ_DIR	= objs

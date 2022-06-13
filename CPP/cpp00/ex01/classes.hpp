@@ -4,6 +4,7 @@
 # include <iostream>
 # include <iomanip>
 # include <string>
+# include <unistd.h>
 
 class	Contacts {
 	private:
@@ -18,11 +19,11 @@ class	Contacts {
 		// ~Contacts(void);
 };
 
-class	PhoneBook {
+class	Phonebook {
 	private:
 	public:
-		// PhoneBook(void);
-		// ~PhoneBook(void);
+		// Phonebook(void);
+		// ~Phonebook(void);
 		Contacts	pb[8];
 };
 
