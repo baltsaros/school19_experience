@@ -1,11 +1,11 @@
 #include "classes.hpp"
 
-// Phonebook::Phonebook(void){
+// PhoneBook::PhoneBook(void){
 // 	std::cout << "PhoneBook constructor" << std::endl;
 // 	return ;
 // }
 
-// Phonebook::~Phonebook(void){
+// PhoneBook::~PhoneBook(void){
 // 	std::cout << "PhoneBook destructor" << std::endl;
 // 	return ;
 // }
@@ -43,24 +43,6 @@ void	error_msg(void)
 	std::cout << "3) EXIT to exit;" << std::endl;
 }
 
-// void	add_contact(Phonebook *phonebook, size_t i)
-// {
-// 	Contacts	contact;
-
-// 	std::cout << "Enter first name:" << std::endl;
-// 	std::getline(std::cin, contact.first_name);
-// 	std::cout << "Enter last name:" << std::endl;
-// 	std::getline(std::cin, contact.last_name);
-// 	std::cout << "Enter nickname:" << std::endl;
-// 	std::getline(std::cin, contact.nickname);
-// 	std::cout << "Enter phone number:" << std::endl;
-// 	std::getline(std::cin, contact.number);
-// 	std::cout << "Enter new contact's darkest secret:" << std::endl;
-// 	std::getline(std::cin, contact.secret);
-// 	phonebook->pb[i] = contact;
-// 	std::cout << "The contact was added!" << std::endl;
-// }
-
 std::string	format_str(std::string str)
 {
 	std::string	tmp;
@@ -73,7 +55,7 @@ std::string	format_str(std::string str)
 	return (tmp);
 }
 
-void	search_contact(Phonebook *phonebook, size_t i)
+void	search_contact(PhoneBook *phonebook, size_t i)
 {
 	std::string	input;
 	size_t		j;
@@ -83,11 +65,11 @@ void	search_contact(Phonebook *phonebook, size_t i)
 		std::cout << std::right << "|";
 		std::cout.width(10); std::cout << std::right << j;
 		std::cout << std::right << "|";
-		std::cout.width(10); std::cout << std::right << format_str(phonebook->pb[j].first_name);
+		std::cout.width(10); std::cout << std::right << format_str(phonebook->_pb[j].getFname());
 		std::cout << std::right << "|";
-		std::cout.width(10); std::cout << std::right << format_str(phonebook->pb[j].last_name);
+		std::cout.width(10); std::cout << std::right << format_str(phonebook->_pb[j].getLname());
 		std::cout << std::right << "|";
-		std::cout.width(10); std::cout << std::right << format_str(phonebook->pb[j].nickname);
+		std::cout.width(10); std::cout << std::right << format_str(phonebook->_pb[j].getNname());
 		std::cout << std::right << "|\n";
 		++j;
 	}
@@ -96,11 +78,7 @@ void	search_contact(Phonebook *phonebook, size_t i)
 		std::getline(std::cin, input);
 		j = stoi(input);
 		if (j >= 0 && j <= 7 && j < i){
-			std::cout << phonebook->pb[j].first_name << std::endl;
-			std::cout << phonebook->pb[j].last_name << std::endl;
-			std::cout << phonebook->pb[j].nickname << std::endl;
-			std::cout << phonebook->pb[j].number << std::endl;
-			std::cout << phonebook->pb[j].secret << std::endl;
+			phonebook->_pb[j].printContacts();
 			break ;
 		}
 		else
@@ -113,7 +91,7 @@ void	search_contact(Phonebook *phonebook, size_t i)
 
 int	main(int argc, char *argv[]){
 	std::string	input;
-	Phonebook	phonebook;
+	PhoneBook	phonebook;
 	Contacts	contact;
 	size_t		i;
 
@@ -125,22 +103,11 @@ int	main(int argc, char *argv[]){
 	while (19){
 		std::getline(std::cin, input);
 		if (input.compare("ADD") == 0){
-			// add_contact(&phonebook, i);
-			std::cout << "Enter first name:" << std::endl;
-			std::getline(std::cin, contact.first_name);
-			std::cout << "Enter last name:" << std::endl;
-			std::getline(std::cin, contact.last_name);
-			std::cout << "Enter nickname:" << std::endl;
-			std::getline(std::cin, contact.nickname);
-			std::cout << "Enter phone number:" << std::endl;
-			std::getline(std::cin, contact.number);
-			std::cout << "Enter new contact's darkest secret:" << std::endl;
-			std::getline(std::cin, contact.secret);
-			phonebook.pb[i] = contact;
+			if (i == 8)
+				i = 0;
+			phonebook._pb[i].add();
 			std::cout << "The contact was added!" << std::endl;
 			++i;
-			if (i == 7)
-				i = 0;
 		}
 		else if (input.compare("SEARCH") == 0){
 			std::cout << "Here is the list of all contacts from your PhoneBook:" << std::endl;

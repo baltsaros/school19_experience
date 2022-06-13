@@ -8,24 +8,26 @@
 
 class	Contacts {
 	private:
+		std::string	_first_name;
+		std::string	_last_name;
+		std::string	_nickname;
+		std::string	_number;
+		std::string	_secret;
+
 	public:
-		std::string	first_name;
-		std::string	last_name;
-		std::string	nickname;
-		std::string	number;
-		std::string	secret;
-		// Contacts(std::string fname, std::string lname, std::string nname, std::string num, std::string dsecret);
-		// Contacts(void);
-		// ~Contacts(void);
+		void		add(void);
+		void		printContacts(void);
+		std::string	getFname(void);
+		std::string	getLname(void);
+		std::string	getNname(void);
 };
 
-class	Phonebook {
+class	PhoneBook {
 	private:
 	public:
-		// Phonebook(void);
-		// ~Phonebook(void);
-		Contacts	pb[8];
+		Contacts	_pb[8];
+		// PhoneBook(void);
+		// ~PhoneBook(void);
 };
-
 
 #endif
