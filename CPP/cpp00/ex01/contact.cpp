@@ -22,34 +22,19 @@ static std::string	check_field(std::string str)
 void	Contact::add(){
 	std::cout << "Enter first name:" << std::endl;
 	std::getline(std::cin, this->_first_name);
-	while(this->_first_name.length() == 0){
-		std::cout << "The field cannot be empty! Type something!" << std::endl;
-		std::getline(std::cin, this->_first_name);
-	}
+	this->_first_name = check_field(this->_first_name);
 	std::cout << "Enter last name:" << std::endl;
 	std::getline(std::cin, this->_last_name);
-	while(this->_last_name.length() == 0){
-		std::cout << "The field cannot be empty! Type something!" << std::endl;
-		std::getline(std::cin, this->_last_name);
-	}
+	this->_last_name = check_field(this->_last_name);
 	std::cout << "Enter nickname:" << std::endl;
 	std::getline(std::cin, this->_nickname);
-	while(this->_nickname.length() == 0){
-		std::cout << "The field cannot be empty! Type something!" << std::endl;
-		std::getline(std::cin, this->_nickname);
-	}
+	this->_nickname = check_field(this->_nickname);
 	std::cout << "Enter phone number:" << std::endl;
 	std::getline(std::cin, this->_number);
-	while(this->_number.length() == 0){
-		std::cout << "The field cannot be empty! Type something!" << std::endl;
-		std::getline(std::cin, this->_number);
-	}
+	this->_number = check_field(this->_number);
 	std::cout << "Enter new contact's darkest secret:" << std::endl;
 	std::getline(std::cin, this->_secret);
-	while(this->_secret.length() == 0){
-		std::cout << "The field cannot be empty! Type something!" << std::endl;
-		std::getline(std::cin, this->_secret);
-	}
+	this->_secret = check_field(this->_secret);
 }
 
 void	Contact::printContact(){

@@ -25,6 +25,7 @@ std::string	format_str(std::string str)
 void	PhoneBook::fillContact(size_t i){
 	this->_pb[i].add();
 	std::cout << "The contact was added!" << std::endl;
+	std::cout << "Type a command (ADD, SEARCH or EXIT):" << std::endl;
 }
 
 void	PhoneBook::displayList(){
