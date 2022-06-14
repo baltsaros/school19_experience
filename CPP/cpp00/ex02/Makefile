@@ -6,12 +6,11 @@ C_GREEN			=\033[0;32m
 C_GREEN_B		=\033[1;32m
 C_RESET			=\033[0m
 
-NAME	= phonebook
+NAME	= account
 
 # SRC_DIR	= srcs
-SRCS	= PhoneBook.cpp \
-			Contact.cpp \
-			main.cpp
+SRCS	= Account.cpp \
+			test.cpp
 # SRCS	= ${notdir ${SRCS_F}}
 
 OBJ_DIR	= objs
@@ -22,7 +21,7 @@ GCC		= c++
 RM		= rm -f
 RMR		= rm -rf
 CFLAGS	= -Wall -Wextra -Werror -std=c++98
-INC		= -I Classes.hpp
+INC		= -I Account.hpp
 
 ${OBJ_DIR}/%.o : %.cpp
 			@mkdir -p ${OBJ_DIR}

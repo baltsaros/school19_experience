@@ -1,4 +1,4 @@
-#include "classes.hpp"
+#include "Classes.hpp"
 
 // PhoneBook::PhoneBook(void){
 // 	std::cout << "PhoneBook constructor" << std::endl;
@@ -10,7 +10,7 @@
 // 	return ;
 // }
 
-std::string	format_str(std::string str)
+static std::string	format_str(std::string str)
 {
 	std::string	tmp;
 

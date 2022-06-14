@@ -66,15 +66,15 @@ int	main(int argc, char *argv[]){
 	welcome_msg();
 	while (19){
 		std::getline(std::cin, input);
-		if (input.compare("ADD") == 0){
+		if (input == "ADD"){
 			phonebook.fillContact(i % 8);
 			++i;
 		}
-		else if (input.compare("SEARCH") == 0){
+		else if (input == "SEARCH"){
 			phonebook.displayList();
 			search_contact(phonebook, i);
 		}
-		else if (input.compare("EXIT") == 0){
+		else if (input == "EXIT"){
 			std::cout << "Bye!" << std::endl;
 			exit (0);
 		}

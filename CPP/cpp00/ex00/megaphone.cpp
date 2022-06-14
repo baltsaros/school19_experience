@@ -11,7 +11,7 @@ int	main(int argc, char **argv){
 		while (argv[i]){
 			j = 0;
 			while (argv[i][j]){
-				argv[i][j] = ::toupper(argv[i][j]);
+				argv[i][j] = std::toupper(argv[i][j]);
 				++j;
 			}
 			std::cout << argv[i];
