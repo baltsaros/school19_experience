@@ -5,6 +5,8 @@
 # include <iomanip>
 # include <string>
 # include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
 
 class	Contact {
 	private:

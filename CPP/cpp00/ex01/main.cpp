@@ -1,4 +1,4 @@
-#include "classes.hpp"
+#include "Classes.hpp"
 
 void	welcome_msg(void)
 {
@@ -30,17 +30,17 @@ void	error_msg(void)
 	std::cout << "3) EXIT to exit;" << std::endl;
 }
 
-void	search_contact(PhoneBook phonebook, size_t i)
+void	search_contact(PhoneBook phonebook, int i)
 {
 	std::string	input;
 	Contact		contact;
-	size_t		j;
+	int			j;
 
 	j = 0;
 	while (i > 0){
 		std::cout << "Write index of the entry to display:" << std::endl;
 		std::getline(std::cin, input);
-		j = stoi(input) - 1;
+		j = atoi(input.c_str()) - 1;
 		if (j >= 0 && j <= 7 && j < i){
 			contact = phonebook.getContact(j);
 			contact.printContact();
@@ -57,7 +57,7 @@ void	search_contact(PhoneBook phonebook, size_t i)
 int	main(int argc, char *argv[]){
 	std::string	input;
 	PhoneBook	phonebook;
-	size_t		i;
+	int			i;
 
 	if (argc != 1)
 		return (-1);
@@ -76,7 +76,7 @@ int	main(int argc, char *argv[]){
 		}
 		else if (input == "EXIT"){
 			std::cout << "Bye!" << std::endl;
-			exit (0);
+			return (0);
 		}
 		else
 			error_msg();
