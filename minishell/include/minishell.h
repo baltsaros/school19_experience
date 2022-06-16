@@ -32,17 +32,39 @@
 
 enum tokens
 {
-	SEPAR		= 1,
+	DOLLAR		= 36,
 	WORD		= 2,
-	QUOTE		= 3,
-	QUOTE_D		= 4,
-	REDIR_OUT	= 5,
-	REDIR_IN	= 6,
+	WORD_AST	= 3,
+	QUOTE		= 39,
+	QUOTE_D		= 34,
+	REDIR_OUT	= 62,
+	REDIR_IN	= 60,
 	REDIR_AP	= 7,
 	REDIR_HD	= 8,
-	PIPE		= 9,
-	EQUAL		= 10
+	DELIM		= 9,
+	PIPE		= 124,
+	EQUAL		= 61,
+	ASTER		= 42,
+	AND			= 13,
+	OR			= 14,
+	BR_L		= 40,
+	BR_R		= 41,
+	AMPER		= 38,
+	APOST		= 44,
+	BACKSL		= 92
 };
+
+// enum builtins
+// {
+// 	BI_ECHO		= 10,
+// 	BI_CD 		= 11,
+// 	BI_PWD		= 12,
+// 	BI_EXPORT	= 13,
+// 	BI_UNSET	= 14,
+// 	BI_ENV		= 15,
+// 	BI_EXIT		= 16,
+// 	BI_ECHON	= 17
+// };
 
 typedef struct s_node
 {
@@ -60,13 +82,41 @@ typedef struct s_env
 	struct s_env	*prev;
 }	t_env;
 
+typedef	struct s_cell
+{
+	t_node			*cmds;
+	int				redir;
+	int				tmp_in;
+	int				tmp_out;
+	
+	struct s_cell	*next;
+	struct s_cell	*prev;
+}	t_cell;
+
+typedef struct s_cell_list
+{
+	struct s_cell		*cell;
+	struct s_cell_list	*next;
+	struct s_cell_list	*prev;
+}	t_cell_list;
+
 typedef struct s_input
 {
+	int				i;
+	int				j;
+	char			*tmp;
+	char			*type;
+	char			*value;
+	t_env			*envp_tmp;
+	t_node			*node_tmp;
 	int				argc;
+	int				in;
+	int				out;
 	char			**argv;
 	char			**envp;
 	t_env			*envp_n;
 	t_node			*args;
+	t_node			*wild;
 	char			*buf;
 	struct builtin	*builtins;
 	int				status;
@@ -77,6 +127,13 @@ struct builtin
 	char	*name;
 	int		(*func)(t_input *data);
 };
+typedef	struct s_env_var
+{
+	char	*name;
+	char	*value;
+}	t_env_var;
+
+// global var
 
 // allocation check
 void	alloc_check(char **str);
@@ -114,8 +171,11 @@ char	*access_check(char *cmd[], char *envp[]);
 void	ft_execve(char *argv, char *envp[]);
 int		ft_open(char *file, int par);
 
-char	**ft_split_op(char const *s, char c);
+char	**ft_split_space(char const *s, char *charset);
 int		get_next_line(char **line);
+int		ft_strstr(char *str, char *to_find);
+int		check_charset(char c, char *charset);
+int		check_envp(char *c, t_env *envp_n, int n);
 
 // minishell
 
@@ -133,5 +193,11 @@ int		yo_export(t_input *data);
 int		yo_env(t_input *data);
 int		yo_unset(t_input *data);
 int		yo_exit(t_input *data);
+
+//signals
+void	sigint_handler(int sign_num);
+
+// others
+void	asterisks(t_input *data);
 
 #endif

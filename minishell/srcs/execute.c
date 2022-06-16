@@ -1,16 +1,5 @@
 #include "minishell.h"
 
-// struct builtin builtins[] =
-// {
-// 	{"pwd", yo_pwd},
-// 	{"cd", yo_cd},
-// 	{"echo", yo_echo},
-// 	{"export", yo_export},
-// 	{"env", yo_env},
-// 	{"unset", yo_unset},
-// 	{"exit", yo_exit}
-// };
-
 void	ft_fork(char *argv, char *envp[])
 {
 	int		fd[2];
@@ -90,19 +79,22 @@ int	pipex(int argc, char *argv[], char *envp[])
 
 int	execute(t_input *data)
 {
-
 	int	pid;
+	int	i;
 
 	pid = 0;
-	if (ft_strncmp(data->argv[0], "pwd", 4) == 0)
-		data->builtins[0].func(data);
-	else if (ft_strncmp(data->argv[0], "cd", 3) == 0)
-		data->builtins[1].func(data);
-	else if (ft_strncmp(data->argv[0], "echo", 5) == 0)
-		data->builtins[2].func(data);
-	else if (ft_strncmp(data->argv[0], "exit", 5) == 0)
-		data->builtins[6].func(data);
-	else
+	i = 0;
+	while (i < 7)
+	{
+		if (ft_strncmp(data->argv[0], data->builtins[i].name, ft_strlen(data->builtins[i].name) + 1))
+			++i;
+		else
+		{
+			data->builtins[i].func(data);
+			break;
+		}
+	}
+	if (i >= 7)
 	{
 		pid = fork();
 		if (pid == 0)

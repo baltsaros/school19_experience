@@ -180,3 +180,58 @@ int	ft_open(char *file, int par)
 		error_check(-1, "Invalid parameter in ft_open ", 30);
 	return (fd);
 }
+
+int	ft_strstr(char *str, char *to_find)
+{
+	int	i;
+	int	j;
+	int	size_f;
+
+	size_f = ft_strlen(to_find);
+	i = 0;
+	j = 0;
+	if (to_find[j] == '\0')
+		return (0);
+	while (str[i] != '\0')
+	{
+		j = 0;
+		while (str[i + j] == to_find[j])
+		{
+			if (j + 1 == size_f)
+				return (1);
+			++j;
+		}
+		++i;
+	}
+	return (0);
+}
+
+int	check_charset(char c, char *charset)
+{
+	unsigned int	i;
+
+	i = 0;
+	
+	if (!charset)
+		return (0);
+	while (charset[i])
+	{
+		if (charset[i] == c)
+			return (charset[i]);
+		++i;
+	}
+	return (0);
+}
+
+int	check_envp(char *c, t_env *envp_n, int n)
+{
+	if (!envp_n)
+		return (0);
+	while (envp_n)
+	{
+		if (ft_strncmp(c, envp_n->type, n))
+			return (1);
+		envp_n = envp_n->next;
+	}
+	return (0);
+}

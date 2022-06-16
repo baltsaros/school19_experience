@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:36:47 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/05/20 17:41:51 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/06/02 17:12:24by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,18 @@ t_node	*ft_token_del(t_node *node)
 	if (!node)
 		return (NULL);
 	tmp = node;
-	if (!tmp->next)
-		node = NULL;
-	else
+	if (tmp->prev && tmp->next)
+	{
+		node = node->prev;
+		node->next = tmp->next;
+		node->next->prev = node;
+	}
+	else if (tmp->prev)
+	{
+		node = node->prev;
+		node->next = NULL;
+	}
+	else if (tmp->next)
 	{
 		node = node->next;
 		node->prev = NULL;

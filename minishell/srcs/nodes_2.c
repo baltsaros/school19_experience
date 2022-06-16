@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:40:56 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/05/20 17:48:35 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/06/03 10:05:20 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,23 @@ t_env	*ft_envp_del(t_env *node)
 	if (!node)
 		return (NULL);
 	tmp = node;
-	if (!tmp->next)
-		node = NULL;
-	else
+	if (tmp->prev && tmp->next)
+	{
+		node = node->prev;
+		node->next = tmp->next;
+		node->next->prev = node;
+	}
+	else if (tmp->prev)
+	{
+		node = node->prev;
+		node->next = NULL;
+	}
+	else if (tmp->next)
 	{
 		node = node->next;
 		node->prev = NULL;
 	}
+	free(tmp->type);
 	free(tmp->value);
 	free(tmp);
 	return (node);
@@ -70,11 +80,11 @@ void	ft_envp_print(t_env *node)
 
 	if (!node)
 	{
-		printf("There are no nodes in the list\n");
+		printf("There are no envp nodes in the list\n");
 		return ;
 	}
 	i = 0;
-	printf("===== NODE =====\n");
+	printf("===== ENVP NODE =====\n");
 	while (node)
 	{
 		printf("type for node[%d] is %s\n", i, node->type);

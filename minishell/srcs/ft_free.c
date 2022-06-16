@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:06:30 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/05/20 17:43:30 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/06/02 17:46:29 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ t_node	*ft_free_token(t_node *node)
 {
 	if (!node)
 		return (NULL);
-	while (node)
+	while (node->next)
 		node = ft_token_del(node);
+	node = ft_token_del(node);
 	node = NULL;
 	return (node);
 }
@@ -39,8 +40,9 @@ t_env	*ft_free_envp(t_env *node)
 {
 	if (!node)
 		return (NULL);
-	while (node)
+	while (node->next)
 		node = ft_envp_del(node);
+	node = ft_envp_del(node);
 	node = NULL;
 	return (node);
 }

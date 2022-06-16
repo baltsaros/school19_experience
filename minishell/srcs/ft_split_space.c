@@ -1,49 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_op.c                                      :+:      :+:    :+:   */
+/*   ft_split_space.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 09:33:11 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/05/16 16:19:18 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/06/01 16:08:00 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static size_t	check_str(char const *s, char c)
+static size_t	check_str(char const *s, char *charset)
 {
 	size_t	i;
 	size_t	n;
 
-	i = 1;
+	i = 0;
 	n = 0;
-	if (!(s[0]))
-		return (0);
-	if (s[0] != c)
-		++n;
-	if (s[0] == '"')
-		i = 0;
 	while (s[i])
 	{
-		if (s[i] == '"')
-		{
-			if (s[i] != c && s[i - 1] == c)
-				++n;
+		while (s[i] && check_charset(s[i], charset))
 			++i;
-			while (s[i] && s[i] != '"')
-				++i;
-			++i;
-		}
-		if (s[i] != c && s[i - 1] == c)
+		if (s[i])
 			++n;
-		++i;
+		if (s[i] == '"' || s[i] == '\'')
+		{
+			++i;
+			while (s[i] && s[i] != '"' && s[i] != '\'')
+				++i;
+		}
+		while (s[i] && !(check_charset(s[i], charset)))
+			++i;
 	}
 	return (n);
 }
 
-static char	**ft_create_str(char **spl, char const *s, char c, int i)
+static char	**ft_create_str(char **spl, char const *s, int i, char *charset)
 {
 	size_t	start;
 	size_t	end;
@@ -52,12 +46,14 @@ static char	**ft_create_str(char **spl, char const *s, char c, int i)
 	while (s[start])
 	{
 		end = 0;
-		while (s[start + end] && s[start + end] != c && s[start + end] != '"')
+		while (s[start + end] && check_charset(s[start + end], charset))
+			++start;
+		while (s[start + end] && !check_charset(s[start + end], charset) && s[start + end] != '"' && s[start + end] != '\'')
 			++end;
-		if (s[start + end] == '"')
+		if (s[start + end] && (s[start + end] == '"' || s[start + end] == '\''))
 		{
 			++end;
-			while (s[start + end] && s[start + end] != '"')
+			while (s[start + end] && s[start + end] != '"' && s[start + end] != '\'')
 				++end;
 			++end;
 		}
@@ -72,14 +68,12 @@ static char	**ft_create_str(char **spl, char const *s, char c, int i)
 			++i;
 			start = start + end;
 		}
-		if (s[start])
-			++start;
 	}
 	spl[i] = NULL;
 	return (spl);
 }
 
-char	**ft_split_op(char const *s, char c)
+char	**ft_split_space(char const *s, char *charset)
 {
 	char	**spl;
 	size_t	size;
@@ -88,10 +82,10 @@ char	**ft_split_op(char const *s, char c)
 	if (!s)
 		return (NULL);
 	i = 0;
-	size = check_str(s, c);
+	size = check_str(s, charset);
 	spl = (char **)malloc(sizeof(*spl) * (size + 1));
 	if (!spl)
 		return (NULL);
-	spl = ft_create_str(spl, s, c, i);
+	spl = ft_create_str(spl, s, i, charset);
 	return (spl);
 }
