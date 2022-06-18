@@ -1,14 +1,14 @@
 #include "Zombie.hpp"
 
-// Zombie::Zombie(std::string name){
-// 	this->_name = name;
-// 	return ;
-// }
-
-void	Zombie::setName(std::string name){
+Zombie::Zombie(std::string name){
 	this->_name = name;
 	return ;
 }
+
+// void	Zombie::setName(std::string name){
+// 	this->_name = name;
+// 	return ;
+// }
 
 Zombie::~Zombie(void){
 	std::cout << this->_name << ": is no more\n";
