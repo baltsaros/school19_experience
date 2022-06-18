@@ -22,7 +22,7 @@ GCC		= c++
 RM		= rm -f
 RMR		= rm -rf
 CFLAGS	= -Wall -Wextra -Werror -std=c++98
-INC		= -I Classes.hpp
+INC		= -I Contact.hpp PhoneBook.hpp
 
 ${OBJ_DIR}/%.o : %.cpp
 			@mkdir -p ${OBJ_DIR}

@@ -1,15 +1,5 @@
-#include "Classes.hpp"
+#include "Contact.hpp"
 
-// Contact::Contact(std::string fname, std::string lname, std::string nname, std::string num, std::string dsecret){
-// Contact::Contact(void){
-// 	std::cout << "Contact constructor" << std::endl;
-// 	return ;
-// }
-
-// Contact::~Contact(void){
-// 	std::cout << "Contact destructor" << std::endl;
-// 	return ;
-// }
 static std::string	check_field(std::string str)
 {
 	while (str.length() == 0){

@@ -1,0 +1,22 @@
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
+
+# include <iostream>
+# include <iomanip>
+# include <string>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include "Contact.hpp"
+
+
+class	PhoneBook {
+	private:
+		Contact		_pb[8];
+	public:
+		void		fillContact(size_t i);
+		void		displayList(void);
+		Contact		getContact(size_t i);
+};
+
+#endif

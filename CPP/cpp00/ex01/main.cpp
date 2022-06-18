@@ -1,4 +1,5 @@
-#include "Classes.hpp"
+#include "Contact.hpp"
+#include "PhoneBook.hpp"
 
 void	welcome_msg(void)
 {

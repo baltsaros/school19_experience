@@ -1,14 +1,5 @@
-#include "Classes.hpp"
-
-// PhoneBook::PhoneBook(void){
-// 	std::cout << "PhoneBook constructor" << std::endl;
-// 	return ;
-// }
-
-// PhoneBook::~PhoneBook(void){
-// 	std::cout << "PhoneBook destructor" << std::endl;
-// 	return ;
-// }
+#include "Contact.hpp"
+#include "PhoneBook.hpp"
 
 static std::string	format_str(std::string str)
 {
