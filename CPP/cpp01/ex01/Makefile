@@ -6,11 +6,12 @@ C_GREEN			=\033[0;32m
 C_GREEN_B		=\033[1;32m
 C_RESET			=\033[0m
 
-NAME	= 
+NAME	= horde
 
 # SRC_DIR	= srcs
-SRCS	= .cpp \
-			.cpp
+SRCS	= main.cpp \
+			Zombie.cpp \
+			zombieHorde.cpp
 # SRCS	= ${notdir ${SRCS_F}}
 
 OBJ_DIR	= objs
