@@ -3,7 +3,6 @@
 
 # include <iostream>
 # include <string>
-# include <new>
 
 class	Weapon{
 	private:
@@ -11,7 +10,8 @@ class	Weapon{
 
 	public:
 		Weapon(std::string weapon);
-		std::string const	&getType(void) const;
+
+		std::string const &	getType(void);
 		void				setType(std::string type);
 };
 
