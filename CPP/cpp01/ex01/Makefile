@@ -6,28 +6,28 @@ C_GREEN			=\033[0;32m
 C_GREEN_B		=\033[1;32m
 C_RESET			=\033[0m
 
-NAME	= horde
+NAME		= horde
 
 # SRC_DIR	= srcs
-SRCS	= main.cpp \
-			Zombie.cpp \
-			zombieHorde.cpp
-# SRCS	= ${notdir ${SRCS_F}}
+SRCS		= main.cpp \
+				Zombie.cpp \
+				zombieHorde.cpp
+# SRCS		= ${notdir ${SRCS_F}}
 
-OBJ_DIR	= objs
-OBJS_F	= ${SRCS:.cpp=.o}
-OBJS	= ${addprefix ${OBJ_DIR}/,${OBJS_F}}
+OBJ_DIR		= objs
+OBJS_F		= ${SRCS:.cpp=.o}
+OBJS		= ${addprefix ${OBJ_DIR}/,${OBJS_F}}
 
-GCC		= c++
-RM		= rm -f
-RMR		= rm -rf
-CFLAGS	= -Wall -Wextra -Werror -std=c++98
-INC		= -I .hpp
+GCC			= c++
+RM			= rm -f
+RMR			= rm -rf
+CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
+INC			= -I .hpp
 
 ${OBJ_DIR}/%.o : %.cpp
 			@mkdir -p ${OBJ_DIR}
 			@printf "${C_GREEN}.${C_RESET}";
-			@${GCC} ${CFLAGS} -c $< -o $@
+			@${GCC} ${CPPFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS}
 			@${GCC} ${OBJS} -o ${NAME}
