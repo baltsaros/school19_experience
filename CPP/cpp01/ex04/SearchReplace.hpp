@@ -15,7 +15,7 @@ class	SearchReplace{
 		SearchReplace(std::string filename, std::string s1, std::string s2);
 		~SearchReplace(void);
 
-		void	openReplace(void);
+		int	openReplace(void);
 };
 
 #endif
