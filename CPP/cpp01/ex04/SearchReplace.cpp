@@ -17,7 +17,7 @@ int	SearchReplace::ftReplace(std::string *read){
 	if (!read || (*read).size() == std::string::npos)
 		return (-4);
 	found = 1;
-	while (found){
+	while (found != std::string::npos){
 		found = (*read).find(this->_s1);
 		if (found == std::string::npos)
 			return (0);
@@ -33,12 +33,13 @@ int	SearchReplace::openReplace(void){
 	std::string		read;
 	int				ret;
 
+	if (this->_filename.size() == 0 || this->_s1.size() == 0 || this->_s2.size() == 0)
+		return (-2);
 	input.open(this->_filename.c_str(), std::fstream::in);
 	if (!input.is_open())
 		return (-3);
 	output.open((this->_filename + ".replace").c_str(), std::fstream::out | std::fstream::trunc);
-	while (input){
-		std::getline(input, read);
+	while (std::getline(input, read)){
 		ret = this->ftReplace(&read);
 		if (ret){
 			input.close();
