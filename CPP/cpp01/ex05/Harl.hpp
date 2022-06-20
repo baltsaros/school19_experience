@@ -4,16 +4,20 @@
 # include <iostream>
 # include <string>
 
+
 class Harl{
+	
+	typedef	struct s_funs{
+		std::string	name;
+		void		(Harl::*fun)(void);
+	}	t_funs;
+
 	private:
+		t_funs	_functions[4];
 		void	_debug(void);
 		void	_info(void);
 		void	_warning(void);
 		void	_error(void);
-		struct _funs{
-			std::string	name;
-			void		(*fun)(void);
-		};
 
 	public:
 		Harl(void);
