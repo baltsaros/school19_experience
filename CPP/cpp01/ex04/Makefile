@@ -41,7 +41,7 @@ clean:
 
 fclean:		clean
 			@echo "${C_RED_B}Deleting program ${NAME}...${C_RESET}";
-			@${RM} ${NAME}
+			@${RM} ${NAME} *.replace
 			@echo "${C_RED_B}Program ${NAME} has been deleted!${C_RESET}";
 
 re:			fclean all

@@ -10,10 +10,10 @@ int	main(int argc, char **argv){
 	fs.open(argv[1]);
 	if (!fs.is_open()){
 		std::cout << "Error opening file" << std::endl;
+		return (-3);
 	}
 
 	SearchReplace	replacer(argv[1], argv[2], argv[3]);
-	// std::fstream	stream;
-	// stream = replacer.openFile();
+	replacer.openReplace();
 	return (0);
 }

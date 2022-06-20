@@ -11,8 +11,10 @@ SearchReplace::~SearchReplace(void){
 	return ;
 }
 
-std::fstream	SearchReplace::openFile(void){
+void	SearchReplace::openReplace(void){
 	std::fstream	stream;
-	stream.open(this->_filename + ".replace", stream.out);
-	return (stream);
+
+	stream.open((this->_filename + ".replace").c_str(), stream.out);
+	stream.close();
+	return ;
 }
