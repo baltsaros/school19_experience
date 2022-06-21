@@ -6,11 +6,11 @@ C_GREEN			=\033[0;32m
 C_GREEN_B		=\033[1;32m
 C_RESET			=\033[0m
 
-NAME		= 
+NAME		= harlFilter
 
 # SRC_DIR	= srcs
-SRCS		= .cpp \
-				.cpp
+SRCS		= main.cpp \
+				Harl.cpp
 # SRCS		= ${notdir ${SRCS_F}}
 
 OBJ_DIR		= objs
