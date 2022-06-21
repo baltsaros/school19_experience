@@ -13,7 +13,7 @@ class Harl{
 	}	t_funs;
 
 	private:
-		t_funs	_functions[4];
+		t_funs	*_functions;
 		void	_debug(void);
 		void	_info(void);
 		void	_warning(void);

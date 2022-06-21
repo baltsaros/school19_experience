@@ -4,6 +4,7 @@ int	main(void){
 	Harl	customer;
 
 	std::cout << "TESTING!" << std::endl;
+	std::cout << std::endl;
 
 	std::cout << "Level: debug" << std::endl;
 	customer.complain("DEBUG");

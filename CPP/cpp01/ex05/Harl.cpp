@@ -2,14 +2,13 @@
 
 Harl::Harl(void){
 	std::cout << "Harl is here!" << std::endl;
-	this->_functions[0].name = "DEBUG";
-	this->_functions[0].fun = &Harl::_debug;
-	this->_functions[1].name = "INFO";
-	this->_functions[1].fun = &Harl::_info;
-	this->_functions[2].name = "WARNING";
-	this->_functions[2].fun = &Harl::_warning;
-	this->_functions[3].name = "ERROR";
-	this->_functions[3].fun = &Harl::_error;
+	static t_funs	funcs[4] = {
+		{"DEBUG", &Harl::_debug},
+		{"INFO", &Harl::_info},
+		{"WARNING", &Harl::_warning},
+		{"ERROR", &Harl::_error}
+	};
+	this->_functions = funcs;
 	return ;
 }
 
