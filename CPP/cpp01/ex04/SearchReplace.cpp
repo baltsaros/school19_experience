@@ -1,13 +1,17 @@
 #include "SearchReplace.hpp"
 
+#define NC "\e[0m"
+#define RED "\e[0;31m"
+#define GRN "\e[0;32m"
+
 SearchReplace::SearchReplace(std::string filename, std::string s1, std::string s2):
 	_filename(filename), _s1(s1), _s2(s2){
-		std::cout << "Got input!" << std::endl;
+		std::cout << GRN "Got input!" NC << std::endl;
 		return ;
 	}
 
 SearchReplace::~SearchReplace(void){
-	std::cout << "Done!" << std::endl;
+	std::cout << GRN "Done!" NC << std::endl;
 	return ;
 }
 

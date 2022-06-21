@@ -1,7 +1,10 @@
 #include "Harl.hpp"
 
+#define NC "\e[0m"
+#define GRN "\e[0;32m"
+
 Harl::Harl(void){
-	std::cout << "Harl is here!" << std::endl;
+	std::cout << GRN "Harl is here!" NC << std::endl;
 	static t_funs	funcs[4] = {
 		{"DEBUG", &Harl::_debug},
 		{"INFO", &Harl::_info},
@@ -13,7 +16,7 @@ Harl::Harl(void){
 }
 
 Harl::~Harl(void){
-	std::cout << "Harl is sad. Harl is leaving..." << std::endl;
+	std::cout << GRN "Harl is sad. Harl is leaving..." NC << std::endl;
 	return ;
 }
 
