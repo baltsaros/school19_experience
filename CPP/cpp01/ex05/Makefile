@@ -21,7 +21,7 @@ GCC			= c++
 RM			= rm -f
 RMR			= rm -rf
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
-INC			= -I .hpp
+INC			= -I Harl.hpp
 
 ${OBJ_DIR}/%.o : %.cpp
 			@mkdir -p ${OBJ_DIR}
