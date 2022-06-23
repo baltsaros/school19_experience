@@ -13,7 +13,7 @@
 
 class	Fixed {
 	private:
-		int					_num;
+		int					_fpn;
 		static const int	_nBits = 8;
 
 	public:

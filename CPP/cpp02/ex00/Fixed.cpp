@@ -2,7 +2,7 @@
 
 Fixed::Fixed(void) {
 	std::cout << BGRN "Fixed" NC << std::endl;
-	this->_num = 0;
+	this->_fpn = 0;
 	return ;
 }
 
@@ -20,17 +20,17 @@ Fixed::~Fixed(void) {
 Fixed&	Fixed::operator=(Fixed const &rhs) {
 	std::cout << "Assigning Fixed" << std::endl;
 	if (this != &rhs)
-		this->_num = rhs.getRawBits();
+		this->_fpn = rhs.getRawBits();
 	return (*this);
 }
 
 int		Fixed::getRawBits(void) const {
 	std::cout << "Getting raw bits" << std::endl;
-	return (this->_num);
+	return (this->_fpn);
 }
 
 void	Fixed::setRawBits(int const raw) {
 	std::cout << "Setting raw bits" << std::endl;
-	this->_num = raw;
+	this->_fpn = raw;
 	return ;
 }
