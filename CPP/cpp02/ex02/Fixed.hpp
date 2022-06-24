@@ -7,6 +7,9 @@
 #define RED "\e[0;31m"
 #define BRED "\e[1;31m"
 #define REDB "\e[41m"
+#define CYN "\e[0;36m"
+#define YLW "\e[0;33m"
+#define YLWB "\e[1;33m"
 
 #include <iostream>
 #include <string>
@@ -51,10 +54,10 @@ class	Fixed {
 		bool	operator!=(const Fixed &rhs) const;
 
 		// max min
-		// static Fixed &	min(Fixed f1, Fixed f2);
-		// static Fixed &	max(Fixed f1, Fixed f2);
-		// static Fixed &	min(Fixed const f1, Fixed const f2);
-		// static Fixed &	max(Fixed const f1, Fixed const f2);
+		static Fixed &	min(Fixed &f1, Fixed &f2);
+		static Fixed &	max(Fixed &f1, Fixed &f2);
+		static Fixed const &	min(const Fixed &f1, const Fixed &f2);
+		static Fixed const &	max(const Fixed &f1, const Fixed &f2);
 
 		// other member functions
 		int		getRawBits(void) const;
