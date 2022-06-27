@@ -51,7 +51,9 @@ int main( void ) {
 		result = bsp(A, B, C, U);
 		std::cout << YLW "Result is " NC << result<< std::endl;
 		std::cout << std::endl;
-		std::cout << RED "You can exit the loop by typing 777. Type any other number to continue." NC << std::endl;
+		std::cout << RED "You can " NC << REDB "exit" NC << RED " the loop by typing any " NC;
+		std::cout << REDB "non-numeric value." NC << std::endl;
+		std::cout << RED "Type any other " NC << REDB "number to continue." NC << std::endl;
 		std::cin >> exit;
 		if (std::cin.fail() || exit == 777)
 			break ;
