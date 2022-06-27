@@ -101,31 +101,30 @@ Fixed	Fixed::operator--(int) {
 
 //	COMPARISON OPERATORS
 bool	Fixed::operator>(const Fixed &rhs) const {
-	if (this > &rhs)
+	if (this->getRawBits() > rhs.getRawBits())
 		return (true);
 	return (false);
 }
 
 bool	Fixed::operator<(const Fixed &rhs) const {
-	if (this < &rhs)
+	if (this->getRawBits() < rhs.getRawBits())
 		return (true);
 	return (false);
 }
 
 bool	Fixed::operator>=(const Fixed &rhs) const {
-	if (this >= &rhs)
+	if (this->getRawBits() >= rhs.getRawBits())
 		return (true);
 	return (false);
 }
 
 bool	Fixed::operator<=(const Fixed &rhs) const {
-	if (this <= &rhs)
+	if (this->getRawBits() <= rhs.getRawBits())
 		return (true);
 	return (false);
 }
 
 bool	Fixed::operator==(const Fixed &rhs) const {
-	// if (this == &rhs)
 	if (this->getRawBits() == rhs.getRawBits())
 		return (true);
 	return (false);
@@ -133,7 +132,6 @@ bool	Fixed::operator==(const Fixed &rhs) const {
 
 bool	Fixed::operator!=(const Fixed &rhs) const {
 	if (this->getRawBits() != rhs.getRawBits())
-	// if (this != &rhs)
 		return (true);
 	return (false);
 }
