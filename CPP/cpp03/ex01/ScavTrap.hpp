@@ -13,6 +13,7 @@ class	ScavTrap : public ClapTrap {
 		unsigned int	_ad;
 
 	public:
+		ScavTrap(void);
 		ScavTrap(std::string name);
 		ScavTrap(ScavTrap const &src);
 		~ScavTrap(void);

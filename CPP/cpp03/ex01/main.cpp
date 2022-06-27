@@ -3,8 +3,6 @@
 
 int	main(void) {
 	ClapTrap	one("Toto");
-	// ClapTrap	two("Jo");
-	// ClapTrap	three("Ba");
 	ScavTrap	four("Gi");
 	std::string	target;
 
@@ -15,5 +13,16 @@ int	main(void) {
 	four.attack(one);
 	four.attack(one);
 	four.beRepaired(1);
+
+	std::cout << YLWB "\n+++++ SOME EXTRA TESTS +++++\n";
+	ClapTrap	two("Jo");
+	ClapTrap	three(two);
+	ScavTrap	five(four);
+	ScavTrap	six;
+
+	two = one;
+	five = six;
+	std::cout << "New name of Jo is " << two.getName() << std::endl;
+	std::cout << std::endl;
 	return (0);
 }

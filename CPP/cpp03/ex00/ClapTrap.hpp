@@ -30,6 +30,7 @@ class	ClapTrap {
 		unsigned int	_ad;
 
 	public:
+		ClapTrap(void);
 		ClapTrap(std::string name);
 		ClapTrap(ClapTrap const &src);
 		~ClapTrap(void);

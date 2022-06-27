@@ -1,6 +1,14 @@
 #include "ScavTrap.hpp"
 
 //	CONSTRUCTORS
+ScavTrap::ScavTrap(void) : 
+	_hp(100), _ep(50), _ad(20) {
+	this->_name = "default";
+	std::cout << PRPLB "ScavTrap " NC << _name;
+	std::cout << PRPLB " said nothing" NC << std::endl;
+	return ;
+}
+
 ScavTrap::ScavTrap(std::string name) : 
 	ClapTrap(name), _name(name), _hp(100), _ep(50), _ad(20) {
 	std::cout << PRPLB "ScavTrap " NC << name;
@@ -10,7 +18,7 @@ ScavTrap::ScavTrap(std::string name) :
 
 ScavTrap::ScavTrap(ScavTrap const &src) : 
 	_name(src._name), _hp(src._hp), _ep(src._ep), _ad(src._ad) {
-	std::cout << GRN "Copy ScavTrap" NC << std::endl;
+	std::cout << PRPL "Copying ScavTrap " NC << src._name << std::endl;
 	return ;
 }
 
@@ -25,9 +33,15 @@ ScavTrap::~ScavTrap(void) {
 
 //	ASSIGN OPERATOR
 ScavTrap&	ScavTrap::operator=(ScavTrap const &rhs) {
-	std::cout << "Assigning ScavTrap" << std::endl;
-	if (this != &rhs)
-		*this = rhs;
+	std::cout << "Assigning" << CYN " ScavTrap " NC << rhs._name;
+	std::cout << " to " << CYN "ScavTrap " NC << this->_name;
+	std::cout << std::endl;
+	if (this != &rhs) {
+		this->_name = rhs._name;
+		this->_hp = rhs._hp;
+		this->_ep = rhs._ep;
+		this->_ad = rhs._ad;
+	}
 	return (*this);
 }
 

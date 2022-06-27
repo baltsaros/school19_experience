@@ -1,6 +1,13 @@
 #include "ClapTrap.hpp"
 
 //	CONSTRUCTORS
+ClapTrap::ClapTrap(void) : _hp(10), _ep(10), _ad(0) {
+	this->_name = "default";
+	std::cout << BGRN "ClapTrap " NC << this->_name;
+	std::cout << BGRN " said hello" NC << std::endl;
+	return ;
+}
+
 ClapTrap::ClapTrap(std::string name) : _name(name), _hp(10), _ep(10), _ad(0) {
 	std::cout << BGRN "ClapTrap " NC << name;
 	std::cout << BGRN " said hello" NC << std::endl;
@@ -24,9 +31,15 @@ ClapTrap::~ClapTrap(void) {
 
 //	ASSIGN OPERATOR
 ClapTrap&	ClapTrap::operator=(ClapTrap const &rhs) {
-	std::cout << "Assigning ClapTrap" << std::endl;
-	if (this != &rhs)
-		*this = rhs;
+	std::cout << "Assigning" << CYN " ClapTrap " NC << rhs._name;
+	std::cout << " to " << CYN "ClapTrap " NC << this->_name;
+	std::cout << std::endl;
+	if (this != &rhs) {
+		this->_name = rhs._name;
+		this->_hp = rhs._hp;
+		this->_ep = rhs._ep;
+		this->_ad = rhs._ad;
+	}
 	return (*this);
 }
 

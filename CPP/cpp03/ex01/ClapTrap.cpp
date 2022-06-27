@@ -16,7 +16,7 @@ ClapTrap::ClapTrap(std::string name) : _name(name), _hp(10), _ep(10), _ad(0) {
 
 ClapTrap::ClapTrap(ClapTrap const &src) : 
 	_name(src._name), _hp(src._hp), _ep(src._ep), _ad(src._ad) {
-	std::cout << GRN "Copy ClapTrap" NC << std::endl;
+	std::cout << GRN "Copying ClapTrap " NC << src._name << std::endl;
 	return ;
 }
 
@@ -31,9 +31,15 @@ ClapTrap::~ClapTrap(void) {
 
 //	ASSIGN OPERATOR
 ClapTrap&	ClapTrap::operator=(ClapTrap const &rhs) {
-	std::cout << "Assigning ClapTrap" << std::endl;
-	if (this != &rhs)
-		*this = rhs;
+	std::cout << "Assigning" << CYN " ClapTrap " NC << rhs._name;
+	std::cout << " to " << CYN "ClapTrap " NC << this->_name;
+	std::cout << std::endl;
+	if (this != &rhs) {
+		this->_name = rhs._name;
+		this->_hp = rhs._hp;
+		this->_ep = rhs._ep;
+		this->_ad = rhs._ad;
+	}
 	return (*this);
 }
 
