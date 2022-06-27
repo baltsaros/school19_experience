@@ -18,13 +18,13 @@ ScavTrap::ScavTrap(std::string name) :
 
 ScavTrap::ScavTrap(ScavTrap const &src) : 
 	_name(src._name), _hp(src._hp), _ep(src._ep), _ad(src._ad) {
-	std::cout << PRPL "Copying ScavTrap " NC << src._name << std::endl;
+	std::cout << PRPLB "Copying ScavTrap " NC << src._name << std::endl;
 	return ;
 }
 
 //	DESTRUCTOR
 ScavTrap::~ScavTrap(void) {
-	std::cout << REDB "ScavTrap " NC << this->_name;
+	std::cout << PRPLB "ScavTrap " NC << this->_name;
 	std::cout << REDB " returns to the gates..." NC << std::endl;
 	std::cout << "It had " << this->_hp << " hp ";
 	std::cout << "and " << this->_ep << " energy left" << std::endl;
@@ -33,8 +33,8 @@ ScavTrap::~ScavTrap(void) {
 
 //	ASSIGN OPERATOR
 ScavTrap&	ScavTrap::operator=(ScavTrap const &rhs) {
-	std::cout << "Assigning" << CYN " ScavTrap " NC << rhs._name;
-	std::cout << " to " << CYN "ScavTrap " NC << this->_name;
+	std::cout << "Assigning" << PRPL " ScavTrap " NC << rhs._name;
+	std::cout << " to " << PRPL "ScavTrap " NC << this->_name;
 	std::cout << std::endl;
 	if (this != &rhs) {
 		this->_name = rhs._name;
@@ -46,7 +46,7 @@ ScavTrap&	ScavTrap::operator=(ScavTrap const &rhs) {
 }
 
 void	ScavTrap::guardGate(void) {
-	std::cout << CYN "ScavTrap " NC << this->_name;
+	std::cout << PRPL "ScavTrap " NC << this->_name;
 	std::cout << " guards the gates! YOU SHALL NOT PASS!!!";
 	std::cout << std::endl;
 	return ;
@@ -54,11 +54,11 @@ void	ScavTrap::guardGate(void) {
 
 void	ScavTrap::attack(const std::string& target) {
 	if (this->_hp <= 0) {
-		std::cout << CYN "ScavTrap " NC << this->_name;
+		std::cout << PRPL "ScavTrap " NC << this->_name;
 		std::cout << " cannot attack, since it is dead!" << std::endl;
 		return ;
 	}
-	std::cout << CYN "ScavTrap " NC << this->_name << " leaps forward and strikes hard ";
+	std::cout << PRPL "ScavTrap " NC << this->_name << " leaps forward and strikes hard ";
 	std::cout << target << " causing " << this->_ad;
 	std::cout << " point(s) of damage!" << std::endl;
 	this->_ep--;
@@ -66,7 +66,7 @@ void	ScavTrap::attack(const std::string& target) {
 }
 
 void	ScavTrap::attack(ClapTrap& target) {
-	std::cout << CYN "ScavTrap " NC << this->_name << " leaps forward and strikes hard ";
+	std::cout << PRPL "ScavTrap " NC << this->_name << " leaps forward and strikes hard ";
 	std::cout << target.getName() << " causing " << this->_ad;
 	std::cout << " point(s) of damage!" << std::endl;
 	target.takeDamage(this->_ad);
