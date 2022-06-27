@@ -31,7 +31,7 @@ int main( void ) {
 	result = bsp(A, B, C, D);
 	std::cout << YLW "Result is " NC << result<< std::endl;
 	
-	usleep(1000000);
+	usleep(2000000);
 	std::cout << std::endl;
 	std::cout << GRNL BLKB "Do you want to try your values?" NC << std::endl;
 	while (19) {
