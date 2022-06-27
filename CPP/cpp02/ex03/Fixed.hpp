@@ -5,11 +5,13 @@
 #define BGRN "\e[1;32m"
 #define GRN "\e[0;32m"
 #define RED "\e[0;31m"
-#define BRED "\e[1;31m"
-#define REDB "\e[41m"
+#define REDB "\e[1;31m"
+#define REDL "\e[41m"
+#define GRNL "\e[42m"
 #define CYN "\e[0;36m"
 #define YLW "\e[0;33m"
 #define YLWB "\e[1;33m"
+#define BLKB "\e[1;30m"
 
 #include <iostream>
 #include <string>

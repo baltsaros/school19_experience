@@ -8,8 +8,8 @@ int main( void ) {
 	Point const	A(0, 0);
 	Point const	B(10, 30);
 	Point const	C(20, 0);
-	Point const	P(30, 15);
-	Point const	D(10, 15);
+	Point const	P(2, 7.43);
+	Point const	D(10.3, 14.9);
 	bool		result;
 
 	std::cout << YLWB "Let's see whether the dot is inside the triangle or not!" NC << std::endl;
@@ -33,23 +33,27 @@ int main( void ) {
 	
 	usleep(1000000);
 	std::cout << std::endl;
-	std::cout << "Do you want to try your values?" << std::endl;
+	std::cout << GRNL BLKB "Do you want to try your values?" NC << std::endl;
 	while (19) {
 		float	x, y;
 		int		exit;
 		std::cout << "Enter a value for X:" << std::endl;
 		std::cin >> x;
+		if (std::cin.fail())
+			break ; 
 		std::cout << "Enter a value for Y:" << std::endl;
 		std::cin >> y;
+		if (std::cin.fail())
+			break ; 
 		Point	U(x, y);
 		std::cout << "Point:" << std::endl;
 		std::cout << CYN "U(" NC << U.getX() << CYN ", " NC << U.getY() << CYN ")" NC<< std::endl;
 		result = bsp(A, B, C, U);
 		std::cout << YLW "Result is " NC << result<< std::endl;
 		std::cout << std::endl;
-		std::cout << RED "You can exit the loop by typing 777" NC << std::endl;
+		std::cout << RED "You can exit the loop by typing 777. Type any other number to continue." NC << std::endl;
 		std::cin >> exit;
-		if (exit == 777)
+		if (std::cin.fail() || exit == 777)
 			break ;
 	}
 	return (0);
