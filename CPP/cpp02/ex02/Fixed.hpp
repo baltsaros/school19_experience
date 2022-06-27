@@ -32,10 +32,10 @@ class	Fixed {
 
 		// math and assign operations
 		Fixed &	operator=(Fixed const &rhs);
-		Fixed	operator+(Fixed const &rhs);
-		Fixed	operator-(Fixed const &rhs);
-		Fixed	operator*(Fixed const &rhs);
-		Fixed	operator/(Fixed const &rhs);
+		Fixed	operator+(const Fixed &rhs) const;
+		Fixed	operator-(const Fixed &rhs) const;
+		Fixed	operator*(const Fixed &rhs) const;
+		Fixed	operator/(const Fixed &rhs) const;
 
 		// prefix de/increment
 		Fixed &	operator++(void);

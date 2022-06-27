@@ -6,9 +6,8 @@ Fixed::Fixed(void) {
 	return ;
 }
 
-Fixed::Fixed(Fixed const &src) {
+Fixed::Fixed(Fixed const &src) : _fpn(src._fpn) {
 	std::cout << GRN "Copy Fixed" NC << std::endl;
-	*this = src;
 	return ;
 }
 

@@ -19,9 +19,8 @@ Fixed::Fixed(const float f) {
 	return ;
 }
 
-Fixed::Fixed(Fixed const &src) {
+Fixed::Fixed(Fixed const &src) : _fpn(src._fpn) {
 	// std::cout << GRN "Copy Fixed" NC << std::endl;
-	*this = src;
 	return ;
 }
 
@@ -39,28 +38,28 @@ Fixed&	Fixed::operator=(Fixed const &rhs) {
 	return (*this);
 }
 
-Fixed	Fixed::operator+(Fixed const &rhs) {
+Fixed	Fixed::operator+(const Fixed &rhs) const {
 	Fixed	tmp;
 
 	tmp.setRawBits((this->_fpn + rhs._fpn));
 	return (tmp);
 }
 
-Fixed	Fixed::operator-(Fixed const &rhs) {
+Fixed	Fixed::operator-(const Fixed &rhs) const {
 	Fixed	tmp;
 
 	tmp.setRawBits((this->_fpn - rhs._fpn));
 	return (tmp);
 }
 
-Fixed	Fixed::operator*(Fixed const &rhs) {
+Fixed	Fixed::operator*(const Fixed &rhs) const {
 	Fixed	tmp;
 
 	tmp.setRawBits(((int64_t)this->_fpn * rhs._fpn) >> this->_nBits);
 	return (tmp);
 }
 
-Fixed	Fixed::operator/(Fixed const &rhs) {
+Fixed	Fixed::operator/(const Fixed &rhs) const {
 	Fixed	tmp;
 
 	tmp.setRawBits(((int64_t)this->_fpn << this->_nBits) / rhs._fpn);
