@@ -31,11 +31,11 @@ class	Fixed {
 		~Fixed(void);
 
 		// math and assign operations
-		Fixed &	operator=(Fixed const &rhs);
-		Fixed	operator+(Fixed const &rhs);
-		Fixed	operator-(Fixed const &rhs);
-		Fixed	operator*(Fixed const &rhs);
-		Fixed	operator/(Fixed const &rhs);
+		Fixed &	operator=(const Fixed &rhs);
+		Fixed	operator+(const Fixed &rhs) const;
+		Fixed	operator-(const Fixed &rhs) const;
+		Fixed	operator*(const Fixed &rhs) const;
+		Fixed	operator/(const Fixed &rhs) const;
 
 		// prefix de/increment
 		Fixed &	operator++(void);
@@ -64,6 +64,7 @@ class	Fixed {
 		void	setRawBits(int const raw);
 		float	toFloat(void) const;
 		int		toInt(void) const;
+		Fixed	absVal(void) const;
 };
 
 std::ostream &	operator<<(std::ostream & o, Fixed const & i);

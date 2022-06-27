@@ -1,25 +1,25 @@
 #include "Point.hpp"
 
 //	CONSTRUCTORS
-Point::Point(void) : _x(0), _y(0) {
-	std::cout << BGRN "I got a point!" NC << std::endl;
+Point::Point(void) : _x(Fixed(0)), _y(Fixed(0)) {
+	// std::cout << BGRN "I got a point!" NC << std::endl;
 	return ;
 }
 
-Point::Point(const float f1, const float f2) : _x(f1), _y(f2) {
-	std::cout << BGRN "I got a point!" NC << std::endl;
+Point::Point(const float f1, const float f2) : _x(Fixed(f1)), _y(Fixed(f2)) {
+	// std::cout << BGRN "I got a point!" NC << std::endl;
 	return ;
 }
 
-Point::Point(Point const &src) {
-	std::cout << GRN "Copy Point" NC << std::endl;
-	*this = src;
+Point::Point(Point const &src) : _x(src._x), _y(src._y) {
+	// std::cout << GRN "Copy Point" NC << std::endl;
+	// *this = src;
 	return ;
 }
 
 //	DESTRUCTOR
 Point::~Point(void) {
-	std::cout << BRED "I lost the point!" NC << std::endl;
+	// std::cout << BRED "I lost the point!" NC << std::endl;
 	return ;
 }
 
@@ -43,13 +43,13 @@ Fixed const	Point::getY(void) const {
 	return (this->_y);
 }
 
-// void	Point::setRawX(int const raw) {
+// void	Point::setX(int const raw) {
 // 	// std::cout << "Setting raw bits" << std::endl;
 // 	this->_x = raw;
 // 	return ;
 // }
 
-// void	Point::setRawY(int const raw) {
+// void	Point::setY(int const raw) {
 // 	// std::cout << "Setting raw bits" << std::endl;
 // 	this->_y = raw;
 // 	return ;

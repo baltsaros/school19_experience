@@ -2,32 +2,31 @@
 
 //	CONSTRUCTORS
 Fixed::Fixed(void) {
-	std::cout << BGRN "Fixed" NC << std::endl;
+	// std::cout << BGRN "Fixed" NC << std::endl;
 	this->_fpn = 0;
 	return ;
 }
 
 Fixed::Fixed(const int i) {
-	std::cout << BGRN "Fixed" NC << std::endl;
+	// std::cout << BGRN "Fixed" NC << std::endl;
 	this->_fpn = i << this->_nBits;
 	return ;
 }
 
 Fixed::Fixed(const float f) {
-	std::cout << BGRN "Fixed" NC << std::endl;
+	// std::cout << BGRN "Fixed" NC << std::endl;
 	this->_fpn = (int)(std::roundf(f * (1 << this->_nBits)));
 	return ;
 }
 
-Fixed::Fixed(Fixed const &src) {
-	std::cout << GRN "Copy Fixed" NC << std::endl;
-	*this = src;
+Fixed::Fixed(Fixed const &src) : _fpn(src._fpn) {
+	// std::cout << GRN "Copy Fixed" NC << std::endl;
 	return ;
 }
 
 //	DESTRUCTOR
 Fixed::~Fixed(void) {
-	std::cout << BRED "UnFixed" NC << std::endl;
+	// std::cout << BRED "UnFixed" NC << std::endl;
 	return ;
 }
 
@@ -39,28 +38,28 @@ Fixed&	Fixed::operator=(Fixed const &rhs) {
 	return (*this);
 }
 
-Fixed	Fixed::operator+(Fixed const &rhs) {
+Fixed	Fixed::operator+(const Fixed &rhs) const {
 	Fixed	tmp;
 
 	tmp.setRawBits((this->_fpn + rhs._fpn));
 	return (tmp);
 }
 
-Fixed	Fixed::operator-(Fixed const &rhs) {
+Fixed	Fixed::operator-(const Fixed &rhs) const {
 	Fixed	tmp;
 
 	tmp.setRawBits((this->_fpn - rhs._fpn));
 	return (tmp);
 }
 
-Fixed	Fixed::operator*(Fixed const &rhs) {
+Fixed	Fixed::operator*(const Fixed &rhs) const {
 	Fixed	tmp;
 
 	tmp.setRawBits(((int64_t)this->_fpn * rhs._fpn) >> this->_nBits);
 	return (tmp);
 }
 
-Fixed	Fixed::operator/(Fixed const &rhs) {
+Fixed	Fixed::operator/(const Fixed &rhs) const {
 	Fixed	tmp;
 
 	tmp.setRawBits(((int64_t)this->_fpn << this->_nBits) / rhs._fpn);
@@ -126,13 +125,15 @@ bool	Fixed::operator<=(const Fixed &rhs) const {
 }
 
 bool	Fixed::operator==(const Fixed &rhs) const {
-	if (this == &rhs)
+	// if (this == &rhs)
+	if (this->getRawBits() == rhs.getRawBits())
 		return (true);
 	return (false);
 }
 
 bool	Fixed::operator!=(const Fixed &rhs) const {
-	if (this != &rhs)
+	if (this->getRawBits() != rhs.getRawBits())
+	// if (this != &rhs)
 		return (true);
 	return (false);
 }
@@ -182,6 +183,17 @@ float	Fixed::toFloat(void) const {
 int		Fixed::toInt(void) const {
 	int	tmp;
 	tmp = this->_fpn >> this->_nBits;
+	return (tmp);
+}
+
+Fixed	Fixed::absVal(void) const {
+	Fixed	tmp;
+
+	if (this->_fpn >= 0) {
+		tmp = *this;
+		return (tmp);
+	}
+	tmp.setRawBits(((this->getRawBits() >> 23) + this->getRawBits()) ^ (this->getRawBits() >> 23));
 	return (tmp);
 }
 

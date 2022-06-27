@@ -1,92 +1,56 @@
 #include "Fixed.hpp"
+#include "Point.hpp"
+#include <unistd.h>
+
+bool	bsp(Point const a, Point const b, Point const c, Point const point);
 
 int main( void ) {
-	Fixed a;
-	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
-	Fixed c(9);
-	Fixed d(5);
-	Fixed e(5);
-	Fixed f(7.05f);
-	Fixed g(25.05f);
-	Fixed const k(25.05f);
-	std::cout << YLWB "\n++++ STANDARD TESTS ++++" NC << std::endl;
+	Point const	A(0, 0);
+	Point const	B(10, 30);
+	Point const	C(20, 0);
+	Point const	P(30, 15);
+	Point const	D(10, 15);
+	bool		result;
+
+	std::cout << YLWB "Let's see whether the dot is inside the triangle or not!" NC << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Corner points of a triangle:" << std::endl;
+	std::cout << "A(" << A.getX() << ", " << A.getY() << ")" << std::endl;
+	std::cout << "B(" << B.getX() << ", " << B.getY() << ")" << std::endl;
+	std::cout << "C(" << C.getX() << ", " << C.getY() << ")" << std::endl;
+	std::cout << std::endl;
 	
-	std::cout << a << std::endl;
-	std::cout << a.getRawBits() << std::endl;
-	std::cout << ++a << std::endl;
-	std::cout << a.getRawBits() << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
-	std::cout << Fixed::max( a, b ) << std::endl;
-
-	std::cout << YLWB "\n++++ MY TESTS ++++" NC << std::endl;
+	std::cout << "Point:" << std::endl;
+	std::cout << CYN "P(" NC << P.getX() << CYN ", " NC << P.getY() << CYN ")" NC<< std::endl;
+	result = bsp(A, B, C, P);
+	std::cout << YLW "Result is " NC << result<< std::endl;
+	std::cout << std::endl;
+	std::cout << "Point:" << std::endl;
+	std::cout << CYN "D(" NC << D.getX() << CYN ", " NC << D.getY() << CYN ")" NC<< std::endl;
+	result = bsp(A, B, C, D);
+	std::cout << YLW "Result is " NC << result<< std::endl;
 	
-	std::cout << YLW "\n++++ ARITHMETIC OPERATIONS ++++" NC << std::endl;
-	std::cout << c << " + " << d << " =";
-	std::cout.width(5); std::cout << (c + d) << std::endl;
-	std::cout << c << " - " << d << " =";
-	std::cout.width(4); std::cout << (c - d) << std::endl;
-	std::cout << d << " * " << e << " =";
-	std::cout.width(5); std::cout << (d * e) << std::endl;
-	std::cout << f << " + " << c << " =";
-	std::cout.width(9); std::cout << (c + f) << std::endl;
-	std::cout << f << " - " << c << " =";
-	std::cout.width(9); std::cout << (f - c) << std::endl;
-	std::cout << g << " / " << e << " =";
-	std::cout.width(9); std::cout << (g / e) << std::endl;
-
-	std::cout << YLW "\n++++ COMPARISONS ++++" NC << std::endl;
-	std::cout << c << "  > " << d << "? ";
-	std::cout.width(5); std::cout << (c > d) << std::endl;
-	std::cout << c << "  < " << d << "? ";
-	std::cout.width(5); std::cout << (c < d) << std::endl;
-	std::cout << e << " >= " << d << "? ";
-	std::cout.width(5); std::cout << (e >= d) << std::endl;
-	std::cout << c << " <= " << d << "? ";
-	std::cout.width(5); std::cout << (c <= d) << std::endl;
-	std::cout << e << " == " << d << "? ";
-	std::cout.width(5); std::cout << (e == d) << std::endl;
-	std::cout << e << " != " << d << "? ";
-	std::cout.width(5); std::cout << (e != d) << std::endl;
-	std::cout << c << " != " << d << "? ";
-	std::cout.width(5); std::cout << (c != d) << std::endl;
-
-	std::cout << YLW "\n++++ DE/INCREMENTATION ++++" NC << std::endl;
-	std::cout << "f is equal to ";
-	std::cout.width(11); std::cout << f << std::endl;
-	std::cout << "++f is equal to ";
-	std::cout.width(9); std::cout << ++f << std::endl;
-	std::cout << "g is equal to ";
-	std::cout.width(11); std::cout << g << std::endl;
-	std::cout << "--g is equal to ";
-	std::cout.width(9); std::cout << --g << std::endl;
-	std::cout << "c is equal to ";
-	std::cout.width(5); std::cout << c << std::endl;
-	std::cout << "c++ is equal to ";
-	std::cout.width(3); std::cout << c++ << std::endl;
-	std::cout << "c is equal to ";
-	std::cout.width(11); std::cout << c << std::endl;
-	std::cout << "d is equal to ";
-	std::cout.width(5); std::cout << d << std::endl;
-	std::cout << "d-- is equal to ";
-	std::cout.width(3); std::cout << d-- << std::endl;
-	std::cout << "d is equal to ";
-	std::cout.width(11); std::cout << d << std::endl;
-
-
-	std::cout << YLW "\n++++ MIN/MAX ++++" NC << std::endl;
-	std::cout << "max(" << c << ", " << d << ")";
-	std::cout.width(11); std::cout << Fixed::max(c, d) << std::endl;
-	std::cout << "min(" << c << ", " << d << ")";
-	std::cout.width(11); std::cout << Fixed::min(c, d) << std::endl;
-	std::cout << "min(" << e << ", " << d << ")";
-	std::cout.width(17); std::cout << Fixed::min(e, d) << std::endl;
-	std::cout << "const max(" << b << ", " << k << ")";
-	std::cout.width(8); std::cout << Fixed::max(b, k) << std::endl;
-	std::cout << "const min(" << b << ", " << k << ")";
-	std::cout.width(8); std::cout << Fixed::min(b, k) << std::endl;
-
+	usleep(1000000);
+	std::cout << std::endl;
+	std::cout << "Do you want to try your values?" << std::endl;
+	while (19) {
+		float	x, y;
+		int		exit;
+		std::cout << "Enter a value for X:" << std::endl;
+		std::cin >> x;
+		std::cout << "Enter a value for Y:" << std::endl;
+		std::cin >> y;
+		Point	U(x, y);
+		std::cout << "Point:" << std::endl;
+		std::cout << CYN "U(" NC << U.getX() << CYN ", " NC << U.getY() << CYN ")" NC<< std::endl;
+		result = bsp(A, B, C, U);
+		std::cout << YLW "Result is " NC << result<< std::endl;
+		std::cout << std::endl;
+		std::cout << RED "You can exit the loop by typing 777" NC << std::endl;
+		std::cin >> exit;
+		if (exit == 777)
+			break ;
+	}
 	return (0);
 }

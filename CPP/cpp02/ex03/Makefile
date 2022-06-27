@@ -6,11 +6,13 @@ C_GREEN			=\033[0;32m
 C_GREEN_B		=\033[1;32m
 C_RESET			=\033[0m
 
-NAME		= fixed
+NAME		= bsp
 
 # SRC_DIR	= srcs
 SRCS		= main.cpp \
-				Fixed.cpp
+				Fixed.cpp \
+				Point.cpp \
+				bsp.cpp
 # SRCS		= ${notdir ${SRCS_F}}
 
 OBJ_DIR		= objs
@@ -21,7 +23,7 @@ GCC			= c++
 RM			= rm -f
 RMR			= rm -rf
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
-INC			= -I Fixed.hpp
+INC			= -I Fixed.hpp Point.hpp
 
 ${OBJ_DIR}/%.o : %.cpp
 			@mkdir -p ${OBJ_DIR}
