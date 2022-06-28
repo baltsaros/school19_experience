@@ -17,15 +17,12 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name) {
 	this->_ep = 50;
 	this->_ad = 30;
 	std::cout << BLUEB "FragTrap " NC << name;
-	std::cout << BLUEB " said nothing" NC << std::endl;
+	std::cout << BLUEB " jumps out of a barrel" NC << std::endl;
 	return ;
 }
 
 FragTrap::FragTrap(FragTrap const &src) {
-	this->_name = src._name;
-	this->_hp = src._hp;
-	this->_ep = src._ep;
-	this->_ad = src._ad;
+	*this = src;
 	std::cout << BLUEB "Copying FragTrap " NC << src._name << std::endl;
 	return ;
 }

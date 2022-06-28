@@ -22,10 +22,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
 }
 
 ScavTrap::ScavTrap(ScavTrap const &src) {
-	this->_name = src._name;
-	this->_hp = src._hp;
-	this->_ep = src._ep;
-	this->_ad = src._ad;
+	*this = src;
 	std::cout << PRPLB "Copying ScavTrap " NC << src._name << std::endl;
 	return ;
 }

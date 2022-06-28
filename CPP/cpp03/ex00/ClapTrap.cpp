@@ -14,8 +14,8 @@ ClapTrap::ClapTrap(std::string name) : _name(name), _hp(10), _ep(10), _ad(0) {
 	return ;
 }
 
-ClapTrap::ClapTrap(ClapTrap const &src) : 
-	_name(src._name), _hp(src._hp), _ep(src._ep), _ad(src._ad) {
+ClapTrap::ClapTrap(ClapTrap const &src) {
+	*this = src;
 	std::cout << BGRN "Copy ClapTrap" NC << std::endl;
 	return ;
 }
