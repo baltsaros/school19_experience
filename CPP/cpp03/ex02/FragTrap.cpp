@@ -1,23 +1,31 @@
 #include "FragTrap.hpp"
 
 //	CONSTRUCTORS
-FragTrap::FragTrap(void) : 
-	_hp(100), _ep(50), _ad(30) {
+FragTrap::FragTrap(void) : ClapTrap() {
 	this->_name = "default";
+	this->_hp = 100;
+	this->_ep = 50;
+	this->_ad = 30;
 	std::cout << BLUEB "FragTrap " NC << _name;
 	std::cout << BLUEB " jumps out of a barrel" NC << std::endl;
 	return ;
 }
 
-FragTrap::FragTrap(std::string name) : 
-	ClapTrap(name), _name(name), _hp(100), _ep(50), _ad(20) {
+FragTrap::FragTrap(std::string name) : ClapTrap(name) {
+	this->_name = name;
+	this->_hp = 100;
+	this->_ep = 50;
+	this->_ad = 30;
 	std::cout << BLUEB "FragTrap " NC << name;
 	std::cout << BLUEB " said nothing" NC << std::endl;
 	return ;
 }
 
-FragTrap::FragTrap(FragTrap const &src) : 
-	_name(src._name), _hp(src._hp), _ep(src._ep), _ad(src._ad) {
+FragTrap::FragTrap(FragTrap const &src) {
+	this->_name = src._name;
+	this->_hp = src._hp;
+	this->_ep = src._ep;
+	this->_ad = src._ad;
 	std::cout << BLUEB "Copying FragTrap " NC << src._name << std::endl;
 	return ;
 }

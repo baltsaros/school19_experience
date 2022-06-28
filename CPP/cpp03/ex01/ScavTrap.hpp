@@ -1,5 +1,5 @@
 #ifndef SCAVTRAP_HPP
-# define	SCAVTRAP_HPP
+# define SCAVTRAP_HPP
 
 #include <iostream>
 #include <string>
@@ -7,10 +7,6 @@
 
 class	ScavTrap : public ClapTrap {
 	private:
-		std::string		_name;
-		int				_hp;
-		int				_ep;
-		unsigned int	_ad;
 
 	public:
 		ScavTrap(void);

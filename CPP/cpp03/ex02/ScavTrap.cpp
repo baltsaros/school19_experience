@@ -1,23 +1,31 @@
 #include "ScavTrap.hpp"
 
 //	CONSTRUCTORS
-ScavTrap::ScavTrap(void) : 
-	_hp(100), _ep(50), _ad(20) {
+ScavTrap::ScavTrap(void) : ClapTrap() {
 	this->_name = "default";
+	this->_hp = 100;
+	this->_ep = 50;
+	this->_ad = 20;
 	std::cout << PRPLB "ScavTrap " NC << _name;
 	std::cout << PRPLB " said nothing" NC << std::endl;
 	return ;
 }
 
-ScavTrap::ScavTrap(std::string name) : 
-	ClapTrap(name), _name(name), _hp(100), _ep(50), _ad(20) {
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
+	this->_name = name;
+	this->_hp = 100;
+	this->_ep = 50;
+	this->_ad = 20;
 	std::cout << PRPLB "ScavTrap " NC << name;
 	std::cout << PRPLB " said nothing" NC << std::endl;
 	return ;
 }
 
-ScavTrap::ScavTrap(ScavTrap const &src) : 
-	_name(src._name), _hp(src._hp), _ep(src._ep), _ad(src._ad) {
+ScavTrap::ScavTrap(ScavTrap const &src) {
+	this->_name = src._name;
+	this->_hp = src._hp;
+	this->_ep = src._ep;
+	this->_ad = src._ad;
 	std::cout << PRPLB "Copying ScavTrap " NC << src._name << std::endl;
 	return ;
 }

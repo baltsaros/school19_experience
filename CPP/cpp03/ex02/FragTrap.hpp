@@ -7,10 +7,6 @@
 
 class	FragTrap : public ClapTrap {
 	private:
-		std::string		_name;
-		int				_hp;
-		int				_ep;
-		unsigned int	_ad;
 
 	public:
 		FragTrap(void);
