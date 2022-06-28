@@ -1,5 +1,5 @@
 #ifndef FRAGTRAP_HPP
-# define	FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
 #include <iostream>
 #include <string>
@@ -17,8 +17,6 @@ class	FragTrap : public ClapTrap {
 		FragTrap&	operator=(FragTrap const &rhs);
 		void		highFivesGuys(void);
 		void		highFivesGuys(ClapTrap& target);
-		void		attack(const std::string& target);
-		void		attack(ClapTrap& target);
 };
 
 #endif

@@ -53,28 +53,6 @@ FragTrap&	FragTrap::operator=(FragTrap const &rhs) {
 	return (*this);
 }
 
-void	FragTrap::attack(const std::string& target) {
-	if (this->_hp <= 0) {
-		std::cout << BLUE "FragTrap " NC << this->_name;
-		std::cout << " cannot attack, since it is dead!" << std::endl;
-		return ;
-	}
-	std::cout << BLUE "FragTrap " NC << this->_name << " leaps forward and strikes hard ";
-	std::cout << target << " causing " << this->_ad;
-	std::cout << " point(s) of damage!" << std::endl;
-	this->_ep--;
-	return ;
-}
-
-void	FragTrap::attack(ClapTrap& target) {
-	std::cout << BLUE "FragTrap " NC << this->_name << " leaps forward and strikes hard ";
-	std::cout << target.getName() << " causing " << this->_ad;
-	std::cout << " point(s) of damage!" << std::endl;
-	target.takeDamage(this->_ad);
-	this->_ep--;
-	return ;
-}
-
 void	FragTrap::highFivesGuys(void) {
 	std::cout << BLUE "FragTrap " NC << this->_name;
 	std::cout << " is waiting for someone to give high fives!";
