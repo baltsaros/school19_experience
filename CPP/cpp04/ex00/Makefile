@@ -12,7 +12,9 @@ NAME		= animals
 SRCS		= main.cpp \
 				Animal.cpp \
 				Cat.cpp \
-				Dog.cpp
+				Dog.cpp \
+				WrongAnimal.cpp \
+				WrongCat.cpp
 # SRCS		= ${notdir ${SRCS_F}}
 
 OBJ_DIR		= objs
@@ -23,7 +25,7 @@ GCC			= c++
 RM			= rm -f
 RMR			= rm -rf
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
-INC			= -I Animal.hpp Cat.hpp Dog.hpp
+INC			= -I Animal.hpp Cat.hpp Dog.hpp WrongAnimal.hpp WrongCat.hpp
 
 ${OBJ_DIR}/%.o : %.cpp
 			@mkdir -p ${OBJ_DIR}

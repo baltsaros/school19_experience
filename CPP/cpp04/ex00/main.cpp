@@ -1,11 +1,13 @@
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 
 int main(void) {
-	const Animal* 	meta = new Animal();
-	const Animal* 	j = new Dog();
-	const Animal* 	i = new Cat();
+	const Animal*	meta = new Animal();
+	const Animal*	j = new Dog();
+	const Animal*	i = new Cat();
 	Animal*			a;
 	Dog*			d = new Dog();
 	Cat*			c = new Cat();
@@ -27,6 +29,15 @@ int main(void) {
 	stat.makeSound();
 	stat = *c;
 	stat.makeSound();
+	std::cout << std::endl;
+
+	const WrongAnimal*	wa = new WrongAnimal();
+	const WrongCat*		wc = new WrongCat();
+	std::cout << wa->getType() << " " << std::endl;
+	std::cout << wc->getType() << " " << std::endl;
+	wa->makeSound();
+	wc->makeSound();
+
 
 	std::cout << std::endl;
 	delete meta;
@@ -34,5 +45,7 @@ int main(void) {
 	delete i;
 	delete d;
 	delete c;
+	delete wa;
+	delete wc;
 	return (0);
 }
