@@ -2,16 +2,18 @@
 
 //	CONSTRUCTORS
 Character::Character(void) {
-	std::cout << CYNB "A character was born!" NC << std::endl;
 	this->_name = "noname";
+	std::cout << CYNB "Character " NC << this->_name;
+	std::cout << CYNB " was born!" NC << std::endl;
 	for (int i = 0; i < 4; i++)
 		this->_inventory[i] = NULL;
 	return ;
 }
 
 Character::Character(std::string const & name) {
-	std::cout << CYNB "Character was born!" NC << std::endl;
 	this->_name = name;
+	std::cout << CYNB "Character " NC << this->_name;
+	std::cout << CYNB " was born!" NC << std::endl;
 	for (int i = 0; i < 4; i++)
 		this->_inventory[i] = NULL;
 	return ;
@@ -25,7 +27,12 @@ Character::Character(Character const &src) {
 
 //	DESTRUCTOR
 Character::~Character(void) {
-	std::cout << REDB "UnCharacter" NC << std::endl;
+	std::cout << CYNB "Character " NC << this->_name;
+	std::cout << REDB " went to bed." NC << std::endl;
+	for (int i = 0; i < 4; i++) {
+		if (this->_inventory[i])
+			delete this->_inventory[i];
+	}
 	return ;
 }
 

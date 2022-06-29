@@ -16,7 +16,11 @@ MateriaSource::MateriaSource(MateriaSource const &src) : IMateriaSource() {
 
 //	DESTRUCTOR
 MateriaSource::~MateriaSource(void) {
-	std::cout << REDB "UnMateriaSource" NC << std::endl;
+	std::cout << PRPLB "MateriaSource" NC << REDB " was exhausted" NC << std::endl;
+	for (int i = 0; i < 4; i++) {
+		if (this->_stored[i])
+			delete this->_stored[i];
+	}
 	return ;
 }
 
@@ -25,7 +29,7 @@ MateriaSource&	MateriaSource::operator=(MateriaSource const &rhs) {
 	std::cout << PRPL "Assigning MateriaSource" NC << std::endl;
 	if (this != &rhs) {
 		for (int i = 0; i < 4; i++) {
-			if (this->_stored[i] != NULL)
+			if (this->_stored[i])
 				delete this->_stored[i];
 		}
 		for (int i = 0; i < 4; i++)
@@ -38,7 +42,7 @@ MateriaSource&	MateriaSource::operator=(MateriaSource const &rhs) {
 void	MateriaSource::learnMateria(AMateria* par) {
 	for (int i = 0; i < 4; i++) {
 		if (this->_stored[i] == NULL) {
-			this->_stored[i] = par->clone();
+			this->_stored[i] = par;
 			return ;
 		}
 	}

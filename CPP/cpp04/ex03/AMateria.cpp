@@ -2,14 +2,14 @@
 
 //	CONSTRUCTORS
 AMateria::AMateria(void) {
-	std::cout << PRPLB "AMateria materialized" NC << std::endl;
 	this->_type = "unknown";
+	std::cout << PRPLB "AMateria " NC << this->_type << PRPLB " materialized" NC << std::endl;
 	return ;
 }
 
 AMateria::AMateria(std::string const & type) {
-	std::cout << PRPLB "AMateria materialized" NC << std::endl;
 	this->_type = type;
+	std::cout << PRPLB "AMateria " NC << this->_type << PRPLB " materialized" NC << std::endl;
 	return ;
 }
 
@@ -21,7 +21,8 @@ AMateria::AMateria(AMateria const &src) {
 
 //	DESTRUCTOR
 AMateria::~AMateria(void) {
-	std::cout << REDB "UnAMateria" NC << std::endl;
+	std::cout << PRPLB "AMateria " NC << this->_type;;
+	std::cout << REDB " was dissolved" NC << std::endl;
 	return ;
 }
 

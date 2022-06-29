@@ -15,7 +15,7 @@ Ice::Ice(Ice const &src) {
 
 //	DESTRUCTOR
 Ice::~Ice(void) {
-	std::cout << REDB "Ice power melted..." NC << std::endl;
+	std::cout << BLUEB "Ice" NC << REDB " power melted..." NC << std::endl;
 	return ;
 }
 
@@ -23,7 +23,7 @@ Ice::~Ice(void) {
 Ice&	Ice::operator=(Ice const &rhs) {
 	std::cout << BLUE "Assigning Ice" NC << std::endl;
 	if (this != &rhs)
-		this->_type= rhs._type;
+		this->_type = rhs._type;
 	return (*this);
 }
 

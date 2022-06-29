@@ -15,7 +15,8 @@ Cure::Cure(Cure const &src) {
 
 //	DESTRUCTOR
 Cure::~Cure(void) {
-	std::cout << REDB "Nature returned to bed..." NC << std::endl;
+	std::cout << GRNB "Nature" NC;
+	std::cout << REDB " fainted." NC << std::endl;
 	return ;
 }
 
