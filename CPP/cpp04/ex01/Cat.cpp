@@ -18,19 +18,30 @@ Cat::Cat(Cat const &src) {
 Cat::~Cat(void) {
 	std::cout << PRPLB "Cat" NC << REDB " returned to its box..." NC;
 	std::cout << std::endl;
+	delete this->_brains;
 	return ;
 }
 
 //	ASSIGN OPERATOR
 Cat&	Cat::operator=(Cat const &rhs) {
 	std::cout << PRPL "Assigning Cat" NC << std::endl;
-	if (this != &rhs)
+	if (this != &rhs) {
+		delete this->_brains;
+		this->_brains = new Brain();
+		*this->_brains = *(rhs._brains);
 		this->_type = rhs._type;
+	}
 	return (*this);
 }
 
+//	OTHERS
 void	Cat::makeSound(void) const {
 	std::cout << PRPL "Cat" NC << " meows: communism is utopia, bro...";
 	std::cout << std::endl;
+	return ;
+}
+
+void	Cat::getIdea(int i) {
+	this->_brains->getIdea(i);
 	return ;
 }

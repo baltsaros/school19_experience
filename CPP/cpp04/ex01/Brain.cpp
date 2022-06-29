@@ -3,9 +3,8 @@
 //	CONSTRUCTORS
 Brain::Brain(void) {
 	std::cout << WHTB "Brain!" NC << std::endl;
-	for (int i = 0; i < 100; i++) {
-		
-	}
+	for (int i = 0; i < 100; i++)
+		_ideas[i] = "empty";
 	return ;
 }
 
@@ -25,6 +24,18 @@ Brain::~Brain(void) {
 //	ASSIGN OPERATOR
 Brain&	Brain::operator=(Brain const &rhs) {
 	std::cout << PRPL "Assigning Brain" NC << std::endl;
-	// if (this != &rhs)
+	if (this != &rhs) {
+		for (int i = 0; i < 100; i ++)
+			this->_ideas[i] = rhs._ideas[i];
+	}
 	return (*this);
+}
+
+//	OTHERS
+void	Brain::getIdea(int i) {
+	if (i >= 0 && i < 100)
+		std::cout << "My idea is " << this->_ideas[i] << std::endl;
+	else
+		std::cout << "There is no such an idead :(" << std::endl;
+	return ;
 }

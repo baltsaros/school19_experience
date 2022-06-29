@@ -25,7 +25,7 @@ OBJS		= ${addprefix ${OBJ_DIR}/,${OBJS_F}}
 GCC			= c++
 RM			= rm -f
 RMR			= rm -rf
-CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
+CPPFLAGS	= -Wall -Wextra -Werror -g -std=c++98
 INC			= -I Animal.hpp \
 					Cat.hpp \
 					Dog.hpp \

@@ -5,47 +5,35 @@
 #include "WrongCat.hpp"
 
 int main(void) {
-	const Animal*	meta = new Animal();
-	const Animal*	j = new Dog();
-	const Animal*	i = new Cat();
-	Animal*			a;
-	Dog*			d = new Dog();
-	Cat*			c = new Cat();
-	Animal			stat;
+	const Animal*	meta[6];
 
+	for (int i = 0; i < 6; i++) {
+		if (i % 2 == 0)
+			meta[i] = new Cat();
+		else
+			meta[i] = new Dog();
+	}
 	std::cout << std::endl;
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	i->makeSound();
-	j->makeSound();
-	meta->makeSound();
+	std::cout << meta[2]->getType() << std::endl;
+	meta[2]->makeSound();
+	std::cout << meta[3]->getType() << std::endl;
+	meta[3]->makeSound();
+	std::cout << std::endl;
 
-	std::cout << CYN "\n+++ EXTRA TESTS +++\n" NC;
-	d->makeSound();
-	a = c;
+	const Animal*	a;
+	a = meta[0];
+	std::cout << a->getType() << std::endl;
 	a->makeSound();
-	a = d;
-	a->makeSound();
-	stat.makeSound();
-	stat = *c;
-	stat.makeSound();
 	std::cout << std::endl;
 
-	const WrongAnimal*	wa = new WrongAnimal();
-	const WrongCat*		wc = new WrongCat();
-	std::cout << wa->getType() << " " << std::endl;
-	std::cout << wc->getType() << " " << std::endl;
-	wa->makeSound();
-	wc->makeSound();
-
+	Dog*	d1 = new Dog();
+	Dog*	d2 = new Dog();
+	delete d1;
+	d1 = d2;
 
 	std::cout << std::endl;
-	delete meta;
-	delete j;
-	delete i;
-	delete d;
-	delete c;
-	delete wa;
-	delete wc;
+	for (int i = 0; i < 6; i++)
+		delete meta[i];
+	delete d2;
 	return (0);
 }

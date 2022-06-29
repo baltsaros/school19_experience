@@ -32,6 +32,7 @@ Animal&	Animal::operator=(Animal const &rhs) {
 	return (*this);
 }
 
+//	OTHERS
 void	Animal::makeSound(void) const {
 	std::cout << GRN "Animal" NC << " makes some weird noises." << std::endl;
 	return ;
