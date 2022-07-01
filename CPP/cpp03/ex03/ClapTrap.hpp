@@ -19,8 +19,6 @@
 #define BLUE "\e[0;34m"
 #define BLUEB "\e[1;34m"
 #define BLUEL "\e[34m"
-#define TT "\e[0;39m"
-#define TTB "\e[1;39m"
 
 #include <iostream>
 #include <string>

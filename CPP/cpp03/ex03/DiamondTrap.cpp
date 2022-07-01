@@ -32,8 +32,8 @@ DiamondTrap::~DiamondTrap(void) {
 
 //	ASSIGN OPERATOR
 DiamondTrap&	DiamondTrap::operator=(DiamondTrap const &rhs) {
-	std::cout << "Assigning" << BLUE " DiamondTrap " NC << rhs._name;
-	std::cout << " to " << BLUE "DiamondTrap " NC << this->_name;
+	std::cout << "Assigning" << CYN " DiamondTrap " NC << rhs._name;
+	std::cout << " to " << CYN "DiamondTrap " NC << this->_name;
 	std::cout << std::endl;
 	if (this != &rhs) {
 		this->_name = rhs._name;
@@ -45,7 +45,7 @@ DiamondTrap&	DiamondTrap::operator=(DiamondTrap const &rhs) {
 }
 
 void	DiamondTrap::whoAmI(void) {
-	std::cout << CYN "DiamondTrap name is " NC << this->_name << std::endl;
-	std::cout << GRN "ClapTrap name is " NC << getName() << std::endl;
+	std::cout << CYN "DiamondTrap" NC << " name is " << this->_name << std::endl;
+	std::cout << GRN "ClapTrap" NC << " name is " << getName() << std::endl;
 	return ;
 }
