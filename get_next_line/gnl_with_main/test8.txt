@@ -1,2 +1,149 @@
-012345678901234567890123456789012345678901
-2
+Note: The dialogue will change slightly based on gender...
+First meeting in the Catacombs
+Good day! You look reasonably sane!
+What are you doing in the Catacombs?
+Are you a Cleric or something?
+answer No
+No? Well, that's strange.
+Ohhh, I know what it is. You've come for the trinkets, haven't you?
+Well whatever it is…
+This place is treacherous. Do watch your step.
+Heh heh heh…
+answer Yes
+Yes, I imagined as much.
+Best of luck with your pilgrimages or missions or whatever you do.
+This place is treacherous. Do watch your step, eh?
+Heh heh heh…
+activating the bridge trap after meeting him
+Ah, oh! Well, how are you, then?
+…I slipped and flipped that lever, you see…
+…It didn't cause you any trouble, by chance?
+answer No
+Oh, really? Yes, I see…Righty-oh!
+Then everything's good, isn't it?
+I'm Trusty Patches, the one and only!
+You and I, just a couple of undead outcasts, right mate? / You and I, just a couple of undead outcasts, right, my darling?
+Heh heh heh…
+answer Yes
+Are you certain?!
+Well that's a fine shame. Oh, I'm truly sorry, really!
+But, wait now, you didn't actually fall down, then?
+Well, why didn't you tell me sooner! All's well that ends well!
+Everybody makes mistakes. I'm not above it all, I swear!
+I'm trusty Patches, the one-and-only!
+I know! This should make up for it. (gives Humanity x1)
+We're on the same side! Undead outcasts!
+Fantastic isn't it?
+Heh heh heh…
+activating the bridge trap before meeting him
+Ah, oh! Well, well, how are you, then?
+I, uh, sort of lost my way, yes…
+But when I came here, I didn't touch any levers, no, not me!
+Very peculiar, isn't it? Wait, did something happen to you?
+Hey, don't look at me like that. I'm Trusty Patches, the one-and-only!
+Here, everything's good with us, eh? Aww, c'mon, take it! (gives Soul of a Lost Undead x1)
+Heh heh. We'll be wonderful friends.
+Heh heh heh…
+Oh, does it really matter that much?
+C'mon now. What exactly do you think I did?
+You're not making sense, my friend.
+Heh heh heh…
+next meeting in the Tomb of the Giants after meeting in the Catacombs
+What you again? Well, well!
+You've been a stranger. Ah, good to see you're well, mate.
+Oh right, you came at the perfect time.
+There's a fine stash of treasure right down that hole.
+I found it first, but…well, we're friends now. I'll split it with you!
+In any case, have a look, it'll shimmer you blind!
+Heh heh heh…
+if you talk again, before he kicks you off the ledge
+There, that hole. Take a closer look.
+after he kicks you off the ledge
+Heh heh, this is what I do, my friend.
+The trinkets I'll be stripping off your corpse; that's the real treasure!
+Nyah hah hah hah!
+next time you meet
+…Oh, you, I…
+Let's just calm down. Talk about things…
+I did you wrong. But, I didn't mean it.
+These temptations, they can, well, overcome me…
+You know what I mean? Don't you? Please forgive me.
+You and me, we're jolly Undead outcasts, aren't we?
+answer No
+Oh for heaven's sake, let's not mope about, eh?
+You're still alive, I've said I'm sorry!
+Wait, I know! Here, take this. It proves something, doesn't it?
+Gives Twin Humanities
+Heh heh heh…
+answer Yes
+Oh, brilliant. A second chance! Wonderful!
+I had a feeling you'd understand. I did.
+But if I were in your shoes…Ooh! Who knows what I'd have done?
+But now we're friends again, eh?
+Heh heh heh…
+next time you talk
+I did you wrong. But I didn't mean it.
+These temptations, they can, well, overcome me…
+You know what I mean? Don't you? Please forgive me.
+first meeting in the Firelink Shrine
+Oh, we meet again. How many of you are there?
+You've come at the perfect time.
+I'm done with looting. I'm a humble merchant now!
+And wondrous treasures, have I! At a special price for you.
+There you are, have a nice look at them.
+Oh relax, no more funny business out of me, my friend!
+next time you talk
+Oi, have you met Petrus, that self proclaimed cleric?
+Believe me on this one, bruv/my love…The man is scum.
+Don't you be fooled by his claims to do good.
+They're all the same, those rotten clerics.
+next time you talk
+Oi, have you met Lautrec the Embraced?
+Believe me on this one, bruv/my love…He's completely mad.
+He wouldn't think twice about cutting somebody down.
+So watch out for him, especially if you've humanity to spare.
+next time you talk
+I'm done with looting. I'm a humble merchant now!
+And wondrous treasures, have I! At a special price for you.
+If you don't buy anything
+What nothing appeals to you?
+Well you must have poor taste.
+next time you talk
+Oh, there you are again.
+Welcome to Patches' Trusty Trove of Treasures.
+We chop prices not limbs!
+next time you talk
+Come on, you can do better than that.
+Nobody likes a tightwad, you hear me?
+next time you talk after a purchase
+Right? Good stuff eh?
+Don't you forget who got it for you!
+Heh heh heh…
+and the next time you talk after a purchase
+How is it? Fine stuff eh?
+Don't forget to thank me.
+the next time you talk
+Oh, you again. Fancy that.
+You've come at the perfect time.
+Some new gems have come my way.
+I saved them specially, just for you, mate. / I saved them specially, just for you, my darling.
+and the next time you talk
+I'm done with the looting. I'm a humble merchant now!
+attacking without made hostile
+Oww!
+What the devil!
+Please, no!
+attacking and made hostile
+All right, all right, if that's the way it is!
+You silly little bastard!/ You impossible little wench!
+Well, I've had enough of you!
+if player answered NO to being a cleric
+You lousy good-for-nothing! Wallow in your spit!
+if player answered YES to being a cleric
+Take your higher cause and stuff it, you lousy charlatan!
+killing the player
+Phew. The righteous prevail, again.
+Hey, don't blame me, mate./ Hey, don't blame me, old darling.
+killed by the player
+Curses…I'm finished…
+What did I ever…

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 10:31:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/02/16 17:56:41 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/06/09 16:39:37 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ size_t	ft_find_line(char *input)
 char	*read_line(char *rest, int fd)
 {
 	ssize_t	r_bytes;
-	char	*buf;
+	static char str[] = "Hello";
+	static char	buf[BUFFER_SIZE + 1];
 
-	buf = malloc(sizeof(*buf) * (BUFFER_SIZE + 1));
-	if (!buf)
-		return (0);
+	// buf = malloc(sizeof(*buf) * (BUFFER_SIZE + 1));
+	// if (!buf)
+	// 	return (0);
 	r_bytes = 1;
 	while (!ft_strchr(rest, '\n') && r_bytes > 0)
 	{
@@ -42,7 +43,7 @@ char	*read_line(char *rest, int fd)
 		buf[r_bytes] = '\0';
 		rest = ft_strjoin_free(rest, buf);
 	}
-	free(buf);
+	// free(buf);
 	return (rest);
 }
 
@@ -126,7 +127,7 @@ int	main(void)
 	size_t	i;
 
 	// fd = 0;
-	fd = open("test4.txt", O_RDONLY);
+	fd = open("test8.txt", O_RDONLY);
 	// if (fd < 0)
 	// {
 	// 	printf("OPEN ERROR\n");
