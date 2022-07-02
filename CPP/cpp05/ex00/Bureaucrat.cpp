@@ -24,7 +24,9 @@ Bureaucrat::Bureaucrat(Bureaucrat const &src) {
 
 //	DESTRUCTOR
 Bureaucrat::~Bureaucrat(void) {
-	std::cout << REDB "Bureaucrat was buried by the piles of paper!" NC << std::endl;
+	std::cout << REDB "Bureaucrat " NC << this->_name;
+	std::cout << REDB " was buried under the piles of paper!" NC;
+	std::cout << std::endl;
 	return ;
 }
 
@@ -56,8 +58,8 @@ void	Bureaucrat::increment(void) {
 }
 
 void	Bureaucrat::decrement(void) {
-	if (this->_grade == 1)
-		throw(GradeTooHighException());
+	if (this->_grade == 150)
+		throw(GradeTooLowException());
 	else
 		this->_grade++;
 	return ;
