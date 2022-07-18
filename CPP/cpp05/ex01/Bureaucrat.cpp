@@ -66,7 +66,7 @@ void	Bureaucrat::decrement(void) {
 }
 
 void	Bureaucrat::signForm(Form &f) {
-	if (this->_grade < f.getGradeSign())
+	if (this->_grade <= f.getGradeSign())
 	{
 		std::cout << YLWB "Bureaucrat " << this->_name << NC " signed ";
 		std::cout << CYNB "form " << f.getName() << NC "." << std::endl;
