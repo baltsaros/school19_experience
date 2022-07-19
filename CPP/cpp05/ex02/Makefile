@@ -11,10 +11,10 @@ NAME		= forms
 # SRC_DIR	= srcs
 SRCS		= main.cpp \
 				Bureaucrat.cpp \
-				Form.cpp \
+				AForm.cpp \
 				PresidentialPardonForm.cpp \
-				RobotomyRequestForm \
-				ShrubberyCreationForm
+				RobotomyRequestForm.cpp \
+				ShrubberyCreationForm.cpp
 # SRCS		= ${notdir ${SRCS_F}}
 
 OBJ_DIR		= objs

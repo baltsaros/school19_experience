@@ -1,5 +1,6 @@
-#include <time.h>
-#include <stdlib.h>
+// #include <time.h>
+// #include <stdlib.h>
+#include <cstdlib>
 #include "include/RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(void)
@@ -24,9 +25,9 @@ RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &src) {
 
 //	DESTRUCTOR
 RobotomyRequestForm::~RobotomyRequestForm(void) {
-	std::cout << REDB "RobotomyRequestForm with a target " NC;
-	std::cout << this->_target << REDB " was torn apart!" NC;
-	std::cout << std::endl;
+	// std::cout << REDB "RobotomyRequestForm with a target " NC;
+	// std::cout << this->_target << REDB " was torn apart!" NC;
+	// std::cout << std::endl;
 	return ;
 }
 
@@ -47,12 +48,12 @@ void	RobotomyRequestForm::formAction(void) const {
 	int	chance;
 
 	std::cout << "Bzzzzzzzzzzzzzzzzzzzz..." << std::endl;
-	srand(time(NULL));
+	srand(time(0));
 	chance = rand() % 2 + 1;
 	if (chance % 2)
 	{
 		std::cout << "Attention, please! " GRNB << this->getTarget();
-		std::cout << NC "was succesfully robotomized!" << std::endl;
+		std::cout << NC " was succesfully robotomized!" << std::endl;
 	}
 	else
 		std::cout << "DAMN! The operation failed! Run!" << std::endl;

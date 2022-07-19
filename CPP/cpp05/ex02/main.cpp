@@ -9,7 +9,76 @@ int	main(void) {
 	std::cout << "Case: ShrubberyCreationForm normal" << std::endl;
 	try {
 		ShrubberyCreationForm	shrub("home");
-		Bureaucrat				bur("Tom", 3);
+		Bureaucrat				bur1("Jovanni", 3);
+		Bureaucrat				bur2("Tom", 13);
+
+		std::cout << shrub;
+		std::cout << bur1;
+		std::cout << bur2;
+		bur1.signForm(shrub);
+		bur2.executeForm(shrub);
+	}
+	catch (std::exception& e){
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
+
+	std::cout << "Case: RobotomyRequestForm normal" << std::endl;
+	try {
+		RobotomyRequestForm		robotomy("Cat");
+		Bureaucrat				bur1("Sarah", 3);
+
+		std::cout << robotomy;
+		std::cout << bur1;
+		bur1.signForm(robotomy);
+		bur1.executeForm(robotomy);
+	}
+	catch (std::exception& e){
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
+
+	std::cout << "Case: PresidentialPardonForm too low to execute" << std::endl;
+	try {
+		PresidentialPardonForm	form("Urmom");
+		Bureaucrat				bur1("Bev", 2);
+		Bureaucrat				bur2("Bath", 1);
+
+		std::cout << form;
+		std::cout << bur1;
+		std::cout << bur2;
+		bur1.signForm(form);
+		bur2.executeForm(form);
+	}
+	catch (std::exception& e){
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
+
+	std::cout << "Case: PresidentialPardonForm too low to sign" << std::endl;
+	try {
+		PresidentialPardonForm	form("Umom");
+		Bureaucrat				bur1("Bev", 28);
+		Bureaucrat				bur2("Bath", 1);
+
+		std::cout << form;
+		std::cout << bur1;
+		std::cout << bur2;
+		bur1.signForm(form);
+		bur2.executeForm(form);
+	}
+	catch (std::exception& e){
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
+	std::cout << "Case: ShrubberyCreationForm, not signed" << std::endl;
+	try {
+		ShrubberyCreationForm	shrub("work");
+		Bureaucrat				bur("Sui", 3);
 
 		std::cout << shrub;
 		std::cout << bur;
@@ -20,75 +89,5 @@ int	main(void) {
 	}
 	std::cout << std::endl;
 
-
-	// std::cout << "Case: too low" << std::endl;
-	// try {
-	// 	Form	form2("Deux", 150, 170);
-
-	// 	std::cout << form2;
-	// }
-	// catch (std::exception& e){
-	// 	std::cerr << e.what() << std::endl;
-	// }
-	// std::cout << std::endl;
-
-
-	// std::cout << "Case: too high" << std::endl;
-	// try {
-	// 	Form	form3("Trois", -11, 1);
-
-	// 	std::cout << form3;
-	// }
-	// catch (std::exception& e){
-	// 	std::cerr << e.what() << std::endl;
-	// }
-	// std::cout << std::endl;
-
-
-	// std::cout << "Case: low bureaucrat and high form" << std::endl;
-	// try {
-	// 	Bureaucrat	bur("Tom", 75);
-	// 	Form		form3("Quatre", 45, 75);
-
-	// 	std::cout << bur;
-	// 	std::cout << form3;
-	// 	bur.signForm(form3);
-	// 	std::cout << form3;
-	// }
-	// catch (std::exception& e){
-	// 	std::cerr << e.what() << std::endl;
-	// }
-	// std::cout << std::endl;
-
-
-	// std::cout << "Case: high bureaucrat and low form" << std::endl;
-	// try {
-	// 	Bureaucrat	bur("Alice", 5);
-	// 	Form		form3("Cinq", 45, 75);
-
-	// 	std::cout << bur;
-	// 	std::cout << form3;
-	// 	bur.signForm(form3);
-	// 	std::cout << form3;
-	// }
-	// catch (std::exception& e){
-	// 	std::cerr << e.what() << std::endl;
-	// }
-	// std::cout << std::endl;
-
-
-	// std::cout << "Case: similar bureaucrat and  form" << std::endl;
-	// try {
-	// 	Bureaucrat	bur("TinTin", 35);
-	// 	Form		form3("Six", 35, 75);
-
-	// 	std::cout << bur;
-	// 	std::cout << form3;
-	// 	bur.signForm(form3);
-	// 	std::cout << form3;
-	// }
-	// catch (std::exception& e){
-	// 	std::cerr << e.what() << std::endl;
-	// }
 	return (0);
 }

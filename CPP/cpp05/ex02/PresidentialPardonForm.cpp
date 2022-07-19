@@ -22,9 +22,9 @@ PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &src
 
 //	DESTRUCTOR
 PresidentialPardonForm::~PresidentialPardonForm(void) {
-	std::cout << REDB "PresidentialPardonForm with a target " NC;
-	std::cout << this->_target << REDB " was torn apart!" NC;
-	std::cout << std::endl;
+	// std::cout << REDB "PresidentialPardonForm with a target " NC;
+	// std::cout << this->_target << REDB " was torn apart!" NC;
+	// std::cout << std::endl;
 	return ;
 }
 

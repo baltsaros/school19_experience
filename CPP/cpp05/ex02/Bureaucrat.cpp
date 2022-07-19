@@ -68,7 +68,7 @@ void	Bureaucrat::decrement(void) {
 void	Bureaucrat::signForm(AForm &f) {
 	if (this->_grade <= f.getGradeSign())
 	{
-		std::cout << YLWB "Bureaucrat " << this->_name << NC " signed ";
+		std::cout << YLWB "Bureaucrat " << this->_name << NC " signed the ";
 		std::cout << CYNB "form " << f.getName() << NC "." << std::endl;
 	}
 	else
@@ -84,7 +84,7 @@ void	Bureaucrat::signForm(AForm &f) {
 void	Bureaucrat::executeForm(AForm const &f) {
 	if (f.execute(*this))
 	{
-		std::cout << YLWB "Bureaucrat " << this->_name << NC " signed ";
+		std::cout << YLWB "Bureaucrat " << this->_name << NC " executed the ";
 		std::cout << CYNB "form " << f.getName() << NC "." << std::endl;
 	}
 	else
