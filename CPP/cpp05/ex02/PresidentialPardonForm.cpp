@@ -2,16 +2,15 @@
 
 PresidentialPardonForm::PresidentialPardonForm(void)
 	: AForm("PrPardon", 25, 5), _target("unknown") {
-	std::cout << "Our benevolent president Zaphod Beeblebrox decided to pardon " GRNB;
-	std::cout << this->getTarget() << NC "!" << std::endl;
-	// std::cout << CYNB "PresidentialPardonForm was filled!" NC << std::endl;
+	std::cout << CYNB "PresidentialPardonForm was filled!" NC << " Target is ";
+	std::cout << this->_target << "." << std::endl;
 	return ;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(std::string const target)
 	: AForm("PrPardon", 25, 5), _target(target) {
-	std::cout << "Our benevolent president Zaphod Beeblebrox decided to pardon " GRNB;
-	std::cout << this->getTarget() << NC "!" << std::endl;
+	std::cout << CYNB "PresidentialPardonForm was filled!" NC << " Target is ";
+	std::cout << this->_target << "." << std::endl;
 	return ;
 }
 
@@ -23,9 +22,9 @@ PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &src
 
 //	DESTRUCTOR
 PresidentialPardonForm::~PresidentialPardonForm(void) {
-	// std::cout << REDB "PresidentialPardonForm " NC << this->_name;
-	// std::cout << REDB " was torn apart!" NC;
-	// std::cout << std::endl;
+	std::cout << REDB "PresidentialPardonForm with a target " NC;
+	std::cout << this->_target << REDB " was torn apart!" NC;
+	std::cout << std::endl;
 	return ;
 }
 
@@ -40,4 +39,10 @@ PresidentialPardonForm&	PresidentialPardonForm::operator=(PresidentialPardonForm
 //	OTHERS
 std::string	PresidentialPardonForm::getTarget(void) const {
 	return (this->_target);
+}
+
+void	PresidentialPardonForm::formAction(void) const {
+	std::cout << "Our benevolent president Zaphod Beeblebrox decided to pardon " GRNB;
+	std::cout << this->getTarget() << NC "!" << std::endl;
+	return ;
 }

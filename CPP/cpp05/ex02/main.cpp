@@ -1,13 +1,19 @@
 #include "include/Bureaucrat.hpp"
 #include "include/AForm.hpp"
+#include "include/ShrubberyCreationForm.hpp"
+#include "include/RobotomyRequestForm.hpp"
+#include "include/PresidentialPardonForm.hpp"
 
 int	main(void) {
 	std::cout << std::endl;
-	std::cout << "Case: normal" << std::endl;
+	std::cout << "Case: ShrubberyCreationForm normal" << std::endl;
 	try {
-		AForm	form1("Un", 45, 70);
+		ShrubberyCreationForm	shrub("home");
+		Bureaucrat				bur("Tom", 3);
 
-		std::cout << form1;
+		std::cout << shrub;
+		std::cout << bur;
+		bur.executeForm(shrub);
 	}
 	catch (std::exception& e){
 		std::cerr << e.what() << std::endl;

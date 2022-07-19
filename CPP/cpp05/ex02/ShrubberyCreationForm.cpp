@@ -2,62 +2,15 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm(void)
 	: AForm("Shrubbery", 145, 137), _target("unknown") {
-	std::ofstream	output;
-
-	output.open(this->_target + "_shrubbery", std::ofstream::out | std::ofstream::app);
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⡠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⡀⡀⠀⠀⡐⡀⠀⠀⠀⠠⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠀⠀⠢⡉⠄⠀⠐⠍⠂⠀⠀⢂⡄⠀⠀⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠻⠃⠸⠃⢠⠄⡀⠛⠀⡤⢀⠀⠛⠇⡀⡜⡠⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⢐⣄⠠⡀⠭⢠⠀⠁⠨⠼⠀⠀⠁⠥⠇⠀⡐⡁⠀⠡⡋⠄⢠⠀⢾⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⢀⡀⠀⠈⠋⠃⠈⠈⠉⠐⢅⢲⠄⡘⡤⡰⣢⠐⡀⠷⠥⠀⠀⡠⠀⢦⡡⠙⢉⠔⣰⠂⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠈⢜⠶⣱⠸⣷⡄⢠⡟⡄⠈⠑⠊⠀⠈⠒⠓⠀⢧⢀⢔⣩⠰⣍⢆⠣⠮⠁⠦⡟⠆⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠈⠖⣦⢤⠄⠈⠑⡄⡬⣀⠘⢼⠻⢀⣤⢰⡀⠣⣫⢝⢦⢸⠪⢾⠒⡈⠾⢑⣠⠖⠴⣦⡔⡲⠂⡠⢶⠀⠀⠀⠀";
-	output << "⠀⠈⠒⠃⠃⢲⡤⡘⠩⠳⠅⠀⢐⣷⡎⠘⠯⠂⠈⢤⣅⣸⡁⡴⣫⡇⢠⡞⣡⣀⣬⡱⠌⠀⠰⡵⣿⠀⠀⠀⠀";
-	output << "⠀⠀⣀⣀⣀⠀⢩⣁⠸⣶⡆⡇⠈⠊⣁⠄⢛⣯⡳⠆⢠⣿⠀⠟⢳⣷⡟⡀⠻⠼⠖⠋⠀⠀⣀⠁⣥⢾⠀⠀⠀";
-	output << "⠀⠀⠈⠛⣗⠧⠀⣙⣃⣀⡀⢰⡀⣾⣿⠀⣀⠈⠉⣰⣿⣿⠶⠖⠛⠋⠸⣟⣟⡶⠂⢀⢀⣾⣭⠸⡝⡿⠀⠀⠀";
-	output << "⠀⣠⢖⡠⠀⠂⣩⣤⡌⠈⠙⢿⣷⡈⢠⣿⡏⠀⠀⣿⣿⠁⣀⠻⠟⠀⣠⡄⠀⢀⣶⣏⠘⠯⠟⠀⠀⣶⡶⣶⠆";
-	output << "⠾⠿⠛⠁⠠⠾⠿⠟⠁⣴⣶⡆⠹⣿⣮⡈⠀⠀⠰⣿⡏⠘⠛⠋⠀⣼⢿⡇⠀⠸⢟⠞⠀⣀⢔⣤⣤⣝⡋⠁⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠚⠛⠙⠀⠀⠈⠻⣿⣶⣦⣴⣿⡇⠀⠀⠀⠀⣘⣾⣥⣤⡤⠶⠞⣋⣄⡐⠻⠽⠊⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⢻⣿⣷⣄⣤⣶⠿⠋⠁⠀⢰⣽⣶⣄⠻⢿⡿⠶⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⡟⠁⠀⠀⠀⠀⠀⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠛⠛⠛⠓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output.close();
-	// std::cout << CYNB "ShrubberyCreationForm was created!" NC << std::endl;
+	std::cout << CYNB "ShrubberyCreationForm was created!" NC << " Target is ";
+	std::cout << this->_target << "." << std::endl;
 	return ;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const target)
 	: AForm("Shrubbery", 145, 137), _target(target) {
-	std::ofstream	output;
-
-	output.open(this->_target + "_shrubbery", std::ofstream::out | std::ofstream::app);
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⡠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⡀⡀⠀⠀⡐⡀⠀⠀⠀⠠⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠀⠀⠢⡉⠄⠀⠐⠍⠂⠀⠀⢂⡄⠀⠀⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠻⠃⠸⠃⢠⠄⡀⠛⠀⡤⢀⠀⠛⠇⡀⡜⡠⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⢐⣄⠠⡀⠭⢠⠀⠁⠨⠼⠀⠀⠁⠥⠇⠀⡐⡁⠀⠡⡋⠄⢠⠀⢾⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⢀⡀⠀⠈⠋⠃⠈⠈⠉⠐⢅⢲⠄⡘⡤⡰⣢⠐⡀⠷⠥⠀⠀⡠⠀⢦⡡⠙⢉⠔⣰⠂⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠈⢜⠶⣱⠸⣷⡄⢠⡟⡄⠈⠑⠊⠀⠈⠒⠓⠀⢧⢀⢔⣩⠰⣍⢆⠣⠮⠁⠦⡟⠆⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠈⠖⣦⢤⠄⠈⠑⡄⡬⣀⠘⢼⠻⢀⣤⢰⡀⠣⣫⢝⢦⢸⠪⢾⠒⡈⠾⢑⣠⠖⠴⣦⡔⡲⠂⡠⢶⠀⠀⠀⠀";
-	output << "⠀⠈⠒⠃⠃⢲⡤⡘⠩⠳⠅⠀⢐⣷⡎⠘⠯⠂⠈⢤⣅⣸⡁⡴⣫⡇⢠⡞⣡⣀⣬⡱⠌⠀⠰⡵⣿⠀⠀⠀⠀";
-	output << "⠀⠀⣀⣀⣀⠀⢩⣁⠸⣶⡆⡇⠈⠊⣁⠄⢛⣯⡳⠆⢠⣿⠀⠟⢳⣷⡟⡀⠻⠼⠖⠋⠀⠀⣀⠁⣥⢾⠀⠀⠀";
-	output << "⠀⠀⠈⠛⣗⠧⠀⣙⣃⣀⡀⢰⡀⣾⣿⠀⣀⠈⠉⣰⣿⣿⠶⠖⠛⠋⠸⣟⣟⡶⠂⢀⢀⣾⣭⠸⡝⡿⠀⠀⠀";
-	output << "⠀⣠⢖⡠⠀⠂⣩⣤⡌⠈⠙⢿⣷⡈⢠⣿⡏⠀⠀⣿⣿⠁⣀⠻⠟⠀⣠⡄⠀⢀⣶⣏⠘⠯⠟⠀⠀⣶⡶⣶⠆";
-	output << "⠾⠿⠛⠁⠠⠾⠿⠟⠁⣴⣶⡆⠹⣿⣮⡈⠀⠀⠰⣿⡏⠘⠛⠋⠀⣼⢿⡇⠀⠸⢟⠞⠀⣀⢔⣤⣤⣝⡋⠁⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠚⠛⠙⠀⠀⠈⠻⣿⣶⣦⣴⣿⡇⠀⠀⠀⠀⣘⣾⣥⣤⡤⠶⠞⣋⣄⡐⠻⠽⠊⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⢻⣿⣷⣄⣤⣶⠿⠋⠁⠀⢰⣽⣶⣄⠻⢿⡿⠶⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⡟⠁⠀⠀⠀⠀⠀⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠛⠛⠛⠓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-	output.close();
-	// std::cout << CYNB "ShrubberyCreationForm " NC << this->_name;
-	// std::cout << CYNB " was created!" NC << std::endl;
+	std::cout << CYNB "ShrubberyCreationForm was created!" NC << " Target is ";
+	std::cout << this->_target << "." << std::endl;
 	return ;
 }
 
@@ -69,9 +22,9 @@ ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &src) {
 
 //	DESTRUCTOR
 ShrubberyCreationForm::~ShrubberyCreationForm(void) {
-	// std::cout << REDB "ShrubberyCreationForm " NC << this->_name;
-	// std::cout << REDB " was torn apart!" NC;
-	// std::cout << std::endl;
+	std::cout << REDB "ShrubberyCreationForm with a target " NC;
+	std::cout << this->_target << REDB " was torn apart!" NC;
+	std::cout << std::endl;
 	return ;
 }
 
@@ -86,4 +39,32 @@ ShrubberyCreationForm&	ShrubberyCreationForm::operator=(ShrubberyCreationForm co
 //	OTHERS
 std::string	ShrubberyCreationForm::getTarget(void) const {
 	return (this->_target);
+}
+
+void		ShrubberyCreationForm::formAction(void) const {
+	std::ofstream	output;
+
+	output.open(this->_target + "_shrubbery", std::ofstream::out | std::ofstream::app);
+	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⡠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
+	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⡀⡀⠀⠀⡐⡀⠀⠀⠀⠠⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
+	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠀⠀⠢⡉⠄⠀⠐⠍⠂⠀⠀⢂⡄⠀⠀⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
+	output << "⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠻⠃⠸⠃⢠⠄⡀⠛⠀⡤⢀⠀⠛⠇⡀⡜⡠⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
+	output << "⠀⠀⠀⠀⠀⠀⢐⣄⠠⡀⠭⢠⠀⠁⠨⠼⠀⠀⠁⠥⠇⠀⡐⡁⠀⠡⡋⠄⢠⠀⢾⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀";
+	output << "⠀⠀⠀⢀⡀⠀⠈⠋⠃⠈⠈⠉⠐⢅⢲⠄⡘⡤⡰⣢⠐⡀⠷⠥⠀⠀⡠⠀⢦⡡⠙⢉⠔⣰⠂⠀⠀⠀⠀⠀⠀";
+	output << "⠀⠀⠀⠈⢜⠶⣱⠸⣷⡄⢠⡟⡄⠈⠑⠊⠀⠈⠒⠓⠀⢧⢀⢔⣩⠰⣍⢆⠣⠮⠁⠦⡟⠆⠀⠀⠀⠀⠀⠀⠀";
+	output << "⠈⠖⣦⢤⠄⠈⠑⡄⡬⣀⠘⢼⠻⢀⣤⢰⡀⠣⣫⢝⢦⢸⠪⢾⠒⡈⠾⢑⣠⠖⠴⣦⡔⡲⠂⡠⢶⠀⠀⠀⠀";
+	output << "⠀⠈⠒⠃⠃⢲⡤⡘⠩⠳⠅⠀⢐⣷⡎⠘⠯⠂⠈⢤⣅⣸⡁⡴⣫⡇⢠⡞⣡⣀⣬⡱⠌⠀⠰⡵⣿⠀⠀⠀⠀";
+	output << "⠀⠀⣀⣀⣀⠀⢩⣁⠸⣶⡆⡇⠈⠊⣁⠄⢛⣯⡳⠆⢠⣿⠀⠟⢳⣷⡟⡀⠻⠼⠖⠋⠀⠀⣀⠁⣥⢾⠀⠀⠀";
+	output << "⠀⠀⠈⠛⣗⠧⠀⣙⣃⣀⡀⢰⡀⣾⣿⠀⣀⠈⠉⣰⣿⣿⠶⠖⠛⠋⠸⣟⣟⡶⠂⢀⢀⣾⣭⠸⡝⡿⠀⠀⠀";
+	output << "⠀⣠⢖⡠⠀⠂⣩⣤⡌⠈⠙⢿⣷⡈⢠⣿⡏⠀⠀⣿⣿⠁⣀⠻⠟⠀⣠⡄⠀⢀⣶⣏⠘⠯⠟⠀⠀⣶⡶⣶⠆";
+	output << "⠾⠿⠛⠁⠠⠾⠿⠟⠁⣴⣶⡆⠹⣿⣮⡈⠀⠀⠰⣿⡏⠘⠛⠋⠀⣼⢿⡇⠀⠸⢟⠞⠀⣀⢔⣤⣤⣝⡋⠁⠀";
+	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠚⠛⠙⠀⠀⠈⠻⣿⣶⣦⣴⣿⡇⠀⠀⠀⠀⣘⣾⣥⣤⡤⠶⠞⣋⣄⡐⠻⠽⠊⠀⠀⠀";
+	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⢻⣿⣷⣄⣤⣶⠿⠋⠁⠀⢰⣽⣶⣄⠻⢿⡿⠶⠀⠀⠀⠀⠀";
+	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⡟⠁⠀⠀⠀⠀⠀⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀";
+	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
+	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
+	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
+	output << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠛⠛⠛⠓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
+	output.close();
+	return ;
 }

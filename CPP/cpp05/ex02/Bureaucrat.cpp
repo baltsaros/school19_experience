@@ -65,7 +65,7 @@ void	Bureaucrat::decrement(void) {
 	return ;
 }
 
-void	Bureaucrat::signForm(Form &f) {
+void	Bureaucrat::signForm(AForm &f) {
 	if (this->_grade <= f.getGradeSign())
 	{
 		std::cout << YLWB "Bureaucrat " << this->_name << NC " signed ";
@@ -78,6 +78,21 @@ void	Bureaucrat::signForm(Form &f) {
 		// std::cout << std::endl;
 	}
 	f.beSigned(*this);
+	return ;
+}
+
+void	Bureaucrat::executeForm(AForm const &f) {
+	if (f.execute(*this))
+	{
+		std::cout << YLWB "Bureaucrat " << this->_name << NC " signed ";
+		std::cout << CYNB "form " << f.getName() << NC "." << std::endl;
+	}
+	else
+	{
+		std::cout << YLWB "Bureaucrat " << this->_name << NC " coudn't ";
+		std::cout << "execute the form " CYNB << f.getName() << NC "." << std::endl;
+	}
+	return;
 }
 
 const char*	Bureaucrat::GradeTooHighException::what(void) const throw() {

@@ -9,10 +9,14 @@ AForm::AForm(void) :
 
 AForm::AForm(std::string name, int sign, int exec) :
 	_name(name), _gradeSign(sign), _gradeExec(exec), _signature(false) {
-	if (sign > 150 || exec > 150)
-		throw(GradeTooLowException());
-	else if (sign < 1 || exec < 1)
-		throw(GradeTooHighException());
+	if (sign > 150)
+		throw(GradeTooLowToSign());
+	else if (sign < 1)
+		throw(GradeTooHighToSign());
+	if (exec > 150)
+		throw(GradeTooLowToExec());
+	else if (exec < 1)
+		throw(GradeTooHighToExec());
 	// std::cout << CYNB "AForm " NC << this->_name;
 	// std::cout << CYNB " was created!" NC << std::endl;
 	return ;
@@ -62,27 +66,51 @@ bool	AForm::getSignature(void) const {
 	return (this->_signature);
 }
 
-bool	AForm::beSigned(Bureaucrat const &b)
-{
+bool	AForm::beSigned(Bureaucrat const &b){
 	if (b.getGrade() <= this->_gradeSign)
 	{
 		this->_signature = true;
 		return (this->_signature);
 	}
-	throw(GradeTooLowException());
+	throw(GradeTooLowToSign());
 	return (this->_signature);
 }
 
-const char*	AForm::GradeTooHighException::what(void) const throw() {
+bool	AForm::execute(Bureaucrat const &executor) const {
+	if (executor.getGrade() > this->_gradeExec)
+		throw(GradeTooLowToExec());
+	else if (!this->_signature)
+		throw(FormNotSigned());
+	else
+	{
+		this->formAction();
+		return (true);
+	}
+	return (false);
+}
+
+const char*	AForm::GradeTooHighToSign::what(void) const throw() {
 	return (REDL "Grade is too high to sign the form!" NC);
 }
 
-const char*	AForm::GradeTooLowException::what(void) const throw() {
+const char*	AForm::GradeTooLowToSign::what(void) const throw() {
 	return (REDL "Grade is too low to sign the form!" NC);
 }
 
+const char*	AForm::GradeTooHighToExec::what(void) const throw() {
+	return (REDL "Grade is too high to execute the form!" NC);
+}
+
+const char*	AForm::GradeTooLowToExec::what(void) const throw() {
+	return (REDL "Grade is too low to execute the form!" NC);
+}
+
+const char*	AForm::FormNotSigned::what(void) const throw() {
+	return (REDL "The form has not yet been signed!" NC);
+}
+
 std::ostream &	operator<<(std::ostream & o, AForm const & form) {
-	o << CYNB "AForm " << form.getName() << NC ": min grade to sign is ";
+	o << CYNB "Form " << form.getName() << NC ": min grade to sign is ";
 	o << form.getGradeSign() << ", min grade to execute is ";
 	o << form.getGradeExec() << ". ";
 	if (form.getSignature())
