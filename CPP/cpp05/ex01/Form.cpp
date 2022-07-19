@@ -9,10 +9,14 @@ Form::Form(void) :
 
 Form::Form(std::string name, int sign, int exec) :
 	_name(name), _gradeSign(sign), _gradeExec(exec), _signature(false) {
-	if (sign > 150 || exec > 150)
-		throw(GradeTooLowException());
-	else if (sign < 1 || exec < 1)
-		throw(GradeTooHighException());
+	if (sign > 150)
+		throw(GradeTooLowToSign());
+	else if (sign < 1)
+		throw(GradeTooHighToSign());
+	if (exec > 150)
+		throw(GradeTooLowToExec());
+	else if (exec < 1)
+		throw(GradeTooHighToExec());
 	// std::cout << CYNB "Form " NC << this->_name;
 	// std::cout << CYNB " was created!" NC << std::endl;
 	return ;
@@ -69,16 +73,24 @@ bool	Form::beSigned(Bureaucrat const &b)
 		this->_signature = true;
 		return (this->_signature);
 	}
-	throw(GradeTooLowException());
+	throw(GradeTooLowToSign());
 	return (this->_signature);
 }
 
-const char*	Form::GradeTooHighException::what(void) const throw() {
+const char*	Form::GradeTooHighToSign::what(void) const throw() {
 	return (REDL "Grade is too high to sign the form!" NC);
 }
 
-const char*	Form::GradeTooLowException::what(void) const throw() {
+const char*	Form::GradeTooLowToSign::what(void) const throw() {
 	return (REDL "Grade is too low to sign the form!" NC);
+}
+
+const char*	Form::GradeTooHighToExec::what(void) const throw() {
+	return (REDL "Grade is too high to execute the form!" NC);
+}
+
+const char*	Form::GradeTooLowToExec::what(void) const throw() {
+	return (REDL "Grade is too low to execute the form!" NC);
 }
 
 std::ostream &	operator<<(std::ostream & o, Form const & form) {

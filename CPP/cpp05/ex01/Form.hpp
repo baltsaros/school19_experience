@@ -25,11 +25,19 @@ class	Form {
 		bool				getSignature(void) const;
 		bool				beSigned(Bureaucrat const &b);
 
-		class GradeTooHighException: public std::exception {
+		class GradeTooHighToSign: public std::exception {
 				const char*	what(void) const throw();
 		};
 
-		class GradeTooLowException: public std::exception {
+		class GradeTooLowToSign: public std::exception {
+				const char*	what(void) const throw();
+		};
+
+		class GradeTooHighToExec: public std::exception {
+				const char*	what(void) const throw();
+		};
+
+		class GradeTooLowToExec: public std::exception {
 				const char*	what(void) const throw();
 		};
 };
