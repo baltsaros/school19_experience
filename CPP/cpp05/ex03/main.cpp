@@ -3,86 +3,150 @@
 #include "include/ShrubberyCreationForm.hpp"
 #include "include/RobotomyRequestForm.hpp"
 #include "include/PresidentialPardonForm.hpp"
+#include "include/Intern.hpp"
 
 int	main(void) {
 	std::cout << std::endl;
-	std::cout << "Case: ShrubberyCreationForm normal" << std::endl;
+	std::cout << "Case: correct form (Presidential Pardon)" << std::endl;
 	try {
-		ShrubberyCreationForm	shrub("home");
-		Bureaucrat				bur1("Jovanni", 3);
-		Bureaucrat				bur2("Tom", 13);
+		Intern		rayn;
+		AForm		*form;
 
-		std::cout << shrub;
+		Bureaucrat	bur1("Jovanni", 3);
+		Bureaucrat	bur2("Tom", 5);
+
+		form = rayn.makeForm("presidential pardon", "urmom");
 		std::cout << bur1;
 		std::cout << bur2;
-		bur1.signForm(shrub);
-		bur2.executeForm(shrub);
+		bur1.signForm(*form);
+		bur2.executeForm(*form);
+		delete form;
 	}
 	catch (std::exception& e){
 		std::cerr << e.what() << std::endl;
 	}
 	std::cout << std::endl;
 
-
-	std::cout << "Case: RobotomyRequestForm normal" << std::endl;
-	try {
-		RobotomyRequestForm		robotomy("Cat");
-		Bureaucrat				bur1("Sarah", 3);
-
-		std::cout << robotomy;
-		std::cout << bur1;
-		bur1.signForm(robotomy);
-		bur1.executeForm(robotomy);
-	}
-	catch (std::exception& e){
-		std::cerr << e.what() << std::endl;
-	}
 	std::cout << std::endl;
-
-
-	std::cout << "Case: PresidentialPardonForm too low to execute" << std::endl;
+	std::cout << "Case: correct form (Robotomy Request)" << std::endl;
 	try {
-		PresidentialPardonForm	form("Urmom");
-		Bureaucrat				bur1("Bev", 2);
-		Bureaucrat				bur2("Bath", 1);
+		Intern		rayn;
+		AForm		*form;
 
-		std::cout << form;
+		Bureaucrat	bur1("Jovanni", 3);
+		Bureaucrat	bur2("Tom", 5);
+
+		form = rayn.makeForm("robotomy request", "Bender");
 		std::cout << bur1;
 		std::cout << bur2;
-		bur1.signForm(form);
-		bur2.executeForm(form);
+		bur1.signForm(*form);
+		bur2.executeForm(*form);
+		delete form;
 	}
 	catch (std::exception& e){
 		std::cerr << e.what() << std::endl;
 	}
 	std::cout << std::endl;
 
-
-	std::cout << "Case: PresidentialPardonForm too low to sign" << std::endl;
+	std::cout << std::endl;
+	std::cout << "Case: correct form (ShrubberyCreation)" << std::endl;
 	try {
-		PresidentialPardonForm	form("Umom");
-		Bureaucrat				bur1("Bev", 28);
-		Bureaucrat				bur2("Bath", 1);
+		Intern		rayn;
+		AForm		*form;
 
-		std::cout << form;
+		Bureaucrat	bur1("Jovanni", 3);
+		Bureaucrat	bur2("Tom", 5);
+
+		form = rayn.makeForm("shrubbery creation", "Home");
 		std::cout << bur1;
 		std::cout << bur2;
-		bur1.signForm(form);
-		bur2.executeForm(form);
+		bur1.signForm(*form);
+		bur2.executeForm(*form);
+		delete form;
 	}
 	catch (std::exception& e){
 		std::cerr << e.what() << std::endl;
 	}
 	std::cout << std::endl;
 
-	std::cout << "Case: ShrubberyCreationForm, not signed" << std::endl;
+	std::cout << std::endl;
+	std::cout << "Case: correct form in uppercase" << std::endl;
 	try {
-		ShrubberyCreationForm	shrub("work");
-		Bureaucrat				bur("Sui", 3);
+		Intern		rayn;
+		AForm		*form;
 
-		std::cout << shrub;
-		std::cout << bur;
-		bur.executeForm(shrub);
+		Bureaucrat	bur1("Jovanni", 3);
+		Bureaucrat	bur2("Tom", 5);
+
+		form = rayn.makeForm("PRESIDENTIAL PARDON", "urmom");
+		std::cout << bur1;
+		std::cout << bur2;
+		bur1.signForm(*form);
+		bur2.executeForm(*form);
+		delete form;
+	}
+	catch (std::exception& e){
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
+	std::cout << std::endl;
+	std::cout << "Case: incorrect form" << std::endl;
+	try {
+		Intern		rayn;
+		AForm		*form;
+
+		Bureaucrat	bur1("Jovanni", 3);
+		Bureaucrat	bur2("Tom", 5);
+
+		form = rayn.makeForm("PRESIDENTIAL", "urmom");
+		std::cout << bur1;
+		std::cout << bur2;
+		bur1.signForm(*form);
+		bur2.executeForm(*form);
+		delete form;
+	}
+	catch (std::exception& e){
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
+	std::cout << std::endl;
+	std::cout << "Case: invalid target" << std::endl;
+	try {
+		Intern		rayn;
+		AForm		*form;
+
+		Bureaucrat	bur1("Jovanni", 3);
+		Bureaucrat	bur2("Tom", 5);
+
+		form = rayn.makeForm("PRESIDENTIAL", "");
+		std::cout << bur1;
+		std::cout << bur2;
+		bur1.signForm(*form);
+		bur2.executeForm(*form);
+		delete form;
+	}
+	catch (std::exception& e){
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
+	std::cout << std::endl;
+	std::cout << "Case: invalid form" << std::endl;
+	try {
+		Intern		rayn;
+		AForm		*form;
+
+		Bureaucrat	bur1("Jovanni", 3);
+		Bureaucrat	bur2("Tom", 5);
+
+		form = rayn.makeForm("", "urmom");
+		std::cout << bur1;
+		std::cout << bur2;
+		bur1.signForm(*form);
+		bur2.executeForm(*form);
+		delete form;
 	}
 	catch (std::exception& e){
 		std::cerr << e.what() << std::endl;
