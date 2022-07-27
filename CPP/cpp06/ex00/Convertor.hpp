@@ -21,9 +21,11 @@
 # define BLUEL "\e[34m"
 
 # include <iostream>
+# include <iomanip>
 # include <string>
 # include <exception>
 # include <stdio.h>
+# include <cmath>
 
 class	Convertor {
 	private:
@@ -51,7 +53,11 @@ class	Convertor {
 		const char*	what(void) const throw();
 		};
 
-		class ImpossibleToDisplay: public std::exception {
+		class NonDisplayable: public std::exception {
+		const char*	what(void) const throw();
+		};
+
+		class Impossible: public std::exception {
 		const char*	what(void) const throw();
 		};
 };
