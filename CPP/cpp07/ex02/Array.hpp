@@ -20,8 +20,6 @@
 # define BLUEB "\e[1;34m"
 # define BLUEL "\e[34m"
 
-# include <iostream>
-# include <string>
 # include <exception>
 
 template <typename T, typename U>
@@ -36,7 +34,7 @@ class	Array {
 		Array<T, U>(Array<T, U> const &src);
 		~Array<T, U>(void);
 
-		Array<T, U>&			operator=(Array<T, U> const &rhs);
+		Array<T, U>&	operator=(Array<T, U> const &rhs);
 		T&				operator[](U const i);
 		unsigned int	size(void) const;
 
@@ -44,5 +42,7 @@ class	Array {
 			const char*	what(void) const throw();
 		};
 };
+template <typename T, typename U>
+std::ostream &	operator<<(std::ostream & o, Array<T, U> & ar);
 
 #endif

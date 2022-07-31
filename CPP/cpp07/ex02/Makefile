@@ -10,7 +10,7 @@ NAME		= array
 
 # SRC_DIR	= srcs
 SRCS		= main.cpp \
-				Array.tpp
+				Array.cpp
 # SRCS		= ${notdir ${SRCS_F}}
 
 OBJ_DIR		= objs
