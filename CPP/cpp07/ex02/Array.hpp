@@ -21,6 +21,7 @@
 # define BLUEL "\e[34m"
 
 # include <exception>
+# include <iostream>
 
 template <typename T, typename U>
 class	Array {

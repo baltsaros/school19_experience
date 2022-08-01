@@ -9,8 +9,7 @@ C_RESET			=\033[0m
 NAME		= array
 
 # SRC_DIR	= srcs
-SRCS		= main.cpp \
-				Array.cpp
+SRCS		= main.cpp 
 # SRCS		= ${notdir ${SRCS_F}}
 
 OBJ_DIR		= objs
@@ -21,7 +20,7 @@ GCC			= c++
 RM			= rm -f
 RMR			= rm -rf
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
-INC			= -I Array.hpp
+INC			= -I Array.hpp Array.tpp
 
 ${OBJ_DIR}/%.o : %.cpp
 			@mkdir -p ${OBJ_DIR}
