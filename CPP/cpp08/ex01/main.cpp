@@ -156,7 +156,7 @@ int	main(void) {
 
 	srand(time(0));
 	for (size_t i = 0; i < 20000; i++) {
-		vct1.push_back(rand());
+		vct1.push_back(rand() % 256);
 	}
 	std::cout << "The container capacity is " << sp4.getCapacity() << std::endl;
 	std::cout << "The container size is " << sp4.getSize() << std::endl;
@@ -184,6 +184,20 @@ int	main(void) {
 		std::cout << sp4[0] << std::endl;
 		std::cout << "Its last element is ";
 		std::cout << sp4[14999] << std::endl;
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		std::cout << "Longest span: " << sp4.longestSpan();
+		std::cout << std::endl;
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		std::cout << "Shortest span: " << sp4.shortestSpan();
+		std::cout << std::endl;
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;
