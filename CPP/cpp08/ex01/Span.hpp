@@ -42,9 +42,12 @@ class	Span {
 		Span<T>&		operator=(Span<T> const &rhs);
 		T&				operator[](long const i);
 		void			addNumber(T num);
+		void			addNumber(typename std::vector<T>::iterator f,
+									typename std::vector<T>::iterator l);
 		T				shortestSpan(void);
 		T				longestSpan(void);
 		unsigned int	getSize(void);
+		unsigned int	getCapacity(void);
 
 		class noSpaceLeft: public std::exception {
 			const char*	what(void) const throw();

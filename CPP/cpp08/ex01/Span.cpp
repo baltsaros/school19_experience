@@ -57,6 +57,22 @@ void	Span<T>::addNumber(T num) {
 }
 
 template <typename T>
+void	Span<T>::addNumber(typename std::vector<T>::iterator first,
+							typename std::vector<T>::iterator last) {
+	if (this->_cntr.size() + 1 >= this->_N)
+		throw(noSpaceLeft());
+
+	unsigned int	size = std::distance(first, last);
+
+	for (unsigned int i = 0; i < size; ++i) {
+		this->_cntr.push_back(*(first + i));
+		if (this->_cntr.size() >= this->_N)
+			throw(noSpaceLeft());
+	}
+	return ;
+}
+
+template <typename T>
 T	Span<T>::shortestSpan(void) {
 	unsigned int	size = this->_cntr.size();
 
@@ -94,6 +110,11 @@ T	Span<T>::longestSpan(void) {
 template <typename T>
 unsigned int	Span<T>::getSize(void) {
 	return (this->_cntr.size());
+}
+
+template <typename T>
+unsigned int	Span<T>::getCapacity(void) {
+	return (this->_N);
 }
 
 template <typename T>
