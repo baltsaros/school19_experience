@@ -56,5 +56,49 @@ int	main(void) {
 		std::cerr << e.what() << std::endl;
 	}
 	std::cout << std::endl;
+	std::cout << YLWB "+++ Testing max span +++\n" NC;
+	try {
+		std::cout << "Longest span: " << sp1.longestSpan();
+		std::cout << std::endl;
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << YLWB "+++ Testing min span +++\n" NC;
+	try {
+		std::cout << "Shortest span: " << sp1.shortestSpan();
+		std::cout << std::endl;
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
+	Span<int>	sp2(5);
+	sp2.addNumber(-100);
+	sp2.addNumber(-3);
+	sp2.addNumber(-13);
+	sp2.addNumber(-43);
+	sp2.addNumber(10);
+	std::cout << sp2;
+	std::cout << YLWB "+++ Testing min span with negative numbers +++\n" NC;
+	try {
+		std::cout << "Shortest span: " << sp2.shortestSpan();
+		std::cout << std::endl;
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << YLWB "+++ Testing maxn span with negative numbers +++\n" NC;
+	try {
+		std::cout << "Shortest span: " << sp2.longestSpan();
+		std::cout << std::endl;
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << std::endl;
 	return (0);
 }

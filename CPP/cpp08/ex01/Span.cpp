@@ -64,7 +64,18 @@ T	Span<T>::shortestSpan(void) {
 		throw(emptyCntr());
 	else if (size == 1)
 		throw(noSpan());
-	return (*this->_cntr.begin());
+
+	T				min;
+	std::vector<T>	tmp = this->_cntr;
+
+	std::sort (tmp.begin(), tmp.end());
+	size -= 1;
+	min = tmp[size] - tmp[size - 1];
+	for (unsigned i = size; i > 0; i--) {
+		if (tmp[i] - tmp[i - 1] < min)
+			min = tmp[i] - tmp[i - 1];
+	}
+	return (min);
 }
 
 template <typename T>
