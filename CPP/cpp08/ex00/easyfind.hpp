@@ -25,7 +25,7 @@
 # include <exception>
 
 template <typename T>
-typename T::iterator	easyfind(T &containter, int n);
+typename T::iterator	easyfind(T &container, int n);
 
 class nothingFound: public std::exception {
 	const char*	what(void) const throw();
