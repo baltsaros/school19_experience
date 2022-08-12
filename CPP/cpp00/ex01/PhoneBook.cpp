@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/12 10:11:25 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/08/12 10:19:34 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 
@@ -15,7 +27,7 @@ static std::string	format_str(std::string str)
 
 void	PhoneBook::fillContact(size_t i){
 	this->_pb[i].add();
-	std::cout << "The contact was added!" << std::endl;
+	std::cout << GRNB "The contact was added!" NC << std::endl;
 	std::cout << "Type a command (ADD, SEARCH or EXIT):" << std::endl;
 }
 

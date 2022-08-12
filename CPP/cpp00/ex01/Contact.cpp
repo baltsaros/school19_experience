@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/12 10:11:11 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/08/12 10:20:44 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Contact.hpp"
 
 static std::string	check_field(std::string str)
 {
 	while (str.length() == 0){
-		std::cout << "The field cannot be empty! Type something!" << std::endl;
+		std::cout << REDL "The field cannot be empty! Type something!" NC << std::endl;
 		std::getline(std::cin, str);
 	}
 	return (str);

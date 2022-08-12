@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/12 10:11:19 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/08/12 10:20:08 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 
@@ -12,7 +24,7 @@ void	welcome_msg(void)
 
 void	error_msg(void)
 {
-	std::cout << "DESTRUCTION IN..." << std::endl;
+	std::cout << REDB "DESTRUCTION IN..." << std::endl;
 	std::cout << "3" << std::endl;
 	usleep(1000000);
 	std::cout << "2" << std::endl;
@@ -25,7 +37,7 @@ void	error_msg(void)
 	usleep(1000000);
 	std::cout << "Bam!" << std::endl;
 	usleep(1000000);
-	std::cout << "Just kidding (:: Choose a proper command please:" << std::endl;
+	std::cout << NC "Just kidding (:: Choose a proper command please:" << std::endl;
 	std::cout << "1) ADD to add a new contact;" << std::endl;
 	std::cout << "2) SEARCH to search for a contact;" << std::endl;
 	std::cout << "3) EXIT to exit;" << std::endl;
@@ -48,10 +60,10 @@ void	search_contact(PhoneBook phonebook, int i)
 			break ;
 		}
 		else
-			std::cout << "Wrong input! Try again." << std::endl;
+			std::cout << REDL "Wrong input! Try again." NC << std::endl;
 	}
 	if (i == 0)
-		std::cout << "The PhoneBook is empty! Fill it with ADD command." << std::endl;
+		std::cout << REDL "The PhoneBook is empty! Fill it with ADD command." NC << std::endl;
 
 }
 
@@ -76,7 +88,7 @@ int	main(int argc, char *argv[]){
 			search_contact(phonebook, i);
 		}
 		else if (input == "EXIT"){
-			std::cout << "Bye!" << std::endl;
+			std::cout << GRNB "Bye!" NC << std::endl;
 			return (0);
 		}
 		else
