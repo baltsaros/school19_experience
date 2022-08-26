@@ -1,8 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/26 09:43:31 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/08/26 10:34:29 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Harl.hpp"
 
 #define NC "\e[0m"
 #define RED "\e[0;31m"
 #define REDB "\e[41m"
+#define YLW "\e[0;33m"
+#define YLWB "\e[1;33m"
 
 int	main(int argc, char *argv[]){
 	Harl	customer;
@@ -13,15 +27,14 @@ int	main(int argc, char *argv[]){
 		return (-1);
 	}
 
-	std::cout << "TESTING!" << std::endl;
+	std::cout << YLWB "TESTING!" NC << std::endl;
 	std::cout << std::endl;
 
-	std::cout << "Your input: " << argv[1] << std::endl;
+	std::cout << YLW "Your input: " NC << argv[1] << std::endl;
 	customer.complain(argv[1]);
 	std::cout << std::endl;
 	
-	std::cout << "Standard levels." << std::endl;
-	std::cout << std::endl;
+	std::cout << YLWB "Standard levels." NC << std::endl;
 
 	std::cout << "Level: " << RED "debug" NC << std::endl;
 	customer.complain("DEBUG");

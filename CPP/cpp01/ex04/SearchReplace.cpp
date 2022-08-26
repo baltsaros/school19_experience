@@ -1,8 +1,16 @@
-#include "SearchReplace.hpp"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   SearchReplace.cpp                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/26 09:43:01 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/08/26 10:26:49 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define NC "\e[0m"
-#define RED "\e[0;31m"
-#define GRN "\e[0;32m"
+#include "SearchReplace.hpp"
 
 SearchReplace::SearchReplace(std::string filename, std::string s1, std::string s2):
 	_filename(filename), _s1(s1), _s2(s2){
@@ -20,13 +28,11 @@ int	SearchReplace::ftReplace(std::string *read){
 
 	if (!read || (*read).size() == std::string::npos)
 		return (-4);
-	found = 1;
+	found = (*read).find(this->_s1);
 	while (found != std::string::npos){
-		found = (*read).find(this->_s1);
-		if (found == std::string::npos)
-			return (0);
 		(*read).erase(found, this->_s1.length());
 		(*read).insert(found, this->_s2);
+		found = (*read).find(this->_s1);
 	}
 	return (0);
 }
@@ -43,6 +49,8 @@ int	SearchReplace::openReplace(void){
 	if (!input.is_open())
 		return (-3);
 	output.open((this->_filename + ".replace").c_str(), std::fstream::out | std::fstream::trunc);
+	if (!output.is_open())
+		return (-3);
 	while (std::getline(input, read)){
 		ret = this->ftReplace(&read);
 		if (ret){
