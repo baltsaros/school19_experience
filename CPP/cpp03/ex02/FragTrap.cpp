@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 15:49:46 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/26 15:49:47 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/29 11:07:37 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 FragTrap::FragTrap(void) : ClapTrap() {
 	this->_name = "default";
 	this->_hp = 100;
-	this->_ep = 50;
+	this->_ep = 100;
 	this->_ad = 30;
 	std::cout << BLUEB "FragTrap " NC << _name;
 	std::cout << BLUEB " jumps out of a barrel" NC << std::endl;
@@ -26,7 +26,7 @@ FragTrap::FragTrap(void) : ClapTrap() {
 FragTrap::FragTrap(std::string name) : ClapTrap(name) {
 	this->_name = name;
 	this->_hp = 100;
-	this->_ep = 50;
+	this->_ep = 100;
 	this->_ad = 30;
 	std::cout << BLUEB "FragTrap " NC << name;
 	std::cout << BLUEB " jumps out of a barrel" NC << std::endl;

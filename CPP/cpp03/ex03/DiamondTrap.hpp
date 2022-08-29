@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 15:50:49 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/26 15:50:50 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/29 11:10:34 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 class	DiamondTrap : public ScavTrap, public FragTrap {
 	private:
-		std::string	_name;
+		std::string		_name;
 
 	public:
 		DiamondTrap(void);
@@ -30,7 +30,7 @@ class	DiamondTrap : public ScavTrap, public FragTrap {
 		~DiamondTrap(void);
 
 		DiamondTrap&	operator=(DiamondTrap const &rhs);
-		void		whoAmI(void);
+		void			whoAmI(void);
 
 		using ScavTrap::_ep;
 		using ScavTrap::attack;
