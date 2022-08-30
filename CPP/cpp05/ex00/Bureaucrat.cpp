@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/30 10:52:53 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/08/30 11:02:04 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 
 //	CONSTRUCTORS
@@ -11,8 +23,8 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 		throw(GradeTooLowException());
 	else if (grade < 1)
 		throw(GradeTooHighException());
-	std::cout << YLWB "Bureaucrat " NC << this->_name;
-	std::cout << YLWB " was born!" NC << std::endl;
+	std::cout << YLWB "Bureaucrat " << this->_name;
+	std::cout << " was born!" NC << std::endl;
 	return ;
 }
 

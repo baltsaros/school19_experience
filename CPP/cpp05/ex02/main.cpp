@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/30 10:53:56 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/08/30 11:11:42 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include/Bureaucrat.hpp"
 #include "include/AForm.hpp"
 #include "include/ShrubberyCreationForm.hpp"
@@ -44,7 +56,7 @@ int	main(void) {
 	try {
 		PresidentialPardonForm	form("Urmom");
 		Bureaucrat				bur1("Bev", 2);
-		Bureaucrat				bur2("Bath", 1);
+		Bureaucrat				bur2("Bath", 6);
 
 		std::cout << form;
 		std::cout << bur1;

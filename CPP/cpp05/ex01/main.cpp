@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/30 10:54:05 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/08/30 11:05:42 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
 int	main(void) {
 	std::cout << std::endl;
-	std::cout << "Case: normal" << std::endl;
+	std::cout << "Case: normal rank" << std::endl;
 	try {
 		Form	form1("Un", 45, 70);
 
@@ -15,7 +27,7 @@ int	main(void) {
 	std::cout << std::endl;
 
 
-	std::cout << "Case: too low" << std::endl;
+	std::cout << "Case: too low rank" << std::endl;
 	try {
 		Form	form2("Deux", 150, 170);
 
@@ -27,7 +39,7 @@ int	main(void) {
 	std::cout << std::endl;
 
 
-	std::cout << "Case: too high" << std::endl;
+	std::cout << "Case: too high rank" << std::endl;
 	try {
 		Form	form3("Trois", -11, 1);
 
@@ -71,7 +83,7 @@ int	main(void) {
 	std::cout << std::endl;
 
 
-	std::cout << "Case: similar bureaucrat and  form" << std::endl;
+	std::cout << "Case: similar bureaucrat and form" << std::endl;
 	try {
 		Bureaucrat	bur("TinTin", 35);
 		Form		form3("Six", 35, 75);
