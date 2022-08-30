@@ -6,15 +6,13 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:35:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/29 16:35:46 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:55:22 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WRONGCAT_HPP
 # define WRONGCAT_HPP
 
-# include <iostream>
-# include <string>
 # include "WrongAnimal.hpp"
 
 class	WrongCat: public	WrongAnimal {

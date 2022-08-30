@@ -6,15 +6,13 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:36:37 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/29 16:36:38 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:54:39 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CURE_HPP
 # define CURE_HPP
 
-# include <iostream>
-# include <string>
 # include "AMateria.hpp"
 
 class	Cure : public AMateria {

@@ -6,15 +6,13 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:35:58 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/29 16:35:59 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:55:17 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DOG_HPP
 # define DOG_HPP
 
-# include <iostream>
-# include <string>
 # include "AAnimal.hpp"
 # include "Brain.hpp"
 

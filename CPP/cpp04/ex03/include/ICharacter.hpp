@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:36:33 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/29 16:36:34 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:54:46 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@
 # define BLUEB "\e[1;34m"
 # define BLUEL "\e[34m"
 
-# include <iostream>
-# include <string>
 # include "AMateria.hpp"
 
 class AMateria;
