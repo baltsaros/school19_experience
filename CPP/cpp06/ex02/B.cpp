@@ -1,3 +1,0 @@
-#include "B.hpp"
-
-//	OTHERS
