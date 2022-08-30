@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:34:33 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/29 16:41:11 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:45:41 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(void) {
 	std::cout << std::endl;
 
 	const WrongAnimal*	wa = new WrongAnimal();
-	const WrongCat*		wc = new WrongCat();
+	const WrongAnimal*		wc = new WrongCat();
 	std::cout << wa->getType() << " " << std::endl;
 	std::cout << wc->getType() << " " << std::endl;
 	wa->makeSound();

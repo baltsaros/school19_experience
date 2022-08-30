@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:34:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/29 16:34:46 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:46:17 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ WrongCat&	WrongCat::operator=(WrongCat const &rhs) {
 	return (*this);
 }
 
-// void	WrongCat::makeSound(void) const {
-// 	std::cout << PRPL "WrongCat" NC << " barks...";
-// 	std::cout << std::endl;
-// 	return ;
-// }
+void	WrongCat::makeSound(void) const {
+	std::cout << PRPL "WrongCat" NC << " barks...";
+	std::cout << std::endl;
+	return ;
+}
