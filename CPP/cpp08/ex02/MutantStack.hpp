@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   MutantStack.hpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/01 11:04:09 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/09/01 11:04:34 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MUTANTSTACK_HPP
 # define MUTANTSTACK_HPP
 
@@ -53,21 +65,3 @@ class	MutantStack: public std::stack<T> {
 };
 
 #endif
-
-/*
-template<typename T, typename Container = std::deque<T>>
-class iterable_stack
-: public std::stack<T, Container>
-{
-    using std::stack<T, Container>::c;
-
-public:
-
-    // expose just the iterators of the underlying container
-    auto begin() { return std::begin(c); }
-    auto end() { return std::end(c); }
-
-    auto begin() const { return std::begin(c); }
-    auto end() const { return std::end(c); }
-};
-*/

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/01 11:03:57 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/09/01 14:18:12 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include "Span.cpp"
 #include <stdlib.h>
@@ -134,7 +146,14 @@ int	main(void) {
 
 	std::cout << YLWB "+++ Testing insetion with range iterators +++\n" NC;
 	Span<float>			sp3(5);
-	std::vector<float>	vct = {1.1f, 2.2f, 3.3f, 4.4f, 5.5f, 6.6f};
+	std::vector<float>	vct;
+	float				f;
+
+	f = 1.1;
+	for (size_t i = 0; i < 5; i++) {
+		vct.push_back(f);
+		f += 1.1;
+	}
 
 	std::cout << "The container before: " << sp3;
 	try {

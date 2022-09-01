@@ -20,7 +20,7 @@ OBJS		= ${addprefix ${OBJ_DIR}/,${OBJS_F}}
 GCC			= c++
 RM			= rm -f
 RMR			= rm -rf
-CPPFLAGS	= -Wall -Wextra -Werror
+CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 INC			= -I Span.hpp
 
 ${OBJ_DIR}/%.o : %.cpp
