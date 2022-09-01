@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 10:19:31 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/09/01 10:19:32 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/09/01 14:11:43 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,29 @@ int	main(void) {
 	std::cout << std::endl;
 	return (0);
 }
+
+// class Awesome
+// {
+// 	public:
+// 		Awesome( void ) : _n( 42 ) { return; }
+// 		int get( void ) const { return this->_n; }
+// 	private:
+// 		int _n;
+// };
+// std::ostream&	operator<<(std::ostream& o, Awesome const & bob) {
+// 	o << YLWB "Awesome: " NC << bob.get() << std::endl;
+// 	return (o);
+// }
+
+// template <typename T>
+// void print( T x ) { std::cout << x << std::endl; return; }
+
+// int main() {
+// 	int tab[] = { 0, 1, 2, 3, 4 }; // );
+// 	Awesome*	as = new Awesome [5];
+	
+// 	iter<int, size_t>( tab, 5, &print );
+// 	iter<Awesome, size_t>( as, 5, &print );
+
+// 	return 0;
+// }

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 10:19:20 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/09/01 10:19:21 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/09/01 14:12:47 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,3 +93,39 @@ int	main(void) {
 
 	return (0);
 }
+
+// class Awesome
+// {
+// 	private:
+// 		int	_n;
+// 	public:
+// 		Awesome(void) : _n(0) {}
+// 		Awesome( int n ) : _n( n ) {}
+// 		Awesome & operator= (Awesome & a) { _n = a._n; return *this; }
+// 		bool operator==( Awesome const & rhs ) const { return (this->_n == rhs._n); }
+// 		bool operator!=( Awesome const & rhs ) const{ return (this->_n != rhs._n); }
+// 		bool operator>( Awesome const & rhs ) const { return (this->_n > rhs._n); }
+// 		bool operator<( Awesome const & rhs) const { return(this->_n < rhs._n); }
+// 		bool operator>=( Awesome const & rhs ) const { return (this->_n >= rhs._n); }
+// 		bool operator<=( Awesome const & rhs ) const { return (this->_n <= rhs._n); }
+// 		int get_n() const { return _n; }
+// };
+
+// std::ostream&	operator<<(std::ostream& o, Awesome const & bob) {
+// 	o << YLWB "Awesome: " NC << bob.get_n() << std::endl;
+// 	return (o);
+// }
+
+// int	main(void) {
+// 	Awesome	as(10);
+// 	Awesome	bs(15);
+
+// 	std::cout << as;
+// 	std::cout << bs;
+
+// 	swap<Awesome>(as, bs);
+	
+// 	std::cout << as;
+// 	std::cout << bs;
+// 	return (0);
+// }
