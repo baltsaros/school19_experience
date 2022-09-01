@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/01 10:19:43 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/09/01 10:31:27 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
@@ -50,7 +62,7 @@ int main(int, char**)
 	{
 		numbers[i] = rand();
 	}
-	delete [] mirror;//
+	delete [] mirror;
 	std::cout << std::endl;
 
 	std::cout << YLWB "+++ More tests +++" NC << std::endl;
