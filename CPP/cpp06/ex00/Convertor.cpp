@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:22:28 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/09/01 09:19:52 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/09/01 12:39:53 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	Convertor::detectType(void) {
 	if (_input.length() == 1 && isalpha(_input[0]))
 		_c = static_cast<char>(_input[0]);
 	else if (isdigit(_input[0]) || (_input[0] == '-' && isdigit(_input[1]))) {
-		if (_input.find(".") && _input.find(".") != -1) {
-			if (_input.find("f") && _input.find("f") != -1)
+		if (_input.find(".") && _input.find(".") != std::string::npos) {
+			if (_input.find("f") && _input.find("f") != std::string::npos)
 				sscanf(_input.c_str(), "%f", &_f);
 			else
 				sscanf(_input.c_str(), "%lf", &_d);
