@@ -1,6 +1,23 @@
 #include "microshell.h"
 #include <stdio.h>
 
+void	ft_cd(t_input *data, t_cmd *cmd)
+{
+	if (cmd->clen != 2)
+	{
+		error_msg("error: cd: bad arguments", NULL);
+		free_all(data);
+		exit(1);
+	}
+	if (chdir(cmd->cmds[1]))
+	{
+		error_msg("error: cd: cannot change directory to", cmd->cmds[1]);
+		free_all(data);
+		exit(1);
+	}
+	return (0);
+}
+
 void	free_all(t_input *data)
 {
 	write(2, "FREEEEEE\n", 9);
@@ -72,6 +89,7 @@ int	main(int argc, char *argv[], char *envp[])
 		return (-1);
 	}
 	count_cmds(&data, argv);
+
 	printf("ncmd is %ld\n", data.ncmd);
 	return (0);
 }

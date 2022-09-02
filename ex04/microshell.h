@@ -12,6 +12,9 @@ typedef struct s_cmd
 	char	*cmds;
 	int		in;
 	int		out;
+	int		pid;
+	int		fd[2];
+	int		clen;
 }	t_cmd;
 
 typedef struct s_input
