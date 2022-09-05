@@ -234,6 +234,11 @@ void	execute_cmds(t_input *data, char *envp[], t_cmd *ctab)
 	// write(2, "cmd: ", 5);
 	// write(2, ctab->cmds[0], ft_strlen(ctab->cmds[0]));
 	// write(2, "\n", 1);
+	if (!strcmp(ctab->cmds[0], "cd"))
+	{
+		ft_cd(data, ctab);
+		return ;
+	}
 	if (ctab->is_pipe == 1)
 		error_check(data, pipe(ctab->fd));
 	ctab->pid = fork();
