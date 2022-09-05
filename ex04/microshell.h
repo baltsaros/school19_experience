@@ -9,12 +9,14 @@
 
 typedef struct s_cmd
 {
-	char	*cmds;
+	char	**cmds;
 	int		in;
 	int		out;
 	int		pid;
 	int		fd[2];
 	int		clen;
+	int		is_pipe;
+	int		is_semicol;
 }	t_cmd;
 
 typedef struct s_input
