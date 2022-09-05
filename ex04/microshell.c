@@ -3,9 +3,17 @@
 
 void	free_all(t_input *data)
 {
+	size_t	i;
 	write(2, "FREEEEEE\n", 9);
 	if (data->ctab)
+	{
+		while (i < data->ncmd)
+		{
+			free(data->ctab[i].cmds);
+			++i;
+		}
 		free(data->ctab);
+	}
 }
 
 size_t	ft_strlen(const char *str)
@@ -157,9 +165,6 @@ void	init_struct(t_input *data, char *argv[])
 		if (!strcmp(argv[i], "|"))
 		{
 			data->ctab[j].is_pipe = 1;
-			error_check(data, pipe(data->ctab[j].fd));
-			error_check(data, dup2(data->ctab[j].fd[0], 0));
-			error_check(data, dup2(data->ctab[j].fd[1], 1));
 			j++;
 			i++;
 			data->ctab[j].clen = 0;
@@ -226,48 +231,37 @@ void	execute_cmds(t_input *data, char *envp[], t_cmd *ctab)
 	int		ret;
 
 	i = 0;
-	write(2, "cmd: ", 5);
-	write(2, ctab->cmds[0], ft_strlen(ctab->cmds[0]));
-	write(2, "\n", 1);
-	// if (ctab->is_pipe == 1)
-	// {
-	// 	printf("pipe\n");
-	// 	error_check(data, pipe(ctab->fd));
-	// 	ctab->pid = fork();
-	// 	error_check(data, ctab->pid);
-	// 	if (ctab->pid == 0)
-	// 	{
-	// 		error_check(data, dup2(ctab->fd[1], 1));
-	// 		close(ctab->fd[1]);
-	// 		close(ctab->fd[0]);
-	// 		execve(ctab->cmds[0], ctab->cmds, envp);
-	// 	}
-	// 	else
-	// 	{
-	// 		waitpid(ctab->pid, NULL, 0);
-	// 		error_check(data, dup2(ctab->fd[0], 0));
-	// 		close(ctab->fd[1]);
-	// 		close(ctab->fd[0]);
-	// 	}
-	// }
+	// write(2, "cmd: ", 5);
+	// write(2, ctab->cmds[0], ft_strlen(ctab->cmds[0]));
+	// write(2, "\n", 1);
+	if (ctab->is_pipe == 1)
+		error_check(data, pipe(ctab->fd));
 	ctab->pid = fork();
 	error_check(data, ctab->pid);
 	if (ctab->pid == 0)
 	{
 		if (ctab->is_pipe == 1)
+		{
+			error_check(data, dup2(ctab->fd[1], 1));
 			close(ctab->fd[1]);
+			close(ctab->fd[0]);
+		}
 		execve(ctab->cmds[0], ctab->cmds, envp);
 		{
-			error_msg("error: cannot execute ", ctab->cmds[0]);
+			error_msg("error: cannot execute", ctab->cmds[0]);
 			free_all(data);
-			exit(1);
+			exit(126);
 		}
 	}
 	else
 	{
 		waitpid(ctab->pid, NULL, 0);
 		if (ctab->is_pipe == 1)
+		{
+			error_check(data, dup2(ctab->fd[0], 0));
 			close(ctab->fd[0]);
+			close(ctab->fd[1]);
+		}
 	}
 }
 
@@ -285,12 +279,10 @@ int	main(int argc, char *argv[], char *envp[])
 	init_struct(&data, argv + 1);
 	create_cmds(&data, argv + 1);
 	i = 0;
-	printf("ncmd: %ld\n", data.ncmd);
 	while (i < data.ncmd)
 	{
 		execute_cmds(&data, envp, &data.ctab[i]);
 		++i;
 	}
-	// write(2, "here\n", 5);
 	return (0);
 }
