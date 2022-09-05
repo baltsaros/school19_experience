@@ -35,6 +35,16 @@ void	error_msg(char *msg, char *arg)
 	write(2, "\n", 1);
 }
 
+void	error_check(t_input *data, int	param)
+{
+	if (param < 0)
+	{
+		error_msg("error: fatal", NULL);
+		free_all(data);
+		exit(1);
+	}
+}
+
 void	ft_cd(t_input *data, t_cmd *cmd)
 {
 	if (cmd->clen != 2)
@@ -147,6 +157,9 @@ void	init_struct(t_input *data, char *argv[])
 		if (!strcmp(argv[i], "|"))
 		{
 			data->ctab[j].is_pipe = 1;
+			error_check(data, pipe(data->ctab[j].fd));
+			error_check(data, dup2(data->ctab[j].fd[0], 0));
+			error_check(data, dup2(data->ctab[j].fd[1], 1));
 			j++;
 			i++;
 			data->ctab[j].clen = 0;
@@ -189,22 +202,22 @@ void	create_cmds(t_input *data, char *argv[])
 			j++;
 			i++;
 			k = 0;
-			printf("\n");
+			// printf("\n");
 		}
 		else if (!strcmp(argv[i], ";"))
 		{
 			data->ctab[j].is_semicol = 1;
 			j++;
 			i++;
-			printf("\n");
+			// printf("\n");
 			k = 0;
 		}
 		data->ctab[j].cmds[k] = argv[i];
-		printf("%s ", data->ctab[j].cmds[k]);
+		// printf("%s ", data->ctab[j].cmds[k]);
 		k++;
 		i++;
 	}
-	printf("\n");
+	// printf("\n");
 }
 
 void	execute_cmds(t_input *data, char *envp[], t_cmd *ctab)
@@ -213,26 +226,48 @@ void	execute_cmds(t_input *data, char *envp[], t_cmd *ctab)
 	int		ret;
 
 	i = 0;
-	if (ctab->is_pipe == 1)
+	write(2, "cmd: ", 5);
+	write(2, ctab->cmds[0], ft_strlen(ctab->cmds[0]));
+	write(2, "\n", 1);
+	// if (ctab->is_pipe == 1)
+	// {
+	// 	printf("pipe\n");
+	// 	error_check(data, pipe(ctab->fd));
+	// 	ctab->pid = fork();
+	// 	error_check(data, ctab->pid);
+	// 	if (ctab->pid == 0)
+	// 	{
+	// 		error_check(data, dup2(ctab->fd[1], 1));
+	// 		close(ctab->fd[1]);
+	// 		close(ctab->fd[0]);
+	// 		execve(ctab->cmds[0], ctab->cmds, envp);
+	// 	}
+	// 	else
+	// 	{
+	// 		waitpid(ctab->pid, NULL, 0);
+	// 		error_check(data, dup2(ctab->fd[0], 0));
+	// 		close(ctab->fd[1]);
+	// 		close(ctab->fd[0]);
+	// 	}
+	// }
+	ctab->pid = fork();
+	error_check(data, ctab->pid);
+	if (ctab->pid == 0)
 	{
-		ret = pipe(ctab->fd);
-		if (ret < 0)
+		if (ctab->is_pipe == 1)
+			close(ctab->fd[1]);
+		execve(ctab->cmds[0], ctab->cmds, envp);
 		{
-			error_msg("error: fatal", NULL);
+			error_msg("error: cannot execute ", ctab->cmds[0]);
 			free_all(data);
 			exit(1);
 		}
-		ctab->pid = fork();
-		if (ctab->pid < 0)
-		{
-			error_msg("error: fatal", NULL);
-			free_all(data);
-			exit(1);
-		}
-		else if (ctab->pid == 0)
-		{
-			
-		}
+	}
+	else
+	{
+		waitpid(ctab->pid, NULL, 0);
+		if (ctab->is_pipe == 1)
+			close(ctab->fd[0]);
 	}
 }
 
@@ -250,9 +285,12 @@ int	main(int argc, char *argv[], char *envp[])
 	init_struct(&data, argv + 1);
 	create_cmds(&data, argv + 1);
 	i = 0;
+	printf("ncmd: %ld\n", data.ncmd);
 	while (i < data.ncmd)
 	{
 		execute_cmds(&data, envp, &data.ctab[i]);
+		++i;
 	}
+	// write(2, "here\n", 5);
 	return (0);
 }
