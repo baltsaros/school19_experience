@@ -237,5 +237,6 @@ int	main(int argc, char *argv[], char *envp[])
 		execute_cmds(&data, envp, &data.ctab[i]);
 		++i;
 	}
+	free_all(&data);
 	return (0);
 }
