@@ -4,7 +4,8 @@
 void	free_all(t_input *data)
 {
 	size_t	i;
-	write(2, "FREEEEEE\n", 9);
+
+	i = 0;
 	if (data->ctab)
 	{
 		while (i < data->ncmd)
@@ -69,22 +70,6 @@ void	ft_cd(t_input *data, t_cmd *cmd)
 	}
 }
 
-int	check_charset(char c, char *str)
-{
-	size_t	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (1);
-		++i;
-	}
-	return (0);
-}
-
 void	*ft_malloc(t_input *data, size_t n)
 {
 	void	*ptr;
@@ -97,42 +82,6 @@ void	*ft_malloc(t_input *data, size_t n)
 		exit(1);
 	}
 	return (ptr);
-}
-
-char	*ft_strndup(t_input *data, char *str, size_t n)
-{
-	size_t	i;
-	char	*tmp;
-
-	if (!str)
-		return (NULL);
-	i = 0;
-	tmp = ft_malloc(data, n + 1);
-	while (i < n)
-	{
-		tmp[i] = str[i];
-		i++;
-	}
-	tmp[i] = '\0';
-	return (tmp);
-}
-
-char	*ft_strdup(t_input *data, char *str)
-{
-	size_t	i;
-	char	*tmp;
-
-	if (!str)
-		return (NULL);
-	i = 0;
-	tmp = ft_malloc(data, ft_strlen(str) + 1);
-	while (str[i])
-	{
-		tmp[i] = str[i];
-		++i;
-	}
-	tmp[i] = '\0';
-	return (tmp);
 }
 
 void	count_cmds(t_input *data, char *argv[])
@@ -148,14 +97,12 @@ void	count_cmds(t_input *data, char *argv[])
 		++i;
 	}
 	data->ctab = ft_malloc(data, sizeof(t_cmd) * data->ncmd);
-	// printf("ncmd is %ld\n", data->ncmd);
 }
 
 void	init_struct(t_input *data, char *argv[])
 {
 	size_t	j;
 	size_t	i;
-	size_t	k;
 
 	j = 0;
 	i = 0;
@@ -176,6 +123,8 @@ void	init_struct(t_input *data, char *argv[])
 			i++;
 			data->ctab[j].clen = 0;
 		}
+		if (!argv[i])
+			break ;
 		data->ctab[j].clen++;
 		data->ctab[j].is_pipe = 0;
 		data->ctab[j].is_semicol = 0;
@@ -207,29 +156,28 @@ void	create_cmds(t_input *data, char *argv[])
 			j++;
 			i++;
 			k = 0;
-			// printf("\n");
 		}
 		else if (!strcmp(argv[i], ";"))
 		{
 			data->ctab[j].is_semicol = 1;
 			j++;
 			i++;
-			// printf("\n");
 			k = 0;
 		}
+		if (!argv[i])
+			break ;
 		data->ctab[j].cmds[k] = argv[i];
-		// printf("%s ", data->ctab[j].cmds[k]);
 		k++;
 		i++;
 	}
-	// printf("\n");
 }
 
 void	execute_cmds(t_input *data, char *envp[], t_cmd *ctab)
 {
 	size_t	i;
-	int		ret;
 
+	if (ctab->clen == 0)
+		error_check(data, -1);
 	i = 0;
 	// write(2, "cmd: ", 5);
 	// write(2, ctab->cmds[0], ft_strlen(ctab->cmds[0]));
