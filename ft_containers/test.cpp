@@ -92,45 +92,69 @@ int	main(void) {
 	// }
 
 	// ft_vector: capacity
+	// {
+	// 	std::vector<int>	v1(4, 100);
+	// 	ft::vector<int>		v2(4, 100);
+	// 	std::vector<int>	v3;
+	// 	ft::vector<int>		v4;
+
+	// 	std::cout << "std: v1 empty? " << v1.empty() << std::endl;
+	// 	std::cout << "ft: v2 empty? " << v2.empty() << std::endl;
+	// 	std::cout << "std: v3 empty? " << v3.empty() << std::endl;
+	// 	std::cout << "ft: v4 empty? " << v4.empty() << std::endl;
+
+	// 	std::cout << "std: v1.size(): " << v1.size() << std::endl;
+	// 	std::cout << "ft: v2.size(): " << v2.size() << std::endl;
+	// 	std::cout << "std: v3.size(): " << v3.size() << std::endl;
+	// 	std::cout << "ft: v4.size(): " << v4.size() << std::endl;
+
+	// 	std::cout << "std: v1.max_size(): " << v1.max_size() << std::endl;
+	// 	std::cout << "ft: v2.max_size(): " << v2.max_size() << std::endl;
+	// 	std::cout << "std: v3.max_size(): " << v3.max_size() << std::endl;
+	// 	std::cout << "ft: v4.max_size(): " << v4.max_size() << std::endl;
+
+	// 	std::cout << "std: v1.reserve(150): " << std::endl;
+	// 	v1.reserve(150);
+	// 	std::cout << "v1.capacity(): " << v1.capacity() << std::endl;
+	// 	std::cout << "v1[0]: " << v1[0] << std::endl;
+	// 	std::cout << "v1[2]: " << v1[2] << std::endl;
+	// 	std::cout << "ft: v2.reserve(150): " << std::endl;
+	// 	v2.reserve(150);
+	// 	std::cout << "v2.capacity(): " << v2.capacity() << std::endl;
+	// 	std::cout << "v2[0]: " << v2[0] << std::endl;
+	// 	std::cout << "v2[2]: " << v2[2] << std::endl;
+	// 	// std::cout << "reserve(4611686018427387904): " << std::endl;
+	// 	// v3.reserve(4611686018427387904);
+	// 	// v4.reserve(4611686018427387904);
+	// 	std::cout << "reserve(10) empty containers: " << std::endl;
+	// 	v3.reserve(10);
+	// 	std::cout << "v3.capacity(): " << v3.capacity() << std::endl;
+	// 	v4.reserve(10);
+	// 	std::cout << "v4.capacity(): " << v4.capacity() << std::endl;
+	// }
+
+	// ft_vector: modifiers
 	{
 		std::vector<int>	v1(4, 100);
 		ft::vector<int>		v2(4, 100);
 		std::vector<int>	v3;
 		ft::vector<int>		v4;
 
-		std::cout << "std: v1 empty? " << v1.empty() << std::endl;
-		std::cout << "ft: v2 empty? " << v2.empty() << std::endl;
-		std::cout << "std: v3 empty? " << v3.empty() << std::endl;
-		std::cout << "ft: v4 empty? " << v4.empty() << std::endl;
+		std::cout << "std: v1.clear()" << std::endl;
+		std::cout << "v1.size: " << v1.size() << std::endl;
+		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+		std::cout << "clearing" << std::endl;
+		v1.clear();
+		std::cout << "v1.size: " << v1.size() << std::endl;
+		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+		std::cout << "ft: v2.clear()" << std::endl;
+		std::cout << "v2.size: " << v2.size() << std::endl;
+		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+		std::cout << "clearing" << std::endl;
+		v2.clear();
+		std::cout << "v2.size: " << v2.size() << std::endl;
+		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
 
-		std::cout << "std: v1.size(): " << v1.size() << std::endl;
-		std::cout << "ft: v2.size(): " << v2.size() << std::endl;
-		std::cout << "std: v3.size(): " << v3.size() << std::endl;
-		std::cout << "ft: v4.size(): " << v4.size() << std::endl;
-
-		std::cout << "std: v1.max_size(): " << v1.max_size() << std::endl;
-		std::cout << "ft: v2.max_size(): " << v2.max_size() << std::endl;
-		std::cout << "std: v3.max_size(): " << v3.max_size() << std::endl;
-		std::cout << "ft: v4.max_size(): " << v4.max_size() << std::endl;
-
-		std::cout << "std: v1.reserve(150): " << std::endl;
-		v1.reserve(150);
-		std::cout << "v1.capacity(): " << v1.capacity() << std::endl;
-		std::cout << "v1[0]: " << v1[0] << std::endl;
-		std::cout << "v1[2]: " << v1[2] << std::endl;
-		std::cout << "ft: v2.reserve(150): " << std::endl;
-		v2.reserve(150);
-		std::cout << "v2.capacity(): " << v2.capacity() << std::endl;
-		std::cout << "v2[0]: " << v2[0] << std::endl;
-		std::cout << "v2[2]: " << v2[2] << std::endl;
-		// std::cout << "reserve(4611686018427387904): " << std::endl;
-		// v3.reserve(4611686018427387904);
-		// v4.reserve(4611686018427387904);
-		std::cout << "reserve(10) empty containers: " << std::endl;
-		v3.reserve(10);
-		std::cout << "v3.capacity(): " << v3.capacity() << std::endl;
-		v4.reserve(10);
-		std::cout << "v4.capacity(): " << v4.capacity() << std::endl;
 	}
 	return (0);
 }

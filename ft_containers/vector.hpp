@@ -12,12 +12,17 @@ namespace ft {
 	class vector {
 		public:
 			// TYPEDEFS
-			typedef std::size_t size_type;
+			typedef T					value_type;
+			typedef Allocator			allocator_type;
+			typedef std::size_t			size_type;
+			typedef std::ptrdiff_t		difference_type;
+			typedef value_type&			reference;
+			typedef const value_type&	const_reference;
 
 		private:
-			Allocator	_alloc;
-			size_type	_count, _cap;
-			T*			_head;
+			allocator_type	_alloc;
+			size_type		_count, _cap;
+			value_type*		_head;
 
 
 
@@ -28,12 +33,13 @@ namespace ft {
 				return ;
 			}
 
-			explicit vector(const Allocator& alloc) :
+			explicit vector(const allocator_type& alloc) :
 				_alloc(alloc), _count(0), _cap(0), _head(0) {
 				return ;
 			}
 
-			explicit vector(size_t count, const T& value = T(), const Allocator& alloc = Allocator()) :
+			explicit vector(size_type count, const value_type& value = value_type(),
+				const allocator_type& alloc = allocator_type()) :
 				_alloc(alloc), _count(count), _cap(count) {
 				this->_head = this->_alloc.allocate(this->_count);
 				for (size_t i = 0; i < this->_count; ++i) {
@@ -43,7 +49,7 @@ namespace ft {
 			}
 
 			// template <class InputIt>
-			// vector(InputIt first, InputIt last, const Allocator& alloc = Allocator()) :
+			// vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type()) :
 			// 	_alloc(alloc), _count(0), _cap(0), _head(0) {
 			// 	return ;
 			// }
@@ -81,7 +87,7 @@ namespace ft {
 			}
 
 			// ASSIGN
-			void	assign(size_t count, const T& value){
+			void	assign(size_type count, const value_type& value){
 
 				return ;
 			}
@@ -92,54 +98,54 @@ namespace ft {
 			}
 
 			// GET_ALLOCATOR
-			Allocator	get_allocator() const {
+			allocator_type	get_allocator() const {
 				return (this->_alloc);
 			}
 
 			// ELEMENT ACCESS
-			T& at(size_t pos) {
+			reference at(size_type pos) {
 				if (pos >= this->_count)
 					throw OutOfRange();
 				return (this->_head[pos]);
 			}
 
-			const T& at(size_t pos) const {
+			const_reference at(size_type pos) const {
 				if (pos >= this->_count)
 					throw OutOfRange();
 				return (this->_head[pos]);
 			}
 
-			T&	operator[](size_t pos) {
+			reference	operator[](size_type pos) {
 				if (pos >= this->_count)
 					throw OutOfBounds();
 				return (this->_head[pos]);
 			}
 
-			const T&	operator[](size_t pos) const {
+			const_reference	operator[](size_type pos) const {
 				if (pos >= this->_count)
 					throw OutOfBounds();
 				return (this->_head[pos]);
 			}
 
-			T&	front() {
+			reference	front() {
 				if (!this->_head)
 					throw EmptyContainer();
 				return (*this->_head);
 			}
 
-			const T&	front() const {
+			const_reference	front() const {
 				if (!this->_head)
 					throw EmptyContainer();
 				return (*this->_head);
 			}
 
-			T&	back() {
+			reference	back() {
 				if (!this->_head)
 					throw EmptyContainer();
 				return (this->_head[this->_count - 1]);
 			}
 
-			const T&	back() const {
+			const_reference	back() const {
 				if (!this->_head)
 					throw EmptyContainer();
 				return (this->_head[this->_count - 1]);
@@ -161,15 +167,15 @@ namespace ft {
 				return (this->_head == this->_head + this->_count);
 			}
 
-			size_t	size() const {
+			size_type	size() const {
 				return (this->_count);
 			}
 
-			size_t	max_size() const {
+			size_type	max_size() const {
 				return (this->_alloc.max_size());
 			}
 
-			void	reserve(size_t new_cap) {
+			void	reserve(size_type new_cap) {
 				if (new_cap <= this->_cap)
 					return ;
 				T	*tmp;
@@ -186,12 +192,17 @@ namespace ft {
 				// INVALIDATE ITERATORS
 			}
 
-			size_t	capacity() const {
+			size_type	capacity() const {
 				return (this->_cap);
 			}
 
 			// MODIFIERS
-
+			void	clear() {
+				for (size_t i = 0; i < this->_count; ++i) {
+						this->_alloc.destroy(this->_head + i);
+					}
+				this->_count = 0;
+			}
 
 			// EXCEPTIONS
 			class OutOfRange: public std::exception {
