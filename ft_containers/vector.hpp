@@ -234,7 +234,7 @@ namespace ft {
 				if (this->_count < this->_cap)
 					this->_alloc.construct(this->_head + this->_count, value);
 				else {
-					this->reserve(this->_cap + 5);
+					this->reserve(this->_cap + ((this->_cap + 2) / 2));
 					this->_alloc.construct(this->_head + this->_count, value);
 				}
 				this->_count++;
