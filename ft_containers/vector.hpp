@@ -204,6 +204,43 @@ namespace ft {
 				this->_count = 0;
 			}
 
+			// iterator	insert(iterator pos, const T& value) {
+			
+			// 	return ;
+			// }
+
+			// void	insert(iterator pos, size_type count, const T&& value) {
+
+			// 	return ;
+			// }
+
+			// template <class InputIt>
+			// void	insert(iterator pos, InputIt first, InputIt last) {
+
+				// return ;
+			// }
+
+			// iterator	erase(iterator pos) {
+			
+			// 	return ;
+			// }
+
+			// iterator	erase(iterator first, iterator last) {
+
+			// 	return ;
+			// }
+
+			void	push_back(const T& value) {
+				if (this->_count < this->_cap)
+					this->_alloc.construct(this->_head + this->_count, value);
+				else {
+					this->reserve(this->_cap + 5);
+					this->_alloc.construct(this->_head + this->_count, value);
+				}
+				this->_count++;
+				// INVALIDATE ITERATORS
+			}
+
 			// EXCEPTIONS
 			class OutOfRange: public std::exception {
 				const char*	what(void) const throw() {

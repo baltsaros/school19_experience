@@ -155,6 +155,18 @@ int	main(void) {
 		std::cout << "v2.size: " << v2.size() << std::endl;
 		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
 
+		std::cout << "std: v1.push_back()" << std::endl;
+		std::cout << "pushing 3 to the end..." << std::endl;
+		v1.push_back(3);
+		std::cout << "v1.back(): " << v1.back() << std::endl;
+		std::cout << "v1.size: " << v1.size() << std::endl;
+		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+		std::cout << "ft: v2.push_back()" << std::endl;
+		std::cout << "pushing 3 to the end..." << std::endl;
+		v2.push_back(3);
+		std::cout << "v2.back(): " << v2.back() << std::endl;
+		std::cout << "v2.size: " << v2.size() << std::endl;
+		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
 	}
 	return (0);
 }
