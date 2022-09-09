@@ -17,11 +17,11 @@ namespace ft {
 		public:
 			// CONSTRUCTORS //
 			vector() :
-				_alloc(0), _count(0), _cap(0), _head(0) {
+				_alloc(), _count(0), _cap(0), _head(0) {
 				return ;
 			}
 
-			explicit vector(const Allocator& alloc = Allocator()) :
+			explicit vector(const Allocator& alloc) :
 				_alloc(alloc), _count(0), _cap(0), _head(0) {
 				return ;
 			}
@@ -48,10 +48,10 @@ namespace ft {
 
 			//	DESTRUCTOR //
 			~vector() {
-				for (size_t i = 0; i < _count; ++i) {
-					_alloc.destroy(_head + i);
+				for (size_t i = 0; i < this->_count; ++i) {
+					this->_alloc.destroy(this->_head + i);
 				}
-				_alloc.deallocate(_head, _count);
+				this->_alloc.deallocate(this->_head, this->_count);
 				return ;
 			}
 
@@ -59,16 +59,16 @@ namespace ft {
 			vector&	operator=(const vector& other) {
 				if (this == &other)
 					return (*this);
-				for (size_t i = 0; i < _count; ++i) {
-					_alloc.destroy(_head + i);
+				for (size_t i = 0; i < this->_count; ++i) {
+					this->_alloc.destroy(this->_head + i);
 				}
-				_alloc.deallocate(_head, _count);
-				_count = other._count;
-				_cap = other._cap;
-				_alloc = other._alloc;
-				_head = _alloc.allocate(_count);
-				for (size_t i = 0; i < _count; ++i) {
-					_alloc.construct(_head + i, other[i]);
+				this->_alloc.deallocate(this->_head, this->_count);
+				this->_count = other._count;
+				this->_cap = other._cap;
+				this->_alloc = other._alloc;
+				this->_head = this->_alloc.allocate(this->_count);
+				for (size_t i = 0; i < this->_count; ++i) {
+					this->_alloc.construct(this->_head + i, other[i]);
 				}
 				return (*this);
 			}
@@ -85,27 +85,59 @@ namespace ft {
 
 			// ELEMENT ACCESS //
 			T& at(T pos) {
-				if (pos >= _count)
+				if (pos >= this->_count)
 					throw OutOfRange();
-				return (_head[pos]);
+				return (this->_head[pos]);
 			}
 
 			const T& at(T pos) const {
-				if (pos >= _count)
+				if (pos >= this->_count)
 					throw OutOfRange();
-				return (_head[pos]);
+				return (this->_head[pos]);
 			}
 
 			T&	operator[](T pos) {
-				if (pos >= _count)
+				if (pos >= this->_count)
 					throw OutOfBounds();
-				return (_head[pos]);
+				return (this->_head[pos]);
 			}
 
 			const T&	operator[](T pos) const {
-				if (pos >= _count)
+				if (pos >= this->_count)
 					throw OutOfBounds();
-				return (_head[pos]);
+				return (this->_head[pos]);
+			}
+
+			T&	front() {
+				if (!this->_head)
+					throw EmptyContainer();
+				return (*this->_head);
+			}
+
+			const T&	front() const {
+				if (!this->_head)
+					throw EmptyContainer();
+				return (*this->_head);
+			}
+
+			T&	back() {
+				if (!this->_head)
+					throw EmptyContainer();
+				return (this->_head[this->_count - 1]);
+			}
+
+			const T&	back() const {
+				if (!this->_head)
+					throw EmptyContainer();
+				return (this->_head[this->_count - 1]);
+			}
+
+			T*	data() {
+				return (this->_head);
+			}
+
+			T*	data() const {
+				return (this->_head);
 			}
 
 			// MODIFIERS
@@ -113,13 +145,19 @@ namespace ft {
 			// EXCEPTIONS
 			class OutOfRange: public std::exception {
 				const char*	what(void) const throw() {
-					return ("ft::vector");
+					return ("ft::vector.at() is out of range");
 				}
 			};
 
 			class OutOfBounds: public std::exception {
 				const char*	what(void) const throw() {
-					return ("ft::vector[] index out of bounds");
+					return ("ft::vector[] index is out of bounds");
+				}
+			};
+
+			class EmptyContainer: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::vector is empty");
 				}
 			};
 
