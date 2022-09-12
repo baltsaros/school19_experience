@@ -241,6 +241,14 @@ namespace ft {
 				// INVALIDATE ITERATORS
 			}
 
+			void	pop_back() {
+				if (!this->_head)
+					throw EmptyContainer();
+				this->_alloc.destroy(this->_head + this->_count);
+				this->_count--;
+				// INVALIDATE ITERATORS
+			}
+
 			// EXCEPTIONS
 			class OutOfRange: public std::exception {
 				const char*	what(void) const throw() {
