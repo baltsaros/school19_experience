@@ -21,7 +21,8 @@ namespace ft {
 			typedef value_type&					reference;
 			typedef const value_type&			const_reference;
 			typedef vt_iterator<T*>				iterator;
-			typedef const_iterator<const T*>	const_iterator;
+			typedef vt_iterator<const T*>		const_iterator;
+
 
 
 		private:
@@ -55,7 +56,8 @@ namespace ft {
 
 			// template <class InputIt>
 			// vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type()) :
-			// 	_alloc(alloc), _count(0), _cap(0), _head(0) {
+			// 	_alloc(alloc) {
+			// 	std::cout << "it constructor\n";
 			// 	return ;
 			// }
 
@@ -300,6 +302,12 @@ namespace ft {
 			class EmptyContainer: public std::exception {
 				const char*	what(void) const throw() {
 					return ("ft::vector is empty");
+				}
+			};
+
+			class LengthError: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::vector begin is ahead of end");
 				}
 			};
 

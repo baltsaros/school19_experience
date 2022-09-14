@@ -209,12 +209,13 @@ int	main(void) {
 		v1.push_back(1);
 		v1.push_back(2);
 		v1.push_back(3);
-		std::vector<int>::const_iterator	it1;
+		std::vector<int>::iterator	it1;
 		ft::vector<int>		v2;
 		v2.push_back(1);
 		v2.push_back(2);
 		v2.push_back(3);
-		ft::vector<int>::iterator		it2;
+		ft::vector<int>::iterator	it2;
+		ft::vector<int>::iterator	it3;
 
 
 		std::cout << "v1.size: " << v1.size() << std::endl;
@@ -226,17 +227,19 @@ int	main(void) {
 		std::cout << "std: v1.begin()" << std::endl;
 		std::cout << *(v1.begin()) << std::endl;
 		it1 = v1.begin();
+		std::cout << "it1: " << *it1 << std::endl;
 		std::cout << "ft: v2.begin()" << std::endl;
 		std::cout << *(v2.begin()) << std::endl;
-		std::cout << "it1: " << *it1 << std::endl;
+		it2 = v2.begin();
+		std::cout << "it2: " << *it2 << std::endl;
 		std::cout << std::endl;
+		it3 = v2.end();
+
 
 		std::cout << "std: v1.end()" << std::endl;
 		std::cout << *(v1.end()) << std::endl;
-		it2 = v2.begin();
 		std::cout << "ft: v2.end()" << std::endl;
 		std::cout << *(v2.end()) << std::endl;
-		std::cout << "it2: " << *it2 << std::endl;
 		std::cout << std::endl;
 	}
 	return (0);

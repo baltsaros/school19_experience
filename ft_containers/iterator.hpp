@@ -2,6 +2,7 @@
 # define ITERATOR_HPP
 
 # include "iterator_traits.hpp"
+# include <type_traits>
 
 namespace ft {
 	template <class Iterator>
@@ -52,12 +53,12 @@ namespace ft {
 
 		~vt_iterator() {};
 
-		vt_iterator(const vt_iterator &src) {
+		vt_iterator(vt_iterator const &src) {
 			*this = src;
 			return ;
 		}
 
-		vt_iterator&	operator=(vt_iterator<Iter> const &rhs) {
+		vt_iterator&	operator=(vt_iterator const &rhs) {
 			this->_ptr = rhs._ptr;
 			return *(this);
 		}
@@ -70,51 +71,6 @@ namespace ft {
 			return (this->_ptr);
 		}
 	};
-
-	template <class Iter>
-	class const_iterator: public iterator
-		<typename iterator_traits<Iter>::iterator_category,
-		typename iterator_traits<Iter>::value_type,
-		typename iterator_traits<Iter>::difference_type,
-		typename iterator_traits<Iter>::pointer,
-		typename iterator_traits<Iter>::reference> {
-
-	protected:
-		Iter	_ptr;
-
-	public:
-		typedef Iter											iterator_type;
-		typedef typename iterator_traits<Iter>::difference_type	difference_type;
-		typedef typename iterator_traits<Iter>::reference		reference;
-		typedef typename iterator_traits<Iter>::pointer			pointer;
-		typedef typename iterator_traits<Iter>::value_type		value_type;
-
-		const_iterator() {
-			this->_ptr = NULL;
-			return ;
-		}
-
-		const_iterator(const Iter &ptr) {
-			this->_ptr = ptr;
-			return ;
-		}
-
-		~const_iterator() {};
-
-		const_iterator&	operator=(const_iterator<Iter> const &rhs) {
-			this->_ptr = rhs._ptr;
-			return (*this);
-		}
-
-		reference	operator*() {
-			return *(this->_ptr);
-		}
-
-		pointer	operator->() {
-			return (this->_ptr);
-		}
-	};
-
 
 }
 
