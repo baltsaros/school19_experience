@@ -135,11 +135,11 @@ int	main(void) {
 	// }
 
 	// ft_vector: modifiers
-	{
-		std::vector<int>	v1(4, 100);
-		ft::vector<int>		v2(4, 100);
-		std::vector<int>	v3;
-		ft::vector<int>		v4;
+	// {
+	// 	std::vector<int>	v1(4, 100);
+	// 	ft::vector<int>		v2(4, 100);
+	// 	std::vector<int>	v3;
+	// 	ft::vector<int>		v4;
 
 		// std::cout << "std: v1.clear()" << std::endl;
 		// std::cout << "v1.size: " << v1.size() << std::endl;
@@ -156,51 +156,88 @@ int	main(void) {
 		// std::cout << "v2.size: " << v2.size() << std::endl;
 		// std::cout << "v2.capacity: " << v2.capacity() << std::endl;
 		
-		std::cout << "std: v1.push_back()" << std::endl;
-		std::cout << "v1.back(): " << v1.back() << std::endl;
-		std::cout << "v1.size: " << v1.size() << std::endl;
-		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
-		std::cout << "pushing 3 to the end..." << std::endl;
+	// 	std::cout << "std: v1.push_back()" << std::endl;
+	// 	std::cout << "v1.back(): " << v1.back() << std::endl;
+	// 	std::cout << "v1.size: " << v1.size() << std::endl;
+	// 	std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+	// 	std::cout << "pushing 3 to the end..." << std::endl;
+	// 	v1.push_back(3);
+	// 	std::cout << "v1.back(): " << v1.back() << std::endl;
+	// 	std::cout << "v1.size: " << v1.size() << std::endl;
+	// 	std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+	// 	std::cout << "ft: v2.push_back()" << std::endl;
+	// 	std::cout << "v2.back(): " << v2.back() << std::endl;
+	// 	std::cout << "v2.size: " << v2.size() << std::endl;
+	// 	std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+	// 	std::cout << "pushing 3 to the end..." << std::endl;
+	// 	v2.push_back(3);
+	// 	std::cout << "v2.back(): " << v2.back() << std::endl;
+	// 	std::cout << "v2.size: " << v2.size() << std::endl;
+	// 	std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+	// 	std::cout << std::endl;
+
+	// 	std::cout << "std: v1.pop_back()" << std::endl;
+	// 	std::cout << "v1.back(): " << v1.back() << std::endl;
+	// 	std::cout << "v1.size: " << v1.size() << std::endl;
+	// 	std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+	// 	std::cout << "popping..." << std::endl;
+	// 	v1.pop_back();
+	// 	std::cout << "v1.back(): " << v1.back() << std::endl;
+	// 	std::cout << "v1.size: " << v1.size() << std::endl;
+	// 	std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+	// 	std::cout << "ft: v2.push_back()" << std::endl;
+	// 	std::cout << "v2.back(): " << v2.back() << std::endl;
+	// 	std::cout << "v2.size: " << v2.size() << std::endl;
+	// 	std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+	// 	std::cout << "popping..." << std::endl;
+	// 	v2.pop_back();
+	// 	std::cout << "v2.back(): " << v2.back() << std::endl;
+	// 	std::cout << "v2.size: " << v2.size() << std::endl;
+	// 	std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+	// 	std::cout << std::endl;
+
+	// 	std::cout << "popping empty vectors" << std::endl;
+	// 	std::cout << "std:\n";
+	// 	v3.pop_back();
+	// 	std::cout << "ft:\n";
+	// 	v4.pop_back();
+	// }
+
+	// iterators
+	{
+		std::vector<int>	v1;
+		v1.push_back(1);
+		v1.push_back(2);
 		v1.push_back(3);
-		std::cout << "v1.back(): " << v1.back() << std::endl;
-		std::cout << "v1.size: " << v1.size() << std::endl;
-		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
-		std::cout << "ft: v2.push_back()" << std::endl;
-		std::cout << "v2.back(): " << v2.back() << std::endl;
-		std::cout << "v2.size: " << v2.size() << std::endl;
-		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
-		std::cout << "pushing 3 to the end..." << std::endl;
+		std::vector<int>::const_iterator	it1;
+		ft::vector<int>		v2;
+		v2.push_back(1);
+		v2.push_back(2);
 		v2.push_back(3);
-		std::cout << "v2.back(): " << v2.back() << std::endl;
+		ft::vector<int>::iterator		it2;
+
+
+		std::cout << "v1.size: " << v1.size() << std::endl;
+		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
 		std::cout << "v2.size: " << v2.size() << std::endl;
 		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
 		std::cout << std::endl;
 
-		std::cout << "std: v1.pop_back()" << std::endl;
-		std::cout << "v1.back(): " << v1.back() << std::endl;
-		std::cout << "v1.size: " << v1.size() << std::endl;
-		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
-		std::cout << "popping..." << std::endl;
-		v1.pop_back();
-		std::cout << "v1.back(): " << v1.back() << std::endl;
-		std::cout << "v1.size: " << v1.size() << std::endl;
-		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
-		std::cout << "ft: v2.push_back()" << std::endl;
-		std::cout << "v2.back(): " << v2.back() << std::endl;
-		std::cout << "v2.size: " << v2.size() << std::endl;
-		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
-		std::cout << "popping..." << std::endl;
-		v2.pop_back();
-		std::cout << "v2.back(): " << v2.back() << std::endl;
-		std::cout << "v2.size: " << v2.size() << std::endl;
-		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+		std::cout << "std: v1.begin()" << std::endl;
+		std::cout << *(v1.begin()) << std::endl;
+		it1 = v1.begin();
+		std::cout << "ft: v2.begin()" << std::endl;
+		std::cout << *(v2.begin()) << std::endl;
+		std::cout << "it1: " << *it1 << std::endl;
 		std::cout << std::endl;
 
-		std::cout << "popping empty vectors" << std::endl;
-		std::cout << "std:\n";
-		v3.pop_back();
-		std::cout << "ft:\n";
-		v4.pop_back();
+		std::cout << "std: v1.end()" << std::endl;
+		std::cout << *(v1.end()) << std::endl;
+		it2 = v2.begin();
+		std::cout << "ft: v2.end()" << std::endl;
+		std::cout << *(v2.end()) << std::endl;
+		std::cout << "it2: " << *it2 << std::endl;
+		std::cout << std::endl;
 	}
 	return (0);
 }

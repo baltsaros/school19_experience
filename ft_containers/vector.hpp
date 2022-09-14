@@ -6,18 +6,23 @@
 # include <algorithm>
 # include <cstring>
 # include <vector>
+# include "iterator.hpp"
+
 
 namespace ft {
 	template <class T, class Allocator = std::allocator<T> >
 	class vector {
 		public:
 			// TYPEDEFS
-			typedef T					value_type;
-			typedef Allocator			allocator_type;
-			typedef std::size_t			size_type;
-			typedef std::ptrdiff_t		difference_type;
-			typedef value_type&			reference;
-			typedef const value_type&	const_reference;
+			typedef T							value_type;
+			typedef Allocator					allocator_type;
+			typedef std::size_t					size_type;
+			typedef std::ptrdiff_t				difference_type;
+			typedef value_type&					reference;
+			typedef const value_type&			const_reference;
+			typedef vt_iterator<T*>				iterator;
+			typedef const_iterator<const T*>	const_iterator;
+
 
 		private:
 			allocator_type	_alloc;
@@ -161,36 +166,36 @@ namespace ft {
 
 			// ITERATORS
 			iterator	begin() {
-				return ;
+				return (iterator(this->_head));
 			}
 
-			const_iterator	begin() {
-				return ;
+			const_iterator	begin() const {
+				return (const_iterator(this->_head));
 			}
 
 			iterator	end() {
-				return ;
+				return (iterator(this->_head + this->_count));
 			}
 
-			const_iterator	end() {
-				return ;
+			const_iterator	end() const {
+				return (const_iterator(this->_head + this->_count));
 			}
 
-			reverse_iterator	rbegin() {
-				return ;
-			}
+			// reverse_iterator	rbegin() {
+			// 	return ;
+			// }
 
-			const_reverse_iterator	rbegin() {
-				return ;
-			}
+			// const_reverse_iterator	rbegin() const {
+			// 	return ;
+			// }
 
-			reverse_iterator	rend() {
-				return ;
-			}
+			// reverse_iterator	rend() {
+			// 	return ;
+			// }
 
-			const_reverse_iterator	rend() {
-				return ;
-			}
+			// const_reverse_iterator	rend() const {
+			// 	return ;
+			// }
 
 			// CAPACITY
 			bool empty() const {
