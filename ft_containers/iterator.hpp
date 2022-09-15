@@ -116,6 +116,31 @@ namespace ft {
 		const	Iter&	base() const {
 			return (this->_ptr);
 		}
+
+		bool	operator==(vt_iterator const &rhs) const {
+			return (this->_ptr == rhs._ptr);
+		}
+
+		bool	operator!=(vt_iterator const &rhs) const {
+			return (this->_ptr != rhs._ptr);
+		}
+
+		bool	operator<(vt_iterator const &rhs) const {
+			return (this->_ptr < rhs._ptr);
+		}
+
+		bool	operator>(vt_iterator const &rhs) const {
+			return (this->_ptr > rhs._ptr);
+		}
+
+		bool	operator<=(vt_iterator const &rhs) const {
+			return (this->_ptr <= rhs._ptr);
+		}
+
+		bool	operator>=(vt_iterator const &rhs) const {
+			return (this->_ptr >= rhs._ptr);
+		}
+
 	};
 
 }

@@ -322,6 +322,38 @@ int	main(void) {
 		std::cout << "(ft)it4[3]: " << it4[3] << std::endl;
 		std::cout << "(std)it3: " << *it3 << std::endl;
 		std::cout << "(ft)it4: " << *it4 << std::endl;
+
+		std::cout << "comparisons" << std::endl;
+		it3 = it3 + 2;
+		it4 = it4 + 2;
+		std::cout << "(std)it1: " << *it1 << std::endl;
+		std::cout << "(std)it3: " << *it3 << std::endl;
+		std::cout << "(ft)it2: " << *it2 << std::endl;
+		std::cout << "(ft)it4: " << *it4 << std::endl;
+		std::cout << "std: " << *it1 << " < " << *it3 << " ? ";
+		std::cout << (it1 < it3) << std::endl;
+		std::cout << "ft: " << *it2 << " < " << *it4 << " ? ";
+		std::cout << (it2 < it4) << std::endl;
+		std::cout << "std: " << *it1 << " > " << *it3 << " ? ";
+		std::cout << (it1 > it3) << std::endl;
+		std::cout << "ft: " << *it2 << " > " << *it4 << " ? ";
+		std::cout << (it2 > it4) << std::endl;
+		std::cout << "std: " << *it1 << " <= " << *it3 << " ? ";
+		std::cout << (it1 <= it3) << std::endl;
+		std::cout << "ft: " << *it2 << " <= " << *it4 << " ? ";
+		std::cout << (it2 <= it4) << std::endl;
+		std::cout << "std: " << *it1 << " >= " << *it3 << " ? ";
+		std::cout << (it1 >= it3) << std::endl;
+		std::cout << "ft: " << *it2 << " >= " << *it4 << " ? ";
+		std::cout << (it2 >= it4) << std::endl;
+		std::cout << "std: " << *it1 << " == " << *it3 << " ? ";
+		std::cout << (it1 == it3) << std::endl;
+		std::cout << "ft: " << *it2 << " == " << *it4 << " ? ";
+		std::cout << (it2 == it4) << std::endl;
+		std::cout << "std: " << *it1 << " != " << *it3 << " ? ";
+		std::cout << (it1 != it3) << std::endl;
+		std::cout << "ft: " << *it2 << " != " << *it4 << " ? ";
+		std::cout << (it2 != it4) << std::endl;
 	}
 	return (0);
 }
