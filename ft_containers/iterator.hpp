@@ -33,13 +33,15 @@ namespace ft {
 
 	protected:
 		Iter	_ptr;
+		typedef iterator_traits<Iter>	itraits;
 
 	public:
-		typedef Iter											iterator_type;
-		typedef typename iterator_traits<Iter>::difference_type	difference_type;
-		typedef typename iterator_traits<Iter>::reference		reference;
-		typedef typename iterator_traits<Iter>::pointer			pointer;
-		typedef typename iterator_traits<Iter>::value_type		value_type;
+		typedef Iter								iterator_type;
+		typedef typename itraits::difference_type	difference_type;
+		typedef typename itraits::reference			reference;
+		typedef typename itraits::pointer			pointer;
+		typedef typename itraits::value_type		value_type;
+		typedef typename itraits::iterator_category	iterator_category;
 
 		vt_iterator() {
 			this->_ptr = NULL;
@@ -60,14 +62,58 @@ namespace ft {
 
 		vt_iterator&	operator=(vt_iterator const &rhs) {
 			this->_ptr = rhs._ptr;
-			return *(this);
+			return (*this);
 		}
 
 		reference	operator*() const {
-			return *(this->_ptr);
+			return (*this->_ptr);
 		}
 
 		pointer	operator->() const {
+			return (this->_ptr);
+		}
+
+		vt_iterator&	operator++() {
+			++(this->_ptr);
+			return (*this);
+		}
+
+		vt_iterator	operator++(int) {
+			return (vt_iterator(this->_ptr++));
+		}
+
+		vt_iterator&	operator--() {
+			--(this->_ptr);
+			return (*this);
+		}
+
+		vt_iterator	operator--(int) {
+			return (vt_iterator(this->_ptr--));
+		}
+
+		reference	operator[](difference_type n) const {
+			return (this->_ptr[n]);
+		}
+
+		vt_iterator&	operator+=(difference_type n) {
+			this->_ptr += n;
+			return (*this);
+		}
+
+		vt_iterator	operator+(difference_type n) const {
+			return (vt_iterator(this->_ptr + n));
+		}
+
+		vt_iterator&	operator-=(difference_type n) {
+			this->_ptr -= n;
+			return (*this);
+		}
+
+		vt_iterator	operator-(difference_type n) const {
+			return (vt_iterator(this->_ptr - n));
+		}
+
+		const	Iter&	base() const {
 			return (this->_ptr);
 		}
 	};
