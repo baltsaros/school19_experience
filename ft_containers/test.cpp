@@ -34,7 +34,6 @@ int	main(void) {
 		int					*p;
 	
 		v1.assign(2, 5);
-		std::cout << "get_allocator: getting type for int array, allocate memory for it and fill it" << std::endl;
 		p = v1.get_allocator().allocate(3);
 		for (size_t i = 0; i < 3; ++i) {
 			v1.get_allocator().construct(&p[i], i);

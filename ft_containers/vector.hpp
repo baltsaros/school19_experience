@@ -7,6 +7,8 @@
 # include <cstring>
 # include <vector>
 # include "iterator.hpp"
+# include "enable_if.hpp"
+# include "is_integral.hpp"
 
 
 namespace ft {
@@ -48,6 +50,7 @@ namespace ft {
 			explicit vector(size_type count, const T& value = T(),
 				const Allocator& alloc = Allocator()) :
 				_alloc(alloc), _count(count), _cap(count) {
+				std::cout << is_integral<T>::value << std::endl;
 				this->_head = this->_alloc.allocate(this->_count);
 				for (size_t i = 0; i < this->_count; ++i) {
 					this->_alloc.construct(this->_head + i, value);
@@ -56,7 +59,8 @@ namespace ft {
 			}
 
 			template <class InputIt>
-			vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type()) :
+			vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type(),
+					typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) :
 				_alloc(alloc) {
 				std::cout << "it constructor\n";
 				assign(first, last);
@@ -111,13 +115,14 @@ namespace ft {
 				return ;
 			}
 
-			// template <class InputIt>
-			// void	assign(InputIt first, InputIt last) {
-			// 	clear();
-			// 	for (; first != last; ++first)
-			// 		push_back(*first);
-			// 	return ;
-			// }
+			template <class InputIt>
+			void	assign(InputIt first, InputIt last,
+							typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) {
+				clear();
+				for (; first != last; ++first)
+					push_back(*first);
+				return ;
+			}
 
 			// GET_ALLOCATOR
 			allocator_type	get_allocator() const {
