@@ -45,8 +45,8 @@ namespace ft {
 				return ;
 			}
 
-			explicit vector(size_type count, const value_type& value = value_type(),
-				const allocator_type& alloc = allocator_type()) :
+			explicit vector(size_type count, const T& value = T(),
+				const Allocator& alloc = Allocator()) :
 				_alloc(alloc), _count(count), _cap(count) {
 				this->_head = this->_alloc.allocate(this->_count);
 				for (size_t i = 0; i < this->_count; ++i) {
@@ -55,12 +55,13 @@ namespace ft {
 				return ;
 			}
 
-			// template <class InputIt>
-			// vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type()) :
-			// 	_alloc(alloc) {
-			// 	std::cout << "it constructor\n";
-			// 	return ;
-			// }
+			template <class InputIt>
+			vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type()) :
+				_alloc(alloc) {
+				std::cout << "it constructor\n";
+				assign(first, last);
+				return ;
+			}
 
 			vector(const vector& other) {
 				*this = other;
@@ -96,14 +97,27 @@ namespace ft {
 
 			// ASSIGN
 			void	assign(size_type count, const value_type& value){
-
+				if (count <= 0)
+					return ;
+				if (count > this->_cap)
+					reserve(count);
+				for (size_t i = 0; i < this->_count; ++i) {
+					this->_alloc.destroy(this->_head + i);
+				}
+				this->_count = count;
+				for (size_t i = 0; i < this->_count; ++i) {
+					this->_alloc.construct(this->_head + i, value);
+				}
 				return ;
 			}
 
-			template <class InputIt>
-			void	assign(InputIt first, InputIt last) {
-				return ;
-			}
+			// template <class InputIt>
+			// void	assign(InputIt first, InputIt last) {
+			// 	clear();
+			// 	for (; first != last; ++first)
+			// 		push_back(*first);
+			// 	return ;
+			// }
 
 			// GET_ALLOCATOR
 			allocator_type	get_allocator() const {
@@ -199,22 +213,6 @@ namespace ft {
 			const_reverse_iterator	rend() const {
 				return (const_reverse_iterator(begin()));
 			}
-
-			// reverse_iterator	rbegin() {
-			// 	return ;
-			// }
-
-			// const_reverse_iterator	rbegin() const {
-			// 	return ;
-			// }
-
-			// reverse_iterator	rend() {
-			// 	return ;
-			// }
-
-			// const_reverse_iterator	rend() const {
-			// 	return ;
-			// }
 
 			// CAPACITY
 			bool empty() const {

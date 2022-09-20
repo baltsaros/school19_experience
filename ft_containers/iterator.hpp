@@ -272,7 +272,6 @@ namespace ft {
 		bool	operator>=(vt_iterator const &rhs) const {
 			return (this->_ptr >= rhs._ptr);
 		}
-
 	};
 
 }

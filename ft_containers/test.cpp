@@ -27,28 +27,30 @@ int	main(void) {
 	}
 
 	// ft_vector: assign, allocator
-	// {
-	// 	std::vector<int>	v1 (4, 100);
-	// 	ft::vector<int>		v2(4, 100);
-	// 	int					*p;
+	{
+		std::vector<int>	v1(4, 100);
+		ft::vector<int>		v2(4, 100);
+		// ft::vector<int>		v3(v2.begin(), v2.end());
+		int					*p;
 	
-	// 	v1.assign(2, 5);
-	// 	std::cout << "get_allocator: getting type for int array, allocate memory for it and fill it" << std::endl;
-	// 	p = v1.get_allocator().allocate(3);
-	// 	for (size_t i = 0; i < 3; ++i) {
-	// 		v1.get_allocator().construct(&p[i], i);
-	// 		std::cout << "std: " << p[i] << std::endl;
-	// 		v1.get_allocator().destroy(&p[i]);
-	// 	}
-	// 	v1.get_allocator().deallocate(p, 3);
-	// 	p = v2.get_allocator().allocate(3);
-	// 	for (size_t i = 0; i < 3; ++i) {
-	// 		v2.get_allocator().construct(&p[i], i);
-	// 		std::cout << "ft: " << p[i] << std::endl;
-	// 		v2.get_allocator().destroy(&p[i]);
-	// 	}
-	// 	v1.get_allocator().deallocate(p, 3);
-	// }
+		v1.assign(2, 5);
+		std::cout << "get_allocator: getting type for int array, allocate memory for it and fill it" << std::endl;
+		p = v1.get_allocator().allocate(3);
+		for (size_t i = 0; i < 3; ++i) {
+			v1.get_allocator().construct(&p[i], i);
+			std::cout << "std: " << p[i] << std::endl;
+			v1.get_allocator().destroy(&p[i]);
+		}
+		v1.get_allocator().deallocate(p, 3);
+		v2.assign(2, 5);
+		p = v2.get_allocator().allocate(3);
+		for (size_t i = 0; i < 3; ++i) {
+			v2.get_allocator().construct(&p[i], i);
+			std::cout << "ft: " << p[i] << std::endl;
+			v2.get_allocator().destroy(&p[i]);
+		}
+		v2.get_allocator().deallocate(p, 3);
+	}
 
 	// ft_vector: access operators
 	// {
@@ -359,159 +361,159 @@ int	main(void) {
 	// }
 	
 	// reverse_iterators
-	{
-		std::vector<int>	v1;
-		v1.push_back(1);
-		v1.push_back(2);
-		v1.push_back(3);
-		std::vector<int>::reverse_iterator	it1;
-		std::vector<int>::reverse_iterator	it3;
-		std::vector<int>::reverse_iterator	it5;
-		ft::vector<int>		v2;
-		v2.push_back(1);
-		v2.push_back(2);
-		v2.push_back(3);
-		ft::vector<int>::reverse_iterator	it2;
-		ft::vector<int>::reverse_iterator	it4;
-		ft::vector<int>::reverse_iterator	it6;
+	// {
+	// 	std::vector<int>	v1;
+	// 	v1.push_back(1);
+	// 	v1.push_back(2);
+	// 	v1.push_back(3);
+	// 	std::vector<int>::reverse_iterator	it1;
+	// 	std::vector<int>::reverse_iterator	it3;
+	// 	std::vector<int>::reverse_iterator	it5;
+	// 	ft::vector<int>		v2;
+	// 	v2.push_back(1);
+	// 	v2.push_back(2);
+	// 	v2.push_back(3);
+	// 	ft::vector<int>::reverse_iterator	it2;
+	// 	ft::vector<int>::reverse_iterator	it4;
+	// 	ft::vector<int>::reverse_iterator	it6;
 
 
-		std::cout << "v1.size: " << v1.size() << std::endl;
-		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
-		std::cout << "v2.size: " << v2.size() << std::endl;
-		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
-		std::cout << std::endl;
+	// 	std::cout << "v1.size: " << v1.size() << std::endl;
+	// 	std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+	// 	std::cout << "v2.size: " << v2.size() << std::endl;
+	// 	std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+	// 	std::cout << std::endl;
 
-		std::cout << "std: v1.begin()" << std::endl;
-		std::cout << *(v1.begin()) << std::endl;
-		it1 = v1.rbegin();
-		std::cout << "it1: " << *it1 << std::endl;
-		std::cout << "ft: v2.begin()" << std::endl;
-		std::cout << *(v2.begin()) << std::endl;
-		it2 = v2.rbegin();
-		std::cout << "it2: " << *it2 << std::endl;
-		std::cout << std::endl;
+	// 	std::cout << "std: v1.begin()" << std::endl;
+	// 	std::cout << *(v1.begin()) << std::endl;
+	// 	it1 = v1.rbegin();
+	// 	std::cout << "it1: " << *it1 << std::endl;
+	// 	std::cout << "ft: v2.begin()" << std::endl;
+	// 	std::cout << *(v2.begin()) << std::endl;
+	// 	it2 = v2.rbegin();
+	// 	std::cout << "it2: " << *it2 << std::endl;
+	// 	std::cout << std::endl;
 
-		std::cout << "std: v1.end()" << std::endl;
-		std::cout << *(v1.end()) << std::endl;
-		std::cout << "ft: v2.end()" << std::endl;
-		std::cout << *(v2.end()) << std::endl;
-		std::cout << std::endl;
+	// 	std::cout << "std: v1.end()" << std::endl;
+	// 	std::cout << *(v1.end()) << std::endl;
+	// 	std::cout << "ft: v2.end()" << std::endl;
+	// 	std::cout << *(v2.end()) << std::endl;
+	// 	std::cout << std::endl;
 		
-		std::cout << "pre-in/decrementation" << std::endl;
-		it3 = v1.rend();
-		it4 = v2.rend();
-		std::cout << "(std)it3: " << *it3 << std::endl;
-		std::cout << "(ft)it4: " << *it4 << std::endl;
-		--it3;
-		--it4;
-		std::cout << "--it3: " << *it3 << std::endl;
-		std::cout << "--it4: " << *it4 << std::endl;
-		--it3;
-		--it4;
-		std::cout << "--it3: " << *it3 << std::endl;
-		std::cout << "--it4: " << *it4 << std::endl;
-		std::cout << "it3--: " << *(it3--) << std::endl;
-		std::cout << "it4--: " << *(it4--) << std::endl;
-		std::cout << "it3: " << *it3 << std::endl;
-		std::cout << "it4: " << *it4 << std::endl;
-		std::cout << "it3--: " << *(it3--) << std::endl;
-		std::cout << "it4--: " << *(it4--) << std::endl;
-		std::cout << "it3: " << *it3 << std::endl;
-		std::cout << "it4: " << *it4 << std::endl;
-		++it3;
-		++it4;
-		std::cout << "++it3: " << *it3 << std::endl;
-		std::cout << "++it4: " << *it4 << std::endl;
-		++it3;
-		++it4;
-		std::cout << "++it3: " << *it3 << std::endl;
-		std::cout << "++it4: " << *it4 << std::endl;
-		std::cout << "it3++: " << *(it3++) << std::endl;
-		std::cout << "it4++: " << *(it4++) << std::endl;
-		std::cout << "it3: " << *it3 << std::endl;
-		std::cout << "it4: " << *it4 << std::endl;
-		std::cout << "it3++: " << *(it3++) << std::endl;
-		std::cout << "it4++: " << *(it4++) << std::endl;
-		std::cout << "it3: " << *it3 << std::endl;
-		std::cout << "it4: " << *it4 << std::endl;
-		std::cout << std::endl;
+	// 	std::cout << "pre-in/decrementation" << std::endl;
+	// 	it3 = v1.rend();
+	// 	it4 = v2.rend();
+	// 	std::cout << "(std)it3: " << *it3 << std::endl;
+	// 	std::cout << "(ft)it4: " << *it4 << std::endl;
+	// 	--it3;
+	// 	--it4;
+	// 	std::cout << "--it3: " << *it3 << std::endl;
+	// 	std::cout << "--it4: " << *it4 << std::endl;
+	// 	--it3;
+	// 	--it4;
+	// 	std::cout << "--it3: " << *it3 << std::endl;
+	// 	std::cout << "--it4: " << *it4 << std::endl;
+	// 	std::cout << "it3--: " << *(it3--) << std::endl;
+	// 	std::cout << "it4--: " << *(it4--) << std::endl;
+	// 	std::cout << "it3: " << *it3 << std::endl;
+	// 	std::cout << "it4: " << *it4 << std::endl;
+	// 	std::cout << "it3--: " << *(it3--) << std::endl;
+	// 	std::cout << "it4--: " << *(it4--) << std::endl;
+	// 	std::cout << "it3: " << *it3 << std::endl;
+	// 	std::cout << "it4: " << *it4 << std::endl;
+	// 	++it3;
+	// 	++it4;
+	// 	std::cout << "++it3: " << *it3 << std::endl;
+	// 	std::cout << "++it4: " << *it4 << std::endl;
+	// 	++it3;
+	// 	++it4;
+	// 	std::cout << "++it3: " << *it3 << std::endl;
+	// 	std::cout << "++it4: " << *it4 << std::endl;
+	// 	std::cout << "it3++: " << *(it3++) << std::endl;
+	// 	std::cout << "it4++: " << *(it4++) << std::endl;
+	// 	std::cout << "it3: " << *it3 << std::endl;
+	// 	std::cout << "it4: " << *it4 << std::endl;
+	// 	std::cout << "it3++: " << *(it3++) << std::endl;
+	// 	std::cout << "it4++: " << *(it4++) << std::endl;
+	// 	std::cout << "it3: " << *it3 << std::endl;
+	// 	std::cout << "it4: " << *it4 << std::endl;
+	// 	std::cout << std::endl;
 
-		std::cout << "arithmetic operations" << std::endl;
-		std::cout << "(std)it3: " << *it3 << std::endl;
-		std::cout << "(ft)it4: " << *it4 << std::endl;
-		it3 -= 2;
-		it4 -= 2;
-		std::cout << "it3 -= 2: " << *it3 << std::endl;
-		std::cout << "it4 -= 2: " << *it4 << std::endl;
-		it3 -= 1;
-		it4 -= 1;
-		std::cout << "it3 -= 1: " << *it3 << std::endl;
-		std::cout << "it4 -= 1: " << *it4 << std::endl;
-		it3 += 2;
-		it4 += 2;
-		std::cout << "it3 += 2: " << *it3 << std::endl;
-		std::cout << "it4 += 2: " << *it4 << std::endl;
-		std::cout << "it3 - 2: " << *it3 << " - " << 2 << " = ";
-		std::cout << *(it3 - 2) << std::endl;
-		std::cout << "it4 - 2: " << *it4 << " - " << 2 << " = ";
-		std::cout << *(it4 - 2) << std::endl;
-		std::cout << "(std)it3: " << *it3 << std::endl;
-		std::cout << "(ft)it4: " << *it4 << std::endl;
-		std::cout << "it3 + 1: " << *it3 << " + " << 1 << " = ";
-		std::cout << *(it3 + 1) << std::endl;
-		std::cout << "it4 + 1: " << *it4 << " + " << 1 << " = ";
-		std::cout << *(it4 + 1) << std::endl;
-		std::cout << std::endl;
+	// 	std::cout << "arithmetic operations" << std::endl;
+	// 	std::cout << "(std)it3: " << *it3 << std::endl;
+	// 	std::cout << "(ft)it4: " << *it4 << std::endl;
+	// 	it3 -= 2;
+	// 	it4 -= 2;
+	// 	std::cout << "it3 -= 2: " << *it3 << std::endl;
+	// 	std::cout << "it4 -= 2: " << *it4 << std::endl;
+	// 	it3 -= 1;
+	// 	it4 -= 1;
+	// 	std::cout << "it3 -= 1: " << *it3 << std::endl;
+	// 	std::cout << "it4 -= 1: " << *it4 << std::endl;
+	// 	it3 += 2;
+	// 	it4 += 2;
+	// 	std::cout << "it3 += 2: " << *it3 << std::endl;
+	// 	std::cout << "it4 += 2: " << *it4 << std::endl;
+	// 	std::cout << "it3 - 2: " << *it3 << " - " << 2 << " = ";
+	// 	std::cout << *(it3 - 2) << std::endl;
+	// 	std::cout << "it4 - 2: " << *it4 << " - " << 2 << " = ";
+	// 	std::cout << *(it4 - 2) << std::endl;
+	// 	std::cout << "(std)it3: " << *it3 << std::endl;
+	// 	std::cout << "(ft)it4: " << *it4 << std::endl;
+	// 	std::cout << "it3 + 1: " << *it3 << " + " << 1 << " = ";
+	// 	std::cout << *(it3 + 1) << std::endl;
+	// 	std::cout << "it4 + 1: " << *it4 << " + " << 1 << " = ";
+	// 	std::cout << *(it4 + 1) << std::endl;
+	// 	std::cout << std::endl;
 
-		std::cout << "operator[]" << std::endl;
-		it3 = v1.rbegin();
-		it4 = v2.rbegin();
-		std::cout << "(std)it3[0]: " << it3[0] << std::endl;
-		std::cout << "(ft)it4[0]: " << it4[0] << std::endl;
-		std::cout << "(std)it3[1]: " << it3[1] << std::endl;
-		std::cout << "(ft)it4[1]: " << it4[1] << std::endl;
-		std::cout << "(std)it3[2]: " << it3[2] << std::endl;
-		std::cout << "(ft)it4[2]: " << it4[2] << std::endl;
-		std::cout << "(std)it3[3]: " << it3[3] << std::endl;
-		std::cout << "(ft)it4[3]: " << it4[3] << std::endl;
-		std::cout << "(std)it3: " << *it3 << std::endl;
-		std::cout << "(ft)it4: " << *it4 << std::endl;
-		std::cout << std::endl;
+	// 	std::cout << "operator[]" << std::endl;
+	// 	it3 = v1.rbegin();
+	// 	it4 = v2.rbegin();
+	// 	std::cout << "(std)it3[0]: " << it3[0] << std::endl;
+	// 	std::cout << "(ft)it4[0]: " << it4[0] << std::endl;
+	// 	std::cout << "(std)it3[1]: " << it3[1] << std::endl;
+	// 	std::cout << "(ft)it4[1]: " << it4[1] << std::endl;
+	// 	std::cout << "(std)it3[2]: " << it3[2] << std::endl;
+	// 	std::cout << "(ft)it4[2]: " << it4[2] << std::endl;
+	// 	std::cout << "(std)it3[3]: " << it3[3] << std::endl;
+	// 	std::cout << "(ft)it4[3]: " << it4[3] << std::endl;
+	// 	std::cout << "(std)it3: " << *it3 << std::endl;
+	// 	std::cout << "(ft)it4: " << *it4 << std::endl;
+	// 	std::cout << std::endl;
 
-		std::cout << "comparisons" << std::endl;
-		it3 = it3 + 2;
-		it4 = it4 + 2;
-		std::cout << "(std)it1: " << *it1 << std::endl;
-		std::cout << "(std)it3: " << *it3 << std::endl;
-		std::cout << "(ft)it2: " << *it2 << std::endl;
-		std::cout << "(ft)it4: " << *it4 << std::endl;
-		std::cout << "std: " << *it1 << " < " << *it3 << " ? ";
-		std::cout << (it1 < it3) << std::endl;
-		std::cout << "ft: " << *it2 << " < " << *it4 << " ? ";
-		std::cout << (it2 < it4) << std::endl;
-		std::cout << "std: " << *it1 << " > " << *it3 << " ? ";
-		std::cout << (it1 > it3) << std::endl;
-		std::cout << "ft: " << *it2 << " > " << *it4 << " ? ";
-		std::cout << (it2 > it4) << std::endl;
-		std::cout << "std: " << *it1 << " <= " << *it3 << " ? ";
-		std::cout << (it1 <= it3) << std::endl;
-		std::cout << "ft: " << *it2 << " <= " << *it4 << " ? ";
-		std::cout << (it2 <= it4) << std::endl;
-		std::cout << "std: " << *it1 << " >= " << *it3 << " ? ";
-		std::cout << (it1 >= it3) << std::endl;
-		std::cout << "ft: " << *it2 << " >= " << *it4 << " ? ";
-		std::cout << (it2 >= it4) << std::endl;
-		std::cout << "std: " << *it1 << " == " << *it3 << " ? ";
-		std::cout << (it1 == it3) << std::endl;
-		std::cout << "ft: " << *it2 << " == " << *it4 << " ? ";
-		std::cout << (it2 == it4) << std::endl;
-		std::cout << "std: " << *it1 << " != " << *it3 << " ? ";
-		std::cout << (it1 != it3) << std::endl;
-		std::cout << "ft: " << *it2 << " != " << *it4 << " ? ";
-		std::cout << (it2 != it4) << std::endl;
-		std::cout << std::endl;
-	}
+	// 	std::cout << "comparisons" << std::endl;
+	// 	it3 = it3 + 2;
+	// 	it4 = it4 + 2;
+	// 	std::cout << "(std)it1: " << *it1 << std::endl;
+	// 	std::cout << "(std)it3: " << *it3 << std::endl;
+	// 	std::cout << "(ft)it2: " << *it2 << std::endl;
+	// 	std::cout << "(ft)it4: " << *it4 << std::endl;
+	// 	std::cout << "std: " << *it1 << " < " << *it3 << " ? ";
+	// 	std::cout << (it1 < it3) << std::endl;
+	// 	std::cout << "ft: " << *it2 << " < " << *it4 << " ? ";
+	// 	std::cout << (it2 < it4) << std::endl;
+	// 	std::cout << "std: " << *it1 << " > " << *it3 << " ? ";
+	// 	std::cout << (it1 > it3) << std::endl;
+	// 	std::cout << "ft: " << *it2 << " > " << *it4 << " ? ";
+	// 	std::cout << (it2 > it4) << std::endl;
+	// 	std::cout << "std: " << *it1 << " <= " << *it3 << " ? ";
+	// 	std::cout << (it1 <= it3) << std::endl;
+	// 	std::cout << "ft: " << *it2 << " <= " << *it4 << " ? ";
+	// 	std::cout << (it2 <= it4) << std::endl;
+	// 	std::cout << "std: " << *it1 << " >= " << *it3 << " ? ";
+	// 	std::cout << (it1 >= it3) << std::endl;
+	// 	std::cout << "ft: " << *it2 << " >= " << *it4 << " ? ";
+	// 	std::cout << (it2 >= it4) << std::endl;
+	// 	std::cout << "std: " << *it1 << " == " << *it3 << " ? ";
+	// 	std::cout << (it1 == it3) << std::endl;
+	// 	std::cout << "ft: " << *it2 << " == " << *it4 << " ? ";
+	// 	std::cout << (it2 == it4) << std::endl;
+	// 	std::cout << "std: " << *it1 << " != " << *it3 << " ? ";
+	// 	std::cout << (it1 != it3) << std::endl;
+	// 	std::cout << "ft: " << *it2 << " != " << *it4 << " ? ";
+	// 	std::cout << (it2 != it4) << std::endl;
+	// 	std::cout << std::endl;
+	// }
 
 	return (0);
 }
