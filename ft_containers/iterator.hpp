@@ -5,23 +5,155 @@
 # include <type_traits>
 
 namespace ft {
-	template <class Iterator>
+	template <class Iter>
 	class reverse_iterator: public iterator
-		<typename iterator_traits<Iterator>::iterator_category,
-		typename iterator_traits<Iterator>::value_type,
-		typename iterator_traits<Iterator>::difference_type,
-		typename iterator_traits<Iterator>::pointer,
-		typename iterator_traits<Iterator>::reference> {
+		<typename iterator_traits<Iter>::iterator_category,
+		typename iterator_traits<Iter>::value_type,
+		typename iterator_traits<Iter>::difference_type,
+		typename iterator_traits<Iter>::pointer,
+		typename iterator_traits<Iter>::reference> {
+
+	private:
+		Iter	_t;
 
 	protected:
-		Iterator	_ptr;
+		Iter	_ptr;
+		typedef iterator_traits<Iter>	itraits;
 
 	public:
-		typedef Iterator											iterator_type;
-		typedef typename iterator_traits<Iterator>::difference_type	difference_type;
-		typedef typename iterator_traits<Iterator>::reference		reference;
-		typedef typename iterator_traits<Iterator>::pointer			pointer;
+		typedef Iter								iterator_type;
+		typedef typename itraits::difference_type	difference_type;
+		typedef typename itraits::reference			reference;
+		typedef typename itraits::pointer			pointer;
+		typedef typename itraits::value_type		value_type;
+		typedef typename itraits::iterator_category	iterator_category;
+
+		reverse_iterator() {
+			this->_ptr = NULL;
+			this->_t = NULL;
+			return ;
+		}
+
+		explicit reverse_iterator(iterator_type x) {
+			this->_ptr = x;
+			this->_t = x;
+			return ;
+		}
+
+		template <class U>
+		reverse_iterator(const reverse_iterator<U> &other) {
+			this->_ptr = other.base();
+			this->_t = other.base();
+			return ;
+		}
+
+		template <class U>
+		reverse_iterator&	operator=(const reverse_iterator<U> &rhs) {
+			this->_ptr = rhs.base();
+			this->_t = this->_ptr;
+			return (*this);
+		}
+
+		iterator_type	base() const {
+			return (this->_ptr);
+		}
+
+		reference	operator*() const {
+			Iter	tmp;
+
+			tmp = this->_ptr;
+			--tmp;
+			return (*tmp);
+		}
+
+		pointer	operator->() const {
+			Iter	tmp;
+
+			tmp = this->_ptr;
+			--tmp;
+			return (tmp);
+		}
+
+		reference	operator[](difference_type n) const {
+			return *(*this + n);
+		}
+
+		reverse_iterator&	operator++() {
+			--(this->_ptr);
+			return (*this);
+		}
+
+		reverse_iterator	operator++(int) {
+			reverse_iterator	tmp(*this);
+			--(this->_ptr);
+			return (tmp);
+		}
+
+		reverse_iterator&	operator--() {
+			++(this->_ptr);
+			return (*this);
+		}
+
+		reverse_iterator	operator--(int) {
+			reverse_iterator	tmp(*this);
+			++(this->_ptr);
+			return (tmp);
+		}
+
+		reverse_iterator&	operator+=(difference_type n) {
+			this->_ptr -= n;
+			return (*this);
+		}
+
+		reverse_iterator	operator+(difference_type n) const {
+			return (reverse_iterator(this->_ptr - n));
+		}
+
+		reverse_iterator&	operator-=(difference_type n) {
+			this->_ptr += n;
+			return (*this);
+		}
+
+		reverse_iterator	operator-(difference_type n) const {
+			return (reverse_iterator(this->_ptr + n));
+		}
 	};
+
+	template <class Iter1, class Iter2>
+	bool	operator==(const reverse_iterator<Iter1> &lhs,
+						const reverse_iterator<Iter2> &rhs){
+		return (lhs.base() == rhs.base());
+	}
+
+	template <class Iter1, class Iter2>
+	bool	operator!=(const reverse_iterator<Iter1> &lhs,
+						const reverse_iterator<Iter2> &rhs){
+		return (lhs.base() != rhs.base());
+	}
+
+	template <class Iter1, class Iter2>
+	bool	operator<(const reverse_iterator<Iter1> &lhs,
+						const reverse_iterator<Iter2> &rhs){
+		return (lhs.base() < rhs.base());
+	}
+
+	template <class Iter1, class Iter2>
+	bool	operator<=(const reverse_iterator<Iter1> &lhs,
+						const reverse_iterator<Iter2> &rhs){
+		return (lhs.base() <= rhs.base());
+	}
+
+	template <class Iter1, class Iter2>
+	bool	operator>(const reverse_iterator<Iter1> &lhs,
+						const reverse_iterator<Iter2> &rhs){
+		return (lhs.base() > rhs.base());
+	}
+
+	template <class Iter1, class Iter2>
+	bool	operator>=(const reverse_iterator<Iter1> &lhs,
+						const reverse_iterator<Iter2> &rhs){
+		return (lhs.base() >= rhs.base());
+	}
 
 	template <class Iter>
 	class vt_iterator: public iterator

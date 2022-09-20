@@ -14,15 +14,16 @@ namespace ft {
 	class vector {
 		public:
 			// TYPEDEFS
-			typedef T							value_type;
-			typedef Allocator					allocator_type;
-			typedef std::size_t					size_type;
-			typedef std::ptrdiff_t				difference_type;
-			typedef value_type&					reference;
-			typedef const value_type&			const_reference;
-			typedef vt_iterator<T*>				iterator;
-			typedef vt_iterator<const T*>		const_iterator;
-
+			typedef T										value_type;
+			typedef Allocator								allocator_type;
+			typedef std::size_t								size_type;
+			typedef std::ptrdiff_t							difference_type;
+			typedef value_type&								reference;
+			typedef const value_type&						const_reference;
+			typedef vt_iterator<T*>							iterator;
+			typedef vt_iterator<const T*>					const_iterator;
+			typedef ft::reverse_iterator<iterator>			reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 
 		private:
@@ -181,6 +182,22 @@ namespace ft {
 
 			const_iterator	end() const {
 				return (const_iterator(this->_head + this->_count));
+			}
+
+			reverse_iterator	rbegin() {
+				return (reverse_iterator(end()));
+			}
+
+			const_reverse_iterator	rbegin() const {
+				return (const_reverse_iterator(end()));
+			}
+
+			reverse_iterator	rend() {
+				return (reverse_iterator(begin()));
+			}
+
+			const_reverse_iterator	rend() const {
+				return (const_reverse_iterator(begin()));
 			}
 
 			// reverse_iterator	rbegin() {
