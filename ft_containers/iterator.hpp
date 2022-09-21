@@ -274,6 +274,11 @@ namespace ft {
 		}
 	};
 
+	template <class Iter1, class Iter2>
+	std::ptrdiff_t	operator-(const vt_iterator<Iter1>& lhs,
+								const vt_iterator<Iter2>& rhs) {
+		return (lhs.base() - rhs.base());
+	}
 }
 
 #endif
