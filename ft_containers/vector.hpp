@@ -65,7 +65,8 @@ namespace ft {
 				return ;
 			}
 
-			vector(const vector& other) {
+			vector(const vector& other) :
+				_alloc(), _count(0), _cap(0), _head(0) {
 				*this = other;
 				return ;
 			}
@@ -265,45 +266,114 @@ namespace ft {
 			}
 
 			iterator	insert(iterator pos, const T& value) {
-			difference_type	dif = pos - begin();
-			T				*tmp;
-			int				j = 0;
+				difference_type	dif = pos - begin();
+				T				*tmp;
+				size_t			j = 0;
 
-			if (pos == end()) {
-				push_back(value);
+				if (pos == end()) {
+					push_back(value);
+					return (this->_head + dif);
+				}
+				if (pos > end() || pos < begin())
+					throw LengthError();
+				if (this->_count >= this->_cap)
+					reserve(this->_cap + ((this->_cap + 2) / 2));
+				tmp = this->_alloc.allocate(this->_cap);
+				for (size_t i = 0; i != this->_count; ++i) {
+					if (i == dif) {
+						this->_alloc.construct(tmp + i + j, value);
+						++j;
+					}
+					this->_alloc.construct(tmp + i + j, this->_head[i]);
+				}
+				for (size_t i = 0; i < this->_count; ++i) {
+					this->_alloc.destroy(this->_head + i);
+				}
+				this->_alloc.deallocate(this->_head, this->_count);
+				this->_head = tmp;
+				++(this->_count);
 				return (this->_head + dif);
 			}
-			if (pos > end() || pos < begin())
-				throw LengthError();
-			if (this->_count >= this->_cap)
-				reserve(this->_cap + ((this->_cap + 2) / 2));
-			tmp = this->_alloc.allocate(this->_cap);
-			for (size_t i = 0; i != this->_count; ++i) {
-				if (i == dif) {
-					this->_alloc.construct(tmp + i + j, value);
-					++j;
+
+			void	insert(iterator pos, size_type count, const T& value) {
+				difference_type	dif = pos - begin();
+				T				*tmp;
+				size_t			j = 0;
+
+				if (pos == end()) {
+					while (j < count) {
+						push_back(value);
+						++j;
+					}
+					return ;
 				}
-				this->_alloc.construct(tmp + i + j, this->_head[i]);
+				if (pos > end() || pos < begin())
+					throw LengthError();
+				if (this->_count + count >= this->_cap)
+					reserve(this->_cap + count + ((this->_cap + 2) / 2));
+				tmp = this->_alloc.allocate(this->_cap);
+				for (size_t i = 0; i != this->_count; ++i) {
+					if (i == dif) {
+						while (j < count) {
+							this->_alloc.construct(tmp + i + j, value);
+							++j;
+						}
+					}
+					this->_alloc.construct(tmp + i + j, this->_head[i]);
+				}
+				for (size_t i = 0; i < this->_count; ++i) {
+					this->_alloc.destroy(this->_head + i);
+				}
+				this->_alloc.deallocate(this->_head, this->_count);
+				this->_head = tmp;
+				this->_count += count;
+				return ;
 			}
-			for (size_t i = 0; i < this->_count; ++i) {
-				this->_alloc.destroy(this->_head + i);
+
+			template <class InputIt>
+			void	insert(iterator pos, InputIt first, InputIt last,
+						typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) {
+				difference_type	dif = pos - begin();
+				T				*tmp;
+				size_t			j = 0;
+				size_t			count = 0;
+				InputIt			it;
+
+				if (pos == end()) {
+					for (; first != last; ++first) {
+						push_back(*first);
+					}
+					return ;
+				}
+				it = first;
+				for (; it != last; ++it) {
+					++count;
+				}
+				if (pos > end() || pos < begin())
+					throw LengthError();
+				if (this->_count + count >= this->_cap)
+					reserve(this->_cap + count + ((this->_cap + 2) / 2));
+				tmp = this->_alloc.allocate(this->_cap);
+				for (size_t i = 0; i != this->_count; ++i) {
+					if (i == dif) {
+						while (j < count) {
+							this->_alloc.construct(tmp + i + j, *first);
+							// std::cout << "iterJ: " << i + j << std::endl;
+							++j;
+							++first;
+						}
+					}
+					// std::cout << "iter: " << i + j << std::endl;
+					this->_alloc.construct(tmp + i + j, this->_head[i]);
+				}
+				for (size_t i = 0; i < this->_count; ++i) {
+					this->_alloc.destroy(this->_head + i);
+				}
+				this->_alloc.deallocate(this->_head, this->_count);
+				this->_head = tmp;
+				this->_count += count;
+				return ;
 			}
-			this->_alloc.deallocate(this->_head, this->_count);
-			this->_head = tmp;
-			++(this->_count);
-			return (this->_head + dif);
-			}
-
-			// void	insert(iterator pos, size_type count, const T&& value) {
-
-			// 	return ;
-			// }
-
-			// template <class InputIt>
-			// void	insert(iterator pos, InputIt first, InputIt last) {
-
-				// return ;
-			// }
 
 			// iterator	erase(iterator pos) {
 			

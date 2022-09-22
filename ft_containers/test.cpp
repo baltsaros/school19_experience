@@ -8,6 +8,14 @@
 
 int	main(void) {
 
+	// testing enable_if, is_integral, etc
+	// {
+	// 	std::cout << ft::is_integral<int>::value << std::endl;
+	// 	std::cout << ft::is_integral<const int>::value << std::endl;
+	// 	std::cout << ft::is_integral<volatile int>::value << std::endl;
+	// 	std::cout << ft::is_integral<const volatile int>::value << std::endl;
+	// }
+
 	// testing size vs capacity
 	// {
 		// std::vector<int>	v1 (100, 100);
@@ -170,6 +178,7 @@ int	main(void) {
 		std::vector<int>			v3;
 		ft::vector<int>				v4;
 
+		std::cout << "+++ Testing simple insert(pos, value) +++" << std::endl;
 		std::cout << "std array before insert: ";
 		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
 			std::cout << *it << " ";
@@ -208,11 +217,82 @@ int	main(void) {
 			std::cout << *it << " ";
 		}
 		std::cout << std::endl;
+		std::cout << std::endl;
 
-		std::cout << ft::is_integral<int>::value << std::endl;
-		std::cout << ft::is_integral<const int>::value << std::endl;
-		std::cout << ft::is_integral<volatile int>::value << std::endl;
-		std::cout << ft::is_integral<const volatile int>::value << std::endl;
+		std::cout << "+++ Testing insert(pos, count, value) +++" << std::endl;
+		std::cout << "std array before insert: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "std: v1.insert(2, 2, 22)" << std::endl;
+		it1 = v1.begin() + 2;
+		v1.insert(it1, 2, 22);
+		std::cout << "std: v1.insert(5, 3, 33)" << std::endl;
+		it1 = v1.begin() + 5;
+		v1.insert(it1, 3, 33);
+		std::cout << "std array after insert: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << std::endl;
+
+		std::cout << "ft array before insert: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "ft: v2.insert(2, 2, 22)" << std::endl;
+		it2 = v2.begin() + 2;
+		v2.insert(it2, 2, 22);
+		std::cout << "ft: v2.insert(5, 3, 33)" << std::endl;
+		it2 = v2.begin() + 5;
+		v2.insert(it2, 3, 33);
+		std::cout << "ft array after insert: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << std::endl;
+
+		std::cout << "+++ Testing insert(pos, It1, It2) +++" << std::endl;
+		std::cout << "std array before insert: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "std: v1.insert(2, 2, 22)" << std::endl;
+		it1 = v1.begin() + 2;
+		v1.insert(it1, v1.begin(), v1.end());
+		std::cout << "std: v1.insert(5, 3, 33)" << std::endl;
+		it1 = v1.begin() + 5;
+		v1.insert(it1, 3, 33);
+		std::cout << "std array after insert: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << std::endl;
+
+		std::cout << "ft array before insert: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "ft: v2.insert(2, begin, end)" << std::endl;
+		ft::vector<int>	v5(v2);
+		it2 = v2.begin() + 2;
+		v2.insert(it2, v2.begin(), v2.end());
+		std::cout << "ft: v2.insert(5, 3, 33)" << std::endl;
+		it2 = v2.begin() + 5;
+		v2.insert(it2, 3, 33);
+		std::cout << "ft array after insert: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << std::endl;	
 		// std::cout << "std: v1.clear()" << std::endl;
 		// std::cout << "v1.size: " << v1.size() << std::endl;
 		// std::cout << "v1.capacity: " << v1.capacity() << std::endl;
