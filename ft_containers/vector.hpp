@@ -375,10 +375,32 @@ namespace ft {
 				return ;
 			}
 
-			// iterator	erase(iterator pos) {
-			
-			// 	return ;
-			// }
+			iterator	erase(iterator pos) {
+				difference_type	dif = pos - begin();
+				T				*tmp;
+				size_t			j = 0;
+
+				if (pos == end()) {
+					pop_back();
+					return (this->_head + dif);
+				}
+				if (pos > end() || pos < begin())
+					throw LengthError();
+				tmp = this->_alloc.allocate(this->_cap);
+				for (size_t i = 0; i != this->_count; ++i) {
+					if (i == dif)
+						continue;
+					this->_alloc.construct(tmp + j, this->_head[i]);
+					j++;
+				}
+				for (size_t i = 0; i < this->_count; ++i) {
+					this->_alloc.destroy(this->_head + i);
+				}
+				this->_alloc.deallocate(this->_head, this->_count);
+				this->_head = tmp;
+				--(this->_count);
+				return (end());
+			}
 
 			// iterator	erase(iterator first, iterator last) {
 
