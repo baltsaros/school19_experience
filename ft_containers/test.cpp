@@ -169,30 +169,45 @@ int	main(void) {
 		ft::vector<int>::iterator	it2;
 		std::vector<int>			v3;
 		ft::vector<int>				v4;
-		std::ptrdiff_t				dif;
 
+		std::cout << "std array before insert: ";
 		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
 			std::cout << *it << " ";
 		}
 		std::cout << std::endl;
-		std::cout << "std: v1.insert(3, 50)" << std::endl;
-		it1 = v1.begin() + 2;
-		v1.insert(it1, 50);
+		std::cout << "std: v1.insert(4, 50)" << std::endl;
+		it1 = v1.begin() + 4;
+		it1 = v1.insert(it1, 50);
+		std::cout << "std return: " << *it1 << std::endl;
+		std::cout << "std: v1.insert(5, 55)" << std::endl;
+		it1 = v1.begin() + 5;
+		it1 = v1.insert(it1, 55);
+		std::cout << "std return: " << *it1 << std::endl;
+		std::cout << "std array after insert: ";
 		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
 			std::cout << *it << " ";
 		}
 		std::cout << std::endl;
-		dif = it1 - v1.begin();
-		std::cout << "dif: " << dif << std::endl;
+		std::cout << std::endl;
+
+		std::cout << "ft array before insert: ";
 		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
 			std::cout << *it << " ";
 		}
 		std::cout << std::endl;
-		std::cout << "std: v1.insert(3, 50)" << std::endl;
-		it2 = v2.begin() + 2;
-		v2.insert(it2, 50);
-		dif = it2 - v2.begin();
-		std::cout << "dif: " << dif << std::endl;
+		std::cout << "ft: v1.insert(4, 50)" << std::endl;
+		it2 = v2.begin() + 4;
+		it2 = v2.insert(it2, 50);
+		std::cout << "ft return: " << *it2 << std::endl;
+		std::cout << "ft: v1.insert(5, 55)" << std::endl;
+		it2 = v2.begin() + 5;
+		it2 = v2.insert(it2, 55);
+		std::cout << "ft return: " << *it2 << std::endl;
+		std::cout << "ft array after insert: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
 
 		// std::cout << "std: v1.clear()" << std::endl;
 		// std::cout << "v1.size: " << v1.size() << std::endl;
