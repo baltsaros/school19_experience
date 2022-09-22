@@ -14,6 +14,9 @@ namespace ft {
 	typedef integral_constant<bool, false>	false_type;
 
 	template <class T> struct is_integral: public false_type {};
+	template <class T> struct is_integral<const T>: is_integral<T> {};
+	template <class T> struct is_integral<volatile T>: is_integral<T> {};
+	template <class T> struct is_integral<const volatile T>: is_integral<T> {};
 	template <> struct is_integral<bool> : public true_type {};
 	template <> struct is_integral<char> : public true_type {};
 	template <> struct is_integral<signed char> : public true_type {};

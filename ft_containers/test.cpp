@@ -209,6 +209,10 @@ int	main(void) {
 		}
 		std::cout << std::endl;
 
+		std::cout << ft::is_integral<int>::value << std::endl;
+		std::cout << ft::is_integral<const int>::value << std::endl;
+		std::cout << ft::is_integral<volatile int>::value << std::endl;
+		std::cout << ft::is_integral<const volatile int>::value << std::endl;
 		// std::cout << "std: v1.clear()" << std::endl;
 		// std::cout << "v1.size: " << v1.size() << std::endl;
 		// std::cout << "v1.capacity: " << v1.capacity() << std::endl;
