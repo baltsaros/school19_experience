@@ -558,6 +558,69 @@ int	main(void) {
 		std::cout << "v2 >= v7? " << (v2 >= v7) << std::endl;
 		std::cout << std::endl;
 
+		std::cout << "+++ swap(v1, v2) +++" << std::endl;
+		std::cout << "std: v1 before swap: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "std: v6 before swap: ";
+		for (std::vector<int>::iterator it = v6.begin(); it != v6.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "v1.size: " << v1.size() << std::endl;
+		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+		std::cout << "v6.size: " << v6.size() << std::endl;
+		std::cout << "v6.capacity: " << v6.capacity() << std::endl;
+		swap(v1, v6);
+		std::cout << "std: v1 after swap: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "std: v6 after swap: ";
+		for (std::vector<int>::iterator it = v6.begin(); it != v6.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "v1.size: " << v1.size() << std::endl;
+		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+		std::cout << "v6.size: " << v6.size() << std::endl;
+		std::cout << "v6.capacity: " << v6.capacity() << std::endl;
+		std::cout << std::endl;
+	
+		std::cout << "ft: v2 before swap: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "ft: v7 before swap: ";
+		for (ft::vector<int>::iterator it = v7.begin(); it != v7.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "v2.size: " << v2.size() << std::endl;
+		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+		std::cout << "v7.size: " << v7.size() << std::endl;
+		std::cout << "v7.capacity: " << v7.capacity() << std::endl;
+		swap(v2, v7);
+		std::cout << "ft: v2 after swap: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "ft: v7 after swap: ";
+		for (ft::vector<int>::iterator it = v7.begin(); it != v7.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "v2.size: " << v2.size() << std::endl;
+		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+		std::cout << "v7.size: " << v7.size() << std::endl;
+		std::cout << "v7.capacity: " << v7.capacity() << std::endl;
+		std::cout << std::endl;
+	
 		// std::cout << "std: v1.clear()" << std::endl;
 		// std::cout << "v1.size: " << v1.size() << std::endl;
 		// std::cout << "v1.capacity: " << v1.capacity() << std::endl;

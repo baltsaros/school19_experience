@@ -586,6 +586,16 @@ namespace ft {
 						const vector<T,Alloc>& rhs) {
 		return (!(lhs < rhs));
 	}
+
+	template <class T, class Alloc>
+	void	swap(vector<T, Alloc>& lhs, vector<T, Alloc>& rhs) {
+		vector<T, Alloc>	tmp;
+
+		tmp = rhs;
+		rhs = lhs;
+		lhs = tmp;
+		return ;
+	}
 }
 
 #endif
