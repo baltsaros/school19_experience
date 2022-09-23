@@ -396,15 +396,15 @@ int	main(void) {
 			std::cout << *it << " ";
 		}
 		std::cout << std::endl;
-		std::cout << "std: v1.resize(0, 3)" << std::endl;
-		v1.resize(0, 3);
-		std::cout << "std array after resize: ";
-		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
-			std::cout << *it << " ";
-		}
-		std::cout << std::endl;
-		std::cout << "v1.size: " << v1.size() << std::endl;
-		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+		// std::cout << "std: v1.resize(0, 3)" << std::endl;
+		// v1.resize(0, 3);
+		// std::cout << "std array after resize: ";
+		// for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+		// 	std::cout << *it << " ";
+		// }
+		// std::cout << std::endl;
+		// std::cout << "v1.size: " << v1.size() << std::endl;
+		// std::cout << "v1.capacity: " << v1.capacity() << std::endl;
 		std::cout << std::endl;
 
 		std::cout << "ft array before resize: ";
@@ -426,15 +426,136 @@ int	main(void) {
 			std::cout << *it << " ";
 		}
 		std::cout << std::endl;
-		std::cout << "ft: v2.resize(0, 3)" << std::endl;
-		v2.resize(0, 3);
-		std::cout << "ft array after resize: ";
+		// std::cout << "ft: v2.resize(0, 3)" << std::endl;
+		// v2.resize(0, 3);
+		// std::cout << "ft array after resize: ";
+		// for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+		// 	std::cout << *it << " ";
+		// }
+		// std::cout << std::endl;
+		// std::cout << "v2.size: " << v2.size() << std::endl;
+		// std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+		std::cout << std::endl;
+
+
+		std::cout << "+++ swap(vector) +++" << std::endl;
+		std::cout << "std: v1 before swap: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "std: v6 before swap: ";
+		for (std::vector<int>::iterator it = v6.begin(); it != v6.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "v1.size: " << v1.size() << std::endl;
+		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+		std::cout << "v6.size: " << v6.size() << std::endl;
+		std::cout << "v6.capacity: " << v6.capacity() << std::endl;
+		v1.swap(v6);
+		std::cout << "std: v1 after swap: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "std: v6 after swap: ";
+		for (std::vector<int>::iterator it = v6.begin(); it != v6.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "v1.size: " << v1.size() << std::endl;
+		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+		std::cout << "v6.size: " << v6.size() << std::endl;
+		std::cout << "v6.capacity: " << v6.capacity() << std::endl;
+		std::cout << std::endl;
+	
+		std::cout << "ft: v2 before swap: ";
 		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "ft: v7 before swap: ";
+		for (ft::vector<int>::iterator it = v7.begin(); it != v7.end(); ++it) {
 			std::cout << *it << " ";
 		}
 		std::cout << std::endl;
 		std::cout << "v2.size: " << v2.size() << std::endl;
 		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+		std::cout << "v7.size: " << v7.size() << std::endl;
+		std::cout << "v7.capacity: " << v7.capacity() << std::endl;
+		v2.swap(v7);
+		std::cout << "ft: v2 after swap: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "ft: v7 after swap: ";
+		for (ft::vector<int>::iterator it = v7.begin(); it != v7.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "v2.size: " << v2.size() << std::endl;
+		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+		std::cout << "v7.size: " << v7.size() << std::endl;
+		std::cout << "v7.capacity: " << v7.capacity() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << "+++ comparison +++" << std::endl;
+		std::cout << "std: v1: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "std: v6: ";
+		for (std::vector<int>::iterator it = v6.begin(); it != v6.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "v1.size: " << v1.size() << std::endl;
+		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+		std::cout << "v6.size: " << v6.size() << std::endl;
+		std::cout << "v6.capacity: " << v6.capacity() << std::endl;
+		std::cout << "v1 == v1? " << (v1 == v1) << std::endl;
+		std::cout << "v1 != v1? " << (v1 != v1) << std::endl;
+		std::cout << "v1 == v6? " << (v1 == v6) << std::endl;
+		std::cout << "v1 != v6? " << (v1 != v6) << std::endl;
+		std::cout << "v1 <  v1? " << (v1 < v1) << std::endl;
+		std::cout << "v1 <= v1? " << (v1 <= v1) << std::endl;
+		std::cout << "v1 <  v6? " << (v1 < v6) << std::endl;
+		std::cout << "v1 <= v6? " << (v1 <= v6) << std::endl;
+		std::cout << "v1 >  v1? " << (v1 > v1) << std::endl;
+		std::cout << "v1 >= v1? " << (v1 >= v1) << std::endl;
+		std::cout << "v1 >  v6? " << (v1 > v6) << std::endl;
+		std::cout << "v1 >= v6? " << (v1 >= v6) << std::endl;
+		std::cout << std::endl;
+		
+		std::cout << "ft: v2: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "ft: v7: ";
+		for (ft::vector<int>::iterator it = v7.begin(); it != v7.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "v2.size: " << v2.size() << std::endl;
+		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+		std::cout << "v7.size: " << v7.size() << std::endl;
+		std::cout << "v7.capacity: " << v7.capacity() << std::endl;
+		std::cout << "v2 == v2? " << (v2 == v2) << std::endl;
+		std::cout << "v2 != v2? " << (v2 != v2) << std::endl;
+		std::cout << "v2 == v7? " << (v2 == v7) << std::endl;
+		std::cout << "v2 != v7? " << (v2 != v7) << std::endl;
+		std::cout << "v2 <  v2? " << (v2 < v2) << std::endl;
+		std::cout << "v2 <= v2? " << (v2 <= v2) << std::endl;
+		std::cout << "v2 <  v7? " << (v2 < v7) << std::endl;
+		std::cout << "v2 <= v7? " << (v2 <= v7) << std::endl;
+		std::cout << "v2 >  v2? " << (v2 > v2) << std::endl;
+		std::cout << "v2 >= v2? " << (v2 >= v2) << std::endl;
+		std::cout << "v2 >  v7? " << (v2 > v7) << std::endl;
+		std::cout << "v2 >= v7? " << (v2 >= v7) << std::endl;
 		std::cout << std::endl;
 
 		// std::cout << "std: v1.clear()" << std::endl;

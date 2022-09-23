@@ -451,32 +451,6 @@ namespace ft {
 				// INVALIDATE ITERATORS
 			}
 
-			// void	resize(size_type count) {
-			// 	T	*tmp;
-
-			// 	if (count > max_size())
-			// 		throw LengthError();
-			// 	if (this->_count == count)
-			// 		return ;
-			// 	else if (this->_cap < count)
-			// 		tmp = this->_alloc.allocate(count);
-			// 	else
-			// 		tmp = this->_alloc.allocate(this->_cap);
-			// 	for (size_t i = 0; i < count; ++i) {
-			// 		if (i < this->_count)
-			// 			this->_alloc.construct(tmp + i, this->_head[i]);
-			// 		else
-			// 			this->_alloc.construct(tmp + i, 0);
-			// 	}
-			// 	for (size_t i = 0; i < this->_count; ++i) {
-			// 		this->_alloc.destroy(this->_head + i);
-			// 	}
-			// 	this->_alloc.deallocate(this->_head, this->_count);
-			// 	this->_head = tmp;
-			// 	this->_count = count;
-			// 	return ;
-			// }
-
 			void	resize(size_type count, T value = T()) {
 				T	*tmp;
 
@@ -501,6 +475,14 @@ namespace ft {
 				this->_head = tmp;
 				this->_count = count;
 				return ;
+			}
+
+			void	swap(vector& other) {
+				vector<T>	tmp;
+
+				tmp = *this;
+				*this = other;
+				other = tmp;
 			}
 
 			// EXCEPTIONS
@@ -529,6 +511,81 @@ namespace ft {
 			};
 
 	};
+
+	template <class T, class Alloc>
+	bool	operator==(const vector<T, Alloc>& lhs,
+						const vector<T,Alloc>& rhs) {
+		if (lhs.size() != rhs.size())
+			return (false);
+		if (lhs.capacity() != rhs.capacity())
+			return (false);
+		if (lhs.get_allocator() != rhs.get_allocator())
+			return (false);
+		for (size_t i = 0; i != lhs.size(); ++i) {
+			if (lhs[i] != rhs[i])
+				return (false);
+		}
+		return (true);
+	}
+
+	template <class T, class Alloc>
+	bool	operator!=(const vector<T, Alloc>& lhs,
+						const vector<T,Alloc>& rhs) {
+		if (lhs.size() != rhs.size())
+			return (true);
+		if (lhs.capacity() != rhs.capacity())
+			return (true);
+		if (lhs.get_allocator() != rhs.get_allocator())
+			return (true);
+		for (size_t i = 0; i != lhs.size(); ++i) {
+			if (lhs[i] == rhs[i])
+				return (false);
+		}
+		return (true);
+	}
+
+	template <class InputIt1, class InputIt2>
+	bool	lexicographical_compare(InputIt1 first1, InputIt1 last1,
+									InputIt2 first2, InputIt2 last2) {
+		for (; (first1 != last1) && (first2 != last2);
+				++first1, (void) ++first2) {
+			if (*first1 < *first2)
+				return (true);
+			if (*first2 < *first1)
+				return (false);
+		}
+		return (first1 == last1) && (first2 != last2);
+	}
+
+	template <class T, class Alloc>
+	bool	operator<(const vector<T, Alloc>& lhs,
+						const vector<T,Alloc>& rhs) {
+		bool	ret;
+
+		ret = lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+		return (ret);
+	}
+
+	template <class T, class Alloc>
+	bool	operator<=(const vector<T, Alloc>& lhs,
+						const vector<T,Alloc>& rhs) {
+		bool	ret;
+
+		ret = lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+		return (ret || (lhs == rhs));
+	}
+
+	template <class T, class Alloc>
+	bool	operator>(const vector<T, Alloc>& lhs,
+						const vector<T,Alloc>& rhs) {
+		return (!(lhs <= rhs));
+	}
+
+	template <class T, class Alloc>
+	bool	operator>=(const vector<T, Alloc>& lhs,
+						const vector<T,Alloc>& rhs) {
+		return (!(lhs < rhs));
+	}
 }
 
 #endif
