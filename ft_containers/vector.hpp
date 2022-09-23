@@ -237,15 +237,18 @@ namespace ft {
 					throw LengthError();
 				if (new_cap <= this->_cap)
 					return ;
-				T	*tmp;
+				T*	tmp;
+
 				tmp = this->_alloc.allocate(new_cap);
-				for (size_t i = 0; i < this->_count; ++i) {
-					this->_alloc.construct(tmp + i, this->_head[i]);
+				if (this->_count > 0) {
+					for (size_t i = 0; i < this->_count; ++i) {
+						this->_alloc.construct(tmp + i, this->_head[i]);
+					}
+					for (size_t i = 0; i < this->_count; ++i) {
+						this->_alloc.destroy(this->_head + i);
+					}
+					this->_alloc.deallocate(this->_head, this->_count);
 				}
-				for (size_t i = 0; i < this->_count; ++i) {
-					this->_alloc.destroy(this->_head + i);
-				}
-				this->_alloc.deallocate(this->_head, this->_count);
 				this->_cap = new_cap;
 				this->_head = tmp;
 				// INVALIDATE ITERATORS
@@ -339,6 +342,8 @@ namespace ft {
 				size_t			count = 0;
 				InputIt			it;
 
+				if (pos > end() || pos < begin() || first > last)
+					throw LengthError();
 				if (pos == end()) {
 					for (; first != last; ++first) {
 						push_back(*first);
@@ -349,8 +354,6 @@ namespace ft {
 				for (; it != last; ++it) {
 					++count;
 				}
-				if (pos > end() || pos < begin())
-					throw LengthError();
 				if (this->_count + count >= this->_cap)
 					reserve(this->_cap + count + ((this->_cap + 2) / 2));
 				tmp = this->_alloc.allocate(this->_cap);
@@ -358,12 +361,10 @@ namespace ft {
 					if (i == dif) {
 						while (j < count) {
 							this->_alloc.construct(tmp + i + j, *first);
-							// std::cout << "iterJ: " << i + j << std::endl;
 							++j;
 							++first;
 						}
 					}
-					// std::cout << "iter: " << i + j << std::endl;
 					this->_alloc.construct(tmp + i + j, this->_head[i]);
 				}
 				for (size_t i = 0; i < this->_count; ++i) {
@@ -380,11 +381,13 @@ namespace ft {
 				T				*tmp;
 				size_t			j = 0;
 
-				if (pos == end()) {
+				if (pos == end() - 1) {
 					pop_back();
 					return (this->_head + dif);
 				}
-				if (pos > end() || pos < begin())
+				if (pos < begin())
+					dif = 0;
+				else if (pos >= end())
 					throw LengthError();
 				tmp = this->_alloc.allocate(this->_cap);
 				for (size_t i = 0; i != this->_count; ++i) {
@@ -399,17 +402,39 @@ namespace ft {
 				this->_alloc.deallocate(this->_head, this->_count);
 				this->_head = tmp;
 				--(this->_count);
-				return (end());
+				return (this->_head + dif);
+				// return (end() - 1);
 			}
 
-			// iterator	erase(iterator first, iterator last) {
+			iterator	erase(iterator first, iterator last) {
+				T		*tmp;
+				size_t	j = 0;
+				size_t	ret = 0;
 
-			// 	return ;
-			// }
+				tmp = this->_alloc.allocate(this->_cap);
+				for (iterator it = begin(); it != end(); ++it) {
+					if (it == first && first != last) {
+						++first;
+						continue ;
+					}
+					if (it == last)
+						ret = j;
+					this->_alloc.construct(tmp + j, *it);
+					++j;
+				}
+				for (size_t i = 0; i < this->_count; ++i) {
+					this->_alloc.destroy(this->_head + i);
+				}
+				this->_alloc.deallocate(this->_head, this->_count);
+				this->_head = tmp;
+				this->_count = j;
+				return (this->_head + ret);
+			}
 
 			void	push_back(const T& value) {
-				if (this->_count < this->_cap)
+				if (this->_count < this->_cap) {
 					this->_alloc.construct(this->_head + this->_count, value);
+				}
 				else {
 					this->reserve(this->_cap + ((this->_cap + 2) / 2));
 					this->_alloc.construct(this->_head + this->_count, value);

@@ -306,11 +306,12 @@ int	main(void) {
 			std::cout << *it << " ";
 		}
 		std::cout << std::endl;
-		std::cout << "std: v6.insert(2, 50)" << std::endl;
+		std::cout << "std: v6.insert(2, 55)" << std::endl;
 		it1 = v6.begin() + 2;
 		it1 = v6.insert(it1, 55);
 		std::cout << "std: v6.erase(it1)" << std::endl;
-		it1 = v6.erase(it1);
+		// it1 = v6.erase(it1);
+		it1 = v6.erase(v6.begin());
 		std::cout << "std return: " << *it1 << std::endl;
 		std::cout << "std array after erase: ";
 		for (std::vector<int>::iterator it = v6.begin(); it != v6.end(); ++it) {
@@ -319,10 +320,9 @@ int	main(void) {
 		std::cout << std::endl;
 		std::cout << std::endl;
 
-
 		ft::vector<int>	v7;
 
-		for (size_t i = 0; i < 4; ++i) {
+		for (int i = 0; i < 4; ++i) {
 			v7.push_back(i);
 		}
 		std::cout << "+++ erase(pos) +++" << std::endl;
@@ -331,14 +331,46 @@ int	main(void) {
 			std::cout << *it << " ";
 		}
 		std::cout << std::endl;
-		std::cout << "ft: v7.insert(2, 50)" << std::endl;
+		std::cout << "ft: v7.insert(2, 55)" << std::endl;
 		it2 = v7.begin() + 2;
 		it2 = v7.insert(it2, 55);
 		std::cout << "ft: v7.erase(it2)" << std::endl;
-		it2 = v7.erase(it2);
+		// it2 = v7.erase(it2);
+		it2 = v7.erase(v7.begin());
 		std::cout << "ft return: " << *it2 << std::endl;
 		std::cout << "ft array after erase: ";
 		for (ft::vector<int>::iterator it = v7.begin(); it != v7.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << std::endl;
+
+		std::cout << "+++ erase(first, last) +++" << std::endl;
+		std::cout << "std array before erase: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "std: v1.erase(v1.begin() + 1, v1.end() - 2)" << std::endl;	
+		it1 = v1.erase(v1.begin() + 1, v1.end() - 2);
+		std::cout << "std return: " << *it1 << std::endl;
+		std::cout << "std array after erase: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << std::endl;
+
+		std::cout << "ft array before erase: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "ft: v2.erase(v2.begin() + 1, v2.end() - 2)" << std::endl;	
+		it2 = v2.erase(v2.begin() + 1, v2.end() - 2);
+		std::cout << "ft return: " << *it2 << std::endl;
+		std::cout << "ft array after erase: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
 			std::cout << *it << " ";
 		}
 		std::cout << std::endl;
