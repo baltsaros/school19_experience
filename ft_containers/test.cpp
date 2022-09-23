@@ -376,6 +376,67 @@ int	main(void) {
 		std::cout << std::endl;
 		std::cout << std::endl;
 
+		std::cout << "+++ resize(count, value) +++" << std::endl;
+		std::cout << "std array before resize: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "std: v1.resize(2, 3)" << std::endl;
+		v1.resize(2, 3);
+		std::cout << "std array after resize: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "std: v1.resize(8, 3)" << std::endl;
+		v1.resize(8, 3);
+		std::cout << "std array after resize: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "std: v1.resize(0, 3)" << std::endl;
+		v1.resize(0, 3);
+		std::cout << "std array after resize: ";
+		for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "v1.size: " << v1.size() << std::endl;
+		std::cout << "v1.capacity: " << v1.capacity() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << "ft array before resize: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "ft: v2.resize(2, 3)" << std::endl;
+		v2.resize(2, 3);
+		std::cout << "ft array after resize: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "ft: v2.resize(8, 3)" << std::endl;
+		v2.resize(8, 3);
+		std::cout << "ft array after resize: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "ft: v2.resize(0, 3)" << std::endl;
+		v2.resize(0, 3);
+		std::cout << "ft array after resize: ";
+		for (ft::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "v2.size: " << v2.size() << std::endl;
+		std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+		std::cout << std::endl;
+
 		// std::cout << "std: v1.clear()" << std::endl;
 		// std::cout << "v1.size: " << v1.size() << std::endl;
 		// std::cout << "v1.capacity: " << v1.capacity() << std::endl;

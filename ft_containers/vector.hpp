@@ -451,6 +451,58 @@ namespace ft {
 				// INVALIDATE ITERATORS
 			}
 
+			// void	resize(size_type count) {
+			// 	T	*tmp;
+
+			// 	if (count > max_size())
+			// 		throw LengthError();
+			// 	if (this->_count == count)
+			// 		return ;
+			// 	else if (this->_cap < count)
+			// 		tmp = this->_alloc.allocate(count);
+			// 	else
+			// 		tmp = this->_alloc.allocate(this->_cap);
+			// 	for (size_t i = 0; i < count; ++i) {
+			// 		if (i < this->_count)
+			// 			this->_alloc.construct(tmp + i, this->_head[i]);
+			// 		else
+			// 			this->_alloc.construct(tmp + i, 0);
+			// 	}
+			// 	for (size_t i = 0; i < this->_count; ++i) {
+			// 		this->_alloc.destroy(this->_head + i);
+			// 	}
+			// 	this->_alloc.deallocate(this->_head, this->_count);
+			// 	this->_head = tmp;
+			// 	this->_count = count;
+			// 	return ;
+			// }
+
+			void	resize(size_type count, T value = T()) {
+				T	*tmp;
+
+				if (count > max_size())
+					throw LengthError();
+				if (this->_count == count)
+					return ;
+				else if (this->_cap < count)
+					tmp = this->_alloc.allocate(count);
+				else
+					tmp = this->_alloc.allocate(this->_cap);
+				for (size_t i = 0; i < count; ++i) {
+					if (i < this->_count)
+						this->_alloc.construct(tmp + i, this->_head[i]);
+					else
+						this->_alloc.construct(tmp + i, value);
+				}
+				for (size_t i = 0; i < this->_count; ++i) {
+					this->_alloc.destroy(this->_head + i);
+				}
+				this->_alloc.deallocate(this->_head, this->_count);
+				this->_head = tmp;
+				this->_count = count;
+				return ;
+			}
+
 			// EXCEPTIONS
 			class OutOfRange: public std::exception {
 				const char*	what(void) const throw() {
