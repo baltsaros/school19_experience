@@ -106,5 +106,19 @@ int	main(void) {
 	std::cout << "s2 <  s6 ? " << (s2 < s6) << std::endl;
 	std::cout << "s6 >  s2 ? " << (s6 > s2) << std::endl;
 	std::cout << std::endl;
+
+	std::cout << "+++ std vector with ft stack +++" << std::endl;
+	ft::stack<int, std::vector<int> >	s10;
+	for (size_t i = 0; i < 7; ++i) {
+		s10.push(i);
+		std::cout << "push: " << i << std::endl;
+		std::cout << "top:  " << s10.top() << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << "s10 size(): " << s10.size() << std::endl;
+	std::cout << "s10 empty(): " << s10.empty() << std::endl;
+	s10.pop();
+	std::cout << "s10 top() after pop(): " << s10.top() << std::endl;
+	std::cout << std::endl;
 	return (0);
 }
