@@ -3,9 +3,7 @@
 
 # include <memory>
 # include <exception>
-# include <algorithm>
 # include <cstring>
-# include <vector>
 # include "iterator.hpp"
 # include "enable_if.hpp"
 # include "is_integral.hpp"
