@@ -92,13 +92,10 @@ void	count_cmds(t_input *data, char *argv[])
 	data->ncmd = 1;
 	while (argv[i])
 	{
-		// while (argv[i + 1] && !strcmp(argv[i + 1], ";"))
-		// 	++i;
 		if (!strcmp(argv[i], "|") || !strcmp(argv[i], ";"))
 			++data->ncmd;
 		++i;
 	}
-	// printf("ncmd: %ld\n", data->ncmd);
 	data->ctab = ft_malloc(data, sizeof(t_cmd) * data->ncmd);
 }
 
@@ -112,7 +109,6 @@ void	init_struct(t_input *data, char *argv[])
 	data->ctab[j].clen = 0;
 	while (argv[i])
 	{
-		// printf("%ld: clen[%ld]: %d\n", i, j, data->ctab[j].clen);
 		if (!strcmp(argv[i], "|"))
 		{
 			data->ctab[j].is_pipe = 1;
@@ -122,8 +118,6 @@ void	init_struct(t_input *data, char *argv[])
 		else if (!strcmp(argv[i], ";"))
 		{
 			data->ctab[j].is_semicol = 1;
-			// if (data->ctab[j].clen == 1)
-			// 	data->ctab[j].clen = 0;
 			j++;
 			i++;
 			data->ctab[j].clen = 0;
@@ -139,7 +133,6 @@ void	init_struct(t_input *data, char *argv[])
 	j = 0;
 	while (j < data->ncmd)
 	{
-		// printf("clen[%ld]: %d\n", j, data->ctab[j].clen);
 		data->ctab[j].cmds = ft_malloc(data, sizeof(char *) * (data->ctab[j].clen + 1));
 		data->ctab[j].cmds[data->ctab[j].clen] = NULL;
 		++j;
@@ -167,7 +160,6 @@ void	create_cmds(t_input *data, char *argv[])
 		else if (!strcmp(argv[i], ";"))
 		{
 			data->ctab[j].is_semicol = 1;
-			// if (data->ctab[j].clen > 0)
 			j++;
 			i++;
 			k = 0;
@@ -185,10 +177,8 @@ void	execute_cmds(t_input *data, char *envp[], t_cmd *ctab)
 {
 	size_t	i;
 
-	// printf("cmd[0]: %s, clen: %d\n", ctab->cmds[0], ctab->clen);
 	if (ctab->clen == 0)
 		return ;
-		// error_check(data, -1);
 	i = 0;
 	// write(2, "cmd: ", 5);
 	// write(2, ctab->cmds[0], ft_strlen(ctab->cmds[0]));
@@ -245,7 +235,6 @@ int	main(int argc, char *argv[], char *envp[])
 	i = 0;
 	while (i < data.ncmd)
 	{
-		// printf("%ld: ", i);
 		execute_cmds(&data, envp, &data.ctab[i]);
 		++i;
 	}
