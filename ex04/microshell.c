@@ -76,11 +76,7 @@ void	*ft_malloc(t_input *data, size_t n)
 
 	ptr = malloc(n);
 	if (!ptr)
-	{
-		error_msg("error: fatal", NULL);
-		free_all(data);
-		exit(1);
-	}
+		error_check(data, -1);
 	return (ptr);
 }
 
@@ -113,7 +109,9 @@ void	init_struct(t_input *data, char *argv[])
 		{
 			data->ctab[j].is_pipe = 1;
 			j++;
+			i++;
 			data->ctab[j].clen = 0;
+			continue ;
 		}
 		else if (!strcmp(argv[i], ";"))
 		{
@@ -123,8 +121,6 @@ void	init_struct(t_input *data, char *argv[])
 			data->ctab[j].clen = 0;
 			continue ;
 		}
-		if (!argv[i])
-			break ;
 		data->ctab[j].clen++;
 		data->ctab[j].is_pipe = 0;
 		data->ctab[j].is_semicol = 0;
@@ -152,21 +148,18 @@ void	create_cmds(t_input *data, char *argv[])
 	{
 		if (!strcmp(argv[i], "|"))
 		{
-			data->ctab[j].is_pipe = 1;
-			j++;
-			i++;
-			k = 0;
-		}
-		else if (!strcmp(argv[i], ";"))
-		{
-			data->ctab[j].is_semicol = 1;
 			j++;
 			i++;
 			k = 0;
 			continue ;
 		}
-		if (!argv[i])
-			break ;
+		else if (!strcmp(argv[i], ";"))
+		{
+			j++;
+			i++;
+			k = 0;
+			continue ;
+		}
 		data->ctab[j].cmds[k] = argv[i];
 		k++;
 		i++;
@@ -177,9 +170,6 @@ void	execute_cmds(t_input *data, char *envp[], t_cmd *ctab)
 {
 	if (ctab->clen == 0)
 		return ;
-	// write(2, "cmd: ", 5);
-	// write(2, ctab->cmds[0], ft_strlen(ctab->cmds[0]));
-	// write(2, "\n", 1);
 	if (!strcmp(ctab->cmds[0], "cd"))
 	{
 		ft_cd(data, ctab);
@@ -198,11 +188,9 @@ void	execute_cmds(t_input *data, char *envp[], t_cmd *ctab)
 			close(ctab->fd[0]);
 		}
 		execve(ctab->cmds[0], ctab->cmds, envp);
-		{
-			error_msg("error: cannot execute", ctab->cmds[0]);
-			free_all(data);
-			exit(126);
-		}
+		error_msg("error: cannot execute", ctab->cmds[0]);
+		free_all(data);
+		exit(126);
 	}
 	else
 	{
@@ -221,11 +209,13 @@ int	main(int argc, char *argv[], char *envp[])
 	t_input	data;
 	size_t	i;
 
-	if (argc < 2)
+	if (argc < 1)
 	{
 		error_msg("Invalid amount of arguments!", NULL);
 		return (-1);
 	}
+	if (argc == 1)
+		return (0);
 	count_cmds(&data, argv + 1);
 	init_struct(&data, argv + 1);
 	create_cmds(&data, argv + 1);
