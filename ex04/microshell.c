@@ -57,17 +57,9 @@ void	error_check(t_input *data, int param)
 void	ft_cd(t_input *data, t_cmd *cmd)
 {
 	if (cmd->clen != 2)
-	{
 		error_msg("error: cd: bad arguments", NULL);
-		free_all(data);
-		exit(1);
-	}
-	if (chdir(cmd->cmds[1]))
-	{
+	else if (chdir(cmd->cmds[1]))
 		error_msg("error: cd: cannot change directory to", cmd->cmds[1]);
-		free_all(data);
-		exit(1);
-	}
 }
 
 void	*ft_malloc(t_input *data, size_t n)
@@ -209,11 +201,6 @@ int	main(int argc, char *argv[], char *envp[])
 	t_input	data;
 	size_t	i;
 
-	if (argc < 1)
-	{
-		error_msg("Invalid amount of arguments!", NULL);
-		return (-1);
-	}
 	if (argc == 1)
 		return (0);
 	count_cmds(&data, argv + 1);
