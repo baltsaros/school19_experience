@@ -9,6 +9,7 @@
 # include "is_integral.hpp"
 # include "lexi_compare.hpp"
 # include "pair.hpp"
+# include "rbtree.hpp"
 
 namespace ft {
 	template <class Key,
@@ -25,10 +26,10 @@ namespace ft {
 		typedef std::ptrdiff_t				difference_type;
 		typedef Compare						key_compare;
 		typedef Allocator					allocator_type;
-		typedef value_type&					reference
-		typedef const value_type&			const_reference
-		typedef Allocator::pointer			pointer;
-		typedef Allocator::const_pointer	const_pointer;
+		typedef value_type&					reference;
+		typedef const value_type&			const_reference;
+		typedef typename Allocator::pointer			pointer;
+		typedef typename Allocator::const_pointer	const_pointer;
 		// typedef iterator;
 		// typedef const_iterator;
 		// typedef reverse_iterator;

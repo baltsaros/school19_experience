@@ -16,14 +16,16 @@ namespace ft {
 		pair(const pair<U1, U2>& p): first(p.first), second(p.second) {}
 		pair(const pair& p): first(p.first), second(p.second) {}
 
-		pair&	operator=(const pair& other): first(other.first), second(other.second) {
-			return (*this)
+		pair&	operator=(const pair& other) {
+			first = other.first;
+			second = other.second;
+			return (*this);
 		}
 	};
 
 	template <class T1, class T2>
 	pair<T1, T2>	make_pair(T1 t, T2 u) {
-		return (pair<T1, T2>(x, y));
+		return (pair<T1, T2>(t, u));
 	}
 
 	template <class T1, class T2>

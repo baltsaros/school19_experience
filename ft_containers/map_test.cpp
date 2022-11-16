@@ -2,10 +2,11 @@
 #include <map>
 #include <string>
 #include <iterator>
-#include "map.hpp"
+// #include "map.hpp"
+#include "rbtree.hpp"
 
 int	main(void) {
-	std::map<std::string, int>	m{{"one", 1}, {"two", 2}, {"three", 3}};
+	ft::RBTree<int>	tr;
 
 	return (0);
 }
