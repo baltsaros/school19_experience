@@ -6,36 +6,36 @@
 
 // colors: 0/false - Black; 1/true - Red
 
-namespace ft {
+// namespace ft {
 
-	struct Nil_Node {
-		Nil_Node	*parent;
-		Nil_Node	*left;
-		Nil_Node	*right;
-		bool		color;
+// 	struct Nil_Node {
+// 		Nil_Node	*parent;
+// 		Nil_Node	*left;
+// 		Nil_Node	*right;
+// 		bool		color;
 
-		Nil_Node(): parent(NULL), left(NULL), right(NULL), color(0) {}
+// 		Nil_Node(): parent(NULL), left(NULL), right(NULL), color(0) {}
 
-		Nil_Node(Nil_Node *parent, Nil_Node *child):
-			parent(parent), left(child), right(child), color(1) {}
+// 		Nil_Node(Nil_Node *parent, Nil_Node *child):
+// 			parent(parent), left(child), right(child), color(1) {}
 
-		Nil_Node(Nil_Node const &src):
-			parent(src.parent), left(src.left), right(src.right), color(src.color) {}
-	};
+// 		Nil_Node(Nil_Node const &src):
+// 			parent(src.parent), left(src.left), right(src.right), color(src.color) {}
+// 	};
 
-	template <class T>
-	struct Node: Nil_Node {
-		T	key;
+// 	template <class T>
+// 	struct Node: Nil_Node {
+// 		T	key;
 
-		Node(): Nil_Node(), key(NULL) {}
+// 		Node(): Nil_Node(), key(NULL) {}
 
-		Node(T const &key, Nil_Node parent, Nil_Node child):
-			Nil_Node(parent, child), key(key) {}
+// 		Node(T const &key, Nil_Node parent, Nil_Node child):
+// 			Nil_Node(parent, child), key(key) {}
 
-		Node(Nil_Node const &nil): Nil_Node(nil), key(NULL) {}
+// 		Node(Nil_Node const &nil): Nil_Node(nil), key(NULL) {}
 
-		Node(Node const &src): Nil_Node(src), key(src.key) {}
-	};
+// 		Node(Node const &src): Nil_Node(src), key(src.key) {}
+// 	};
 
 	// template <class Key,
 	// 			class T,
@@ -92,41 +92,100 @@ namespace ft {
 
 	// };
 
-	template <class T, class Allocator = std::allocator<T> >
+// }
+
+namespace ft {
+
+	template <class T>
+	struct Node {
+		T		key;
+		bool	color;
+		size_t	level;
+		Node<T>	*left;
+		Node<T>	*right;
+		Node<T>	*parent;
+		Node(T k, bool c, size_t lvl, Node *p, Node *l, Node *r) :
+			key(k), color(c), level(lvl), parent(p), left(l), right(r) {} ;
+	};
+
+	template <class T>
 	class RBTree {
-		public:
-			typedef Nil_Node					nnode;
+		// public:
 			typedef Node<T>						node;
-			typedef std::size_t					size_type;
-			// typedef typename Allocator::template rebind<Nil_Node>::other	alloc_nil;
-			// typedef typename Allocator::template rebind<Node<T> >::other		alloc_node;
 
 		private:
-			nnode		*_root;
-			nnode		*_nil;
-			Allocator	_alloc;
-			// alloc_nil	_nn_alloc;
-			// alloc_nil	_node_alloc;
-			size_type	_size;
+			node		*_root;
 
 		public:
-			RBTree(): _root(NULL), _nil(NULL), _alloc(), _size(0) {
-				std::cout << "constr 1" << std::endl;
+			RBTree<T>(): _root(NULL) {
+				std::cout << "constructor" << std::endl;
 			}
 
-			RBTree(const Allocator &alloc): _size(0), _alloc(alloc) {
-				std::cout << "constr 2" << std::endl;
-				_nil = nilInit();
-				_root = _nil;
+			virtual ~RBTree<T>() {deleteNodes();}
+
+			void	insert(T key) {
+				if (!_root) {
+					node	*n = new node(key, false, 0, NULL, NULL, NULL);
+
+					_root = n;
+					return ;
+				}
+
+				node	*n = new node(key, true, 0, NULL, NULL, NULL);
+				node	*head = _root;
+				node	*parent = NULL;
+				while (head)
+				{
+					parent = head;
+					if (head->key > n->key)
+						head = head->left;
+					else
+						head = head->right;
+					n->level++;
+				}
+				n->parent = parent;
+				if (parent->key > n->key)
+					parent->left = n;
+				else
+					parent->right = n;
 			}
 
-			~RBTree(){}
-
-			nnode	*nilInit() {
-				nnode	*nil = _alloc.allocate(1);
-				_alloc.construct(nil, &nil);
-				return (nil);
+			void	printNode() {
+				printNode(_root);
 			}
+
+			void	printNode(node *tmp) {
+				std::cout << "root key: " << tmp->key << " | color: " << tmp->color;
+				std::cout << " | level: " << tmp->level << "\n";
+				if (tmp->left) {
+					std::cout << "left key: " << tmp->left->key << " | color: " << tmp->left->color;
+					std::cout << " | level: " << tmp->left->level << "\n";
+				}
+				if (tmp->right) {
+					std::cout << "right key: " << tmp->right->key << " | color: " << tmp->right->color;
+					std::cout << " | level: " << tmp->right->level << "\n";
+				}
+				if (tmp->left)
+					printNode(tmp->left);
+				if (tmp->right)
+					printNode(tmp->right);
+			}
+
+			void	deleteNodes() {
+				deleteNodes(_root);
+				_root = NULL;
+			}
+
+			void	deleteNodes(node *tmp) {
+				if (tmp->left)
+					deleteNodes(tmp->left);
+				if (tmp->right)
+					deleteNodes(tmp->right);
+				delete tmp;
+			}
+
+			// void	leftRotate()
+
 	};
 }
 
