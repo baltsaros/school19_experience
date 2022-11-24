@@ -159,14 +159,14 @@ namespace ft {
 				if (parent->left && parent->color && parent->left->color) {
 					if (uncle && uncle->color)
 						swapColors(parent, uncle);
-					else
-						rightRotation(parent->left, parent);
+					else if (parent != _root)
+						rightRotation(parent, parent->left);
 				}
 				if (parent->right && parent->color && parent->right->color) {
 					if (uncle && uncle->color)
 						swapColors(parent, uncle);
-					else
-						leftRotation(parent->right, parent);
+					else if (parent != _root)
+						leftRotation(parent, parent->right);
 				}
 				if (parent->left)
 					checkTree(parent->left, parent->right);
@@ -182,11 +182,12 @@ namespace ft {
 					uncle->color = !(uncle->color);
 			}
 
-			void	rightRotation(node *head, node *parent) {
-
+			void	rightRotation(node *parent, node *child) {
+				std::cout << "right rotation\n";
 			}
 
-			void	leftRotation(node *head, node *parent) {
+			void	leftRotation(node *parent, node *child) {
+				std::cout << "left rotation\n";
 
 			}
 
