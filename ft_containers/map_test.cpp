@@ -23,10 +23,11 @@ int	main(void) {
 	tr.insert(3);
 	tr.insert(1);
 	tr.insert(5);
-	std::cout << "\nit1\n";
-	tr.printNode();
+	// std::cout << "\nit1\n";
+	// tr.printNode();
 	tr.insert(7);
-	std::cout << "\nit2\n";
+	tr.insert(6);
+	// std::cout << "\nit2\n";
 	tr.printNode();
 
 

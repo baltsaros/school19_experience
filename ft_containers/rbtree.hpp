@@ -157,13 +157,13 @@ namespace ft {
 
 			void	checkTree(node *parent, node *uncle) {
 				if (parent->left && parent->color && parent->left->color) {
-					if ((parent->right && parent->color) || !(parent->right))
+					if (uncle && uncle->color)
 						swapColors(parent, uncle);
 					else
 						rightRotation(parent->left, parent);
 				}
 				if (parent->right && parent->color && parent->right->color) {
-					if ((parent->left && parent->color) || !(parent->left))
+					if (uncle && uncle->color)
 						swapColors(parent, uncle);
 					else
 						leftRotation(parent->right, parent);
