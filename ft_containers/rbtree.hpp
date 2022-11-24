@@ -148,6 +148,46 @@ namespace ft {
 					parent->left = n;
 				else
 					parent->right = n;
+				checkTree();
+			}
+
+			void	checkTree() {
+				checkTree(_root, NULL);
+			}
+
+			void	checkTree(node *parent, node *uncle) {
+				if (parent->left && parent->color && parent->left->color) {
+					if ((parent->right && parent->color) || !(parent->right))
+						swapColors(parent, uncle);
+					else
+						rightRotation(parent->left, parent);
+				}
+				if (parent->right && parent->color && parent->right->color) {
+					if ((parent->left && parent->color) || !(parent->left))
+						swapColors(parent, uncle);
+					else
+						leftRotation(parent->right, parent);
+				}
+				if (parent->left)
+					checkTree(parent->left, parent->right);
+				if (parent->right)
+					checkTree(parent->right, parent->left);
+			}
+
+			void	swapColors(node *parent, node *uncle) {
+				parent->color = !(parent->color);
+				if (parent->parent && parent->parent != _root)
+					parent->parent->color = !(parent->parent->color);
+				if (uncle)
+					uncle->color = !(uncle->color);
+			}
+
+			void	rightRotation(node *head, node *parent) {
+
+			}
+
+			void	leftRotation(node *head, node *parent) {
+
 			}
 
 			void	printNode() {

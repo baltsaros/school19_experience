@@ -8,8 +8,7 @@ C_RESET			=\033[0m
 
 NAME		= containers
 # SRC_DIR	= srcs
-SRCS		= main.cpp \
-				.cpp
+SRCS		= map_test.cpp
 # SRCS		= ${notdir ${SRCS_F}}
 
 OBJ_DIR		= objs
@@ -22,27 +21,32 @@ RMR			= rm -rf
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 INC			= -I .hpp
 
-${OBJ_DIR}/%.o : %.cpp
-			@mkdir -p ${OBJ_DIR}
-			@printf "${C_GREEN}.${C_RESET}";
-			@${GCC} ${CPPFLAGS} -c $< -o $@
-
-${NAME}:	${OBJS}
-			@${GCC} ${OBJS} -o ${NAME}
-			@printf "\n${C_GREEN_B}Finished!${C_RESET}\n";
-
-all:		${NAME}
+all:
+	@g++ $(SRCS) && ./a.out
 
 clean:
-			@echo "${C_RED_B}Deleting o-files...${C_RESET}";
-			@${RMR} ${OBJ_DIR}
-			@echo "${C_RED_B}O-files have been deleted!${C_RESET}";
+	@rm ./a.out
+# ${OBJ_DIR}/%.o : %.cpp
+# 			@mkdir -p ${OBJ_DIR}
+# 			@printf "${C_GREEN}.${C_RESET}";
+# 			@${GCC} ${CPPFLAGS} -c $< -o $@
 
-fclean:		clean
-			@echo "${C_RED_B}Deleting program ${NAME}...${C_RESET}";
-			@${RM} ${NAME}
-			@echo "${C_RED_B}Program ${NAME} has been deleted!${C_RESET}";
+# ${NAME}:	${OBJS}
+# 			@${GCC} ${OBJS} -o ${NAME}
+# 			@printf "\n${C_GREEN_B}Finished!${C_RESET}\n";
 
-re:			fclean all
+# all:		${NAME}
+
+# clean:
+# 			@echo "${C_RED_B}Deleting o-files...${C_RESET}";
+# 			@${RMR} ${OBJ_DIR}
+# 			@echo "${C_RED_B}O-files have been deleted!${C_RESET}";
+
+# fclean:		clean
+# 			@echo "${C_RED_B}Deleting program ${NAME}...${C_RESET}";
+# 			@${RM} ${NAME}
+# 			@echo "${C_RED_B}Program ${NAME} has been deleted!${C_RESET}";
+
+# re:			fclean all
 
 .PHONY:		all clean fclean re .cpp.o %.cpp%.o
