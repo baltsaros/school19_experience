@@ -160,13 +160,13 @@ namespace ft {
 					if (uncle && uncle->color)
 						swapColors(parent, uncle);
 					else if (parent != _root)
-						rightRotation(parent, parent->left);
+						rightRotation(parent->parent, parent);
 				}
 				if (parent->right && parent->color && parent->right->color) {
 					if (uncle && uncle->color)
 						swapColors(parent, uncle);
 					else if (parent != _root)
-						leftRotation(parent, parent->right);
+						leftRotation(parent->parent, parent);
 				}
 				if (parent->left)
 					checkTree(parent->left, parent->right);
@@ -182,13 +182,55 @@ namespace ft {
 					uncle->color = !(uncle->color);
 			}
 
-			void	rightRotation(node *parent, node *child) {
+			void	rightRotation(node *gparent, node *parent) {
 				std::cout << "right rotation\n";
+				std::cout << "gparent: " << gparent->key << "\n";
+				std::cout << "parent: " << parent->key << "\n";
+				std::cout << "parent->left: " << parent->left->key << "\n";
+				if (gparent->left) {
+					parent = gparent->left;
+					gparent->left = parent->right;
+				}
+				else {
+					parent = gparent->right;
+					gparent->right = parent->right;
+				}
+				if (parent->right)
+					parent->right->parent = gparent;
+				parent->parent = gparent->parent;
+				if (!gparent->parent)
+					_root = parent;
+				else if (gparent == gparent->parent->left)
+					gparent->parent->left = parent;
+				else
+					gparent->parent->right = parent;
+				parent->right = gparent;
+				gparent->parent = parent;
+				gparent->level++;
+				parent->level--;
 			}
 
-			void	leftRotation(node *parent, node *child) {
+			void	leftRotation(node *gparent, node *parent) {
 				std::cout << "left rotation\n";
-
+				if (gparent->right) {
+					parent = gparent->right;
+					gparent->right = parent->left;
+				}
+				else {
+					parent = gparent->left;
+					gparent->left = parent->left;
+				}
+				if (parent->left)
+					parent->left->parent = gparent;
+				parent->parent = gparent->parent;
+				if (!gparent->parent)
+					_root = parent;
+				else if (gparent == gparent->parent->left)
+					gparent->parent->left = parent;
+				else
+					gparent->parent->right = parent;
+				parent->left = gparent;
+				gparent->parent = parent;
 			}
 
 			void	printNode() {
