@@ -110,7 +110,7 @@ namespace ft {
 
 	template <class T>
 	class RBTree {
-		// public:
+		public:
 			typedef Node<T>						node;
 
 		private:
@@ -121,7 +121,7 @@ namespace ft {
 				std::cout << "constructor" << std::endl;
 			}
 
-			virtual ~RBTree<T>() {deleteNodes();}
+			virtual ~RBTree<T>() {deleteAll();}
 
 			void	insert(T key) {
 				if (!_root) {
@@ -235,6 +235,19 @@ namespace ft {
 				x->parent = y;
 			}
 
+			node*	search(T key) {
+				search(_root, key);
+			}
+
+			node*	search(node *tmp, T key) {
+				if (!tmp || tmp->key == key)
+					return (tmp);
+				if (key > tmp->key)
+					search(tmp->right, key);
+				else
+					search(tmp->left, key);
+			}
+
 			void	printNode() {
 				int	level = 0;
 
@@ -267,21 +280,31 @@ namespace ft {
 				if (tmp->right)
 					printNode(tmp->right);
 			}
+			void	deleteOne(node *t) {
 
-			void	deleteNodes() {
-				deleteNodes(_root);
+			}
+
+			void	transplant(node *u, node *v) {
+
+			}
+
+			void	deleteFixup(node *z) {
+
+			}
+
+			void	deleteAll() {
+				deleteAll(_root);
 				_root = NULL;
 			}
 
-			void	deleteNodes(node *tmp) {
+			void	deleteAll(node *tmp) {
 				if (tmp->left)
-					deleteNodes(tmp->left);
+					deleteAll(tmp->left);
 				if (tmp->right)
-					deleteNodes(tmp->right);
+					deleteAll(tmp->right);
 				delete tmp;
 			}
 
-			// void	leftRotate()
 
 	};
 }

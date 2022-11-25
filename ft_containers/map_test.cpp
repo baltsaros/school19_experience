@@ -7,6 +7,7 @@
 
 int	main(void) {
 	ft::RBTree<int>	tr;
+	ft::RBTree<int>	tr2;
 
 	// tr.insert(10);
 	// std::cout << "it1\n";
@@ -29,7 +30,6 @@ int	main(void) {
 	tr.insert(6);
 	// std::cout << "\nit2\n";
 	tr.printNode();
-
 
 	return (0);
 }
