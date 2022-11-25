@@ -285,7 +285,13 @@ namespace ft {
 			}
 
 			void	transplant(node *u, node *v) {
-
+				if (!u->parent)
+					_root = v;
+				else if (u == u->parent->left)
+					u->parent->left = v;
+				else
+					u->parent->right = v;
+				v->parent = u->parent;
 			}
 
 			void	deleteFixup(node *z) {
