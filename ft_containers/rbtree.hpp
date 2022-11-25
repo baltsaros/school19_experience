@@ -125,116 +125,130 @@ namespace ft {
 
 			void	insert(T key) {
 				if (!_root) {
-					node	*n = new node(key, false, 0, NULL, NULL, NULL);
+					node	*child = new node(key, false, 0, NULL, NULL, NULL);
 
-					_root = n;
+					_root = child;
 					return ;
 				}
 
-				node	*n = new node(key, true, 0, NULL, NULL, NULL);
+				node	*child = new node(key, true, 0, NULL, NULL, NULL);
 				node	*head = _root;
 				node	*parent = NULL;
 				while (head)
 				{
 					parent = head;
-					if (head->key > n->key)
+					if (head->key > child->key)
 						head = head->left;
 					else
 						head = head->right;
-					n->level++;
+					child->level++;
 				}
-				n->parent = parent;
-				if (parent->key > n->key)
-					parent->left = n;
+				child->parent = parent;
+				if (parent->key > child->key)
+					parent->left = child;
 				else
-					parent->right = n;
-				checkTree();
+					parent->right = child;
+				insertFixup(child);
 			}
 
-			void	checkTree() {
-				checkTree(_root, NULL);
-			}
+			void	insertFixup(node *child) {
+				node	*uncle;
 
-			void	checkTree(node *parent, node *uncle) {
-				if (parent->left && parent->color && parent->left->color) {
-					if (uncle && uncle->color)
-						swapColors(parent, uncle);
-					else if (parent != _root)
-						rightRotation(parent->parent, parent);
+				if (child == _root || child->parent == _root)
+					return ;
+				while (child != _root && child->parent->color) {
+					if (child->parent == child->parent->parent->left) {
+						uncle = child->parent->parent->right;
+						if (uncle && uncle->color) {
+							child->parent->color = 0;
+							uncle->color = 0;
+							child->parent->parent->color = 1;
+							child = child->parent->parent;
+						}
+						else {
+							if (child == child->parent->right) {
+								child = child->parent;
+								leftRotation(child);
+							}
+							child->parent->color = 0;
+							child->parent->parent->color = 1;
+							rightRotation(child->parent->parent);
+						} 
+					}
+					else {
+						uncle = child->parent->parent->left;
+						if (uncle && uncle->color) {
+							child->parent->color = 0;
+							uncle->color = 0;
+							child->parent->parent->color = 1;
+							child = child->parent->parent;
+						}
+						else {
+							if (child == child->parent->left) {
+								child = child->parent;
+								rightRotation(child);
+							}
+							child->parent->color = 0;
+							child->parent->parent->color = 1;
+							leftRotation(child->parent->parent);
+						}
+					}
 				}
-				if (parent->right && parent->color && parent->right->color) {
-					if (uncle && uncle->color)
-						swapColors(parent, uncle);
-					else if (parent != _root)
-						leftRotation(parent->parent, parent);
-				}
-				if (parent->left)
-					checkTree(parent->left, parent->right);
-				if (parent->right)
-					checkTree(parent->right, parent->left);
+				_root->color = 0;
 			}
 
-			void	swapColors(node *parent, node *uncle) {
-				parent->color = !(parent->color);
-				if (parent->parent && parent->parent != _root)
-					parent->parent->color = !(parent->parent->color);
-				if (uncle)
-					uncle->color = !(uncle->color);
-			}
+			void	rightRotation(node *x) {
+				node	*y;
 
-			void	rightRotation(node *gparent, node *parent) {
 				std::cout << "right rotation\n";
-				std::cout << "gparent: " << gparent->key << "\n";
-				std::cout << "parent: " << parent->key << "\n";
-				std::cout << "parent->left: " << parent->left->key << "\n";
-				if (gparent->left) {
-					parent = gparent->left;
-					gparent->left = parent->right;
-				}
-				else {
-					parent = gparent->right;
-					gparent->right = parent->right;
-				}
-				if (parent->right)
-					parent->right->parent = gparent;
-				parent->parent = gparent->parent;
-				if (!gparent->parent)
-					_root = parent;
-				else if (gparent == gparent->parent->left)
-					gparent->parent->left = parent;
+				y = x->left;
+				x->left = y->right;
+				if (y->right)
+					y->right->parent = x;
+				y->parent = x->parent;
+				if (!x->parent)
+					_root = y;
+				else if (x == x->parent->left)
+					x->parent->left = y;
 				else
-					gparent->parent->right = parent;
-				parent->right = gparent;
-				gparent->parent = parent;
-				gparent->level++;
-				parent->level--;
+					x->parent->right = y;
+				y->right = x;
+				x->parent = y;
 			}
 
-			void	leftRotation(node *gparent, node *parent) {
-				std::cout << "left rotation\n";
-				if (gparent->right) {
-					parent = gparent->right;
-					gparent->right = parent->left;
-				}
-				else {
-					parent = gparent->left;
-					gparent->left = parent->left;
-				}
-				if (parent->left)
-					parent->left->parent = gparent;
-				parent->parent = gparent->parent;
-				if (!gparent->parent)
-					_root = parent;
-				else if (gparent == gparent->parent->left)
-					gparent->parent->left = parent;
+			void	leftRotation(node *x) {
+				node	*y;
+
+				std::cout << "left rotation\n"; 
+				y = x->right;
+				x->right = y->left;
+				if (y->left)
+					y->left->parent = x;
+				y->parent = x->parent;
+				if (!x->parent)
+					_root = y;
+				else if (x == x->parent->left)
+					x->parent->left = y;
 				else
-					gparent->parent->right = parent;
-				parent->left = gparent;
-				gparent->parent = parent;
+					x->parent->right = y;
+				y->left = x;
+				x->parent = y;
 			}
 
 			void	printNode() {
+				int	level = 0;
+
+				fixLevels(_root, level);
 				printNode(_root);
+			}
+
+			void	fixLevels(node *tmp, int lvl) {
+				tmp->level = lvl;
+				++lvl;
+				if (tmp->left)
+					fixLevels(tmp->left, lvl);
+				if (tmp->right)
+					fixLevels(tmp->right, lvl);
 			}
 
 			void	printNode(node *tmp) {
