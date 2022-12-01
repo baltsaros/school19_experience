@@ -266,19 +266,70 @@ namespace ft {
 
 			void	deleteOne(node *toDelete)
 			{
-				node	*tmp;
-				bool	color;
+				node	*y;
+				node	*x;
+				bool	y_color;
 
-				tmp = toDelete;
-				color = tmp->color;
+				y = toDelete;
+				y_color = y->color;
+				if (!toDelete->left) {
+					x = toDelete->right;
+					transplant(toDelete, toDelete->right);
+				}
+				else if (!toDelete->right) {
+					x = toDelete->left;
+					transplant(toDelete, toDelete->left);
+				}
+				else {
+					y = fidMin(toDelete->right);
+					y_color = y->color;
+					x = y->right;
+					if (y->parent == toDelete)
+						x->parent = y;
+					else {
+						transplant(y, y->right);
+						y->right = toDelete->right;
+						y->right->parent = y;
+					}
+					transplant(toDelete, y);
+					y->left = toDelete->left;
+					y->left->parent = y;
+					y->color = toDelete->color;
+				}
+				if (!y_color)
+					deleteFixup(x);
+			}
 
+			void	deleteFixup(node *x) {
+
+			}
+
+			node*	findMin(node *tmp) {
+				if (!tmp)
+					return (nullptr);
+				while (tmp->left)
+					tmp = tmp->left;
+				return (tmp);
+			}
+
+			node*	findMax(node *tmp) {
+				if (!tmp)
+					return (nullptr);
+				while (tmp->right)
+					tmp = tmp->right;
+				return (tmp);
 			}
 
 			void	printNode() {
 				int	level = 0;
+				node	*tmp;
 
 				fixLevels(_root, level);
 				printNode(_root);
+				tmp = findMin(_root);
+				std::cout << "min: " << tmp->key << "\n";
+				tmp = findMax(_root);
+				std::cout << "max: " << tmp->key << "\n";
 			}
 
 			void	fixLevels(node *tmp, int lvl) {
@@ -291,37 +342,26 @@ namespace ft {
 			}
 
 			void	printNode(node *tmp) {
+				std::cout.width(15); 
 				std::cout << "root key: " << tmp->key << " | color: " << tmp->color;
+				std::cout.width(10); 
 				std::cout << " | level: " << tmp->level << "\n";
 				if (tmp->left) {
+					std::cout.width(15);
 					std::cout << "left key: " << tmp->left->key << " | color: " << tmp->left->color;
+					std::cout.width(10);
 					std::cout << " | level: " << tmp->left->level << "\n";
 				}
 				if (tmp->right) {
+					std::cout.width(15);
 					std::cout << "right key: " << tmp->right->key << " | color: " << tmp->right->color;
+					std::cout.width(10);
 					std::cout << " | level: " << tmp->right->level << "\n";
 				}
 				if (tmp->left)
 					printNode(tmp->left);
 				if (tmp->right)
 					printNode(tmp->right);
-			}
-			void	deleteOne(node *t) {
-
-			}
-
-			void	transplant(node *u, node *v) {
-				if (!u->parent)
-					_root = v;
-				else if (u == u->parent->left)
-					u->parent->left = v;
-				else
-					u->parent->right = v;
-				v->parent = u->parent;
-			}
-
-			void	deleteFixup(node *z) {
-
 			}
 
 			void	deleteAll() {
