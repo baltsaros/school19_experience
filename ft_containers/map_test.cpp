@@ -30,6 +30,5 @@ int	main(void) {
 	tr.insert(6);
 	// std::cout << "\nit2\n";
 	tr.printNode();
-
 	return (0);
 }

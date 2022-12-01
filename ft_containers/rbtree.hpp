@@ -304,6 +304,8 @@ namespace ft {
 			}
 
 			void	deleteAll(node *tmp) {
+				if (!tmp)
+					return ;
 				if (tmp->left)
 					deleteAll(tmp->left);
 				if (tmp->right)
