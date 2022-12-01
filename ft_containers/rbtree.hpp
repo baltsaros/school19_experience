@@ -248,6 +248,32 @@ namespace ft {
 					search(tmp->left, key);
 			}
 
+			void	transplant(node *u, node *v) {
+				if (!u->parent)
+					_root = v;
+				else if (u == u->parent->left)
+					u->parent->left = v;
+				else
+					u->parent->right = v;
+				v->parent = u->parent;
+			}
+
+			void	deleteOne(T key) {
+				node	*tmp = _root;
+
+
+			}
+
+			void	deleteOne(node *toDelete)
+			{
+				node	*tmp;
+				bool	color;
+
+				tmp = toDelete;
+				color = tmp->color;
+
+			}
+
 			void	printNode() {
 				int	level = 0;
 
