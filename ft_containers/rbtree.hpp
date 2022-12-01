@@ -261,7 +261,9 @@ namespace ft {
 			void	deleteOne(T key) {
 				node	*tmp = _root;
 
-
+				tmp = search(key);
+				std::cout << "found: " << tmp->key << "\n";
+				deleteOne(tmp);
 			}
 
 			void	deleteOne(node *toDelete)
@@ -301,7 +303,23 @@ namespace ft {
 			}
 
 			void	deleteFixup(node *x) {
+				node	*tmp;
 
+				while (x != _root && !x->color) {
+					if (x == x->parent->left) {
+						w = x->parent->right;
+						if (w->color) {
+							w->color = false;
+							x->parent->color = true;
+							leftRotation(x->parent);
+							w = x->parent->right;
+						}
+						if (!w->left->color && !w->right->color) {
+							w->color = true;
+							x = x->parent;
+						}
+					}
+				}
 			}
 
 			node*	findMin(node *tmp) {
