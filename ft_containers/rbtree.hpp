@@ -318,6 +318,43 @@ namespace ft {
 							w->color = true;
 							x = x->parent;
 						}
+						else {
+							if (!w->right->color) {
+								w->left->color = false;
+								w->color = true;
+								rightRotation(w);
+							}
+							w->color = x->parent->color;
+							x->parent->color = false;
+							w->right->color = false;
+							leftRotation(x->parent);
+							x = _root;
+						}
+					}
+					else {
+						w = x->parent->left;
+						if (w->color) {
+							w->color = false;
+							x->parent->color = true;
+							rightRotation(x->parent);
+							w = x->parent->left;
+						}
+						if (!w->right->color && !w->left->color) {
+							w->color = true;
+							x = x->parent;
+						}
+						else {
+							if (!w->left->color) {
+								w->right->color = false;
+								w->color = true;
+								leftRotation(w);
+							}
+							w->color = x->parent->color;
+							x->parent->color = false;
+							w->left->color = false;
+							rightRotation(x->parent);
+							x = _root;
+						}
 					}
 				}
 			}
