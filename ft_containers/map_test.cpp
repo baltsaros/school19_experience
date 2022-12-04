@@ -28,6 +28,9 @@ int	main(void) {
 	// tr.printNode();
 	tr.insert(7);
 	tr.insert(6);
+	tr.insert(16);
+	tr.insert(26);
+	tr.deleteOne(16);
 	// std::cout << "\nit2\n";
 	tr.printNode();
 	return (0);

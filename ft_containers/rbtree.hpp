@@ -236,19 +236,23 @@ namespace ft {
 			}
 
 			node*	search(T key) {
-				search(_root, key);
+				node	*tmp;
+
+				tmp = search(_root, key);
+				return (tmp);
 			}
 
 			node*	search(node *tmp, T key) {
 				if (!tmp || tmp->key == key)
 					return (tmp);
 				if (key > tmp->key)
-					search(tmp->right, key);
+					return search(tmp->right, key);
 				else
-					search(tmp->left, key);
+					return search(tmp->left, key);
 			}
 
 			void	transplant(node *u, node *v) {
+				std::cout << "transplanting\n";
 				if (!u->parent)
 					_root = v;
 				else if (u == u->parent->left)
@@ -261,6 +265,7 @@ namespace ft {
 			void	deleteOne(T key) {
 				node	*tmp = _root;
 
+				std::cout << "deleting " << key << "\n";
 				tmp = search(key);
 				std::cout << "found: " << tmp->key << "\n";
 				deleteOne(tmp);
@@ -268,42 +273,44 @@ namespace ft {
 
 			void	deleteOne(node *toDelete)
 			{
-				node	*y;
-				node	*x;
+				node	*y, *x, *tmp;
 				bool	y_color;
 
 				y = toDelete;
+				std::cout << "to delete: " << y->key << "\n";
 				y_color = y->color;
-				if (!toDelete->left) {
-					x = toDelete->right;
-					transplant(toDelete, toDelete->right);
+				if (!y->left) {
+					x = y->right;
+					transplant(y, y->right);
 				}
-				else if (!toDelete->right) {
-					x = toDelete->left;
-					transplant(toDelete, toDelete->left);
+				else if (!y->right) {
+					x = tmp->left;
+					transplant(y, y->left);
 				}
 				else {
-					y = fidMin(toDelete->right);
+					tmp = y;
+					y = findMin(tmp->right);
 					y_color = y->color;
 					x = y->right;
-					if (y->parent == toDelete)
-						x->parent = y;
-					else {
+					if (y->parent != tmp) {
 						transplant(y, y->right);
-						y->right = toDelete->right;
-						y->right->parent = y;
+						y->right = tmp->right;
+						tmp->right->parent = y;
 					}
-					transplant(toDelete, y);
-					y->left = toDelete->left;
+					transplant(tmp, y);
+					y->left = tmp->left;
 					y->left->parent = y;
-					y->color = toDelete->color;
+					y->color = tmp->color;
 				}
+				std::cout << "to delete2: " << toDelete->key << "\n";
+				delete toDelete;
+				std::cout << "del fixup\n";
 				if (!y_color)
 					deleteFixup(x);
 			}
 
 			void	deleteFixup(node *x) {
-				node	*tmp;
+				node	*w;
 
 				while (x != _root && !x->color) {
 					if (x == x->parent->left) {
