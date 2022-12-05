@@ -127,7 +127,52 @@ namespace ft {
 				_nil = new node(_root);
 			}
 
+			RBTree<T>(RBTree const &src) {
+				*this = src;
+			}
+
+			RBTree&	operator=(RBTree const &src) {
+				if (_root)
+					deleteAll();
+				_root = nullptr;
+				if (src._root) {
+					copyTree(src._root, src._nil);
+				}
+				return (*this);
+			}
+
 			virtual ~RBTree<T>() {deleteAll();}
+
+			void	copyTree(node *root, node *nil) {
+				if (!_root) {
+					node	*child = new node(root->key, root->color, root->level, _nil, _nil, _nil);
+
+					_root = child;
+				}
+				else {
+					node	*child = new node(root->key, root->color, root->level, nullptr, _nil, _nil);
+					node	*head = _root;
+					node	*parent = _nil;
+
+					while (head != _nil)
+					{
+						parent = head;
+						if (head->key > child->key)
+							head = head->left;
+						else
+							head = head->right;
+					}
+					child->parent = parent;
+					if (parent->key > child->key)
+						parent->left = child;
+					else
+						parent->right = child;
+				}
+				if (root->left != nil)
+					copyTree(root->left, nil);
+				if (root->right != nil)
+					copyTree(root->right, nil);
+			}
 
 			void	insert(T key) {
 				if (!_root) {
@@ -392,6 +437,10 @@ namespace ft {
 				int	level = 0;
 				node	*tmp;
 
+				if (!_root) {
+					std::cout << "The tree does not exist!\n";
+					return ;
+				}
 				fixLevels(_root, level);
 				printNode(_root);
 				tmp = findMin(_root);
