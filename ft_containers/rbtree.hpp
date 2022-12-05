@@ -104,6 +104,9 @@ namespace ft {
 		Node<T>	*left;
 		Node<T>	*right;
 		Node<T>	*parent;
+
+		Node(Node *parent) : color(false), level(0),
+			parent(parent), left(nullptr), right(nullptr) {} ;
 		Node(T k, bool c, size_t lvl, Node *p, Node *l, Node *r) :
 			key(k), color(c), level(lvl), parent(p), left(l), right(r) {} ;
 	};
@@ -115,26 +118,29 @@ namespace ft {
 
 		private:
 			node		*_root;
+			node		*_nil;
 
 		public:
-			RBTree<T>(): _root(NULL) {
+			RBTree<T>() {
 				std::cout << "constructor" << std::endl;
+				_root = nullptr;
+				_nil = new node(_root);
 			}
 
 			virtual ~RBTree<T>() {deleteAll();}
 
 			void	insert(T key) {
 				if (!_root) {
-					node	*child = new node(key, false, 0, NULL, NULL, NULL);
+					node	*child = new node(key, false, 0, _nil, _nil, _nil);
 
 					_root = child;
 					return ;
 				}
 
-				node	*child = new node(key, true, 0, NULL, NULL, NULL);
+				node	*child = new node(key, true, 0, nullptr, _nil, _nil);
 				node	*head = _root;
-				node	*parent = NULL;
-				while (head)
+				node	*parent = _nil;
+				while (head != _nil)
 				{
 					parent = head;
 					if (head->key > child->key)
@@ -159,7 +165,7 @@ namespace ft {
 				while (child != _root && child->parent->color) {
 					if (child->parent == child->parent->parent->left) {
 						uncle = child->parent->parent->right;
-						if (uncle && uncle->color) {
+						if (uncle != _nil && uncle->color) {
 							child->parent->color = 0;
 							uncle->color = 0;
 							child->parent->parent->color = 1;
@@ -177,7 +183,7 @@ namespace ft {
 					}
 					else {
 						uncle = child->parent->parent->left;
-						if (uncle && uncle->color) {
+						if (uncle != _nil && uncle->color) {
 							child->parent->color = 0;
 							uncle->color = 0;
 							child->parent->parent->color = 1;
@@ -203,10 +209,10 @@ namespace ft {
 				std::cout << "right rotation\n";
 				y = x->left;
 				x->left = y->right;
-				if (y->right)
+				if (y->right != _nil)
 					y->right->parent = x;
 				y->parent = x->parent;
-				if (!x->parent)
+				if (x->parent == _nil)
 					_root = y;
 				else if (x == x->parent->left)
 					x->parent->left = y;
@@ -219,13 +225,13 @@ namespace ft {
 			void	leftRotation(node *x) {
 				node	*y;
 
-				std::cout << "left rotation\n"; 
+				std::cout << "left rotation\n";
 				y = x->right;
 				x->right = y->left;
-				if (y->left)
+				if (y->left != _nil)
 					y->left->parent = x;
 				y->parent = x->parent;
-				if (!x->parent)
+				if (x->parent == _nil)
 					_root = y;
 				else if (x == x->parent->left)
 					x->parent->left = y;
@@ -243,7 +249,7 @@ namespace ft {
 			}
 
 			node*	search(node *tmp, T key) {
-				if (!tmp || tmp->key == key)
+				if (tmp == _nil || tmp->key == key)
 					return (tmp);
 				if (key > tmp->key)
 					return search(tmp->right, key);
@@ -253,7 +259,7 @@ namespace ft {
 
 			void	transplant(node *u, node *v) {
 				std::cout << "transplanting\n";
-				if (!u->parent)
+				if (u->parent == _nil)
 					_root = v;
 				else if (u == u->parent->left)
 					u->parent->left = v;
@@ -279,11 +285,11 @@ namespace ft {
 				y = toDelete;
 				std::cout << "to delete: " << y->key << "\n";
 				y_color = y->color;
-				if (!y->left) {
+				if (y->left == _nil) {
 					x = y->right;
 					transplant(y, y->right);
 				}
-				else if (!y->right) {
+				else if (y->right == _nil) {
 					x = tmp->left;
 					transplant(y, y->left);
 				}
@@ -367,17 +373,17 @@ namespace ft {
 			}
 
 			node*	findMin(node *tmp) {
-				if (!tmp)
+				if (tmp == _nil)
 					return (nullptr);
-				while (tmp->left)
+				while (tmp->left != _nil)
 					tmp = tmp->left;
 				return (tmp);
 			}
 
 			node*	findMax(node *tmp) {
-				if (!tmp)
+				if (tmp == _nil)
 					return (nullptr);
-				while (tmp->right)
+				while (tmp->right != _nil)
 					tmp = tmp->right;
 				return (tmp);
 			}
@@ -397,9 +403,9 @@ namespace ft {
 			void	fixLevels(node *tmp, int lvl) {
 				tmp->level = lvl;
 				++lvl;
-				if (tmp->left)
+				if (tmp->left != _nil)
 					fixLevels(tmp->left, lvl);
-				if (tmp->right)
+				if (tmp->right != _nil)
 					fixLevels(tmp->right, lvl);
 			}
 
@@ -408,35 +414,37 @@ namespace ft {
 				std::cout << "root key: " << tmp->key << " | color: " << tmp->color;
 				std::cout.width(10); 
 				std::cout << " | level: " << tmp->level << "\n";
-				if (tmp->left) {
+				if (tmp->left != _nil) {
 					std::cout.width(15);
 					std::cout << "left key: " << tmp->left->key << " | color: " << tmp->left->color;
 					std::cout.width(10);
 					std::cout << " | level: " << tmp->left->level << "\n";
 				}
-				if (tmp->right) {
+				if (tmp->right != _nil) {
 					std::cout.width(15);
 					std::cout << "right key: " << tmp->right->key << " | color: " << tmp->right->color;
 					std::cout.width(10);
 					std::cout << " | level: " << tmp->right->level << "\n";
 				}
-				if (tmp->left)
+				if (tmp->left != _nil)
 					printNode(tmp->left);
-				if (tmp->right)
+				if (tmp->right != _nil)
 					printNode(tmp->right);
 			}
 
 			void	deleteAll() {
 				deleteAll(_root);
-				_root = NULL;
+				_root = nullptr;
+				delete _nil;
+				_nil = nullptr;
 			}
 
 			void	deleteAll(node *tmp) {
-				if (!tmp)
+				if (tmp == _nil || !tmp)
 					return ;
-				if (tmp->left)
+				if (tmp->left != _nil)
 					deleteAll(tmp->left);
-				if (tmp->right)
+				if (tmp->right != _nil)
 					deleteAll(tmp->right);
 				delete tmp;
 			}
