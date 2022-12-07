@@ -36,12 +36,12 @@ namespace ft {
 			typedef std::size_t					size_type;
 			typedef std::ptrdiff_t				difference_type;
 			typedef Compare						key_compare;
-			typedef Allocator					allocator_type;
+			typedef Allocator			allocator_type;
 			typedef value_type&					reference;
 			typedef const value_type&			const_reference;
-			typedef Allocator::pointer			pointer;
-			typedef Allocator::const_pointer	const_pointer;
 			typedef Node<T>						node;
+			typedef typename Allocator::pointer	pointer;
+			typedef typename Allocator::const_pointer	const_pointer;
 			typedef typename Allocator::template rebind<Node<T> >::other	alloc_node;
 			// typedef iterator;
 			// typedef const_iterator;
@@ -52,20 +52,22 @@ namespace ft {
 			node			*_root;
 			node			*_nil;
 			allocator_type	_alloc;
-			alloc_node		_nalloc;
+			alloc_node		_node_alloc;
 			size_type		_size;
 			key_compare		_comp;
 
 		public:
-			RBTree<T>(key_compare const &comp, allocator_type const &alloc) :
-				_alloc(alloc), _nalloc(alloc), _comp(comp), _size(0) {
+			explicit RBTree(key_compare const &comp = key_compare(),
+				allocator_type const &alloc = allocator_type()) :
+				_alloc(alloc), _node_alloc(alloc), _comp(comp), _size(0) {
 				std::cout << "constructor" << std::endl;
 				_root = nullptr;
-				_nil = new node(_root);
+				_nil = _node_alloc.allocate(1);
+				_node_alloc.construct(_nil, node(_root));
 			}
 
-			RBTree<T>(RBTree const &src) :
-				_alloc(src._alloc), _nalloc(src._alloc), _comp(src._comp), _size(0) {
+			RBTree(RBTree const &src) :
+				_alloc(src._alloc), _node_alloc(src._alloc), _comp(src._comp), _size(0) {
 				*this = src;
 			}
 
@@ -81,18 +83,23 @@ namespace ft {
 				return (*this);
 			}
 
-			virtual ~RBTree<T>() {deleteAll();}
+			virtual ~RBTree() {deleteAll();}
 
 			void	copyTree(node *root, node *nil) {
 				if (!_root) {
-					node	*child = new node(root->key, root->color, root->level, _nil, _nil, _nil);
+					node	*child;
 
+					child = _node_alloc.allocate(1);
+					_node_alloc.construct(child, node(root->key, root->color, root->level, _nil, _nil, _nil));
 					_root = child;
 				}
 				else {
-					node	*child = new node(root->key, root->color, root->level, nullptr, _nil, _nil);
+					node	*child;
 					node	*head = _root;
 					node	*parent = _nil;
+
+					child = _node_alloc.allocate(1);
+					_node_alloc.construct(child, node(root->key, root->color, root->level, nullptr, _nil, _nil));
 
 					while (head != _nil)
 					{
@@ -116,15 +123,21 @@ namespace ft {
 
 			void	insert(T key) {
 				if (!_root) {
-					node	*child = new node(key, false, 0, _nil, _nil, _nil);
+					node	*child;
 
+					child = _node_alloc.allocate(1);
+					_node_alloc.construct(child, node(key, false, 0, _nil, _nil, _nil));
 					_root = child;
 					return ;
 				}
 
-				node	*child = new node(key, true, 0, nullptr, _nil, _nil);
+				node	*child;
 				node	*head = _root;
 				node	*parent = _nil;
+
+				child = _node_alloc.allocate(1);
+				_node_alloc.construct(child, node(key, true, 0, nullptr, _nil, _nil));
+
 				while (head != _nil)
 				{
 					parent = head;
@@ -424,7 +437,7 @@ namespace ft {
 			void	deleteAll() {
 				deleteAll(_root);
 				_root = nullptr;
-				delete _nil;
+				_node_alloc.deallocate(_nil, 1);
 				_nil = nullptr;
 			}
 
@@ -435,7 +448,8 @@ namespace ft {
 					deleteAll(tmp->left);
 				if (tmp->right != _nil)
 					deleteAll(tmp->right);
-				delete tmp;
+				_node_alloc.deallocate(tmp, 1);
+				tmp = nullptr;
 			}
 
 

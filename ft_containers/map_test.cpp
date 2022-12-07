@@ -6,8 +6,8 @@
 #include "rbtree.hpp"
 
 int	main(void) {
-	ft::RBTree<int>	tr;
-	ft::RBTree<int>	tr2;
+	ft::RBTree<int, int>	tr;
+	ft::RBTree<int, int>	tr2;
 
 	// tr.insert(10);
 	// std::cout << "it1\n";
