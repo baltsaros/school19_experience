@@ -8,41 +8,43 @@
 
 namespace ft {
 
-	template <class T>
+	template <class Key, class Pair>
 	struct Node {
-		T		key;
-		bool	color;
-		size_t	level;
-		Node<T>	*left;
-		Node<T>	*right;
-		Node<T>	*parent;
+		Key				key;
+		Pair			value;
+		bool			color;
+		size_t			level;
+		Node<Key, Pair>	*left;
+		Node<Key, Pair>	*right;
+		Node<Key, Pair>	*parent;
 
 		Node(Node *parent) : color(false), level(0),
-			parent(parent), left(nullptr), right(nullptr) {} ;
-		Node(T k, bool c, size_t lvl, Node *p, Node *l, Node *r) :
-			key(k), color(c), level(lvl), parent(p), left(l), right(r) {} ;
+			parent(parent), left(nullptr), right(nullptr) {}
+
+		Node(Key k, Pair v, bool c, size_t lvl, Node *p, Node *l, Node *r) :
+			key(k), value(v), color(c), level(lvl), parent(p), left(l), right(r) {}
 	};
 
 	template <class Key,
-				class T,
+				class Pair,
 				class Compare = std::less<Key>,
-				class Allocator = std::allocator<pair<const Key, T> > >
+				class Allocator = std::allocator<Pair> >
 	class RBTree {
 		public:
 		// TYPEDEFS
 			typedef Key							key_type;
-			typedef T							mapped_type;
-			typedef pair<const Key, T>			value_type;
+			typedef Pair						value_type;
+			// typedef pair<const Key, T>			value_type;
 			typedef std::size_t					size_type;
 			typedef std::ptrdiff_t				difference_type;
 			typedef Compare						key_compare;
-			typedef Allocator			allocator_type;
+			typedef Allocator					allocator_type;
 			typedef value_type&					reference;
 			typedef const value_type&			const_reference;
-			typedef Node<T>						node;
+			typedef Node<Key, value_type>		node;
 			typedef typename Allocator::pointer	pointer;
 			typedef typename Allocator::const_pointer	const_pointer;
-			typedef typename Allocator::template rebind<Node<T> >::other	alloc_node;
+			typedef typename Allocator::template rebind<Node<Key, value_type> >::other	alloc_node;
 			// typedef iterator;
 			// typedef const_iterator;
 			// typedef reverse_iterator;
@@ -83,14 +85,17 @@ namespace ft {
 				return (*this);
 			}
 
-			virtual ~RBTree() {deleteAll();}
+			virtual ~RBTree() {
+				std::cout << "destructor\n";
+				deleteAll();
+			}
 
 			void	copyTree(node *root, node *nil) {
 				if (!_root) {
 					node	*child;
 
 					child = _node_alloc.allocate(1);
-					_node_alloc.construct(child, node(root->key, root->color, root->level, _nil, _nil, _nil));
+					_node_alloc.construct(child, node(root->key, root->value, root->color, root->level, _nil, _nil, _nil));
 					_root = child;
 				}
 				else {
@@ -99,7 +104,7 @@ namespace ft {
 					node	*parent = _nil;
 
 					child = _node_alloc.allocate(1);
-					_node_alloc.construct(child, node(root->key, root->color, root->level, nullptr, _nil, _nil));
+					_node_alloc.construct(child, node(root->key, root->value, root->color, root->level, nullptr, _nil, _nil));
 
 					while (head != _nil)
 					{
@@ -121,22 +126,28 @@ namespace ft {
 					copyTree(root->right, nil);
 			}
 
-			void	insert(T key) {
+			pair<Key, bool>	insert(value_type pair) {
 				if (!_root) {
 					node	*child;
 
 					child = _node_alloc.allocate(1);
-					_node_alloc.construct(child, node(key, false, 0, _nil, _nil, _nil));
+					_node_alloc.construct(child, node(pair.first, pair, false, 0, _nil, _nil, _nil));
 					_root = child;
-					return ;
+					return (make_pair(child->key, true));
 				}
 
 				node	*child;
 				node	*head = _root;
 				node	*parent = _nil;
+				node	*tmp;
 
+				tmp = search(pair.first);
+				if (tmp != _nil) {
+					std::cout << "Key is already present!\n";
+					return (make_pair(pair.first, false));
+				}
 				child = _node_alloc.allocate(1);
-				_node_alloc.construct(child, node(key, true, 0, nullptr, _nil, _nil));
+				_node_alloc.construct(child, node(pair.first, pair, true, 0, nullptr, _nil, _nil));
 
 				while (head != _nil)
 				{
@@ -153,6 +164,7 @@ namespace ft {
 				else
 					parent->right = child;
 				insertFixup(child);
+				return (make_pair(child->key, true));
 			}
 
 			void	insertFixup(node *child) {
@@ -239,14 +251,14 @@ namespace ft {
 				x->parent = y;
 			}
 
-			node*	search(T key) {
+			node*	search(Key key) {
 				node	*tmp;
 
 				tmp = search(_root, key);
 				return (tmp);
 			}
 
-			node*	search(node *tmp, T key) {
+			node*	search(node *tmp, Key key) {
 				if (tmp == _nil || tmp->key == key)
 					return (tmp);
 				if (key > tmp->key)
@@ -266,7 +278,7 @@ namespace ft {
 				v->parent = u->parent;
 			}
 
-			void	deleteOne(T key) {
+			void	deleteOne(Key key) {
 				node	*tmp = _root;
 
 				std::cout << "deleting " << key << "\n";
