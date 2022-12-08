@@ -382,7 +382,7 @@ namespace ft {
 				}
 			}
 
-			node*	findMin(node *tmp) {
+			node*	findMin(node *tmp) const {
 				if (tmp == _nil)
 					return (nullptr);
 				while (tmp->left != _nil)
@@ -390,7 +390,7 @@ namespace ft {
 				return (tmp);
 			}
 
-			node*	findMax(node *tmp) {
+			node*	findMax(node *tmp) const {
 				if (tmp == _nil)
 					return (nullptr);
 				while (tmp->right != _nil)
@@ -425,20 +425,20 @@ namespace ft {
 
 			void	printNode(node *tmp) {
 				std::cout.width(15); 
-				std::cout << "root key: " << tmp->key << " | color: " << tmp->color;
+				std::cout << "root key: " << tmp->key << " | value: " << tmp->value.second;
 				std::cout.width(10); 
-				std::cout << " | level: " << tmp->level << "\n";
+				std::cout << " | color: " << tmp->color << " | level: " << tmp->level << "\n";
 				if (tmp->left != _nil) {
 					std::cout.width(15);
-					std::cout << "left key: " << tmp->left->key << " | color: " << tmp->left->color;
+					std::cout << "left key: " << tmp->left->key << " | value: " << tmp->left->value.second;
 					std::cout.width(10);
-					std::cout << " | level: " << tmp->left->level << "\n";
+					std::cout << " | color: " << tmp->left->color << " | level: " << tmp->left->level << "\n";
 				}
 				if (tmp->right != _nil) {
 					std::cout.width(15);
-					std::cout << "right key: " << tmp->right->key << " | color: " << tmp->right->color;
+					std::cout << "right key: " << tmp->right->key << " | value: " << tmp->right->value.second;
 					std::cout.width(10);
-					std::cout << " | level: " << tmp->right->level << "\n";
+					std::cout << " | color: " << tmp->right->color << " | level: " << tmp->right->level << "\n";
 				}
 				if (tmp->left != _nil)
 					printNode(tmp->left);
