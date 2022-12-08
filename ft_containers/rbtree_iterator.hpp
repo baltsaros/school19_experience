@@ -9,37 +9,23 @@ namespace ft {
 	template <class Iter, class Pair>
 	struct Node;
 
-	// class rbt_iterator: public iterator<std::bidirectional_iterator_tag, Pair> {
 	template <class Iter, class Pair>
-	// class rbt_iterator: public iterator
-	// 	<typename iterator_traits<Pair*>::iterator_category,
-	// 	typename iterator_traits<Pair*>::value_type,
-	// 	typename iterator_traits<Pair*>::difference_type,
-	// 	typename iterator_traits<Pair*>::pointer,
-	// 	typename iterator_traits<Pair*>::reference> {
+	class rbt_iterator: public iterator
+		<typename iterator_traits<Pair>::iterator_category,
+		typename iterator_traits<Pair>::value_type,
+		typename iterator_traits<Pair>::difference_type,
+		typename iterator_traits<Pair>::pointer,
+		typename iterator_traits<Pair>::reference> {
 
-	// public:
-	// 	typedef Node<Iter, Pair>					node;
-	// 	typedef iterator_traits<Pair*>				itraits;
-	// 	typedef Pair								iterator_type;
-	// 	typedef typename itraits::difference_type	difference_type;
-	// 	typedef typename itraits::reference			reference;
-	// 	typedef typename itraits::pointer			pointer;
-	// 	typedef typename itraits::value_type		value_type;
-	// 	typedef typename itraits::iterator_category	iterator_category;
-
-
-	class rbt_iterator {
-		typedef typename iterator_traits<Pair*>::value_type	value_type;
-		typedef typename iterator_traits<Pair*>::difference_type	difference_type;
-		typedef typename iterator_traits<Pair*>::pointer	pointer;
-		typedef typename iterator_traits<Pair*>::reference	reference;
-		// typedef Pair	value_type;
-		// typedef Pair&	reference;
-		// typedef Pair*	pointer;
-		typedef std::bidirectional_iterator_tag	iterator_category;
+	public:
 		typedef Node<Iter, Pair>					node;
-		// typedef std::ptrdiff_t	difference_type;
+		typedef iterator_traits<Pair>				itraits;
+		typedef Pair								iterator_type;
+		typedef typename itraits::difference_type	difference_type;
+		typedef typename itraits::reference			reference;
+		typedef typename itraits::pointer			pointer;
+		typedef typename itraits::value_type		value_type;
+		typedef typename itraits::iterator_category	iterator_category;
 
 	private:
 		node	*_ptr;

@@ -36,10 +36,6 @@ namespace ft {
 		// TYPEDEFS
 			typedef Key							key_type;
 			typedef Pair						value_type;
-			// typedef value_type*					pointer;
-			// typedef const value_type*			const_pointer;
-			// typedef value_type&					reference;
-			// typedef const value_type&			const_reference;
 			typedef std::size_t					size_type;
 			typedef std::ptrdiff_t				difference_type;
 			typedef Compare						key_compare;
@@ -52,8 +48,8 @@ namespace ft {
 			typedef typename Allocator::const_pointer	const_pointer;
 			typedef typename Allocator::template rebind<Node<Key, value_type> >::other	alloc_node;
 			
-			typedef rbt_iterator<Key, Pair>				iterator;
-			typedef rbt_iterator<const Key, const Pair>	const_iterator;
+			typedef rbt_iterator<Key, Pair*>				iterator;
+			typedef rbt_iterator<const Key, const Pair*>	const_iterator;
 			// typedef reverse_iterator;
 			// typedef const_reverse_iterator;
 
