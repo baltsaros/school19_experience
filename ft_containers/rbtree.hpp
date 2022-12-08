@@ -1,8 +1,10 @@
 #ifndef RBTREE_HPP
 # define RBTREE_HPP
 
-#include <iostream>
-#include "map.hpp"
+# include "rbtree_iterator.hpp"
+# include "map.hpp"
+# define BLACK	false
+# define RED	true
 
 // colors: 0/false - Black; 1/true - Red
 
@@ -18,7 +20,7 @@ namespace ft {
 		Node<Key, Pair>	*right;
 		Node<Key, Pair>	*parent;
 
-		Node(Node *parent) : color(false), level(0),
+		Node(Node *parent) : color(BLACK), level(0),
 			parent(parent), left(nullptr), right(nullptr) {}
 
 		Node(Key k, Pair v, bool c, size_t lvl, Node *p, Node *l, Node *r) :
@@ -34,19 +36,24 @@ namespace ft {
 		// TYPEDEFS
 			typedef Key							key_type;
 			typedef Pair						value_type;
-			// typedef pair<const Key, T>			value_type;
+			// typedef value_type*					pointer;
+			// typedef const value_type*			const_pointer;
+			// typedef value_type&					reference;
+			// typedef const value_type&			const_reference;
 			typedef std::size_t					size_type;
 			typedef std::ptrdiff_t				difference_type;
 			typedef Compare						key_compare;
 			typedef Allocator					allocator_type;
 			typedef value_type&					reference;
 			typedef const value_type&			const_reference;
-			typedef Node<Key, value_type>		node;
-			typedef typename Allocator::pointer	pointer;
+			typedef Node<Key, Pair>				node;
+
+			typedef typename Allocator::pointer			pointer;
 			typedef typename Allocator::const_pointer	const_pointer;
 			typedef typename Allocator::template rebind<Node<Key, value_type> >::other	alloc_node;
-			// typedef iterator;
-			// typedef const_iterator;
+			
+			typedef rbt_iterator<Key, Pair>				iterator;
+			typedef rbt_iterator<const Key, const Pair>	const_iterator;
 			// typedef reverse_iterator;
 			// typedef const_reverse_iterator;
 
@@ -131,7 +138,7 @@ namespace ft {
 					node	*child;
 
 					child = _node_alloc.allocate(1);
-					_node_alloc.construct(child, node(pair.first, pair, false, 0, _nil, _nil, _nil));
+					_node_alloc.construct(child, node(pair.first, pair, BLACK, 0, _nil, _nil, _nil));
 					_root = child;
 					return (make_pair(child->key, true));
 				}
@@ -147,7 +154,7 @@ namespace ft {
 					return (make_pair(pair.first, false));
 				}
 				child = _node_alloc.allocate(1);
-				_node_alloc.construct(child, node(pair.first, pair, true, 0, nullptr, _nil, _nil));
+				_node_alloc.construct(child, node(pair.first, pair, RED, 0, nullptr, _nil, _nil));
 
 				while (head != _nil)
 				{
@@ -332,24 +339,24 @@ namespace ft {
 					if (x == x->parent->left) {
 						w = x->parent->right;
 						if (w->color) {
-							w->color = false;
-							x->parent->color = true;
+							w->color = BLACK;
+							x->parent->color = RED;
 							leftRotation(x->parent);
 							w = x->parent->right;
 						}
 						if (!w->left->color && !w->right->color) {
-							w->color = true;
+							w->color = RED;
 							x = x->parent;
 						}
 						else {
 							if (!w->right->color) {
-								w->left->color = false;
-								w->color = true;
+								w->left->color = BLACK;
+								w->color = RED;
 								rightRotation(w);
 							}
 							w->color = x->parent->color;
-							x->parent->color = false;
-							w->right->color = false;
+							x->parent->color = BLACK;
+							w->right->color = BLACK;
 							leftRotation(x->parent);
 							x = _root;
 						}
@@ -357,24 +364,24 @@ namespace ft {
 					else {
 						w = x->parent->left;
 						if (w->color) {
-							w->color = false;
-							x->parent->color = true;
+							w->color = BLACK;
+							x->parent->color = RED;
 							rightRotation(x->parent);
 							w = x->parent->left;
 						}
 						if (!w->right->color && !w->left->color) {
-							w->color = true;
+							w->color = RED;
 							x = x->parent;
 						}
 						else {
 							if (!w->left->color) {
-								w->right->color = false;
-								w->color = true;
+								w->right->color = BLACK;
+								w->color = RED;
 								leftRotation(w);
 							}
 							w->color = x->parent->color;
-							x->parent->color = false;
-							w->left->color = false;
+							x->parent->color = BLACK;
+							w->left->color = BLACK;
 							rightRotation(x->parent);
 							x = _root;
 						}
@@ -464,7 +471,26 @@ namespace ft {
 				tmp = nullptr;
 			}
 
+			// iterator	begin() {
+			// 	node	*min = findMin(_root);
+			// 	return (iterator(min));
+			// }
 
+			iterator	begin() {
+				return (iterator(findMin(_root)));
+			}
+
+			// const_iterator	begin() const {
+			// 	return (const_iterator(findMin(_root)));
+			// }
+
+			iterator	end() {
+				return (iterator(_nil));
+			}
+
+			const_iterator	end() const {
+				return (const_iterator(_nil));
+			}
 	};
 }
 

@@ -3,10 +3,11 @@
 #include <string>
 #include <iterator>
 #include "map.hpp"
-#include "rbtree.hpp"
+// #include "rbtree.hpp"
 
 int	main(void) {
 	ft::map<int, std::string>	m1;
+	ft::map<int, std::string>::iterator	it1;
 	ft::pair<int, bool>			ret;
 	// std::map<int, int>	m2;
 	// std::map<int, int>::iterator	it2;
@@ -36,11 +37,17 @@ int	main(void) {
 	// m2[5] = 26;
 	m2[0] = "one";
 	m2[1] = "two";
+	std::cout << "std iterator \n";
 	it2 = m2.begin();
 	std::cout << it2->first << ": " << it2->second << "\n";
 	++it2;
 	std::cout << it2->first << ": " << it2->second << "\n";
-	++it2;
-	std::cout << it2->first << ": " << it2->second << "\n";
+	// ++it2;
+	// std::cout << it2->first << ": " << it2->second << "\n";
+	std::cout << "ft iterator: \n";
+	it1 = m1.begin();
+	std::cout << it1->first << ": " << it1->second << "\n";
+	++it1;
+	std::cout << it1->first << ": " << it1->second << "\n";
 	return (0);
 }
