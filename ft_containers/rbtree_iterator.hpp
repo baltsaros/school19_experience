@@ -11,15 +11,15 @@ namespace ft {
 
 	template <class Iter, class Pair>
 	class rbt_iterator: public iterator
-		<typename iterator_traits<Pair>::iterator_category,
-		typename iterator_traits<Pair>::value_type,
-		typename iterator_traits<Pair>::difference_type,
-		typename iterator_traits<Pair>::pointer,
-		typename iterator_traits<Pair>::reference> {
+		<typename iterator_traits<Pair*>::iterator_category,
+		typename iterator_traits<Pair*>::value_type,
+		typename iterator_traits<Pair*>::difference_type,
+		typename iterator_traits<Pair*>::pointer,
+		typename iterator_traits<Pair*>::reference> {
 
 	public:
 		typedef Node<Iter, Pair>					node;
-		typedef iterator_traits<Pair>				itraits;
+		typedef iterator_traits<Pair*>				itraits;
 		typedef Pair								iterator_type;
 		typedef typename itraits::difference_type	difference_type;
 		typedef typename itraits::reference			reference;
@@ -62,11 +62,6 @@ namespace ft {
 			return ;
 		}
 
-		explicit rbt_iterator(Pair const &ptr) {
-			_ptr = ptr;
-			return ;
-		}
-
 		~rbt_iterator() {};
 
 		rbt_iterator(rbt_iterator const &src) {
@@ -84,7 +79,7 @@ namespace ft {
 		}
 
 		pointer	operator->() const {
-			return (_ptr->value);
+			return &(_ptr->value);
 		}
 
 		rbt_iterator&	operator++() {

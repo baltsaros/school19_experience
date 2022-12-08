@@ -48,8 +48,8 @@ namespace ft {
 			typedef typename Allocator::const_pointer	const_pointer;
 			typedef typename Allocator::template rebind<Node<Key, value_type> >::other	alloc_node;
 			
-			typedef rbt_iterator<Key, Pair*>				iterator;
-			typedef rbt_iterator<const Key, const Pair*>	const_iterator;
+			typedef rbt_iterator<Key, Pair>				iterator;
+			typedef rbt_iterator<Key, const Pair>	const_iterator;
 			// typedef reverse_iterator;
 			// typedef const_reverse_iterator;
 
