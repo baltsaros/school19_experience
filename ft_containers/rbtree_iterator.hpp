@@ -196,7 +196,7 @@ namespace ft {
 			return (*tmp);
 		}
 
-		pointer	operator->() const {
+		Iter	operator->() const {
 			Iter	tmp;
 
 			tmp = _ptr;

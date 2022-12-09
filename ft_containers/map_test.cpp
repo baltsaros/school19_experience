@@ -54,25 +54,31 @@ int	main(void) {
 
 	std::cout << "\nFT: it1 = m1(end())\n";
 	it1 = m1.end();
+	std::cout << "it1--\n";
 	it1--;
 	std::cout << it1->first << ": " << it1->second << "\n";
 	it2 = m2.end();
-	it2--;
 	std::cout << "STD: it2 = m2(end())\n";
+	std::cout << "it2--\n";
+	it2--;
 	std::cout << it2->first << ": " << it2->second << "\n";
 
-	// std::cout << "\nFT: rit1 = m1(rbegin()\n";
-	// rit1 = m1.rbegin();
-	// std::cout << rit1->first << ": " << rit1->second << "\n";
-	rit2 = m2.rbegin();
+	std::cout << "\nFT: rit1 = m1(rbegin()\n";
+	rit1 = m1.rbegin();
+	std::cout << rit1->first << ": " << rit1->second << "\n";
 	std::cout << "STD: rit2 = m2(rbegin()\n";
+	rit2 = m2.rbegin();
 	std::cout << rit2->first << ": " << rit2->second << "\n";
 
-	// std::cout << "\nFT: rit1 = m1(rend()\n";
-	// rit1 = m1.rend();
-	// std::cout << rit1->first << ": " << rit1->second << "\n";
-	rit2 = m2.rend();
+	std::cout << "\nFT: rit1 = m1(rend()\n";
+	rit1 = m1.rend();
+	std::cout << "rit1++\n";
+	rit1++;
+	std::cout << rit1->first << ": " << rit1->second << "\n";
 	std::cout << "STD: rit2 = m2(rend()\n";
+	rit2 = m2.rend();
+	rit2++;
+	std::cout << "rit2++\n";
 	std::cout << rit2->first << ": " << rit2->second << "\n";
 
 	return (0);
