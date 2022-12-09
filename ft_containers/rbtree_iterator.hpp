@@ -94,8 +94,10 @@ namespace ft {
 		}
 
 		rbt_iterator	operator++(int) {
-			
-			return (rbt_iterator(this->_ptr++));
+			rbt_iterator	tmp = *this;
+
+			this->operator++();
+			return (tmp);
 		}
 
 		rbt_iterator&	operator--() {
@@ -118,7 +120,10 @@ namespace ft {
 		}
 
 		rbt_iterator	operator--(int) {
-			return (rbt_iterator(_ptr--));
+			rbt_iterator	tmp = *this;
+
+			this->operator--();
+			return (tmp);
 		}
 
 		const node&	base() const {
