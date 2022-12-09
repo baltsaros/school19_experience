@@ -37,12 +37,13 @@ int	main(void) {
 	m2[2] = "two";
 	m2[3] = "three";
 	m2[4] = "four";
-	m2[4] = "five";
-	std::cout << "FT: it1 = m1(begin()\n";
+	m2[5] = "five";
+
+	std::cout << "\nFT: it1 = m1(begin())\n";
 	it1 = m1.begin();
 	std::cout << it1->first << ": " << it1->second << "\n";
 	it2 = m2.begin();
-	std::cout << "STD: it2 = m2(begin()\n";
+	std::cout << "STD: it2 = m2(begin())\n";
 	std::cout << it2->first << ": " << it2->second << "\n";
 	++it1;
 	std::cout << "FT: ++it1\n";
@@ -51,23 +52,25 @@ int	main(void) {
 	++it2;
 	std::cout << it2->first << ": " << it2->second << "\n";
 
-	std::cout << "\nFT: it1 = m1(end()\n";
+	std::cout << "\nFT: it1 = m1(end())\n";
 	it1 = m1.end();
+	--it1;
 	std::cout << it1->first << ": " << it1->second << "\n";
 	it2 = m2.end();
-	std::cout << "STD: it2 = m2(end()\n";
+	--it2;
+	std::cout << "STD: it2 = m2(end())\n";
 	std::cout << it2->first << ": " << it2->second << "\n";
 
-	std::cout << "\nFT: rit1 = m1(rbegin()\n";
-	rit1 = m1.rbegin();
-	std::cout << rit1->first << ": " << rit1->second << "\n";
+	// std::cout << "\nFT: rit1 = m1(rbegin()\n";
+	// rit1 = m1.rbegin();
+	// std::cout << rit1->first << ": " << rit1->second << "\n";
 	rit2 = m2.rbegin();
 	std::cout << "STD: rit2 = m2(rbegin()\n";
 	std::cout << rit2->first << ": " << rit2->second << "\n";
 
-	std::cout << "\nFT: rit1 = m1(rend()\n";
-	rit1 = m1.rend();
-	std::cout << rit1->first << ": " << rit1->second << "\n";
+	// std::cout << "\nFT: rit1 = m1(rend()\n";
+	// rit1 = m1.rend();
+	// std::cout << rit1->first << ": " << rit1->second << "\n";
 	rit2 = m2.rend();
 	std::cout << "STD: rit2 = m2(rend()\n";
 	std::cout << rit2->first << ": " << rit2->second << "\n";

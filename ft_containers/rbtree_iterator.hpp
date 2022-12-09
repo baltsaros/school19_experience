@@ -94,12 +94,15 @@ namespace ft {
 		}
 
 		rbt_iterator	operator++(int) {
+			
 			return (rbt_iterator(this->_ptr++));
 		}
 
 		rbt_iterator&	operator--() {
-			if (_check_nil(_ptr))
+			if (_check_nil(_ptr)) {
 				_ptr = _ptr->parent;
+				_ptr = _treeMax(_ptr);
+			}
 			else if (_ptr->left && _ptr->left->right)
 				_ptr = _treeMax(_ptr->left);
 			else {
@@ -150,8 +153,9 @@ namespace ft {
 		typedef typename itraits::iterator_category	iterator_category;
 
 		reverse_iterator() : _ptr(nullptr), _t(nullptr) {
-			// this->_ptr = nullptr;
-			// this->_t = nullptr;
+		// reverse_iterator() {
+		// 	this->_ptr = nullptr;
+		// 	this->_t = nullptr;
 			return ;
 		}
 

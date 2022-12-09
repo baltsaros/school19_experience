@@ -100,6 +100,7 @@ namespace ft {
 					child = _node_alloc.allocate(1);
 					_node_alloc.construct(child, node(root->key, root->value, root->color, root->level, _nil, _nil, _nil));
 					_root = child;
+					_nil->parent = _root;
 					_size++;
 				}
 				else {
@@ -138,6 +139,7 @@ namespace ft {
 					child = _node_alloc.allocate(1);
 					_node_alloc.construct(child, node(pair.first, pair, BLACK, 0, _nil, _nil, _nil));
 					_root = child;
+					_nil->parent = _root;
 					_size++;
 					return (make_pair(child->key, true));
 				}
@@ -218,6 +220,7 @@ namespace ft {
 					}
 				}
 				_root->color = 0;
+				_nil->parent = _root;
 			}
 
 			void	rightRotation(node *x) {
