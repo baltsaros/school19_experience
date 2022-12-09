@@ -5,6 +5,11 @@
 #include "map.hpp"
 // #include "rbtree.hpp"
 
+template <class Pair>
+void	printPair(Pair it) {
+	std::cout << it->first << ": " << it->second << std::endl;
+}
+
 int	main(void) {
 	// FT ITERATORS
 	std::cout << "\n+++++++++ ITERATORS +++++++++\n";
@@ -30,7 +35,7 @@ int	main(void) {
 	ret = m1.insert(ft::make_pair(3, "three"));
 	ret = m1.insert(ft::make_pair(4, "four"));
 	ret = m1.insert(ft::make_pair(5, "five"));
-	m1.printMap();
+	// m1.printMap();
 
 	m2[0] = "zero";
 	m2[1] = "one";
@@ -41,45 +46,75 @@ int	main(void) {
 
 	std::cout << "\nFT: it1 = m1(begin())\n";
 	it1 = m1.begin();
-	std::cout << it1->first << ": " << it1->second << "\n";
-	it2 = m2.begin();
+	printPair(it1);
 	std::cout << "STD: it2 = m2(begin())\n";
-	std::cout << it2->first << ": " << it2->second << "\n";
-	++it1;
+	it2 = m2.begin();
+	printPair(it2);
+
+	std::cout << "\n+++ preincrement +++\n";
 	std::cout << "FT: ++it1\n";
-	std::cout << it1->first << ": " << it1->second << "\n";
-	std::cout << "++it2\n";
-	++it2;
-	std::cout << it2->first << ": " << it2->second << "\n";
+	printPair(++it1);
+	printPair(it1);
+	std::cout << "STD: ++it2\n";
+	printPair(++it2);
+	printPair(it2);
 
-	std::cout << "\nFT: it1 = m1(end())\n";
-	it1 = m1.end();
-	std::cout << "it1--\n";
-	it1--;
-	std::cout << it1->first << ": " << it1->second << "\n";
-	it2 = m2.end();
-	std::cout << "STD: it2 = m2(end())\n";
-	std::cout << "it2--\n";
-	it2--;
-	std::cout << it2->first << ": " << it2->second << "\n";
+	std::cout << "\n+++ predecrement +++\n";
+	std::cout << "FT: --it1\n";
+	printPair(--it1);
+	printPair(it1);
+	std::cout << "STD: --it2\n";
+	printPair(--it2);
+	printPair(it2);
 
-	std::cout << "\nFT: rit1 = m1(rbegin()\n";
-	rit1 = m1.rbegin();
-	std::cout << rit1->first << ": " << rit1->second << "\n";
-	std::cout << "STD: rit2 = m2(rbegin()\n";
-	rit2 = m2.rbegin();
-	std::cout << rit2->first << ": " << rit2->second << "\n";
+	std::cout << "\n+++ postincrement +++\n";
+	std::cout << "FT: it1++\n";
+	printPair(it1++);
+	std::cout << "FT: it1\n";
+	printPair(it1);
+	std::cout << "STD: it2++\n";
+	printPair(it2++);
+	std::cout << "STD: it2\n";
+	printPair(it2);
 
-	std::cout << "\nFT: rit1 = m1(rend()\n";
-	rit1 = m1.rend();
-	std::cout << "rit1++\n";
-	rit1++;
-	std::cout << rit1->first << ": " << rit1->second << "\n";
-	std::cout << "STD: rit2 = m2(rend()\n";
-	rit2 = m2.rend();
-	rit2++;
-	std::cout << "rit2++\n";
-	std::cout << rit2->first << ": " << rit2->second << "\n";
+	std::cout << "\n+++ postdecrement +++\n";
+	std::cout << "FT: it1--\n";
+	printPair(it1--);
+	std::cout << "FT: it1\n";
+	printPair(it1);
+	std::cout << "STD: it2--\n";
+	printPair(it2--);
+	std::cout << "STD: it2\n";
+	printPair(it2);
+
+	// std::cout << "\nFT: it1 = m1(end())\n";
+	// it1 = m1.end();
+	// std::cout << "it1--\n";
+	// it1--;
+	// std::cout << it1->first << ": " << it1->second << "\n";
+	// it2 = m2.end();
+	// std::cout << "STD: it2 = m2(end())\n";
+	// std::cout << "it2--\n";
+	// it2--;
+	// std::cout << it2->first << ": " << it2->second << "\n";
+
+	// std::cout << "\nFT: rit1 = m1(rbegin()\n";
+	// rit1 = m1.rbegin();
+	// std::cout << rit1->first << ": " << rit1->second << "\n";
+	// std::cout << "STD: rit2 = m2(rbegin()\n";
+	// rit2 = m2.rbegin();
+	// std::cout << rit2->first << ": " << rit2->second << "\n";
+
+	// std::cout << "\nFT: rit1 = m1(rend()\n";
+	// rit1 = m1.rend();
+	// std::cout << "rit1++\n";
+	// rit1++;
+	// std::cout << rit1->first << ": " << rit1->second << "\n";
+	// std::cout << "STD: rit2 = m2(rend()\n";
+	// rit2 = m2.rend();
+	// rit2++;
+	// std::cout << "rit2++\n";
+	// std::cout << rit2->first << ": " << rit2->second << "\n";
 
 	return (0);
 }
