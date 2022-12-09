@@ -10,6 +10,11 @@ void	printPair(Pair it) {
 	std::cout << it->first << ": " << it->second << std::endl;
 }
 
+template <class T>
+void	printValue(T value) {
+	std::cout << value << std::endl;
+}
+
 int	main(void) {
 	ft::map<int, std::string>						m1;
 	ft::map<int, std::string>::iterator				it1;
@@ -36,19 +41,30 @@ int	main(void) {
 	// ELEMENT ACCES
 	{
 		std::cout << "\n+++++++++ ELEMENT ACCES +++++++++\n";
-		std::cout << "\n+++ at() +++\n";
-		std::cout << "FT: m1.at(0)\n";
-		std::cout << m1.at(0) << "\n";
-		std::cout << "STD: m2.at(0)\n";
-		std::cout << m2.at(0) << "\n";
-		std::cout << "FT: m1.at(1)\n";
-		std::cout << m1.at(1) << "\n";
-		std::cout << "STD: m2.at(1)\n";
-		std::cout << m2.at(1) << "\n";
-		// std::cout << "FT: m1.at(10) (out of range)\n";
+		// std::cout << "\n+++ at() +++\n";
+		// std::cout << "FT: m1.at(0)\n";
+		// std::cout << m1.at(0) << "\n";
+		// std::cout << "STD: m2.at(0)\n";
+		// std::cout << m2.at(0) << "\n";
+		// std::cout << "FT: m1.at(1)\n";
+		// std::cout << m1.at(1) << "\n";
+		// std::cout << "STD: m2.at(1)\n";
+		// std::cout << m2.at(1) << "\n";
+		// std::cout << "FT: m1.at(10) - (out of range)\n";
 		// std::cout << m1.at(10) << "\n";
-		// std::cout << "STD: m2.at(10) (out of range)\n";
+		// std::cout << "STD: m2.at(10) - (out of range)\n";
 		// std::cout << m2.at(10) << "\n";
+
+		std::cout << "\n+++ operator[] +++\n";
+
+		std::cout << "FT: m1[0]\n";
+		printValue(m1[0]);
+		std::cout << "STD: m2[0]\n";
+		printValue(m2[0]);
+		std::cout << "FT: m1[6] - (out of range)\n";
+		printValue(m1[6]);
+		std::cout << "STD: m2[6] - (out of range)\n";
+		printValue(m2[6]);
 	}
 
 	// FT ITERATORS

@@ -94,9 +94,18 @@ namespace ft {
 				return (tmp->value.second);
 			}
 
-			// T&	operator[](const Key& key) {
+			T&	operator[](const Key& key) {
+				node	*tmp = nullptr;
 
-			// }
+				tmp = _tree.search(key);
+				if (!tmp || (!tmp->left && !tmp->right)) {
+					pair<Key, T>	newPair = value_type(key, T());
+
+					_tree.insert(newPair);
+					tmp = _tree.search(key);
+				}
+				return (tmp->value.second);
+			}
 
 			// ITERATORS
 			iterator	begin() {

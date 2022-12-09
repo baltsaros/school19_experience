@@ -226,7 +226,7 @@ namespace ft {
 			void	rightRotation(node *x) {
 				node	*y;
 
-				std::cout << "right rotation\n";
+				// std::cout << "right rotation\n";
 				y = x->left;
 				x->left = y->right;
 				if (y->right != _nil)
@@ -245,7 +245,7 @@ namespace ft {
 			void	leftRotation(node *x) {
 				node	*y;
 
-				std::cout << "left rotation\n";
+				// std::cout << "left rotation\n";
 				y = x->right;
 				x->right = y->left;
 				if (y->left != _nil)
@@ -278,7 +278,7 @@ namespace ft {
 			}
 
 			void	transplant(node *u, node *v) {
-				std::cout << "transplanting\n";
+				// std::cout << "transplanting\n";
 				if (u->parent == _nil)
 					_root = v;
 				else if (u == u->parent->left)
