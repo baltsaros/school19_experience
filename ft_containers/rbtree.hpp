@@ -65,7 +65,7 @@ namespace ft {
 			explicit RBTree(key_compare const &comp = key_compare(),
 				allocator_type const &alloc = allocator_type()) :
 				_alloc(alloc), _node_alloc(alloc), _comp(comp), _size(0) {
-				std::cout << "constructor" << std::endl;
+				// std::cout << "constructor 1" << std::endl;
 				_root = nullptr;
 				_nil = _node_alloc.allocate(1);
 				_node_alloc.construct(_nil, node(_root));
@@ -89,7 +89,7 @@ namespace ft {
 			}
 
 			virtual ~RBTree() {
-				std::cout << "destructor\n";
+				// std::cout << "destructor\n";
 				deleteAll();
 			}
 

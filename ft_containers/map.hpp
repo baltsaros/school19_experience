@@ -82,12 +82,17 @@ namespace ft {
 				tmp = _tree.search(key);
 				if (!tmp || (!tmp->left && !tmp->right))
 					throw OutOfRange();
-				return (tmp->value->second);
+				return (tmp->value.second);
 			}
 
-			// const T&	at(const Key& key) const {
+			const T&	at(const Key& key) const {
+				node	*tmp = nullptr;
 
-			// }
+				tmp = _tree.search(key);
+				if (!tmp || (!tmp->left && !tmp->right))
+					throw OutOfRange();
+				return (tmp->value.second);
+			}
 
 			// T&	operator[](const Key& key) {
 
