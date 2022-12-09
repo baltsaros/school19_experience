@@ -22,6 +22,7 @@ namespace ft {
 		typedef Key											key_type;
 		typedef T											mapped_type;
 		typedef pair<const Key, T>							value_type;
+		typedef Node<Key, value_type>						node;
 		typedef std::size_t									size_type;
 		typedef std::ptrdiff_t								difference_type;
 		typedef Compare										key_compare;
@@ -33,8 +34,8 @@ namespace ft {
 		typedef	RBTree<Key, value_type, Compare, Allocator>	tree;
 		typedef typename tree::iterator						iterator;
 		typedef typename tree::const_iterator				const_iterator;
-		// typedef reverse_iterator;
-		// typedef const_reverse_iterator;
+		typedef typename tree::reverse_iterator				reverse_iterator;
+		typedef typename tree::const_reverse_iterator		const_reverse_iterator;
 
 		private:
 			allocator_type	_alloc;
@@ -43,6 +44,7 @@ namespace ft {
 			size_type		_size;
 
 		public:
+			// CONSTRUCTORS
 			map() {};
 
 			explicit map(const Compare& comp, const Allocator& alloc = Allocator()) :
@@ -56,8 +58,10 @@ namespace ft {
 					*this = other;
 			}
 
+			// DESCTRUCTOR
 			~map() {}
 
+			// ASSIGN OPERATOR
 			map&	operator=(const map& src) {
 				_alloc = src._alloc;
 				_compare = src._compare;
@@ -66,14 +70,30 @@ namespace ft {
 				return (*this);
 			}
 
-			pair<Key, bool>	insert(const value_type& value) {
-				return (_tree.insert(value));
+			// GET ALLOCATOR
+			allocator_type	get_allocator() const {
+				return (_alloc);
 			}
 
-			void	printMap() {
-				_tree.printNode();
+			// ELEMENT ACCESS
+			T&	at(const Key& key) {
+				node	*tmp = nullptr;
+
+				tmp = _tree.search(key);
+				if (!tmp || (!tmp->left && !tmp->right))
+					throw OutOfRange();
+				return (tmp->value->second);
 			}
 
+			// const T&	at(const Key& key) const {
+
+			// }
+
+			// T&	operator[](const Key& key) {
+
+			// }
+
+			// ITERATORS
 			iterator	begin() {
 				return (_tree.begin());
 			}
@@ -90,7 +110,57 @@ namespace ft {
 				return (_tree.end());
 			}
 
-			
+			reverse_iterator	rbegin() {
+				return (_tree.rbegin());
+			}
+
+			const_reverse_iterator	rbegin() const {
+				return (_tree.rbegin());
+			}
+
+			reverse_iterator	rend() {
+				return (_tree.rend());
+			}
+
+			const_reverse_iterator	rend() const {
+				return (_tree.rend());
+			}
+
+			// MODIFIERS
+			pair<Key, bool>	insert(const value_type& value) {
+				return (_tree.insert(value));
+			}
+
+			// EXCEPTIONS
+			class OutOfRange: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map.at() is out of range");
+				}
+			};
+
+			class OutOfBounds: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map[] index is out of bounds");
+				}
+			};
+
+			class EmptyContainer: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map is empty");
+				}
+			};
+
+			class LengthError: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map begin is ahead of end");
+				}
+			};
+
+			// UTILS
+			void	printMap() {
+				_tree.printNode();
+			}
+
 	};
 }
 

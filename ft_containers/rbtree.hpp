@@ -49,9 +49,9 @@ namespace ft {
 			typedef typename Allocator::template rebind<Node<Key, value_type> >::other	alloc_node;
 			
 			typedef rbt_iterator<Key, Pair>				iterator;
-			typedef rbt_iterator<Key, const Pair>	const_iterator;
-			// typedef reverse_iterator;
-			// typedef const_reverse_iterator;
+			typedef rbt_iterator<Key, const Pair>		const_iterator;
+			typedef ft::reverse_iterator<iterator>			reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		private:
 			node			*_root;
@@ -100,6 +100,7 @@ namespace ft {
 					child = _node_alloc.allocate(1);
 					_node_alloc.construct(child, node(root->key, root->value, root->color, root->level, _nil, _nil, _nil));
 					_root = child;
+					_size++;
 				}
 				else {
 					node	*child;
@@ -123,6 +124,7 @@ namespace ft {
 					else
 						parent->right = child;
 				}
+					_size++;
 				if (root->left != nil)
 					copyTree(root->left, nil);
 				if (root->right != nil)
@@ -136,6 +138,7 @@ namespace ft {
 					child = _node_alloc.allocate(1);
 					_node_alloc.construct(child, node(pair.first, pair, BLACK, 0, _nil, _nil, _nil));
 					_root = child;
+					_size++;
 					return (make_pair(child->key, true));
 				}
 
@@ -166,6 +169,7 @@ namespace ft {
 					parent->left = child;
 				else
 					parent->right = child;
+				_size++;
 				insertFixup(child);
 				return (make_pair(child->key, true));
 			}
@@ -255,7 +259,7 @@ namespace ft {
 			}
 
 			node*	search(Key key) {
-				node	*tmp;
+				node	*tmp = nullptr;
 
 				tmp = search(_root, key);
 				return (tmp);
@@ -322,7 +326,8 @@ namespace ft {
 					y->color = tmp->color;
 				}
 				std::cout << "to delete2: " << toDelete->key << "\n";
-				delete toDelete;
+				_node_alloc.deallocate(toDelete, 1);
+				_size--;
 				std::cout << "del fixup\n";
 				if (!y_color)
 					deleteFixup(x);
@@ -464,21 +469,17 @@ namespace ft {
 				if (tmp->right != _nil)
 					deleteAll(tmp->right);
 				_node_alloc.deallocate(tmp, 1);
+				_size--;
 				tmp = nullptr;
 			}
-
-			// iterator	begin() {
-			// 	node	*min = findMin(_root);
-			// 	return (iterator(min));
-			// }
 
 			iterator	begin() {
 				return (iterator(findMin(_root)));
 			}
 
-			// const_iterator	begin() const {
-			// 	return (const_iterator(findMin(_root)));
-			// }
+			const_iterator	begin() const {
+				return (const_iterator(findMin(_root)));
+			}
 
 			iterator	end() {
 				return (iterator(_nil));
@@ -486,6 +487,22 @@ namespace ft {
 
 			const_iterator	end() const {
 				return (const_iterator(_nil));
+			}
+
+			reverse_iterator	rbegin() {
+				return (reverse_iterator(end()));
+			}
+
+			const_reverse_iterator	rbegin() const {
+				return (const_reverse_iterator(end()));
+			}
+
+			reverse_iterator	rend() {
+				return (reverse_iterator(begin()));
+			}
+
+			const_reverse_iterator	rend() const {
+				return (const_reverse_iterator(begin()));
 			}
 	};
 }
