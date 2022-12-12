@@ -50,9 +50,12 @@ namespace ft {
 			explicit map(const Compare& comp, const Allocator& alloc = Allocator()) :
 				_alloc(alloc), _tree(comp, alloc), _compare(comp), _size(0) {}
 
-			// template <class InputIt>
-			// map(InputIt first, InputIt last, const Compare& comp = Compare(),
-			// 	const Allocator& alloc = Allocator()) {}
+			template <class InputIt>
+			map(InputIt first, InputIt last, const Compare& comp = Compare(),
+				const Allocator& alloc = Allocator(),
+				typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) {
+
+			}
 
 			map(const map& other) {
 					*this = other;
@@ -159,17 +162,23 @@ namespace ft {
 			}
 
 			pair<iterator, bool>	insert(const value_type& value) {
+				// std::cout << "insert 1\n";
 				return (_tree.insert(value));
 			}
 
 			iterator	insert(iterator pos, const value_type& value) {
+				// std::cout << "insert 2\n";
 				return (_tree.insert(pos, value));
 			}
 
-			// template <class InputIt>
-			// void	insert(InputIt first, InputIt last) {
-
-			// }
+			template <class InputIt>
+			void	insert(InputIt first, InputIt last,
+				typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) {
+				// std::cout << "insert 3\n";
+				// for (; first != last; ++first)
+				// 	insert(*first);
+				_tree.insert(first, last);
+			}
 
 			// iterator	erase(iterator pos) {
 

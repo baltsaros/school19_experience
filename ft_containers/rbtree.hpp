@@ -91,6 +91,8 @@ namespace ft {
 			virtual ~RBTree() {
 				// std::cout << "destructor\n";
 				deleteAll();
+				_node_alloc.deallocate(_nil, 1);
+				_nil = nullptr;
 			}
 
 			void	copyTree(node *root, node *nil) {
@@ -459,7 +461,7 @@ namespace ft {
 			}
 
 			pair<iterator, bool>	create_root(const value_type& value) {
-					node		*child;
+					node					*child;
 					pair<iterator, bool>	ret;
 
 					child = _node_alloc.allocate(1);
@@ -481,7 +483,6 @@ namespace ft {
 				node					*parent = _nil;
 				node					*tmp;
 				pair<iterator, bool>	ret;
-
 
 				tmp = search(value.first);
 				if (tmp != _nil) {
@@ -549,6 +550,14 @@ namespace ft {
 				return (iterator(child));
 			}
 
+			template <class InputIt>
+			void	insert(InputIt first, InputIt last) {
+				// typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) {
+				// std::cout << "insert 3\n";
+				for (; first != last; ++first)
+					insert(*first);
+			}
+
 			bool	deleteOne(Key key) {
 				node	*tmp = _root;
 
@@ -564,8 +573,8 @@ namespace ft {
 			void	deleteAll() {
 				deleteAll(_root);
 				_root = nullptr;
-				_node_alloc.deallocate(_nil, 1);
-				_nil = nullptr;
+				// _node_alloc.deallocate(_nil, 1);
+				// _nil = nullptr;
 			}
 
 			node*	search(Key key) {

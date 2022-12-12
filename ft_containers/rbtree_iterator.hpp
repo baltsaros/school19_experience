@@ -69,7 +69,7 @@ namespace ft {
 		}
 
 		reference	operator*() const {
-			return *(_ptr->value);
+			return (_ptr->value);
 		}
 
 		pointer	operator->() const {
