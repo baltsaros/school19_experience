@@ -4,7 +4,7 @@
 # include <memory>
 # include <exception>
 # include <cstring>
-# include "iterator.hpp"
+# include <iostream>
 # include "enable_if.hpp"
 # include "is_integral.hpp"
 # include "lexi_compare.hpp"
@@ -19,21 +19,208 @@ namespace ft {
 	class map {
 		public:
 		// TYPEDEFS
-		typedef Key							key_type;
-		typedef T							mapped_type;
-		typedef pair<const Key, T>			value_type;
-		typedef std::size_t					size_type;
-		typedef std::ptrdiff_t				difference_type;
-		typedef Compare						key_compare;
-		typedef Allocator					allocator_type;
-		typedef value_type&					reference;
-		typedef const value_type&			const_reference;
-		typedef typename Allocator::pointer			pointer;
-		typedef typename Allocator::const_pointer	const_pointer;
-		// typedef iterator;
-		// typedef const_iterator;
-		// typedef reverse_iterator;
-		// typedef const_reverse_iterator;
+		typedef Key											key_type;
+		typedef T											mapped_type;
+		typedef pair<const Key, T>							value_type;
+		typedef Node<Key, value_type>						node;
+		typedef std::size_t									size_type;
+		typedef std::ptrdiff_t								difference_type;
+		typedef Compare										key_compare;
+		typedef Allocator									allocator_type;
+		typedef value_type&									reference;
+		typedef const value_type&							const_reference;
+		typedef typename Allocator::pointer					pointer;
+		typedef typename Allocator::const_pointer			const_pointer;
+		typedef	RBTree<Key, value_type, Compare, Allocator>	tree;
+		typedef typename tree::iterator						iterator;
+		typedef typename tree::const_iterator				const_iterator;
+		typedef typename tree::reverse_iterator				reverse_iterator;
+		typedef typename tree::const_reverse_iterator		const_reverse_iterator;
+
+		private:
+			allocator_type	_alloc;
+			tree			_tree;
+			key_compare		_compare;
+			size_type		_size;
+
+		public:
+			// CONSTRUCTORS
+			map() {};
+
+			explicit map(const Compare& comp, const Allocator& alloc = Allocator()) :
+				_alloc(alloc), _tree(comp, alloc), _compare(comp), _size(0) {}
+
+			template <class InputIt>
+			map(InputIt first, InputIt last, const Compare& comp = Compare(),
+				const Allocator& alloc = Allocator(),
+				typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) {
+
+			}
+
+			map(const map& other) {
+					*this = other;
+			}
+
+			// DESCTRUCTOR
+			~map() {}
+
+			// ASSIGN OPERATOR
+			map&	operator=(const map& src) {
+				_alloc = src._alloc;
+				_compare = src._compare;
+				_size = src._size;
+				_tree = src._tree;
+				return (*this);
+			}
+
+			// GET ALLOCATOR
+			allocator_type	get_allocator() const {
+				return (_alloc);
+			}
+
+			// ELEMENT ACCESS
+			T&	at(const Key& key) {
+				node	*tmp = nullptr;
+
+				tmp = _tree.search(key);
+				if (!tmp || (!tmp->left && !tmp->right))
+					throw OutOfRange();
+				return (tmp->value.second);
+			}
+
+			const T&	at(const Key& key) const {
+				node	*tmp = nullptr;
+
+				tmp = _tree.search(key);
+				if (!tmp || (!tmp->left && !tmp->right))
+					throw OutOfRange();
+				return (tmp->value.second);
+			}
+
+			T&	operator[](const Key& key) {
+				node	*tmp = nullptr;
+
+				tmp = _tree.search(key);
+				if (!tmp || (!tmp->left && !tmp->right)) {
+					pair<Key, T>	newPair = value_type(key, T());
+
+					_tree.insert(newPair);
+					tmp = _tree.search(key);
+				}
+				return (tmp->value.second);
+			}
+
+			// ITERATORS
+			iterator	begin() {
+				return (_tree.begin());
+			}
+
+			const_iterator	begin() const {
+				return (_tree.begin());
+			}
+
+			iterator	end() {
+				return (_tree.end());
+			}
+
+			const_iterator	end() const {
+				return (_tree.end());
+			}
+
+			reverse_iterator	rbegin() {
+				return (_tree.rbegin());
+			}
+
+			const_reverse_iterator	rbegin() const {
+				return (_tree.rbegin());
+			}
+
+			reverse_iterator	rend() {
+				return (_tree.rend());
+			}
+
+			const_reverse_iterator	rend() const {
+				return (_tree.rend());
+			}
+
+			// CAPACITY
+			bool	empty() const {
+				return (_tree.empty());
+			}
+
+			size_type	size() const {
+				return (_tree.size());
+			}
+
+			size_type	max_size() const {
+				return (_tree.max_size());
+			}
+
+			// MODIFIERS
+			void	clear() {
+				_tree.deleteAll();
+			}
+
+			pair<iterator, bool>	insert(const value_type& value) {
+				// std::cout << "insert 1\n";
+				return (_tree.insert(value));
+			}
+
+			iterator	insert(iterator pos, const value_type& value) {
+				// std::cout << "insert 2\n";
+				return (_tree.insert(pos, value));
+			}
+
+			template <class InputIt>
+			void	insert(InputIt first, InputIt last,
+				typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) {
+				// std::cout << "insert 3\n";
+				// for (; first != last; ++first)
+				// 	insert(*first);
+				_tree.insert(first, last);
+			}
+
+			// iterator	erase(iterator pos) {
+
+			// }
+
+			// iterator	erase(iterator first, iterator last) {
+				
+			// }
+
+			size_type	erase(const Key& key) {
+				return (_tree.deleteOne(key));
+			}
+
+			// EXCEPTIONS
+			class OutOfRange: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map.at() is out of range");
+				}
+			};
+
+			class OutOfBounds: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map[] index is out of bounds");
+				}
+			};
+
+			class EmptyContainer: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map is empty");
+				}
+			};
+
+			class LengthError: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map begin is ahead of end");
+				}
+			};
+
+			// UTILS
+			void	printMap() {
+				_tree.printNode();
+			}
 
 	};
 }
