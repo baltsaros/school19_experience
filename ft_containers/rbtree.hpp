@@ -558,7 +558,23 @@ namespace ft {
 					insert(*first);
 			}
 
-			bool	deleteOne(Key key) {
+			iterator	erase(iterator pos) {
+				node	*tmp = pos.base();
+				node	*ret;
+
+				if (!tmp || tmp == _nil)
+					return (pos);
+				pos++;
+				ret = pos.base();
+				deleteOne(tmp);
+				if (!ret || ret == _nil)
+					return (iterator(nullptr));
+				// std::cout << "key: "<< ret->key << "\n";
+				// std::cout << "key: "<< ret->key << "\n";
+				return (iterator(ret));
+			}
+			
+			bool	erase(const Key& key) {
 				node	*tmp = _root;
 
 				// std::cout << "deleting " << key << "\n";

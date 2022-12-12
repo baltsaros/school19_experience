@@ -126,7 +126,7 @@ namespace ft {
 			return (tmp);
 		}
 
-		const node&	base() const {
+		node*	base() const {
 			return (_ptr);
 		}
 
