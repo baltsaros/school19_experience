@@ -140,9 +140,38 @@ namespace ft {
 				return (_tree.rend());
 			}
 
+			// CAPACITY
+			bool	empty() const {
+				return (_tree.empty());
+			}
+
+			size_type	size() const {
+				return (_tree.size());
+			}
+
+			size_type	max_size() const {
+				return (_tree.max_size());
+			}
+
 			// MODIFIERS
+			void	clear() {
+				_tree.deleteAll();
+			}
+
 			pair<Key, bool>	insert(const value_type& value) {
 				return (_tree.insert(value));
+			}
+
+			// iterator	erase(iterator pos) {
+
+			// }
+
+			// iterator	erase(iterator first, iterator last) {
+				
+			// }
+
+			size_type	erase(const Key& key) {
+				return (_tree.deleteOne(key));
 			}
 
 			// EXCEPTIONS

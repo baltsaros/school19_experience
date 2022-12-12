@@ -132,49 +132,6 @@ namespace ft {
 					copyTree(root->right, nil);
 			}
 
-			pair<Key, bool>	insert(value_type pair) {
-				if (!_root) {
-					node	*child;
-
-					child = _node_alloc.allocate(1);
-					_node_alloc.construct(child, node(pair.first, pair, BLACK, 0, _nil, _nil, _nil));
-					_root = child;
-					_nil->parent = _root;
-					_size++;
-					return (make_pair(child->key, true));
-				}
-
-				node	*child;
-				node	*head = _root;
-				node	*parent = _nil;
-				node	*tmp;
-
-				tmp = search(pair.first);
-				if (tmp != _nil) {
-					std::cout << "Key is already present!\n";
-					return (make_pair(pair.first, false));
-				}
-				child = _node_alloc.allocate(1);
-				_node_alloc.construct(child, node(pair.first, pair, RED, 0, nullptr, _nil, _nil));
-
-				while (head != _nil)
-				{
-					parent = head;
-					if (head->key > child->key)
-						head = head->left;
-					else
-						head = head->right;
-					child->level++;
-				}
-				child->parent = parent;
-				if (parent->key > child->key)
-					parent->left = child;
-				else
-					parent->right = child;
-				_size++;
-				insertFixup(child);
-				return (make_pair(child->key, true));
-			}
 
 			void	insertFixup(node *child) {
 				node	*uncle;
@@ -223,79 +180,6 @@ namespace ft {
 				_nil->parent = _root;
 			}
 
-			void	rightRotation(node *x) {
-				node	*y;
-
-				// std::cout << "right rotation\n";
-				y = x->left;
-				x->left = y->right;
-				if (y->right != _nil)
-					y->right->parent = x;
-				y->parent = x->parent;
-				if (x->parent == _nil)
-					_root = y;
-				else if (x == x->parent->left)
-					x->parent->left = y;
-				else
-					x->parent->right = y;
-				y->right = x;
-				x->parent = y;
-			}
-
-			void	leftRotation(node *x) {
-				node	*y;
-
-				// std::cout << "left rotation\n";
-				y = x->right;
-				x->right = y->left;
-				if (y->left != _nil)
-					y->left->parent = x;
-				y->parent = x->parent;
-				if (x->parent == _nil)
-					_root = y;
-				else if (x == x->parent->left)
-					x->parent->left = y;
-				else
-					x->parent->right = y;
-				y->left = x;
-				x->parent = y;
-			}
-
-			node*	search(Key key) {
-				node	*tmp = nullptr;
-
-				tmp = search(_root, key);
-				return (tmp);
-			}
-
-			node*	search(node *tmp, Key key) {
-				if (tmp == _nil || tmp->key == key)
-					return (tmp);
-				if (key > tmp->key)
-					return search(tmp->right, key);
-				else
-					return search(tmp->left, key);
-			}
-
-			void	transplant(node *u, node *v) {
-				// std::cout << "transplanting\n";
-				if (u->parent == _nil)
-					_root = v;
-				else if (u == u->parent->left)
-					u->parent->left = v;
-				else
-					u->parent->right = v;
-				v->parent = u->parent;
-			}
-
-			void	deleteOne(Key key) {
-				node	*tmp = _root;
-
-				std::cout << "deleting " << key << "\n";
-				tmp = search(key);
-				std::cout << "found: " << tmp->key << "\n";
-				deleteOne(tmp);
-			}
 
 			void	deleteOne(node *toDelete)
 			{
@@ -303,7 +187,7 @@ namespace ft {
 				bool	y_color;
 
 				y = toDelete;
-				std::cout << "to delete: " << y->key << "\n";
+				// std::cout << "to delete: " << y->key << "\n";
 				y_color = y->color;
 				if (y->left == _nil) {
 					x = y->right;
@@ -328,12 +212,24 @@ namespace ft {
 					y->left->parent = y;
 					y->color = tmp->color;
 				}
-				std::cout << "to delete2: " << toDelete->key << "\n";
+				// std::cout << "to delete2: " << toDelete->key << "\n";
 				_node_alloc.deallocate(toDelete, 1);
 				_size--;
-				std::cout << "del fixup\n";
+				// std::cout << "del fixup\n";
 				if (!y_color)
 					deleteFixup(x);
+			}
+
+			void	deleteAll(node *tmp) {
+				if (tmp == _nil || !tmp)
+					return ;
+				if (tmp->left != _nil)
+					deleteAll(tmp->left);
+				if (tmp->right != _nil)
+					deleteAll(tmp->right);
+				_node_alloc.deallocate(tmp, 1);
+				_size--;
+				tmp = nullptr;
 			}
 
 			void	deleteFixup(node *x) {
@@ -391,6 +287,65 @@ namespace ft {
 						}
 					}
 				}
+			}
+
+			void	rightRotation(node *x) {
+				node	*y;
+
+				// std::cout << "right rotation\n";
+				y = x->left;
+				x->left = y->right;
+				if (y->right != _nil)
+					y->right->parent = x;
+				y->parent = x->parent;
+				if (x->parent == _nil)
+					_root = y;
+				else if (x == x->parent->left)
+					x->parent->left = y;
+				else
+					x->parent->right = y;
+				y->right = x;
+				x->parent = y;
+			}
+
+			void	leftRotation(node *x) {
+				node	*y;
+
+				// std::cout << "left rotation\n";
+				y = x->right;
+				x->right = y->left;
+				if (y->left != _nil)
+					y->left->parent = x;
+				y->parent = x->parent;
+				if (x->parent == _nil)
+					_root = y;
+				else if (x == x->parent->left)
+					x->parent->left = y;
+				else
+					x->parent->right = y;
+				y->left = x;
+				x->parent = y;
+			}
+
+
+			node*	search(node *tmp, Key key) {
+				if (!tmp || tmp == _nil || tmp->key == key)
+					return (tmp);
+				if (key > tmp->key)
+					return search(tmp->right, key);
+				else
+					return search(tmp->left, key);
+			}
+
+			void	transplant(node *u, node *v) {
+				// std::cout << "transplanting\n";
+				if (u->parent == _nil)
+					_root = v;
+				else if (u == u->parent->left)
+					u->parent->left = v;
+				else
+					u->parent->right = v;
+				v->parent = u->parent;
 			}
 
 			node*	findMin(node *tmp) const {
@@ -457,25 +412,7 @@ namespace ft {
 					printNode(tmp->right);
 			}
 
-			void	deleteAll() {
-				deleteAll(_root);
-				_root = nullptr;
-				_node_alloc.deallocate(_nil, 1);
-				_nil = nullptr;
-			}
-
-			void	deleteAll(node *tmp) {
-				if (tmp == _nil || !tmp)
-					return ;
-				if (tmp->left != _nil)
-					deleteAll(tmp->left);
-				if (tmp->right != _nil)
-					deleteAll(tmp->right);
-				_node_alloc.deallocate(tmp, 1);
-				_size--;
-				tmp = nullptr;
-			}
-
+			// ITERATORS
 			iterator	begin() {
 				return (iterator(findMin(_root)));
 			}
@@ -507,6 +444,91 @@ namespace ft {
 			const_reverse_iterator	rend() const {
 				return (const_reverse_iterator(begin()));
 			}
+
+			// CAPACITY
+			bool	empty() const {
+				return (!_size);
+			}
+
+			size_type	size() const {
+				return (_size);
+			}
+
+			size_type	max_size() const {
+				return (_node_alloc.max_size());
+			}
+
+			// MODIFIERS
+			pair<Key, bool>	insert(value_type pair) {
+				if (!_root) {
+					node	*child;
+
+					child = _node_alloc.allocate(1);
+					_node_alloc.construct(child, node(pair.first, pair, BLACK, 0, _nil, _nil, _nil));
+					_root = child;
+					_nil->parent = _root;
+					_size++;
+					return (make_pair(child->key, true));
+				}
+
+				node	*child;
+				node	*head = _root;
+				node	*parent = _nil;
+				node	*tmp;
+
+				tmp = search(pair.first);
+				if (tmp != _nil) {
+					std::cout << "Key is already present!\n";
+					return (make_pair(pair.first, false));
+				}
+				child = _node_alloc.allocate(1);
+				_node_alloc.construct(child, node(pair.first, pair, RED, 0, nullptr, _nil, _nil));
+
+				while (head != _nil)
+				{
+					parent = head;
+					if (head->key > child->key)
+						head = head->left;
+					else
+						head = head->right;
+					child->level++;
+				}
+				child->parent = parent;
+				if (parent->key > child->key)
+					parent->left = child;
+				else
+					parent->right = child;
+				_size++;
+				insertFixup(child);
+				return (make_pair(child->key, true));
+			}
+
+			bool	deleteOne(Key key) {
+				node	*tmp = _root;
+
+				// std::cout << "deleting " << key << "\n";
+				tmp = search(key);
+				if (!tmp || tmp == _nil)
+					return (false);
+				// std::cout << "found: " << tmp->key << "\n";
+				deleteOne(tmp);
+				return (true);
+			}
+
+			void	deleteAll() {
+				deleteAll(_root);
+				_root = nullptr;
+				_node_alloc.deallocate(_nil, 1);
+				_nil = nullptr;
+			}
+
+			node*	search(Key key) {
+				node	*tmp = nullptr;
+
+				tmp = search(_root, key);
+				return (tmp);
+			}
+
 	};
 }
 

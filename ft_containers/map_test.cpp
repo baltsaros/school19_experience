@@ -39,8 +39,8 @@ int	main(void) {
 	m2[5] = "five";
 
 	// ELEMENT ACCES
-	{
-		std::cout << "\n+++++++++ ELEMENT ACCES +++++++++\n";
+	// {
+		// std::cout << "\n+++++++++ ELEMENT ACCES +++++++++\n";
 		// std::cout << "\n+++ at() +++\n";
 		// std::cout << "FT: m1.at(0)\n";
 		// std::cout << m1.at(0) << "\n";
@@ -55,17 +55,17 @@ int	main(void) {
 		// std::cout << "STD: m2.at(10) - (out of range)\n";
 		// std::cout << m2.at(10) << "\n";
 
-		std::cout << "\n+++ operator[] +++\n";
+	// 	std::cout << "\n+++ operator[] +++\n";
 
-		std::cout << "FT: m1[0]\n";
-		printValue(m1[0]);
-		std::cout << "STD: m2[0]\n";
-		printValue(m2[0]);
-		std::cout << "FT: m1[6] - (out of range)\n";
-		printValue(m1[6]);
-		std::cout << "STD: m2[6] - (out of range)\n";
-		printValue(m2[6]);
-	}
+	// 	std::cout << "FT: m1[0]\n";
+	// 	printValue(m1[0]);
+	// 	std::cout << "STD: m2[0]\n";
+	// 	printValue(m2[0]);
+	// 	std::cout << "FT: m1[6] - (out of range)\n";
+	// 	printValue(m1[6]);
+	// 	std::cout << "STD: m2[6] - (out of range)\n";
+	// 	printValue(m2[6]);
+	// }
 
 	// FT ITERATORS
 	// {
@@ -147,6 +147,76 @@ int	main(void) {
 	// 	printPair(rit2);
 	// }
 
+	// CAPACITY
+	{
+		std::cout << "\n+++++++++ CAPACITY +++++++++\n";
+		std::cout << "\n+++ empty() +++\n";
+		std::cout << "FT: m1.empty()\n";
+		std::cout << m1.empty() << "\n";
+		std::cout << "STD: m2.empty()\n";
+		std::cout << m2.empty() << "\n";
 
+		std::cout << "\nCreating empty m3(ft) and m4 (std)\n";
+		ft::map<int, std::string>						m3;
+		std::map<int, std::string>						m4;
+
+		std::cout << "FT: m3.empty()\n";
+		std::cout << m3.empty() << "\n";
+		std::cout << "STD: m4.empty()\n";
+		std::cout << m4.empty() << "\n";
+
+
+		std::cout << "\n+++ size() +++\n";
+		std::cout << "FT: m1.size()\n";
+		std::cout << m1.size() << "\n";
+		std::cout << "STD: m2.size()\n";
+		std::cout << m2.size() << "\n";
+		std::cout << "FT: m3.size()\n";
+		std::cout << m3.size() << "\n";
+		std::cout << "STD: m4.size()\n";
+		std::cout << m4.size() << "\n";
+
+		std::cout << "\nerase(3): deleting one element\n";
+		std::cout << m1.erase(3) << std::endl;
+		std::cout << m2.erase(3) << std::endl;
+		std::cout << "FT: m1.empty()\n";
+		std::cout << m1.empty() << "\n";
+		std::cout << "STD: m2.empty()\n";
+		std::cout << m2.empty() << "\n";
+		std::cout << "FT: m1.size()\n";
+		std::cout << m1.size() << "\n";
+		std::cout << "STD: m2.size()\n";
+		std::cout << m2.size() << "\n";
+
+		std::cout << "\nerase(10): deleting non-existing element\n";
+		std::cout << m1.erase(10) << std::endl;
+		std::cout << m2.erase(10) << std::endl;
+		std::cout << "FT: m1.empty()\n";
+		std::cout << m1.empty() << "\n";
+		std::cout << "STD: m2.empty()\n";
+		std::cout << m2.empty() << "\n";
+		std::cout << "FT: m1.size()\n";
+		std::cout << m1.size() << "\n";
+		std::cout << "STD: m2.size()\n";
+		std::cout << m2.size() << "\n";
+
+		std::cout << "\nclear(): deleting all elements\n";
+		m1.clear();
+		m2.clear();
+		std::cout << "FT: m1.empty()\n";
+		std::cout << m1.empty() << "\n";
+		std::cout << "STD: m2.empty()\n";
+		std::cout << m2.empty() << "\n";
+		std::cout << "FT: m1.size()\n";
+		std::cout << m1.size() << "\n";
+		std::cout << "STD: m2.size()\n";
+		std::cout << m2.size() << "\n";
+
+		std::cout << "\n+++ max_size() +++\n";
+		std::cout << "FT: m1.max_size()\n";
+		std::cout << m1.max_size() << "\n";
+		std::cout << "STD: m2.max_size()\n";
+		std::cout << m2.max_size() << "\n";
+	}
 	return (0);
 }
