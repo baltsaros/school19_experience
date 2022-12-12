@@ -349,7 +349,7 @@ namespace ft {
 			}
 
 			node*	findMin(node *tmp) const {
-				if (tmp == _nil)
+				if (!tmp || tmp == _nil)
 					return (nullptr);
 				while (tmp->left != _nil)
 					tmp = tmp->left;
@@ -357,7 +357,7 @@ namespace ft {
 			}
 
 			node*	findMax(node *tmp) const {
-				if (tmp == _nil)
+				if (!tmp || tmp == _nil)
 					return (nullptr);
 				while (tmp->right != _nil)
 					tmp = tmp->right;
@@ -458,31 +458,39 @@ namespace ft {
 				return (_node_alloc.max_size());
 			}
 
-			// MODIFIERS
-			pair<Key, bool>	insert(value_type pair) {
-				if (!_root) {
-					node	*child;
+			pair<iterator, bool>	create_root(const value_type& value) {
+					node		*child;
+					pair<iterator, bool>	ret;
 
 					child = _node_alloc.allocate(1);
-					_node_alloc.construct(child, node(pair.first, pair, BLACK, 0, _nil, _nil, _nil));
+					_node_alloc.construct(child, node(value.first, value, BLACK, 0, _nil, _nil, _nil));
 					_root = child;
 					_nil->parent = _root;
 					_size++;
-					return (make_pair(child->key, true));
-				}
+					ret = ft::make_pair(iterator(child), true);
+					return (ret);
+			}
 
-				node	*child;
-				node	*head = _root;
-				node	*parent = _nil;
-				node	*tmp;
+			// MODIFIERS
+			pair<iterator, bool>	insert(const value_type& value) {
+				if (!_root)
+					return (create_root(value));
 
-				tmp = search(pair.first);
+				node					*child;
+				node					*head = _root;
+				node					*parent = _nil;
+				node					*tmp;
+				pair<iterator, bool>	ret;
+
+
+				tmp = search(value.first);
 				if (tmp != _nil) {
 					std::cout << "Key is already present!\n";
-					return (make_pair(pair.first, false));
+					ret = ft::make_pair(iterator(tmp), false);
+					return (ret);
 				}
 				child = _node_alloc.allocate(1);
-				_node_alloc.construct(child, node(pair.first, pair, RED, 0, nullptr, _nil, _nil));
+				_node_alloc.construct(child, node(value.first, value, RED, 0, nullptr, _nil, _nil));
 
 				while (head != _nil)
 				{
@@ -500,7 +508,45 @@ namespace ft {
 					parent->right = child;
 				_size++;
 				insertFixup(child);
-				return (make_pair(child->key, true));
+				ret = ft::make_pair(iterator(child), true);
+				return (ret);
+			}
+
+			iterator	insert(iterator pos, const value_type& value) {
+				(void)pos;
+				if (!_root)
+					return (create_root(value).first);
+
+				node	*child;
+				node	*head = _root;
+				node	*parent = _nil;
+				node	*tmp;
+
+				tmp = search(value.first);
+				if (tmp != _nil) {
+					std::cout << "Key is already present!\n";
+					return (iterator(tmp));
+				}
+				child = _node_alloc.allocate(1);
+				_node_alloc.construct(child, node(value.first, value, RED, 0, nullptr, _nil, _nil));
+
+				while (head != _nil)
+				{
+					parent = head;
+					if (head->key > child->key)
+						head = head->left;
+					else
+						head = head->right;
+					child->level++;
+				}
+				child->parent = parent;
+				if (parent->key > child->key)
+					parent->left = child;
+				else
+					parent->right = child;
+				_size++;
+				insertFixup(child);
+				return (iterator(child));
 			}
 
 			bool	deleteOne(Key key) {

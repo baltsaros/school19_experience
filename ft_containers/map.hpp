@@ -158,9 +158,18 @@ namespace ft {
 				_tree.deleteAll();
 			}
 
-			pair<Key, bool>	insert(const value_type& value) {
+			pair<iterator, bool>	insert(const value_type& value) {
 				return (_tree.insert(value));
 			}
+
+			iterator	insert(iterator pos, const value_type& value) {
+				return (_tree.insert(pos, value));
+			}
+
+			// template <class InputIt>
+			// void	insert(InputIt first, InputIt last) {
+
+			// }
 
 			// iterator	erase(iterator pos) {
 

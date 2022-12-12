@@ -19,17 +19,16 @@ int	main(void) {
 	ft::map<int, std::string>						m1;
 	ft::map<int, std::string>::iterator				it1;
 	ft::map<int, std::string>::reverse_iterator		rit1;
-	ft::pair<int, bool>								ret;
 	std::map<int, std::string>						m2;
 	std::map<int, std::string>::iterator			it2;
 	std::map<int, std::string>::reverse_iterator	rit2;
 
-	ret = m1.insert(ft::make_pair(0, "zero"));
-	ret = m1.insert(ft::make_pair(1, "one"));
-	ret = m1.insert(ft::make_pair(2, "two"));
-	ret = m1.insert(ft::make_pair(3, "three"));
-	ret = m1.insert(ft::make_pair(4, "four"));
-	ret = m1.insert(ft::make_pair(5, "five"));
+	m1.insert(ft::make_pair(0, "zero"));
+	m1.insert(ft::make_pair(1, "one"));
+	m1.insert(ft::make_pair(2, "two"));
+	m1.insert(ft::make_pair(3, "three"));
+	m1.insert(ft::make_pair(4, "four"));
+	m1.insert(ft::make_pair(5, "five"));
 
 	m2[0] = "zero";
 	m2[1] = "one";
@@ -148,75 +147,135 @@ int	main(void) {
 	// }
 
 	// CAPACITY
-	{
-		std::cout << "\n+++++++++ CAPACITY +++++++++\n";
-		std::cout << "\n+++ empty() +++\n";
-		std::cout << "FT: m1.empty()\n";
-		std::cout << m1.empty() << "\n";
-		std::cout << "STD: m2.empty()\n";
-		std::cout << m2.empty() << "\n";
+	// {
+	// 	std::cout << "\n+++++++++ CAPACITY +++++++++\n";
+	// 	std::cout << "\n+++ empty() +++\n";
+	// 	std::cout << "FT: m1.empty()\n";
+	// 	std::cout << m1.empty() << "\n";
+	// 	std::cout << "STD: m2.empty()\n";
+	// 	std::cout << m2.empty() << "\n";
 
-		std::cout << "\nCreating empty m3(ft) and m4 (std)\n";
+	// 	std::cout << "\nCreating empty m3(ft) and m4 (std)\n";
+	// 	ft::map<int, std::string>						m3;
+	// 	std::map<int, std::string>						m4;
+
+	// 	std::cout << "FT: m3.empty()\n";
+	// 	std::cout << m3.empty() << "\n";
+	// 	std::cout << "STD: m4.empty()\n";
+	// 	std::cout << m4.empty() << "\n";
+
+
+	// 	std::cout << "\n+++ size() +++\n";
+	// 	std::cout << "FT: m1.size()\n";
+	// 	std::cout << m1.size() << "\n";
+	// 	std::cout << "STD: m2.size()\n";
+	// 	std::cout << m2.size() << "\n";
+	// 	std::cout << "FT: m3.size()\n";
+	// 	std::cout << m3.size() << "\n";
+	// 	std::cout << "STD: m4.size()\n";
+	// 	std::cout << m4.size() << "\n";
+
+	// 	std::cout << "\nerase(3): deleting one element\n";
+	// 	std::cout << m1.erase(3) << std::endl;
+	// 	std::cout << m2.erase(3) << std::endl;
+	// 	std::cout << "FT: m1.empty()\n";
+	// 	std::cout << m1.empty() << "\n";
+	// 	std::cout << "STD: m2.empty()\n";
+	// 	std::cout << m2.empty() << "\n";
+	// 	std::cout << "FT: m1.size()\n";
+	// 	std::cout << m1.size() << "\n";
+	// 	std::cout << "STD: m2.size()\n";
+	// 	std::cout << m2.size() << "\n";
+
+	// 	std::cout << "\nerase(10): deleting non-existing element\n";
+	// 	std::cout << m1.erase(10) << std::endl;
+	// 	std::cout << m2.erase(10) << std::endl;
+	// 	std::cout << "FT: m1.empty()\n";
+	// 	std::cout << m1.empty() << "\n";
+	// 	std::cout << "STD: m2.empty()\n";
+	// 	std::cout << m2.empty() << "\n";
+	// 	std::cout << "FT: m1.size()\n";
+	// 	std::cout << m1.size() << "\n";
+	// 	std::cout << "STD: m2.size()\n";
+	// 	std::cout << m2.size() << "\n";
+
+	// 	std::cout << "\nclear(): deleting all elements\n";
+	// 	m1.clear();
+	// 	m2.clear();
+	// 	std::cout << "FT: m1.empty()\n";
+	// 	std::cout << m1.empty() << "\n";
+	// 	std::cout << "STD: m2.empty()\n";
+	// 	std::cout << m2.empty() << "\n";
+	// 	std::cout << "FT: m1.size()\n";
+	// 	std::cout << m1.size() << "\n";
+	// 	std::cout << "STD: m2.size()\n";
+	// 	std::cout << m2.size() << "\n";
+
+	// 	std::cout << "\n+++ max_size() +++\n";
+	// 	std::cout << "FT: m1.max_size()\n";
+	// 	std::cout << m1.max_size() << "\n";
+	// 	std::cout << "STD: m2.max_size()\n";
+	// 	std::cout << m2.max_size() << "\n";
+	// }
+
+	// MODIFIERS
+	{
 		ft::map<int, std::string>						m3;
 		std::map<int, std::string>						m4;
 
-		std::cout << "FT: m3.empty()\n";
-		std::cout << m3.empty() << "\n";
-		std::cout << "STD: m4.empty()\n";
-		std::cout << m4.empty() << "\n";
+		std::cout << "\n+++++++++ MODIFIERS +++++++++\n";
+		std::cout << "\n+++ insert(it, pair) +++\n";
+		it1 = m3.begin();
+		it2 = m4.begin();
+		// it1 = m3.end();
+		// it2 = m4.end();
+		std::cout << "\nEmpty maps, it = m.begin()\n";
+		std::cout << "insert(it, make_pair(2, \"two\")\n";
+		it1 = m3.insert(it1, ft::make_pair(2, "two"));
+		it2 = m4.insert(it2, std::make_pair(2, "two"));
+		std::cout << "FT: it1\n";
+		printPair(it1);
+		std::cout << "STD: it2\n";
+		printPair(it2);
+		std::cout << "FT: m3.at(2)\n";
+		printValue(m3.at(2));
+		std::cout << "STD: m4.at(2)\n";
+		printValue(m4.at(2));
 
+		it1 = m1.begin();
+		it2 = m2.begin();
+		// it1 = m3.end();
+		// it2 = m4.end();
+		std::cout << "\nFilled maps, it = m.begin()\n";
+		std::cout << "insert(it, make_pair(2, \"aaa\")\n";
+		it1 = m1.insert(it1, ft::make_pair(2, "aaa"));
+		it2 = m2.insert(it2, std::make_pair(2, "aaa"));
+		std::cout << "FT: it1\n";
+		printPair(it1);
+		std::cout << "STD: it2\n";
+		printPair(it2);
+		std::cout << "FT: m1.at(2)\n";
+		printValue(m1.at(0));
+		printValue(m1.at(1));
+		printValue(m1.at(2));
+		printValue(m1.at(3));
+		std::cout << "STD: m2.at(2)\n";
+		printValue(m2.at(0));
+		printValue(m2.at(1));
+		printValue(m2.at(2));
+		printValue(m2.at(3));
 
-		std::cout << "\n+++ size() +++\n";
-		std::cout << "FT: m1.size()\n";
-		std::cout << m1.size() << "\n";
-		std::cout << "STD: m2.size()\n";
-		std::cout << m2.size() << "\n";
-		std::cout << "FT: m3.size()\n";
-		std::cout << m3.size() << "\n";
-		std::cout << "STD: m4.size()\n";
-		std::cout << m4.size() << "\n";
-
-		std::cout << "\nerase(3): deleting one element\n";
-		std::cout << m1.erase(3) << std::endl;
-		std::cout << m2.erase(3) << std::endl;
-		std::cout << "FT: m1.empty()\n";
-		std::cout << m1.empty() << "\n";
-		std::cout << "STD: m2.empty()\n";
-		std::cout << m2.empty() << "\n";
-		std::cout << "FT: m1.size()\n";
-		std::cout << m1.size() << "\n";
-		std::cout << "STD: m2.size()\n";
-		std::cout << m2.size() << "\n";
-
-		std::cout << "\nerase(10): deleting non-existing element\n";
-		std::cout << m1.erase(10) << std::endl;
-		std::cout << m2.erase(10) << std::endl;
-		std::cout << "FT: m1.empty()\n";
-		std::cout << m1.empty() << "\n";
-		std::cout << "STD: m2.empty()\n";
-		std::cout << m2.empty() << "\n";
-		std::cout << "FT: m1.size()\n";
-		std::cout << m1.size() << "\n";
-		std::cout << "STD: m2.size()\n";
-		std::cout << m2.size() << "\n";
-
-		std::cout << "\nclear(): deleting all elements\n";
-		m1.clear();
-		m2.clear();
-		std::cout << "FT: m1.empty()\n";
-		std::cout << m1.empty() << "\n";
-		std::cout << "STD: m2.empty()\n";
-		std::cout << m2.empty() << "\n";
-		std::cout << "FT: m1.size()\n";
-		std::cout << m1.size() << "\n";
-		std::cout << "STD: m2.size()\n";
-		std::cout << m2.size() << "\n";
-
-		std::cout << "\n+++ max_size() +++\n";
-		std::cout << "FT: m1.max_size()\n";
-		std::cout << m1.max_size() << "\n";
-		std::cout << "STD: m2.max_size()\n";
-		std::cout << m2.max_size() << "\n";
+		std::cout << "\ninsert(it, make_pair(10, \"aaa\")\n";
+		it1 = m1.insert(it1, ft::make_pair(10, "aaa"));
+		it2 = m2.insert(it2, std::make_pair(10, "aaa"));
+		std::cout << "FT: it1\n";
+		printPair(it1);
+		std::cout << "STD: it2\n";
+		printPair(it2);
+		std::cout << "FT: m1.at(10)\n";
+		printValue(m1.at(10));
+		std::cout << "STD: m2.at(10)\n";
+		printValue(m2.at(10));
 	}
 	return (0);
 }
