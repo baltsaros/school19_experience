@@ -501,7 +501,52 @@ int	main(void) {
 		// std::cout << "STD: m2.find(11) - ";
 		// printPair(m2.find(11));
 
-		
+		std::cout << "\n+++ lower_bound() +++\n";
+		std::cout << "FT: m1.lower_bound(0) - ";
+		printPair(m1.lower_bound(0));
+		std::cout << "STD: m2.lower_bound(0) - ";
+		printPair(m2.lower_bound(0));
+		std::cout << "FT: m1.lower_bound(2) - ";
+		printPair(m1.lower_bound(2));
+		std::cout << "STD: m2.lower_bound(2) - ";
+		printPair(m2.lower_bound(2));
+		// std::cout << "FT: m1.lower_bound(7) - ";
+		// printPair(m1.lower_bound(7));
+		// std::cout << "STD: m2.lower_bound(7) - ";
+		// printPair(m2.lower_bound(7));
+
+		std::cout << "\n+++ upper_bound() +++\n";
+		std::cout << "FT: m1.upper_bound(0) - ";
+		printPair(m1.upper_bound(0));
+		std::cout << "STD: m2.upper_bound(0) - ";
+		printPair(m2.upper_bound(0));
+		std::cout << "FT: m1.upper_bound(2) - ";
+		printPair(m1.upper_bound(2));
+		std::cout << "STD: m2.upper_bound(2) - ";
+		printPair(m2.upper_bound(2));
+	
+		std::cout << "\n+++ equal_range() +++\n";
+		std::cout << "FT: m1.equal_range(0)\n";
+		std::cout << "lower: ";
+		printPair(m1.equal_range(0).first);
+		std::cout << "upper: ";
+		printPair(m1.equal_range(0).second);
+		std::cout << "STD: m2.equal_range(0)\n";
+		std::cout << "lower: ";
+		printPair(m2.equal_range(0).first);
+		std::cout << "upper: ";
+		printPair(m2.equal_range(0).second);
+		std::cout << "FT: m1.equal_range(4)\n";
+		std::cout << "lower: ";
+		printPair(m1.equal_range(4).first);
+		std::cout << "upper: ";
+		printPair(m1.equal_range(4).second);
+		std::cout << "STD: m2.equal_range(4)\n";
+		std::cout << "lower: ";
+		printPair(m2.equal_range(4).first);
+		std::cout << "upper: ";
+		printPair(m2.equal_range(4).second);
+
 	}
 	return (0);
 }

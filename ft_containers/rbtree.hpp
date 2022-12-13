@@ -562,7 +562,6 @@ namespace ft {
 
 			template <class InputIt>
 			void	insert(InputIt first, InputIt last) {
-				// typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) {
 				for (; first != last; ++first)
 					insert(*first);
 			}
@@ -624,6 +623,63 @@ namespace ft {
 				node	*tmp = search(key);
 
 				return (const_iterator(tmp));
+			}
+
+			pair<iterator, iterator>	equal_range(const Key& key) {
+				pair<iterator, iterator>	ret;
+
+				ret = ft::make_pair(lower_bound(key), upper_bound(key));
+				return (ret);
+			}
+
+			pair<const_iterator, const_iterator>	equal_range(const Key& key) const {
+				pair<const_iterator, const_iterator>	ret;
+
+				ret = ft::make_pair(lower_bound(key), upper_bound(key));
+				return (ret);
+			}
+
+			iterator	lower_bound(const Key& key) {
+				iterator	last = end();
+
+				for (iterator head = begin(); head != last; ++head) {
+					if (head->first >= key)
+						return (head);
+				}
+				return (last);
+			}
+
+			const_iterator	lower_bound(const Key& key) const {
+				const_iterator	last = end();
+
+				for (const_iterator head = begin(); head != last; ++head) {
+					if (head->first >= key)
+						return (head);
+				}
+				return (last);
+			}
+
+			iterator	upper_bound(const Key& key) {
+				iterator	last = end();
+
+				for (iterator head = begin(); head != last; ++head) {
+					if (head->first > key) {
+						return (head);
+					}
+				}
+				return (last);
+			}
+
+			const_iterator	upper_bound(const Key& key) const {
+				const_iterator	last = end();
+
+				for (const_iterator head = begin(); head != last; ++head) {
+					if (head->first > key) {
+						head++;
+						return (head);
+					}
+				}
+				return (last);
 			}
 
 			node*	search(Key key) const {

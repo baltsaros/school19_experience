@@ -229,6 +229,30 @@ namespace ft {
 				return (_tree.find(key));
 			}
 
+			pair<iterator, iterator>	equal_range(const Key& key) {
+				return (_tree.equal_range(key));
+			}
+
+			pair<const_iterator, const_iterator>	equal_range(const Key& key) const {
+				return (_tree.equal_range(key));
+			}
+
+			iterator	lower_bound(const Key& key) {
+				return (_tree.lower_bound(key));
+			}
+
+			const_iterator	lower_bound(const Key& key) const {
+				return (_tree.lower_bound(key));
+			}
+
+			iterator	upper_bound(const Key& key) {
+				return (_tree.upper_bound(key));
+			}
+
+			const_iterator	upper_bound(const Key& key) const {
+				return (_tree.upper_bound(key));
+			}
+
 			// UTILS
 			void	printMap() {
 				_tree.printNode();
