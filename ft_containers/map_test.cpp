@@ -552,57 +552,67 @@ int	main(void) {
 	// }
 
 	// OBSERVERS
+	// {
+	// 	ft::map<int, std::string>::iterator		it3;
+	// 	std::map<int, std::string>::iterator	it4;
+
+	// 	it1 = m1.begin();
+	// 	it3 = m1.begin();
+	// 	it3++;
+	// 	std::cout << "\n+++++++++ OBSERVERS +++++++++\n";
+	// 	std::cout << "\n+++ key_comp() +++\n";
+	// 	std::cout << "FT: it1 - ";
+	// 	printIter(it1);
+	// 	std::cout << "FT: it3 - ";
+	// 	printIter(it3);
+	// 	std::cout << "FT: m1.key_comp()(it1->first, it3->first) - ";
+	// 	std::cout << m1.key_comp()(it1->first, it3->first);
+	// 	std::cout << std::endl;
+
+	// 	it2 = m2.begin();
+	// 	it4 = m2.begin();
+	// 	it4++;
+	// 	std::cout << "STD: it2 - ";
+	// 	printIter(it2);
+	// 	std::cout << "STD: it4 - ";
+	// 	printIter(it4);
+	// 	std::cout << "STD: m2.key_comp()(it2->first, it4->first) - ";
+	// 	std::cout << m2.key_comp()(it2->first, it4->first);
+	// 	std::cout << std::endl;
+	// 	std::cout << std::endl;
+
+	// 	std::cout << "FT: m1.key_comp()(it3->first, it1->first) - ";
+	// 	std::cout << m1.key_comp()(it3->first, it1->first);
+	// 	std::cout << std::endl;
+	// 	std::cout << "STD: m2.key_comp()(it4->first, it2->first) - ";
+	// 	std::cout << m2.key_comp()(it4->first, it2->first);
+	// 	std::cout << std::endl;
+
+	// 	std::cout << "\n+++ value_comp() +++\n";
+	// 	std::cout << "FT: m1.value_comp()(*it3, *it1) - ";
+	// 	std::cout << m1.value_comp()(*it3, *it1);
+	// 	std::cout << std::endl;
+	// 	std::cout << "STD: m2.value_comp()(*it4, *it2) - ";
+	// 	std::cout << m2.value_comp()(*it4, *it2);
+	// 	std::cout << std::endl;
+	// 	std::cout << "FT: m1.value_comp()(*it1, *it3) - ";
+	// 	std::cout << m1.value_comp()(*it1, *it3);
+	// 	std::cout << std::endl;
+	// 	std::cout << "STD: m2.value_comp()(*it2, *it4) - ";
+	// 	std::cout << m2.value_comp()(*it2, *it4);
+	// 	std::cout << std::endl;
+	// }
+
+	// COMPARISONS
 	{
+		ft::map<int, std::string>				m3;
 		ft::map<int, std::string>::iterator		it3;
+		std::map<int, std::string>				m4;
 		std::map<int, std::string>::iterator	it4;
 
-		it1 = m1.begin();
-		it3 = m1.begin();
-		it3++;
-		std::cout << "\n+++++++++ OBSERVERS +++++++++\n";
-		std::cout << "\n+++ key_comp() +++\n";
-		std::cout << "FT: it1 - ";
-		printIter(it1);
-		std::cout << "FT: it3 - ";
-		printIter(it3);
-		std::cout << "FT: m1.key_comp()(it1->first, it3->first) - ";
-		std::cout << m1.key_comp()(it1->first, it3->first);
-		std::cout << std::endl;
-
-		it2 = m2.begin();
-		it4 = m2.begin();
-		it4++;
-		std::cout << "STD: it2 - ";
-		printIter(it2);
-		std::cout << "STD: it4 - ";
-		printIter(it4);
-		std::cout << "STD: m2.key_comp()(it2->first, it4->first) - ";
-		std::cout << m2.key_comp()(it2->first, it4->first);
-		std::cout << std::endl;
-		std::cout << std::endl;
-
-		std::cout << "FT: m1.key_comp()(it3->first, it1->first) - ";
-		std::cout << m1.key_comp()(it3->first, it1->first);
-		std::cout << std::endl;
-		std::cout << "STD: m2.key_comp()(it4->first, it2->first) - ";
-		std::cout << m2.key_comp()(it4->first, it2->first);
-		std::cout << std::endl;
-
-		std::cout << "\n+++ value_comp() +++\n";
-		std::cout << "FT: m1.value_comp()(*it3, *it1) - ";
-		std::cout << m1.value_comp()(*it3, *it1);
-		std::cout << std::endl;
-		std::cout << "STD: m2.value_comp()(*it4, *it2) - ";
-		std::cout << m2.value_comp()(*it4, *it2);
-		std::cout << std::endl;
-		std::cout << "FT: m1.value_comp()(*it1, *it3) - ";
-		std::cout << m1.value_comp()(*it1, *it3);
-		std::cout << std::endl;
-		std::cout << "STD: m2.value_comp()(*it2, *it4) - ";
-		std::cout << m2.value_comp()(*it2, *it4);
-		std::cout << std::endl;
+		std::cout << "\n+++++++++ COMPARISONS +++++++++\n";
+		std::cout << "\n+++ == +++\n";
+		std::cout << (m1 == m3);
 	}
-
-
 	return (0);
 }
