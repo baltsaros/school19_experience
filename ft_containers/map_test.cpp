@@ -339,10 +339,8 @@ int	main(void) {
 		++it1;
 		std::cout << "FT: it1\n";
 		printPair(it1);
-		std::cout << "FT: it1 = m1.erase(it1)\n";
-		it1 = m1.erase(it1);
-		std::cout << "FT: it1\n";
-		printPair(it1);
+		std::cout << "FT: m1.erase(it1)\n";
+		m1.erase(it1);
 		for (it1 = m1.begin(); it1 != m1.end(); it1++) {
 			std::cout << "FT: ";
 			printPair(it1);
@@ -355,10 +353,8 @@ int	main(void) {
 		++it2;
 		std::cout << "\nSTD: it2\n";
 		printPair(it2);
-		std::cout << "STD: it2 = m2.erase(it2)\n";
-		it2 = m2.erase(it2);
-		std::cout << "STD: it2\n";
-		printPair(it2);
+		std::cout << "STD: m2.erase(it2)\n";
+		m2.erase(it2);
 		for (it2 = m2.begin(); it2 != m2.end(); it2++) {
 			std::cout << "STD: ";
 			printPair(it2);
@@ -371,6 +367,38 @@ int	main(void) {
 			printPair(it1);
 		}
 		std::cout << "\nSTD: m2.erase(1): " << m2.erase(1) << "\n";
+		for (it2 = m2.begin(); it2 != m2.end(); it2++) {
+			std::cout << "STD: ";
+			printPair(it2);
+		}
+
+		// std::cout << m1.empty() << "\n";
+		// std::cout << "STD: m2.empty()\n";
+		// std::cout << m2.empty() << "\n";
+		// std::cout << "FT: m1.size()\n";
+		// std::cout << m1.size() << "\n";
+		// std::cout << "STD: m2.size()\n";
+		// std::cout << m2.size() << "\n";
+
+		std::cout << "\n+++ erase(iterator first, iterator last) +++\n";
+		std::cout << "FT: it1 = m1.end()\nit1--\n";
+		it1 = m1.end();
+		it1--;
+		std::cout << "FT: ";
+		printPair(it1);
+		std::cout << "FT: m1.erase(m1.begin(), it1)\n";
+		m1.erase(m1.begin(), it1);
+		for (it1 = m1.begin(); it1 != m1.end(); it1++) {
+			std::cout << "FT: ";
+			printPair(it1);
+		}
+		std::cout << "\nSTD: it2 = m2.end()\nit2--\n";
+		it2 = m2.end();
+		it2--;
+		std::cout << "STD: ";
+		printPair(it2);
+		std::cout << "STD: m2.erase(m2.begin(), it2)\n";
+		m2.erase(m2.begin(), it2);
 		for (it2 = m2.begin(); it2 != m2.end(); it2++) {
 			std::cout << "STD: ";
 			printPair(it2);

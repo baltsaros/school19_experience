@@ -91,6 +91,7 @@ namespace ft {
 			virtual ~RBTree() {
 				// std::cout << "destructor\n";
 				deleteAll();
+				_node_alloc.destroy(_nil);
 				_node_alloc.deallocate(_nil, 1);
 				_nil = nullptr;
 			}
@@ -144,9 +145,9 @@ namespace ft {
 					if (child->parent == child->parent->parent->left) {
 						uncle = child->parent->parent->right;
 						if (uncle != _nil && uncle->color) {
-							child->parent->color = 0;
-							uncle->color = 0;
-							child->parent->parent->color = 1;
+							child->parent->color = BLACK;
+							uncle->color = BLACK;
+							child->parent->parent->color = RED;
 							child = child->parent->parent;
 						}
 						else {
@@ -154,17 +155,17 @@ namespace ft {
 								child = child->parent;
 								leftRotation(child);
 							}
-							child->parent->color = 0;
-							child->parent->parent->color = 1;
+							child->parent->color = BLACK;
+							child->parent->parent->color = RED;
 							rightRotation(child->parent->parent);
 						} 
 					}
 					else {
 						uncle = child->parent->parent->left;
 						if (uncle != _nil && uncle->color) {
-							child->parent->color = 0;
-							uncle->color = 0;
-							child->parent->parent->color = 1;
+							child->parent->color = BLACK;
+							uncle->color = BLACK;
+							child->parent->parent->color = RED;
 							child = child->parent->parent;
 						}
 						else {
@@ -172,16 +173,28 @@ namespace ft {
 								child = child->parent;
 								rightRotation(child);
 							}
-							child->parent->color = 0;
-							child->parent->parent->color = 1;
+							child->parent->color = BLACK;
+							child->parent->parent->color = RED;
 							leftRotation(child->parent->parent);
 						}
 					}
 				}
-				_root->color = 0;
+				_root->color = BLACK;
 				_nil->parent = _root;
 			}
 
+			void	deleteAll(node *tmp) {
+				if (tmp == _nil || !tmp)
+					return ;
+				if (tmp->left != _nil)
+					deleteAll(tmp->left);
+				if (tmp->right != _nil)
+					deleteAll(tmp->right);
+				_node_alloc.destroy(tmp);
+				_node_alloc.deallocate(tmp, 1);
+				_size--;
+				tmp = nullptr;
+			}
 
 			void	deleteOne(node *toDelete)
 			{
@@ -189,14 +202,15 @@ namespace ft {
 				bool	y_color;
 
 				y = toDelete;
-				// std::cout << "to delete: " << y->key << "\n";
+				if (toDelete == _nil)
+					return ;
 				y_color = y->color;
 				if (y->left == _nil) {
 					x = y->right;
 					transplant(y, y->right);
 				}
 				else if (y->right == _nil) {
-					x = tmp->left;
+					x = y->left;
 					transplant(y, y->left);
 				}
 				else {
@@ -215,23 +229,12 @@ namespace ft {
 					y->color = tmp->color;
 				}
 				// std::cout << "to delete2: " << toDelete->key << "\n";
+				_node_alloc.destroy(toDelete);
 				_node_alloc.deallocate(toDelete, 1);
 				_size--;
-				// std::cout << "del fixup\n";
 				if (!y_color)
 					deleteFixup(x);
-			}
-
-			void	deleteAll(node *tmp) {
-				if (tmp == _nil || !tmp)
-					return ;
-				if (tmp->left != _nil)
-					deleteAll(tmp->left);
-				if (tmp->right != _nil)
-					deleteAll(tmp->right);
-				_node_alloc.deallocate(tmp, 1);
-				_size--;
-				tmp = nullptr;
+				_nil->parent = _root;
 			}
 
 			void	deleteFixup(node *x) {
@@ -255,6 +258,7 @@ namespace ft {
 								w->left->color = BLACK;
 								w->color = RED;
 								rightRotation(w);
+								w = x->parent->right;
 							}
 							w->color = x->parent->color;
 							x->parent->color = BLACK;
@@ -280,6 +284,7 @@ namespace ft {
 								w->right->color = BLACK;
 								w->color = RED;
 								leftRotation(w);
+								w = x->parent->left;
 							}
 							w->color = x->parent->color;
 							x->parent->color = BLACK;
@@ -348,6 +353,7 @@ namespace ft {
 				else
 					u->parent->right = v;
 				v->parent = u->parent;
+				_nil->parent = _root;
 			}
 
 			node*	findMin(node *tmp) const {
@@ -553,35 +559,29 @@ namespace ft {
 			template <class InputIt>
 			void	insert(InputIt first, InputIt last) {
 				// typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) {
-				// std::cout << "insert 3\n";
 				for (; first != last; ++first)
 					insert(*first);
 			}
 
-			iterator	erase(iterator pos) {
+			void	erase(iterator pos) {
 				node	*tmp = pos.base();
-				node	*ret;
 
 				if (!tmp || tmp == _nil)
-					return (pos);
-				pos++;
-				ret = pos.base();
+					return ;
 				deleteOne(tmp);
-				if (!ret || ret == _nil)
-					return (iterator(nullptr));
-				// std::cout << "key: "<< ret->key << "\n";
-				// std::cout << "key: "<< ret->key << "\n";
-				return (iterator(ret));
+			}
+
+			void	erase(iterator first, iterator last) {
+				for (; first != last; first++)
+					erase(first);
 			}
 			
 			bool	erase(const Key& key) {
 				node	*tmp = _root;
 
-				// std::cout << "deleting " << key << "\n";
 				tmp = search(key);
 				if (!tmp || tmp == _nil)
 					return (false);
-				// std::cout << "found: " << tmp->key << "\n";
 				deleteOne(tmp);
 				return (true);
 			}
@@ -589,8 +589,6 @@ namespace ft {
 			void	deleteAll() {
 				deleteAll(_root);
 				_root = nullptr;
-				// _node_alloc.deallocate(_nil, 1);
-				// _nil = nullptr;
 			}
 
 			node*	search(Key key) {

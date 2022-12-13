@@ -175,13 +175,13 @@ namespace ft {
 				_tree.insert(first, last);
 			}
 
-			iterator	erase(iterator pos) {
-				return (_tree.erase(pos));
+			void	erase(iterator pos) {
+				_tree.erase(pos);
 			}
 
-			// iterator	erase(iterator first, iterator last) {
-				
-			// }
+			void	erase(iterator first, iterator last) {
+				_tree.erase(first, last);
+			}
 
 			size_type	erase(const Key& key) {
 				return (_tree.erase(key));
