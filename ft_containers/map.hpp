@@ -37,6 +37,17 @@ namespace ft {
 		typedef typename tree::reverse_iterator				reverse_iterator;
 		typedef typename tree::const_reverse_iterator		const_reverse_iterator;
 
+		class	value_compare {
+			protected:
+				key_compare	_compare;
+
+			public:
+				value_compare(key_compare comp) : _compare(comp) {}
+				bool	operator()(const value_type& x, const value_type& y) const {
+					return (_compare(x.first, y.first));
+				}
+		};
+
 		private:
 			allocator_type	_alloc;
 			tree			_tree;
@@ -251,6 +262,15 @@ namespace ft {
 
 			const_iterator	upper_bound(const Key& key) const {
 				return (_tree.upper_bound(key));
+			}
+
+			// OBSERVERS
+			key_compare	key_comp() const {
+				return (_tree.key_comp());
+			}
+
+			value_compare	value_comp() const {
+				return (value_compare(_tree.key_comp()));
 			}
 
 			// UTILS

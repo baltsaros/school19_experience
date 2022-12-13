@@ -689,6 +689,11 @@ namespace ft {
 				return (tmp);
 			}
 
+			// OBSERVER
+			key_compare	key_comp() const {
+				return (_comp);
+			}
+
 			bool	test() {
 				return (_comp(_root->value.first, _root->left->value.first));
 			}
