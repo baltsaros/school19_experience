@@ -216,9 +216,26 @@ namespace ft {
 				}
 			};
 
+			// LOOKUPS
+			size_type	count(const Key& key) const {
+				return (_tree.count(key));
+			}
+
+			iterator	find(const Key& key) {
+				return (_tree.find(key));
+			}
+
+			const_iterator	find(const Key& key) const {
+				return (_tree.find(key));
+			}
+
 			// UTILS
 			void	printMap() {
 				_tree.printNode();
+			}
+
+			bool	test() {
+				return (_tree.test());
 			}
 
 	};

@@ -339,7 +339,7 @@ namespace ft {
 			}
 
 
-			node*	search(node *tmp, Key key) {
+			node*	search(node *tmp, Key key) const {
 				if (!tmp || tmp == _nil || tmp->key == key)
 					return (tmp);
 				if (key > tmp->key)
@@ -605,11 +605,36 @@ namespace ft {
 				other = tmp;
 			}
 
-			node*	search(Key key) {
+			// LOOKUPS
+			size_type	count(const Key& key) const {
+				node	*tmp = search(key);
+
+				if (!tmp || tmp == _nil)
+					return (false);
+				return (true);
+			}
+
+			iterator	find(const Key& key) {
+				node	*tmp = search(key);
+
+				return (iterator(tmp));
+			}
+
+			const_iterator	find(const Key& key) const {
+				node	*tmp = search(key);
+
+				return (const_iterator(tmp));
+			}
+
+			node*	search(Key key) const {
 				node	*tmp = nullptr;
 
 				tmp = search(_root, key);
 				return (tmp);
+			}
+
+			bool	test() {
+				return (_comp(_root->value.first, _root->left->value.first));
 			}
 
 	};

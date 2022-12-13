@@ -17,6 +17,15 @@ void	printValue(T value) {
 	std::cout << value << std::endl;
 }
 
+
+template <class Map, class InputIt>
+void	printMap(Map map, InputIt it, std::string type) {
+	for (it = map.begin(); it != map.end(); it++) {
+		std::cout << type << ": ";
+		printPair(it);
+	}
+}
+
 int	main(void) {
 	ft::map<int, std::string>						m1;
 	ft::map<int, std::string>::iterator				it1;
@@ -462,5 +471,37 @@ int	main(void) {
 		// 	printPair(it2);
 		// }
 	// }
+
+	// LOOKUPS
+	{
+		std::cout << "\n+++++++++ LOOKUPS +++++++++\n";
+		std::cout << "\n+++ count() +++\n";
+		std::cout << "\nm1 elements:\n";
+		printMap(m1, it1, "FT");
+		std::cout << "\nm2 elements:\n";
+		printMap(m2, it2, "STD");
+		std::cout << "\nFT: m1.count(1) - " << m1.count(1) << std::endl;
+		std::cout << "STD: m2.count(1) - " << m2.count(1) << std::endl;
+		std::cout << "FT: m1.count(4) - " << m1.count(4) << std::endl;
+		std::cout << "STD: m2.count(4) - " << m2.count(4) << std::endl;
+		std::cout << "FT: m1.count(10) - " << m1.count(10) << std::endl;
+		std::cout << "STD: m2.count(10) - " << m2.count(10) << std::endl;
+
+		std::cout << "\n+++ find() +++\n";
+		std::cout << "FT: m1.find(1) - ";
+		printPair(m1.find(1));
+		std::cout << "STD: m2.find(1) - ";
+		printPair(m2.find(1));
+		std::cout << "FT: m1.find(3) - ";
+		printPair(m1.find(3));
+		std::cout << "STD: m2.find(3) - ";
+		printPair(m2.find(3));
+		// std::cout << "FT: m1.find(11) - ";
+		// printPair(m1.find(11));
+		// std::cout << "STD: m2.find(11) - ";
+		// printPair(m2.find(11));
+
+		
+	}
 	return (0);
 }
