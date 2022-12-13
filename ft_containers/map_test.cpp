@@ -7,6 +7,8 @@
 
 template <class Pair>
 void	printPair(Pair it) {
+	// if (!it->first)
+	// 	std::cout << "test\n";
 	std::cout << it->first << ": " << it->second << std::endl;
 }
 
@@ -49,21 +51,21 @@ int	main(void) {
 	// 	std::cout << m1.at(1) << "\n";
 	// 	std::cout << "STD: m2.at(1)\n";
 	// 	std::cout << m2.at(1) << "\n";
-	// 	std::cout << "FT: m1.at(10) - (out of range)\n";
-	// 	std::cout << m1.at(10) << "\n";
-	// 	std::cout << "STD: m2.at(10) - (out of range)\n";
-	// 	std::cout << m2.at(10) << "\n";
+		// std::cout << "FT: m1.at(10) - (out of range)\n";
+		// std::cout << m1.at(10) << "\n";
+		// std::cout << "STD: m2.at(10) - (out of range)\n";
+		// std::cout << m2.at(10) << "\n";
 
-	// 	std::cout << "\n+++ operator[] +++\n";
+		// std::cout << "\n+++ operator[] +++\n";
 
-	// 	std::cout << "FT: m1[0]\n";
-	// 	printValue(m1[0]);
-	// 	std::cout << "STD: m2[0]\n";
-	// 	printValue(m2[0]);
-	// 	std::cout << "FT: m1[6] - (out of range)\n";
-	// 	printValue(m1[6]);
-	// 	std::cout << "STD: m2[6] - (out of range)\n";
-	// 	printValue(m2[6]);
+		// std::cout << "FT: m1[0]\n";
+		// printValue(m1[0]);
+		// std::cout << "STD: m2[0]\n";
+		// printValue(m2[0]);
+		// std::cout << "FT: m1[6] - (out of range)\n";
+		// printValue(m1[6]);
+		// std::cout << "STD: m2[6] - (out of range)\n";
+		// printValue(m2[6]);
 	// }
 
 	// FT ITERATORS
@@ -207,9 +209,9 @@ int	main(void) {
 	// }
 
 	// MODIFIERS
-	{
-		ft::map<int, std::string>						m3;
-		std::map<int, std::string>						m4;
+	// {
+	// 	ft::map<int, std::string>						m3;
+	// 	std::map<int, std::string>						m4;
 
 		// std::cout << "\n+++++++++ MODIFIERS +++++++++\n";
 		// std::cout << "\n+++ clear() +++\n";
@@ -331,78 +333,134 @@ int	main(void) {
 		// 	printPair(it2);
 		// }
 
-		std::cout << "\n+++ erase(iterator pos) +++\n";
+		// std::cout << "\n+++ erase(iterator pos) +++\n";
+		// // it1 = m1.end();
+		// // it1--;
+		// it1 = m1.begin();
+		// ++it1;
+		// ++it1;
+		// std::cout << "FT: it1\n";
+		// printPair(it1);
+		// std::cout << "FT: m1.erase(it1)\n";
+		// m1.erase(it1);
+		// for (it1 = m1.begin(); it1 != m1.end(); it1++) {
+		// 	std::cout << "FT: ";
+		// 	printPair(it1);
+		// }
+
+		// // it2 = m2.end();
+		// // it2--;
+		// it2 = m2.begin();
+		// ++it2;
+		// ++it2;
+		// std::cout << "\nSTD: it2\n";
+		// printPair(it2);
+		// std::cout << "STD: m2.erase(it2)\n";
+		// m2.erase(it2);
+		// for (it2 = m2.begin(); it2 != m2.end(); it2++) {
+		// 	std::cout << "STD: ";
+		// 	printPair(it2);
+		// }
+
+		// std::cout << "\n+++ erase() +++\n";
+		// std::cout << "FT: m1.erase(1): " << m1.erase(1) << "\n";
+		// for (it1 = m1.begin(); it1 != m1.end(); it1++) {
+		// 	std::cout << "FT: ";
+		// 	printPair(it1);
+		// }
+		// std::cout << "\nSTD: m2.erase(1): " << m2.erase(1) << "\n";
+		// for (it2 = m2.begin(); it2 != m2.end(); it2++) {
+		// 	std::cout << "STD: ";
+		// 	printPair(it2);
+		// }
+
+		// std::cout << "\n+++ erase(iterator first, iterator last) +++\n";
+		// std::cout << "FT: it1 = m1.end()\nit1--\n";
 		// it1 = m1.end();
 		// it1--;
-		it1 = m1.begin();
-		++it1;
-		++it1;
-		std::cout << "FT: it1\n";
-		printPair(it1);
-		std::cout << "FT: m1.erase(it1)\n";
-		m1.erase(it1);
-		for (it1 = m1.begin(); it1 != m1.end(); it1++) {
-			std::cout << "FT: ";
-			printPair(it1);
-		}
-
+		// std::cout << "FT: ";
+		// printPair(it1);
+		// std::cout << "FT: m1.erase(m1.begin(), it1)\n";
+		// m1.erase(m1.begin(), it1);
+		// for (it1 = m1.begin(); it1 != m1.end(); it1++) {
+		// 	std::cout << "FT: ";
+		// 	printPair(it1);
+		// }
+		// std::cout << "\nSTD: it2 = m2.end()\nit2--\n";
 		// it2 = m2.end();
 		// it2--;
-		it2 = m2.begin();
-		++it2;
-		++it2;
-		std::cout << "\nSTD: it2\n";
-		printPair(it2);
-		std::cout << "STD: m2.erase(it2)\n";
-		m2.erase(it2);
-		for (it2 = m2.begin(); it2 != m2.end(); it2++) {
-			std::cout << "STD: ";
-			printPair(it2);
-		}
+		// std::cout << "STD: ";
+		// printPair(it2);
+		// std::cout << "STD: m2.erase(m2.begin(), it2)\n";
+		// m2.erase(m2.begin(), it2);
+		// for (it2 = m2.begin(); it2 != m2.end(); it2++) {
+		// 	std::cout << "STD: ";
+		// 	printPair(it2);
+		// }
 
-		std::cout << "\n+++ erase() +++\n";
-		std::cout << "FT: m1.erase(1): " << m1.erase(1) << "\n";
-		for (it1 = m1.begin(); it1 != m1.end(); it1++) {
-			std::cout << "FT: ";
-			printPair(it1);
-		}
-		std::cout << "\nSTD: m2.erase(1): " << m2.erase(1) << "\n";
-		for (it2 = m2.begin(); it2 != m2.end(); it2++) {
-			std::cout << "STD: ";
-			printPair(it2);
-		}
-
-		// std::cout << m1.empty() << "\n";
-		// std::cout << "STD: m2.empty()\n";
-		// std::cout << m2.empty() << "\n";
+		// std::cout << "\n+++ swap(map) +++\n";
 		// std::cout << "FT: m1.size()\n";
 		// std::cout << m1.size() << "\n";
-		// std::cout << "STD: m2.size()\n";
-		// std::cout << m2.size() << "\n";
+		// std::cout << "FT: m3.size()\n";
+		// std::cout << m3.size() << "\n";
+		// std::cout << "\nm1 elements:\n";
+		// for (it1 = m1.begin(); it1 != m1.end(); it1++) {
+		// 	std::cout << "FT: ";
+		// 	printPair(it1);
+		// }
+		// std::cout << "\nm3 elements:\n";
+		// for (it1 = m3.begin(); it1 != m3.end(); it1++) {
+		// 	std::cout << "FT: ";
+		// 	printPair(it1);
+		// }
 
-		std::cout << "\n+++ erase(iterator first, iterator last) +++\n";
-		std::cout << "FT: it1 = m1.end()\nit1--\n";
-		it1 = m1.end();
-		it1--;
-		std::cout << "FT: ";
-		printPair(it1);
-		std::cout << "FT: m1.erase(m1.begin(), it1)\n";
-		m1.erase(m1.begin(), it1);
-		for (it1 = m1.begin(); it1 != m1.end(); it1++) {
-			std::cout << "FT: ";
-			printPair(it1);
-		}
-		std::cout << "\nSTD: it2 = m2.end()\nit2--\n";
-		it2 = m2.end();
-		it2--;
-		std::cout << "STD: ";
-		printPair(it2);
-		std::cout << "STD: m2.erase(m2.begin(), it2)\n";
-		m2.erase(m2.begin(), it2);
-		for (it2 = m2.begin(); it2 != m2.end(); it2++) {
-			std::cout << "STD: ";
-			printPair(it2);
-		}
-	}
+		// std::cout << "\nFT: m1.swap(m3)\n";
+		// m1.swap(m3);
+		// std::cout << "FT: m1.size()\n";
+		// std::cout << m1.size() << "\n";
+		// std::cout << "FT: m3.size()\n";
+		// std::cout << m3.size() << "\n";
+		// std::cout << "\nm1 elements:\n";
+		// for (it1 = m1.begin(); it1 != m1.end(); it1++) {
+		// 	std::cout << "FT: ";
+		// 	printPair(it1);
+		// }
+		// std::cout << "\nm3 elements:\n";
+		// for (it1 = m3.begin(); it1 != m3.end(); it1++) {
+		// 	std::cout << "FT: ";
+		// 	printPair(it1);
+		// }
+
+		// std::cout << "\nSTD: m2.size()\n";
+		// std::cout << m2.size() << "\n";
+		// std::cout << "STD: m4.size()\n";
+		// std::cout << m4.size() << "\n";
+		// std::cout << "\nm2 elements:\n";
+		// for (it2 = m2.begin(); it2 != m2.end(); it2++) {
+		// 	std::cout << "STD: ";
+		// 	printPair(it2);
+		// }
+		// std::cout << "\nm4 elements:\n";
+		// for (it2 = m4.begin(); it2 != m4.end(); it2++) {
+		// 	std::cout << "STD: ";
+		// 	printPair(it2);
+		// }
+		// std::cout << "STD: m2.swap(m4)\n";
+		// m2.swap(m4);
+		// std::cout << "\nSTD: m2.size()\n";
+		// std::cout << m2.size() << "\n";
+		// std::cout << "STD: m4.size()\n";
+		// std::cout << m4.size() << "\n";
+		// std::cout << "\nm2 elements:\n";
+		// for (it2 = m2.begin(); it2 != m2.end(); it2++) {
+		// 	std::cout << "STD: ";
+		// 	printPair(it2);
+		// }
+		// std::cout << "\nm4 elements:\n";
+		// for (it2 = m4.begin(); it2 != m4.end(); it2++) {
+		// 	std::cout << "STD: ";
+		// 	printPair(it2);
+		// }
+	// }
 	return (0);
 }

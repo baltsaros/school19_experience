@@ -69,6 +69,7 @@ namespace ft {
 				_root = nullptr;
 				_nil = _node_alloc.allocate(1);
 				_node_alloc.construct(_nil, node(_root));
+				_root = _nil;
 			}
 
 			RBTree(RBTree const &src) :
@@ -79,8 +80,11 @@ namespace ft {
 			RBTree&	operator=(RBTree const &src) {
 				if (this == &src)
 					return (*this);
+				_alloc = src._alloc;
+				_node_alloc = src._node_alloc;
+				_comp = src._comp;
 				if (_root)
-					deleteAll();
+					clear();
 				_root = nullptr;
 				if (src._root) {
 					copyTree(src._root, src._nil);
@@ -90,14 +94,14 @@ namespace ft {
 
 			virtual ~RBTree() {
 				// std::cout << "destructor\n";
-				deleteAll();
+				clear();
 				_node_alloc.destroy(_nil);
 				_node_alloc.deallocate(_nil, 1);
 				_nil = nullptr;
 			}
 
 			void	copyTree(node *root, node *nil) {
-				if (!_root) {
+				if (!_root || root == nil) {
 					node	*child;
 
 					child = _node_alloc.allocate(1);
@@ -129,9 +133,9 @@ namespace ft {
 						parent->right = child;
 				}
 					_size++;
-				if (root->left != nil)
+				if (root && root->left && root->left != nil)
 					copyTree(root->left, nil);
-				if (root->right != nil)
+				if (root && root->right && root->right != nil)
 					copyTree(root->right, nil);
 			}
 
@@ -358,7 +362,7 @@ namespace ft {
 
 			node*	findMin(node *tmp) const {
 				if (!tmp || tmp == _nil)
-					return (nullptr);
+					return (tmp);
 				while (tmp->left != _nil)
 					tmp = tmp->left;
 				return (tmp);
@@ -366,7 +370,7 @@ namespace ft {
 
 			node*	findMax(node *tmp) const {
 				if (!tmp || tmp == _nil)
-					return (nullptr);
+					return (tmp);
 				while (tmp->right != _nil)
 					tmp = tmp->right;
 				return (tmp);
@@ -481,7 +485,7 @@ namespace ft {
 
 			// MODIFIERS
 			pair<iterator, bool>	insert(const value_type& value) {
-				if (!_root)
+				if (!_root || _root == _nil)
 					return (create_root(value));
 
 				node					*child;
@@ -521,7 +525,7 @@ namespace ft {
 
 			iterator	insert(iterator pos, const value_type& value) {
 				(void)pos;
-				if (!_root)
+				if (!_root || _root == _nil)
 					return (create_root(value).first);
 
 				node	*child;
@@ -586,9 +590,19 @@ namespace ft {
 				return (true);
 			}
 
-			void	deleteAll() {
+			void	clear() {
+				if (_root == _nil)
+					return ;
 				deleteAll(_root);
 				_root = nullptr;
+			}
+
+			void	swap(RBTree& other) {
+				RBTree	tmp;
+
+				tmp = *this;
+				*this = other;
+				other = tmp;
 			}
 
 			node*	search(Key key) {

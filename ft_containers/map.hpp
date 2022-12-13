@@ -158,7 +158,7 @@ namespace ft {
 
 			// MODIFIERS
 			void	clear() {
-				_tree.deleteAll();
+				_tree.clear();
 			}
 
 			pair<iterator, bool>	insert(const value_type& value) {
@@ -185,6 +185,10 @@ namespace ft {
 
 			size_type	erase(const Key& key) {
 				return (_tree.erase(key));
+			}
+
+			void	swap(map& other) {
+				_tree.swap(other._tree);
 			}
 
 			// EXCEPTIONS
