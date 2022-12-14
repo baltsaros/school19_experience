@@ -64,12 +64,13 @@ namespace ft {
 			template <class InputIt>
 			map(InputIt first, InputIt last, const Compare& comp = Compare(),
 				const Allocator& alloc = Allocator(),
-				typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) {
-
+				typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) :
+				 _alloc(alloc), _tree(comp, alloc), _compare(comp), _size(0) {
+				insert(first, last);
 			}
 
 			map(const map& other) {
-					*this = other;
+				*this = other;
 			}
 
 			// DESCTRUCTOR

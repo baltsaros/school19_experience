@@ -366,7 +366,7 @@ namespace ft {
 					}
 					this->_alloc.construct(tmp + i + j, this->_head[i]);
 				}
-				for (size_t i = 0; i < this->_count; ++i) {
+				for (std::ptrdiff_t i = 0; i < this->_count; ++i) {
 					this->_alloc.destroy(this->_head + i);
 				}
 				this->_alloc.deallocate(this->_head, this->_count);

@@ -26,6 +26,9 @@ all:
 
 clean:
 	@rm ./a.out
+
+fclean:
+	@rm ./a.out
 # ${OBJ_DIR}/%.o : %.cpp
 # 			@mkdir -p ${OBJ_DIR}
 # 			@printf "${C_GREEN}.${C_RESET}";
