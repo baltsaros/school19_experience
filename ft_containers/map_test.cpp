@@ -611,8 +611,18 @@ int	main(void) {
 		std::map<int, std::string>::iterator	it4;
 
 		std::cout << "\n+++++++++ COMPARISONS +++++++++\n";
-		std::cout << "\n+++ == +++\n";
-		std::cout << (m1 == m3);
+		std::cout << "\n+++ operator== +++\n";
+		std::cout << "FT: m1.size()\n";
+		std::cout << m1.size() << "\n";
+		std::cout << "FT: m3.size()\n";
+		std::cout << m3.size() << "\n";
+		std::cout << "FT: m1 == m3 - " << (m1 == m3) << "\n";
+		std::cout << "STD: m2.size()\n";
+		std::cout << m2.size() << "\n";
+		std::cout << "STD: m4.size()\n";
+		std::cout << m4.size() << "\n";
+		std::cout << "STD: m2 == m4 - " << (m2 == m4) << "\n";
+
 	}
 	return (0);
 }

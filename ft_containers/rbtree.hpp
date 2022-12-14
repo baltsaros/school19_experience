@@ -49,7 +49,7 @@ namespace ft {
 			typedef typename Allocator::template rebind<Node<Key, value_type> >::other	alloc_node;
 			
 			typedef rbt_iterator<Key, Pair>				iterator;
-			typedef rbt_iterator<Key, const Pair>		const_iterator;
+			typedef rbt_iterator<const Key, const Pair>		const_iterator;
 			typedef ft::reverse_iterator<iterator>			reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
@@ -698,7 +698,19 @@ namespace ft {
 				return (_comp(_root->value.first, _root->left->value.first));
 			}
 
+			// COMPARISON OPERATORS
+			friend bool	operator==(const RBTree& lhs, const RBTree& rhs) {
+				if (lhs.size() != rhs.size())
+					return (false);
+				return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+			}
+
+			friend bool	operator<(const RBTree& lhs, const RBTree& rhs) {
+				if (lhs.size() != rhs.size())
+					return (false);
+				return (lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+			}
 	};
-}
+};
 
 #endif
