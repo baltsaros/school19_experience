@@ -356,7 +356,7 @@ namespace ft {
 				if (this->_count + count >= this->_cap)
 					reserve(this->_cap + count + ((this->_cap + 2) / 2));
 				tmp = this->_alloc.allocate(this->_cap);
-				for (size_t i = 0; i != this->_count; ++i) {
+				for (std::ptrdiff_t i = 0; i != this->_count; ++i) {
 					if (i == dif) {
 						while (j < count) {
 							this->_alloc.construct(tmp + i + j, *first);
