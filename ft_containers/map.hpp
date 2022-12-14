@@ -22,7 +22,7 @@ namespace ft {
 		typedef Key											key_type;
 		typedef T											mapped_type;
 		typedef pair<const Key, T>							value_type;
-		typedef Node<Key, value_type>						node;
+		typedef Node<value_type>							node;
 		typedef std::size_t									size_type;
 		typedef std::ptrdiff_t								difference_type;
 		typedef Compare										key_compare;
@@ -94,7 +94,7 @@ namespace ft {
 			T&	at(const Key& key) {
 				node	*tmp = nullptr;
 
-				tmp = _tree.search(key);
+				tmp = _tree.search(value_type(key, T()));
 				if (!tmp || (!tmp->left && !tmp->right))
 					throw OutOfRange();
 				return (tmp->value.second);
@@ -103,21 +103,20 @@ namespace ft {
 			const T&	at(const Key& key) const {
 				node	*tmp = nullptr;
 
-				tmp = _tree.search(key);
+				tmp = _tree.search(value_type(key, T()));
 				if (!tmp || (!tmp->left && !tmp->right))
 					throw OutOfRange();
 				return (tmp->value.second);
 			}
 
 			T&	operator[](const Key& key) {
-				node	*tmp = nullptr;
+				node			*tmp = nullptr;
+				pair<Key, T>	value = value_type(key, T());
 
-				tmp = _tree.search(key);
+				tmp = _tree.search(value);
 				if (!tmp || (!tmp->left && !tmp->right)) {
-					pair<Key, T>	newPair = value_type(key, T());
-
-					_tree.insert(newPair);
-					tmp = _tree.search(key);
+					_tree.insert(value);
+					tmp = _tree.search(value);
 				}
 				return (tmp->value.second);
 			}
@@ -196,7 +195,7 @@ namespace ft {
 			}
 
 			size_type	erase(const Key& key) {
-				return (_tree.erase(key));
+				return (_tree.erase(value_type(key, T())));
 			}
 
 			void	swap(map& other) {
@@ -230,39 +229,39 @@ namespace ft {
 
 			// LOOKUPS
 			size_type	count(const Key& key) const {
-				return (_tree.count(key));
+				return (_tree.count(value_type(key, T())));
 			}
 
 			iterator	find(const Key& key) {
-				return (_tree.find(key));
+				return (_tree.find(value_type(key, T())));
 			}
 
 			const_iterator	find(const Key& key) const {
-				return (_tree.find(key));
+				return (_tree.find(value_type(key, T())));
 			}
 
 			pair<iterator, iterator>	equal_range(const Key& key) {
-				return (_tree.equal_range(key));
+				return (_tree.equal_range(value_type(key, T())));
 			}
 
 			pair<const_iterator, const_iterator>	equal_range(const Key& key) const {
-				return (_tree.equal_range(key));
+				return (_tree.equal_range(value_type(key, T())));
 			}
 
 			iterator	lower_bound(const Key& key) {
-				return (_tree.lower_bound(key));
+				return (_tree.lower_bound(value_type(key, T())));
 			}
 
 			const_iterator	lower_bound(const Key& key) const {
-				return (_tree.lower_bound(key));
+				return (_tree.lower_bound(value_type(key, T())));
 			}
 
 			iterator	upper_bound(const Key& key) {
-				return (_tree.upper_bound(key));
+				return (_tree.upper_bound(value_type(key, T())));
 			}
 
 			const_iterator	upper_bound(const Key& key) const {
-				return (_tree.upper_bound(key));
+				return (_tree.upper_bound(value_type(key, T())));
 			}
 
 			// OBSERVERS

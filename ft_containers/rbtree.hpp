@@ -10,21 +10,20 @@
 
 namespace ft {
 
-	template <class Key, class Pair>
+	template <class Pair>
 	struct Node {
-		Key				key;
-		Pair			value;
-		bool			color;
-		size_t			level;
-		Node<Key, Pair>	*left;
-		Node<Key, Pair>	*right;
-		Node<Key, Pair>	*parent;
+		Pair		value;
+		bool		color;
+		size_t		level;
+		Node<Pair>	*left;
+		Node<Pair>	*right;
+		Node<Pair>	*parent;
 
 		Node(Node *parent) : color(BLACK), level(0),
 			parent(parent), left(nullptr), right(nullptr) {}
 
-		Node(Key k, Pair v, bool c, size_t lvl, Node *p, Node *l, Node *r) :
-			key(k), value(v), color(c), level(lvl), parent(p), left(l), right(r) {}
+		Node(Pair v, bool c, size_t lvl, Node *p, Node *l, Node *r) :
+			value(v), color(c), level(lvl), parent(p), left(l), right(r) {}
 	};
 
 	template <class Key,
@@ -34,22 +33,22 @@ namespace ft {
 	class RBTree {
 		public:
 		// TYPEDEFS
-			typedef Key							key_type;
-			typedef Pair						value_type;
-			typedef std::size_t					size_type;
-			typedef std::ptrdiff_t				difference_type;
-			typedef Compare						key_compare;
-			typedef Allocator					allocator_type;
-			typedef value_type&					reference;
-			typedef const value_type&			const_reference;
-			typedef Node<Key, Pair>				node;
+			typedef Key						key_type;
+			typedef Pair					value_type;
+			typedef std::size_t				size_type;
+			typedef std::ptrdiff_t			difference_type;
+			typedef Compare					key_compare;
+			typedef Allocator				allocator_type;
+			typedef value_type&				reference;
+			typedef const value_type&		const_reference;
+			typedef Node<Pair>				node;
 
 			typedef typename Allocator::pointer			pointer;
 			typedef typename Allocator::const_pointer	const_pointer;
-			typedef typename Allocator::template rebind<Node<Key, value_type> >::other	alloc_node;
+			typedef typename Allocator::template rebind<Node<value_type> >::other	alloc_node;
 			
-			typedef rbt_iterator<Key, Pair>				iterator;
-			typedef rbt_iterator<const Key, const Pair>		const_iterator;
+			typedef rbt_iterator<Pair>				iterator;
+			typedef rbt_iterator<const Pair>		const_iterator;
 			typedef ft::reverse_iterator<iterator>			reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
@@ -64,7 +63,7 @@ namespace ft {
 		public:
 			explicit RBTree(key_compare const &comp = key_compare(),
 				allocator_type const &alloc = allocator_type()) :
-				_alloc(alloc), _node_alloc(alloc), _comp(comp), _size(0) {
+				_alloc(alloc), _node_alloc(alloc), _size(0), _comp(comp) {
 				// std::cout << "constructor 1" << std::endl;
 				_root = nullptr;
 				_nil = _node_alloc.allocate(1);
@@ -73,7 +72,7 @@ namespace ft {
 			}
 
 			RBTree(RBTree const &src) :
-				_alloc(src._alloc), _node_alloc(src._alloc), _comp(src._comp), _size(0) {
+				_alloc(src._alloc), _node_alloc(src._alloc), _size(0), _comp(src._comp) {
 				*this = src;
 			}
 
@@ -106,7 +105,7 @@ namespace ft {
 					node	*child;
 
 					child = _node_alloc.allocate(1);
-					_node_alloc.construct(child, node(root->key, root->value, root->color, root->level, _nil, _nil, _nil));
+					_node_alloc.construct(child, node(root->value, root->color, root->level, _nil, _nil, _nil));
 					_root = child;
 					_nil->parent = _root;
 					_size++;
@@ -117,18 +116,18 @@ namespace ft {
 					node	*parent = _nil;
 
 					child = _node_alloc.allocate(1);
-					_node_alloc.construct(child, node(root->key, root->value, root->color, root->level, nullptr, _nil, _nil));
+					_node_alloc.construct(child, node(root->value, root->color, root->level, nullptr, _nil, _nil));
 
 					while (head != _nil)
 					{
 						parent = head;
-						if (head->key > child->key)
+						if (_comp(child->value.first, head->value.first))
 							head = head->left;
 						else
 							head = head->right;
 					}
 					child->parent = parent;
-					if (parent->key > child->key)
+					if (_comp(child->value.first, parent->value.first))
 						parent->left = child;
 					else
 						parent->right = child;
@@ -340,10 +339,10 @@ namespace ft {
 			}
 
 
-			node*	search(node *tmp, Key key) const {
-				if (!tmp || tmp == _nil || tmp->key == key)
+			node*	search(node *tmp, const value_type& key) const {
+				if (!tmp || tmp == _nil || tmp->value.first == key.first)
 					return (tmp);
-				if (key > tmp->key)
+				if (_comp(tmp->value.first, key.first))
 					return search(tmp->right, key);
 				else
 					return search(tmp->left, key);
@@ -404,18 +403,18 @@ namespace ft {
 
 			void	printNode(node *tmp) {
 				std::cout.width(15); 
-				std::cout << "root key: " << tmp->key << " | value: " << tmp->value.second;
+				std::cout << "root key: " << tmp->value.first << " | value: " << tmp->value.second;
 				std::cout.width(10); 
 				std::cout << " | color: " << tmp->color << " | level: " << tmp->level << "\n";
 				if (tmp->left != _nil) {
 					std::cout.width(15);
-					std::cout << "left key: " << tmp->left->key << " | value: " << tmp->left->value.second;
+					std::cout << "left key: " << tmp->left->value.first<< " | value: " << tmp->left->value.second;
 					std::cout.width(10);
 					std::cout << " | color: " << tmp->left->color << " | level: " << tmp->left->level << "\n";
 				}
 				if (tmp->right != _nil) {
 					std::cout.width(15);
-					std::cout << "right key: " << tmp->right->key << " | value: " << tmp->right->value.second;
+					std::cout << "right key: " << tmp->right->value.first << " | value: " << tmp->right->value.second;
 					std::cout.width(10);
 					std::cout << " | color: " << tmp->right->color << " | level: " << tmp->right->level << "\n";
 				}
@@ -476,7 +475,7 @@ namespace ft {
 					pair<iterator, bool>	ret;
 
 					child = _node_alloc.allocate(1);
-					_node_alloc.construct(child, node(value.first, value, BLACK, 0, _nil, _nil, _nil));
+					_node_alloc.construct(child, node(value, BLACK, 0, _nil, _nil, _nil));
 					_root = child;
 					_nil->parent = _root;
 					_size++;
@@ -495,25 +494,25 @@ namespace ft {
 				node					*tmp;
 				pair<iterator, bool>	ret;
 
-				tmp = search(value.first);
+				tmp = search(value);
 				if (tmp != _nil) {
 					ret = ft::make_pair(iterator(tmp), false);
 					return (ret);
 				}
 				child = _node_alloc.allocate(1);
-				_node_alloc.construct(child, node(value.first, value, RED, 0, nullptr, _nil, _nil));
+				_node_alloc.construct(child, node(value, RED, 0, nullptr, _nil, _nil));
 
 				while (head != _nil)
 				{
 					parent = head;
-					if (head->key > child->key)
+					if (_comp(child->value.first, head->value.first))
 						head = head->left;
 					else
 						head = head->right;
 					child->level++;
 				}
 				child->parent = parent;
-				if (parent->key > child->key)
+				if (_comp(child->value.first, parent->value.first))
 					parent->left = child;
 				else
 					parent->right = child;
@@ -533,23 +532,23 @@ namespace ft {
 				node	*parent = _nil;
 				node	*tmp;
 
-				tmp = search(value.first);
+				tmp = search(value);
 				if (tmp != _nil)
 					return (iterator(tmp));
 				child = _node_alloc.allocate(1);
-				_node_alloc.construct(child, node(value.first, value, RED, 0, nullptr, _nil, _nil));
+				_node_alloc.construct(child, node(value, RED, 0, nullptr, _nil, _nil));
 
 				while (head != _nil)
 				{
 					parent = head;
-					if (head->key > child->key)
+					if (_comp(child->value.first, head->value.first))
 						head = head->left;
 					else
 						head = head->right;
 					child->level++;
 				}
 				child->parent = parent;
-				if (parent->key > child->key)
+				if (_comp(child->value.first, parent->value.first))
 					parent->left = child;
 				else
 					parent->right = child;
@@ -577,7 +576,7 @@ namespace ft {
 					erase(first);
 			}
 			
-			bool	erase(const Key& key) {
+			bool	erase(const value_type& key) {
 				node	*tmp = _root;
 
 				tmp = search(key);
@@ -603,7 +602,7 @@ namespace ft {
 			}
 
 			// LOOKUPS
-			size_type	count(const Key& key) const {
+			size_type	count(const value_type& key) const {
 				node	*tmp = search(key);
 
 				if (!tmp || tmp == _nil)
@@ -611,68 +610,57 @@ namespace ft {
 				return (true);
 			}
 
-			iterator	find(const Key& key) {
+			iterator	find(const value_type& key) {
 				node	*tmp = search(key);
 
 				return (iterator(tmp));
 			}
 
-			const_iterator	find(const Key& key) const {
+			const_iterator	find(const value_type& key) const {
 				node	*tmp = search(key);
 
 				return (const_iterator(tmp));
 			}
 
-			pair<iterator, iterator>	equal_range(const Key& key) {
+			pair<iterator, iterator>	equal_range(const value_type& key) {
 				pair<iterator, iterator>	ret;
 
 				ret = ft::make_pair(lower_bound(key), upper_bound(key));
 				return (ret);
 			}
 
-			pair<const_iterator, const_iterator>	equal_range(const Key& key) const {
+			pair<const_iterator, const_iterator>	equal_range(const value_type& key) const {
 				pair<const_iterator, const_iterator>	ret;
 
 				ret = ft::make_pair(lower_bound(key), upper_bound(key));
 				return (ret);
 			}
 
-			iterator	lower_bound(const Key& key) {
+			iterator	lower_bound(const value_type& key) {
 				iterator	last = end();
 
 				for (iterator head = begin(); head != last; ++head) {
-					if (head->first >= key)
+					if (!_comp(head->first, key.first))
 						return (head);
 				}
 				return (last);
 			}
 
-			const_iterator	lower_bound(const Key& key) const {
+			const_iterator	lower_bound(const value_type& key) const {
 				const_iterator	last = end();
 
 				for (const_iterator head = begin(); head != last; ++head) {
-					if (head->first >= key)
+					if (!_comp(head->first, key.first))
 						return (head);
 				}
 				return (last);
 			}
 
-			iterator	upper_bound(const Key& key) {
+			iterator	upper_bound(const value_type& key) {
 				iterator	last = end();
 
 				for (iterator head = begin(); head != last; ++head) {
-					if (head->first > key) {
-						return (head);
-					}
-				}
-				return (last);
-			}
-
-			const_iterator	upper_bound(const Key& key) const {
-				const_iterator	last = end();
-
-				for (const_iterator head = begin(); head != last; ++head) {
-					if (head->first > key) {
+					if (_comp(key.first, head->first)) {
 						head++;
 						return (head);
 					}
@@ -680,7 +668,19 @@ namespace ft {
 				return (last);
 			}
 
-			node*	search(Key key) const {
+			const_iterator	upper_bound(const value_type& key) const {
+				const_iterator	last = end();
+
+				for (const_iterator head = begin(); head != last; ++head) {
+					if (_comp(key.first, head->first)) {
+						head++;
+						return (head);
+					}
+				}
+				return (last);
+			}
+
+			node*	search(const value_type& key) const {
 				node	*tmp = nullptr;
 
 				tmp = search(_root, key);

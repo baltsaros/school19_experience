@@ -6,10 +6,10 @@
 // # include <type_traits>
 
 namespace ft {
-	template <class Iter, class Pair>
+	template <class Pair>
 	struct Node;
 
-	template <class Iter, class Pair>
+	template <class Pair>
 	class rbt_iterator : public iterator
 		<typename iterator_traits<Pair*>::iterator_category,
 		typename iterator_traits<Pair*>::value_type,
@@ -17,7 +17,8 @@ namespace ft {
 		typename iterator_traits<Pair*>::pointer,
 		typename iterator_traits<Pair*>::reference> {
 	public:
-		typedef Node<typename std::remove_const<Iter>::type, typename std::remove_const<Pair>::type >					node;
+		typedef Node<typename std::remove_const<Pair>::type >		node;
+		// typedef Node<Pair>							node;
 		typedef iterator_traits<Pair*>				itraits;
 		typedef Pair								iterator_type;
 		typedef typename itraits::difference_type	difference_type;
