@@ -10,9 +10,14 @@ namespace ft {
 	struct Node;
 
 	template <class Iter, class Pair>
-	class rbt_iterator {
+	class rbt_iterator : public iterator
+		<typename iterator_traits<Pair*>::iterator_category,
+		typename iterator_traits<Pair*>::value_type,
+		typename iterator_traits<Pair*>::difference_type,
+		typename iterator_traits<Pair*>::pointer,
+		typename iterator_traits<Pair*>::reference> {
 	public:
-		typedef Node<Iter, Pair>					node;
+		typedef Node<typename std::remove_const<Iter>::type, typename std::remove_const<Pair>::type >					node;
 		typedef iterator_traits<Pair*>				itraits;
 		typedef Pair								iterator_type;
 		typedef typename itraits::difference_type	difference_type;
@@ -126,7 +131,7 @@ namespace ft {
 			return (tmp);
 		}
 
-		const node&	base() const {
+		node*	base() const {
 			return (_ptr);
 		}
 

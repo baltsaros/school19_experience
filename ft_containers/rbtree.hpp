@@ -49,7 +49,7 @@ namespace ft {
 			typedef typename Allocator::template rebind<Node<Key, value_type> >::other	alloc_node;
 			
 			typedef rbt_iterator<Key, Pair>				iterator;
-			typedef rbt_iterator<Key, const Pair>		const_iterator;
+			typedef rbt_iterator<const Key, const Pair>		const_iterator;
 			typedef ft::reverse_iterator<iterator>			reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
@@ -69,6 +69,7 @@ namespace ft {
 				_root = nullptr;
 				_nil = _node_alloc.allocate(1);
 				_node_alloc.construct(_nil, node(_root));
+				_root = _nil;
 			}
 
 			RBTree(RBTree const &src) :
@@ -79,18 +80,23 @@ namespace ft {
 			RBTree&	operator=(RBTree const &src) {
 				if (this == &src)
 					return (*this);
+				_alloc = src._alloc;
+				_node_alloc = src._node_alloc;
+				_comp = src._comp;
 				if (_root)
-					deleteAll();
+					clear();
 				_root = nullptr;
-				if (src._root) {
+				if (src._root && src._root != src._nil)
 					copyTree(src._root, src._nil);
-				}
+				else if (src._root == src._nil)
+					_root = _nil;
 				return (*this);
 			}
 
 			virtual ~RBTree() {
 				// std::cout << "destructor\n";
-				deleteAll();
+				clear();
+				_node_alloc.destroy(_nil);
 				_node_alloc.deallocate(_nil, 1);
 				_nil = nullptr;
 			}
@@ -126,11 +132,11 @@ namespace ft {
 						parent->left = child;
 					else
 						parent->right = child;
-				}
 					_size++;
-				if (root->left != nil)
+				}
+				if (root && root->left && root->left != nil)
 					copyTree(root->left, nil);
-				if (root->right != nil)
+				if (root && root->right && root->right != nil)
 					copyTree(root->right, nil);
 			}
 
@@ -144,9 +150,9 @@ namespace ft {
 					if (child->parent == child->parent->parent->left) {
 						uncle = child->parent->parent->right;
 						if (uncle != _nil && uncle->color) {
-							child->parent->color = 0;
-							uncle->color = 0;
-							child->parent->parent->color = 1;
+							child->parent->color = BLACK;
+							uncle->color = BLACK;
+							child->parent->parent->color = RED;
 							child = child->parent->parent;
 						}
 						else {
@@ -154,17 +160,17 @@ namespace ft {
 								child = child->parent;
 								leftRotation(child);
 							}
-							child->parent->color = 0;
-							child->parent->parent->color = 1;
+							child->parent->color = BLACK;
+							child->parent->parent->color = RED;
 							rightRotation(child->parent->parent);
 						} 
 					}
 					else {
 						uncle = child->parent->parent->left;
 						if (uncle != _nil && uncle->color) {
-							child->parent->color = 0;
-							uncle->color = 0;
-							child->parent->parent->color = 1;
+							child->parent->color = BLACK;
+							uncle->color = BLACK;
+							child->parent->parent->color = RED;
 							child = child->parent->parent;
 						}
 						else {
@@ -172,16 +178,28 @@ namespace ft {
 								child = child->parent;
 								rightRotation(child);
 							}
-							child->parent->color = 0;
-							child->parent->parent->color = 1;
+							child->parent->color = BLACK;
+							child->parent->parent->color = RED;
 							leftRotation(child->parent->parent);
 						}
 					}
 				}
-				_root->color = 0;
+				_root->color = BLACK;
 				_nil->parent = _root;
 			}
 
+			void	deleteAll(node *tmp) {
+				if (tmp == _nil || !tmp)
+					return ;
+				if (tmp->left != _nil)
+					deleteAll(tmp->left);
+				if (tmp->right != _nil)
+					deleteAll(tmp->right);
+				_node_alloc.destroy(tmp);
+				_node_alloc.deallocate(tmp, 1);
+				_size--;
+				tmp = nullptr;
+			}
 
 			void	deleteOne(node *toDelete)
 			{
@@ -189,14 +207,15 @@ namespace ft {
 				bool	y_color;
 
 				y = toDelete;
-				// std::cout << "to delete: " << y->key << "\n";
+				if (toDelete == _nil)
+					return ;
 				y_color = y->color;
 				if (y->left == _nil) {
 					x = y->right;
 					transplant(y, y->right);
 				}
 				else if (y->right == _nil) {
-					x = tmp->left;
+					x = y->left;
 					transplant(y, y->left);
 				}
 				else {
@@ -215,23 +234,12 @@ namespace ft {
 					y->color = tmp->color;
 				}
 				// std::cout << "to delete2: " << toDelete->key << "\n";
+				_node_alloc.destroy(toDelete);
 				_node_alloc.deallocate(toDelete, 1);
 				_size--;
-				// std::cout << "del fixup\n";
 				if (!y_color)
 					deleteFixup(x);
-			}
-
-			void	deleteAll(node *tmp) {
-				if (tmp == _nil || !tmp)
-					return ;
-				if (tmp->left != _nil)
-					deleteAll(tmp->left);
-				if (tmp->right != _nil)
-					deleteAll(tmp->right);
-				_node_alloc.deallocate(tmp, 1);
-				_size--;
-				tmp = nullptr;
+				_nil->parent = _root;
 			}
 
 			void	deleteFixup(node *x) {
@@ -255,6 +263,7 @@ namespace ft {
 								w->left->color = BLACK;
 								w->color = RED;
 								rightRotation(w);
+								w = x->parent->right;
 							}
 							w->color = x->parent->color;
 							x->parent->color = BLACK;
@@ -280,6 +289,7 @@ namespace ft {
 								w->right->color = BLACK;
 								w->color = RED;
 								leftRotation(w);
+								w = x->parent->left;
 							}
 							w->color = x->parent->color;
 							x->parent->color = BLACK;
@@ -330,7 +340,7 @@ namespace ft {
 			}
 
 
-			node*	search(node *tmp, Key key) {
+			node*	search(node *tmp, Key key) const {
 				if (!tmp || tmp == _nil || tmp->key == key)
 					return (tmp);
 				if (key > tmp->key)
@@ -348,11 +358,12 @@ namespace ft {
 				else
 					u->parent->right = v;
 				v->parent = u->parent;
+				_nil->parent = _root;
 			}
 
 			node*	findMin(node *tmp) const {
 				if (!tmp || tmp == _nil)
-					return (nullptr);
+					return (tmp);
 				while (tmp->left != _nil)
 					tmp = tmp->left;
 				return (tmp);
@@ -360,7 +371,7 @@ namespace ft {
 
 			node*	findMax(node *tmp) const {
 				if (!tmp || tmp == _nil)
-					return (nullptr);
+					return (tmp);
 				while (tmp->right != _nil)
 					tmp = tmp->right;
 				return (tmp);
@@ -475,7 +486,7 @@ namespace ft {
 
 			// MODIFIERS
 			pair<iterator, bool>	insert(const value_type& value) {
-				if (!_root)
+				if (!_root || _root == _nil)
 					return (create_root(value));
 
 				node					*child;
@@ -486,7 +497,6 @@ namespace ft {
 
 				tmp = search(value.first);
 				if (tmp != _nil) {
-					std::cout << "Key is already present!\n";
 					ret = ft::make_pair(iterator(tmp), false);
 					return (ret);
 				}
@@ -515,7 +525,7 @@ namespace ft {
 
 			iterator	insert(iterator pos, const value_type& value) {
 				(void)pos;
-				if (!_root)
+				if (!_root || _root == _nil)
 					return (create_root(value).first);
 
 				node	*child;
@@ -524,10 +534,8 @@ namespace ft {
 				node	*tmp;
 
 				tmp = search(value.first);
-				if (tmp != _nil) {
-					std::cout << "Key is already present!\n";
+				if (tmp != _nil)
 					return (iterator(tmp));
-				}
 				child = _node_alloc.allocate(1);
 				_node_alloc.construct(child, node(value.first, value, RED, 0, nullptr, _nil, _nil));
 
@@ -552,39 +560,155 @@ namespace ft {
 
 			template <class InputIt>
 			void	insert(InputIt first, InputIt last) {
-				// typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) {
-				// std::cout << "insert 3\n";
 				for (; first != last; ++first)
 					insert(*first);
 			}
 
-			bool	deleteOne(Key key) {
+			void	erase(iterator pos) {
+				node	*tmp = pos.base();
+
+				if (!tmp || tmp == _nil)
+					return ;
+				deleteOne(tmp);
+			}
+
+			void	erase(iterator first, iterator last) {
+				for (; first != last; first++)
+					erase(first);
+			}
+			
+			bool	erase(const Key& key) {
 				node	*tmp = _root;
 
-				// std::cout << "deleting " << key << "\n";
 				tmp = search(key);
 				if (!tmp || tmp == _nil)
 					return (false);
-				// std::cout << "found: " << tmp->key << "\n";
 				deleteOne(tmp);
 				return (true);
 			}
 
-			void	deleteAll() {
+			void	clear() {
+				if (_root == _nil)
+					return ;
 				deleteAll(_root);
 				_root = nullptr;
-				// _node_alloc.deallocate(_nil, 1);
-				// _nil = nullptr;
 			}
 
-			node*	search(Key key) {
+			void	swap(RBTree& other) {
+				RBTree	tmp;
+
+				tmp = *this;
+				*this = other;
+				other = tmp;
+			}
+
+			// LOOKUPS
+			size_type	count(const Key& key) const {
+				node	*tmp = search(key);
+
+				if (!tmp || tmp == _nil)
+					return (false);
+				return (true);
+			}
+
+			iterator	find(const Key& key) {
+				node	*tmp = search(key);
+
+				return (iterator(tmp));
+			}
+
+			const_iterator	find(const Key& key) const {
+				node	*tmp = search(key);
+
+				return (const_iterator(tmp));
+			}
+
+			pair<iterator, iterator>	equal_range(const Key& key) {
+				pair<iterator, iterator>	ret;
+
+				ret = ft::make_pair(lower_bound(key), upper_bound(key));
+				return (ret);
+			}
+
+			pair<const_iterator, const_iterator>	equal_range(const Key& key) const {
+				pair<const_iterator, const_iterator>	ret;
+
+				ret = ft::make_pair(lower_bound(key), upper_bound(key));
+				return (ret);
+			}
+
+			iterator	lower_bound(const Key& key) {
+				iterator	last = end();
+
+				for (iterator head = begin(); head != last; ++head) {
+					if (head->first >= key)
+						return (head);
+				}
+				return (last);
+			}
+
+			const_iterator	lower_bound(const Key& key) const {
+				const_iterator	last = end();
+
+				for (const_iterator head = begin(); head != last; ++head) {
+					if (head->first >= key)
+						return (head);
+				}
+				return (last);
+			}
+
+			iterator	upper_bound(const Key& key) {
+				iterator	last = end();
+
+				for (iterator head = begin(); head != last; ++head) {
+					if (head->first > key) {
+						return (head);
+					}
+				}
+				return (last);
+			}
+
+			const_iterator	upper_bound(const Key& key) const {
+				const_iterator	last = end();
+
+				for (const_iterator head = begin(); head != last; ++head) {
+					if (head->first > key) {
+						head++;
+						return (head);
+					}
+				}
+				return (last);
+			}
+
+			node*	search(Key key) const {
 				node	*tmp = nullptr;
 
 				tmp = search(_root, key);
 				return (tmp);
 			}
 
+			// OBSERVER
+			key_compare	key_comp() const {
+				return (_comp);
+			}
+
+			bool	test() {
+				return (_comp(_root->value.first, _root->left->value.first));
+			}
+
+			// COMPARISON OPERATORS
+			friend bool	operator==(const RBTree& lhs, const RBTree& rhs) {
+				if (lhs.size() != rhs.size())
+					return (false);
+				return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+			}
+
+			friend bool	operator<(const RBTree& lhs, const RBTree& rhs) {
+				if (lhs.size() != rhs.size())
+					return (false);
+				return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+			}
 	};
-}
+};
 
 #endif
