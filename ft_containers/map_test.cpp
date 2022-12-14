@@ -150,16 +150,16 @@ int	main(void) {
 		std::cout << "\n+++ rend() +++\n";
 		std::cout << "FT: rit1 = m1(rend()\n";
 		rit1 = m1.rend();
-		printIter(rit1);
-		// std::cout << "rit1++\n";
-		// rit1++;
 		// printIter(rit1);
+		std::cout << "rit1++\n";
+		rit1++;
+		printIter(rit1);
 		std::cout << "STD: rit2 = m2(rend()\n";
 		rit2 = m2.rend();
-		printIter(rit2);
-		// std::cout << "rit2++\n";
-		// rit2++;
 		// printIter(rit2);
+		std::cout << "rit2++\n";
+		rit2++;
+		printIter(rit2);
 	}
 
 	// CAPACITY
