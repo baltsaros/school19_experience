@@ -86,9 +86,10 @@ namespace ft {
 				if (_root)
 					clear();
 				_root = nullptr;
-				if (src._root) {
+				if (src._root && src._root != src._nil)
 					copyTree(src._root, src._nil);
-				}
+				else if (src._root == src._nil)
+					_root = _nil;
 				return (*this);
 			}
 
@@ -101,7 +102,7 @@ namespace ft {
 			}
 
 			void	copyTree(node *root, node *nil) {
-				if (!_root || root == nil) {
+				if (!_root) {
 					node	*child;
 
 					child = _node_alloc.allocate(1);
@@ -131,8 +132,8 @@ namespace ft {
 						parent->left = child;
 					else
 						parent->right = child;
-				}
 					_size++;
+				}
 				if (root && root->left && root->left != nil)
 					copyTree(root->left, nil);
 				if (root && root->right && root->right != nil)
@@ -496,7 +497,6 @@ namespace ft {
 
 				tmp = search(value.first);
 				if (tmp != _nil) {
-					std::cout << "Key is already present!\n";
 					ret = ft::make_pair(iterator(tmp), false);
 					return (ret);
 				}
@@ -534,10 +534,8 @@ namespace ft {
 				node	*tmp;
 
 				tmp = search(value.first);
-				if (tmp != _nil) {
-					std::cout << "Key is already present!\n";
+				if (tmp != _nil)
 					return (iterator(tmp));
-				}
 				child = _node_alloc.allocate(1);
 				_node_alloc.construct(child, node(value.first, value, RED, 0, nullptr, _nil, _nil));
 
@@ -708,7 +706,7 @@ namespace ft {
 			friend bool	operator<(const RBTree& lhs, const RBTree& rhs) {
 				if (lhs.size() != rhs.size())
 					return (false);
-				return (lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+				return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 			}
 	};
 };
