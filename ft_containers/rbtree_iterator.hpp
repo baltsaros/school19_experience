@@ -6,25 +6,18 @@
 // # include <type_traits>
 
 namespace ft {
-	template <class Iter, class Pair>
+	template <class Pair>
 	struct Node;
 
-	template <class Iter, class Pair>
-	class rbt_iterator : public iterator
-		<typename iterator_traits<Pair*>::iterator_category,
-		typename iterator_traits<Pair*>::value_type,
-		typename iterator_traits<Pair*>::difference_type,
-		typename iterator_traits<Pair*>::pointer,
-		typename iterator_traits<Pair*>::reference> {
+	template <class Pair>
+	class rbt_iterator {
 	public:
-		typedef Node<typename std::remove_const<Iter>::type, typename std::remove_const<Pair>::type >					node;
-		typedef iterator_traits<Pair*>				itraits;
-		typedef Pair								iterator_type;
-		typedef typename itraits::difference_type	difference_type;
-		typedef typename itraits::reference			reference;
-		typedef typename itraits::pointer			pointer;
-		typedef typename itraits::value_type		value_type;
-		typedef typename itraits::iterator_category	iterator_category;
+		typedef Pair						value_type;
+		typedef Pair*						pointer;
+		typedef Pair&						reference;
+		typedef ft::bidirectional_iterator_tag	iterator_category;
+		typedef std::ptrdiff_t				difference_type;
+		typedef	Node<Pair>					node;
 
 	private:
 		node	*_ptr;
@@ -63,6 +56,10 @@ namespace ft {
 
 		~rbt_iterator() {};
 
+		operator	rbt_iterator<Pair const>() const {
+			return (rbt_iterator<Pair const>(this->_ptr));
+		}
+
 		rbt_iterator(rbt_iterator const &src) {
 			*this = src;
 			return ;
@@ -73,12 +70,13 @@ namespace ft {
 			return (*this);
 		}
 
+
 		reference	operator*() const {
-			return (_ptr->value);
+			return (static_cast<node*>(_ptr)->value);
 		}
 
 		pointer	operator->() const {
-			return &(_ptr->value);
+			return &(static_cast<node*>(_ptr)->value);
 		}
 
 		rbt_iterator&	operator++() {
@@ -140,6 +138,139 @@ namespace ft {
 		}
 
 		bool	operator!=(rbt_iterator const &rhs) const {
+			return (_ptr != rhs._ptr);
+		}
+	};
+
+template <class Pair>
+class rbt_const_iterator {
+	public:
+		typedef Pair						value_type;
+		typedef const Pair*						pointer;
+		typedef const Pair&						reference;
+		typedef rbt_iterator<Pair>				iterator;
+		typedef bidirectional_iterator_tag	iterator_category;
+		typedef std::ptrdiff_t				difference_type;
+		typedef	const Node<Pair>			node;
+
+	private:
+		node	*_ptr;
+
+		bool	_check_nil(node *tree) {
+			if (!tree->left && !tree->right)
+				return (true);
+			return (false);
+		}
+			node*	_treeMin(node *tmp) const {
+				if (!tmp)
+					return (nullptr);
+				while (tmp->left && tmp->left->left)
+					tmp = tmp->left;
+				return (tmp);
+			}
+
+			node*	_treeMax(node *tmp) const {
+				if (!tmp)
+					return (nullptr);
+				while (tmp->right && tmp->right->right)
+					tmp = tmp->right;
+				return (tmp);
+			}
+
+	public:
+		rbt_const_iterator() {
+			_ptr = nullptr;
+			return ;
+		}
+
+		explicit rbt_const_iterator(node *ptr) {
+			_ptr = ptr;
+			return ;
+		}
+
+		~rbt_const_iterator() {};
+
+		rbt_const_iterator(const iterator &src) {
+			_ptr = src._ptr;
+			return ;
+		}
+
+		iterator	it_const_cast() {
+			return (iterator(const_cast<typename iterator::node*>(_ptr)));
+		}
+
+		rbt_const_iterator&	operator=(rbt_const_iterator const &rhs) {
+			_ptr = rhs._ptr;
+			return (*this);
+		}
+
+		reference	operator*() const {
+			return (_ptr->value);
+		}
+
+		pointer	operator->() const {
+			return &(_ptr->value);
+		}
+
+		rbt_const_iterator&	operator++() {
+			if (_check_nil(_ptr))
+				_ptr = _ptr->parent;
+			else if (_ptr->right && _ptr->right->left)
+				_ptr = _treeMin(_ptr->right);
+			else {
+				node	*tmp = _ptr->parent;
+
+				while (!_check_nil(tmp) && _ptr == tmp->right) {
+					_ptr = tmp;
+					tmp = tmp->parent;
+				}
+				_ptr = tmp;
+			}
+			return (*this);
+		}
+
+		rbt_const_iterator	operator++(int) {
+			rbt_const_iterator	tmp = *this;
+
+			this->operator++();
+			return (tmp);
+		}
+
+		rbt_const_iterator&	operator--() {
+			if (_check_nil(_ptr)) {
+				_ptr = _ptr->parent;
+				_ptr = _treeMax(_ptr);
+			}
+			else if (_ptr->left && _ptr->left->right)
+				_ptr = _treeMax(_ptr->left);
+			else {
+				node	*tmp = _ptr->parent;
+
+				while (!_check_nil(tmp) && _ptr == tmp->left) {
+					_ptr = tmp;
+					tmp = tmp->parent;
+				}
+				_ptr = tmp;
+			}
+			return (*this);
+		}
+
+		rbt_const_iterator	operator--(int) {
+			rbt_const_iterator	tmp = *this;
+
+			this->operator--();
+			return (tmp);
+		}
+
+		node*	base() const {
+			return (_ptr);
+		}
+
+		bool	operator==(rbt_const_iterator const &rhs) const {
+			return (_ptr == rhs._ptr);
+		}
+
+		bool	operator!=(rbt_const_iterator const &rhs) const {
 			return (_ptr != rhs._ptr);
 		}
 	};
