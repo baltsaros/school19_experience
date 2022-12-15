@@ -12,6 +12,8 @@ namespace ft {
 
 	template <class Pair>
 	struct Node {
+		typedef	const Node	const_Node;
+
 		Pair		value;
 		bool		color;
 		size_t		level;
@@ -24,6 +26,7 @@ namespace ft {
 
 		Node(Pair v, bool c, size_t lvl, Node *p, Node *l, Node *r) :
 			value(v), color(c), level(lvl), parent(p), left(l), right(r) {}
+
 	};
 
 	template <class Key,
@@ -47,8 +50,8 @@ namespace ft {
 			typedef typename Allocator::const_pointer	const_pointer;
 			typedef typename Allocator::template rebind<Node<value_type> >::other	alloc_node;
 			
-			typedef rbt_iterator<Pair>				iterator;
-			typedef rbt_iterator<const Pair>		const_iterator;
+			typedef rbt_iterator<Pair>						iterator;
+			typedef rbt_const_iterator<Pair>				const_iterator;
 			typedef ft::reverse_iterator<iterator>			reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
