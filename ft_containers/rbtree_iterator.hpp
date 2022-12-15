@@ -9,23 +9,6 @@ namespace ft {
 	template <class Pair>
 	struct Node;
 
-	// class rbt_iterator : public ft::iterator
-	// 	<typename iterator_traits<Pair*>::iterator_category,
-	// 	typename iterator_traits<Pair*>::value_type,
-	// 	typename iterator_traits<Pair*>::difference_type,
-	// 	typename iterator_traits<Pair*>::pointer,
-	// 	typename iterator_traits<Pair*>::reference> {
-	// public:
-	// 	// typedef Node<typename std::remove_const<Pair>::type >		node;
-	// 	typedef Node<Pair>							node;
-	// 	typedef iterator_traits<Pair*>				itraits;
-	// 	typedef Pair								iterator_type;
-	// 	typedef typename itraits::difference_type	difference_type;
-	// 	typedef typename itraits::reference			reference;
-	// 	typedef typename itraits::pointer			pointer;
-	// 	typedef typename itraits::value_type		value_type;
-	// 	typedef typename itraits::iterator_category	iterator_category;
-
 	template <class Pair>
 	class rbt_iterator {
 	public:
@@ -34,7 +17,6 @@ namespace ft {
 		typedef Pair&						reference;
 		typedef ft::bidirectional_iterator_tag	iterator_category;
 		typedef std::ptrdiff_t				difference_type;
-		// typedef Node<typename std::remove_const<Pair>::type >		node;
 		typedef	Node<Pair>					node;
 
 	private:

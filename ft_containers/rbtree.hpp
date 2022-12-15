@@ -30,6 +30,7 @@ namespace ft {
 	};
 
 	template <class Key,
+				class T,
 				class Pair,
 				class Compare = std::less<Key>,
 				class Allocator = std::allocator<Pair> >
@@ -37,6 +38,7 @@ namespace ft {
 		public:
 		// TYPEDEFS
 			typedef Key						key_type;
+			typedef T						mapped_type;
 			typedef Pair					value_type;
 			typedef std::size_t				size_type;
 			typedef std::ptrdiff_t			difference_type;
@@ -427,6 +429,37 @@ namespace ft {
 					printNode(tmp->right);
 			}
 
+			// ELEMENT ACCESS
+			T&	at(const value_type& key) {
+				node	*tmp = nullptr;
+
+				tmp = search(key);
+				if (!tmp || (!tmp->left && !tmp->right))
+					throw OutOfRange();
+				return (tmp->value.second);
+			}
+
+			const T&	at(const value_type& key) const {
+				node	*tmp = nullptr;
+
+				tmp = search(key);
+				if (!tmp || (!tmp->left && !tmp->right))
+					throw OutOfRange();
+				return (tmp->value.second);
+			}
+
+			T&	operator[](const Key& key) {
+				node			*tmp = nullptr;
+				pair<Key, T>	value = value_type(key, T());
+
+				tmp = search(value);
+				if (!tmp || (!tmp->left && !tmp->right)) {
+					insert(value);
+					tmp = search(value);
+				}
+				return (tmp->value.second);
+			}
+
 			// ITERATORS
 			iterator	begin() {
 				return (iterator(findMin(_root)));
@@ -711,6 +744,31 @@ namespace ft {
 					return (false);
 				return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 			}
+
+			// EXCEPTIONS
+			class OutOfRange: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map.at() is out of range");
+				}
+			};
+
+			class OutOfBounds: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map[] index is out of bounds");
+				}
+			};
+
+			class EmptyContainer: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map is empty");
+				}
+			};
+
+			class LengthError: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map begin is ahead of end");
+				}
+			};
 	};
 };
 

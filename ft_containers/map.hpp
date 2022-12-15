@@ -31,7 +31,7 @@ namespace ft {
 		typedef const value_type&							const_reference;
 		typedef typename Allocator::pointer					pointer;
 		typedef typename Allocator::const_pointer			const_pointer;
-		typedef	RBTree<Key, value_type, Compare, Allocator>	tree;
+		typedef	RBTree<Key, T, value_type, Compare, Allocator>	tree;
 		typedef typename tree::iterator						iterator;
 		typedef typename tree::const_iterator				const_iterator;
 		typedef typename tree::reverse_iterator				reverse_iterator;
@@ -92,33 +92,16 @@ namespace ft {
 
 			// ELEMENT ACCESS
 			T&	at(const Key& key) {
-				node	*tmp = nullptr;
-
-				tmp = _tree.search(value_type(key, T()));
-				if (!tmp || (!tmp->left && !tmp->right))
-					throw OutOfRange();
-				return (tmp->value.second);
+				return (_tree.at(value_type(key, T())));
 			}
 
 			const T&	at(const Key& key) const {
-				node	*tmp = nullptr;
-
-				tmp = _tree.search(value_type(key, T()));
-				if (!tmp || (!tmp->left && !tmp->right))
-					throw OutOfRange();
-				return (tmp->value.second);
+				return (_tree.at(value_type(key, T())));
 			}
 
 			T&	operator[](const Key& key) {
-				node			*tmp = nullptr;
-				pair<Key, T>	value = value_type(key, T());
-
-				tmp = _tree.search(value);
-				if (!tmp || (!tmp->left && !tmp->right)) {
-					_tree.insert(value);
-					tmp = _tree.search(value);
-				}
-				return (tmp->value.second);
+				return (_tree[key]);
+				// return (_tree.operator[](value_type(key, T())));
 			}
 
 			// ITERATORS
@@ -202,31 +185,6 @@ namespace ft {
 				_tree.swap(other._tree);
 			}
 
-			// EXCEPTIONS
-			class OutOfRange: public std::exception {
-				const char*	what(void) const throw() {
-					return ("ft::map.at() is out of range");
-				}
-			};
-
-			class OutOfBounds: public std::exception {
-				const char*	what(void) const throw() {
-					return ("ft::map[] index is out of bounds");
-				}
-			};
-
-			class EmptyContainer: public std::exception {
-				const char*	what(void) const throw() {
-					return ("ft::map is empty");
-				}
-			};
-
-			class LengthError: public std::exception {
-				const char*	what(void) const throw() {
-					return ("ft::map begin is ahead of end");
-				}
-			};
-
 			// LOOKUPS
 			size_type	count(const Key& key) const {
 				return (_tree.count(value_type(key, T())));
@@ -291,6 +249,31 @@ namespace ft {
 			template <class KeyF, class TF, class CompareF, class AllocF>
 			friend bool	operator<(const map<KeyF, TF, CompareF, AllocF>& lhs,
 							const map<KeyF, TF, CompareF, AllocF>& rhs);
+
+			// EXCEPTIONS
+			class OutOfRange: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map.at() is out of range");
+				}
+			};
+
+			class OutOfBounds: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map[] index is out of bounds");
+				}
+			};
+
+			class EmptyContainer: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map is empty");
+				}
+			};
+
+			class LengthError: public std::exception {
+				const char*	what(void) const throw() {
+					return ("ft::map begin is ahead of end");
+				}
+			};
 	};
 
 	template <class Key, class T, class Compare, class Alloc>
