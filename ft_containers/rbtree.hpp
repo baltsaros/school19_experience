@@ -22,7 +22,7 @@ namespace ft {
 		Node<Pair>	*parent;
 
 		Node(Node *parent) : color(BLACK), level(0),
-			parent(parent), left(nullptr), right(nullptr) {}
+			parent(parent), left(NULL), right(NULL) {}
 
 		Node(Pair v, bool c, size_t lvl, Node *p, Node *l, Node *r) :
 			value(v), color(c), level(lvl), parent(p), left(l), right(r) {}
@@ -70,7 +70,7 @@ namespace ft {
 				allocator_type const &alloc = allocator_type()) :
 				_alloc(alloc), _node_alloc(alloc), _size(0), _comp(comp) {
 				// std::cout << "constructor 1" << std::endl;
-				_root = nullptr;
+				_root = NULL;
 				_nil = _node_alloc.allocate(1);
 				_node_alloc.construct(_nil, node(_root));
 				_root = _nil;
@@ -89,7 +89,7 @@ namespace ft {
 				_comp = src._comp;
 				if (_root)
 					clear();
-				_root = nullptr;
+				_root = NULL;
 				if (src._root && src._root != src._nil)
 					copyTree(src._root, src._nil);
 				else if (src._root == src._nil)
@@ -102,7 +102,7 @@ namespace ft {
 				clear();
 				_node_alloc.destroy(_nil);
 				_node_alloc.deallocate(_nil, 1);
-				_nil = nullptr;
+				_nil = NULL;
 			}
 
 			void	copyTree(node *root, node *nil) {
@@ -121,7 +121,7 @@ namespace ft {
 					node	*parent = _nil;
 
 					child = _node_alloc.allocate(1);
-					_node_alloc.construct(child, node(root->value, root->color, root->level, nullptr, _nil, _nil));
+					_node_alloc.construct(child, node(root->value, root->color, root->level, NULL, _nil, _nil));
 
 					while (head != _nil)
 					{
@@ -202,7 +202,7 @@ namespace ft {
 				_node_alloc.destroy(tmp);
 				_node_alloc.deallocate(tmp, 1);
 				_size--;
-				tmp = nullptr;
+				tmp = NULL;
 			}
 
 			void	deleteOne(node *toDelete)
@@ -431,7 +431,7 @@ namespace ft {
 
 			// ELEMENT ACCESS
 			T&	at(const value_type& key) {
-				node	*tmp = nullptr;
+				node	*tmp = NULL;
 
 				tmp = search(key);
 				if (!tmp || (!tmp->left && !tmp->right))
@@ -440,7 +440,7 @@ namespace ft {
 			}
 
 			const T&	at(const value_type& key) const {
-				node	*tmp = nullptr;
+				node	*tmp = NULL;
 
 				tmp = search(key);
 				if (!tmp || (!tmp->left && !tmp->right))
@@ -449,7 +449,7 @@ namespace ft {
 			}
 
 			T&	operator[](const Key& key) {
-				node			*tmp = nullptr;
+				node			*tmp = NULL;
 				pair<Key, T>	value = value_type(key, T());
 
 				tmp = search(value);
@@ -536,7 +536,7 @@ namespace ft {
 					return (ret);
 				}
 				child = _node_alloc.allocate(1);
-				_node_alloc.construct(child, node(value, RED, 0, nullptr, _nil, _nil));
+				_node_alloc.construct(child, node(value, RED, 0, NULL, _nil, _nil));
 
 				while (head != _nil)
 				{
@@ -572,7 +572,7 @@ namespace ft {
 				if (tmp != _nil)
 					return (iterator(tmp));
 				child = _node_alloc.allocate(1);
-				_node_alloc.construct(child, node(value, RED, 0, nullptr, _nil, _nil));
+				_node_alloc.construct(child, node(value, RED, 0, NULL, _nil, _nil));
 
 				while (head != _nil)
 				{
@@ -626,7 +626,7 @@ namespace ft {
 				if (_root == _nil)
 					return ;
 				deleteAll(_root);
-				_root = nullptr;
+				_root = NULL;
 			}
 
 			void	swap(RBTree& other) {
@@ -717,7 +717,7 @@ namespace ft {
 			}
 
 			node*	search(const value_type& key) const {
-				node	*tmp = nullptr;
+				node	*tmp = NULL;
 
 				tmp = search(_root, key);
 				return (tmp);

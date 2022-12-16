@@ -58,7 +58,7 @@ namespace ft {
 
 			template <class InputIt>
 			vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type(),
-					typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) :
+					typename enable_if<!is_integral<InputIt>::value>::type* = NULL) :
 				_alloc(alloc), _count(0), _cap(0), _head(0) {
 				assign(first, last);
 				return ;
@@ -115,7 +115,7 @@ namespace ft {
 
 			template <class InputIt>
 			void	assign(InputIt first, InputIt last,
-							typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) {
+							typename enable_if<!is_integral<InputIt>::value>::type* = NULL) {
 				clear();
 				for (; first != last; ++first) {
 					push_back(*first);
@@ -314,7 +314,7 @@ namespace ft {
 				if (this->_count + count >= this->_cap)
 					reserve(this->_cap + count + ((this->_cap + 2) / 2));
 				tmp = this->_alloc.allocate(this->_cap);
-				for (size_t i = 0; i != this->_count; ++i) {
+				for (std::ptrdiff_t i = 0; i != this->_count; ++i) {
 					if (i == dif) {
 						while (j < count) {
 							this->_alloc.construct(tmp + i + j, value);
@@ -334,14 +334,15 @@ namespace ft {
 
 			template <class InputIt>
 			void	insert(iterator pos, InputIt first, InputIt last,
-						typename enable_if<!is_integral<InputIt>::value>::type* = nullptr) {
+						typename enable_if<!is_integral<InputIt>::value>::type* = NULL) {
 				difference_type	dif = pos - begin();
 				T				*tmp;
 				size_t			j = 0;
 				size_t			count = 0;
 				InputIt			it;
 
-				if (pos > end() || pos < begin() || first > last)
+				// if (pos > end() || pos < begin() || first > last)
+				if (pos > end() || pos < begin())
 					throw LengthError();
 				if (pos == end()) {
 					for (; first != last; ++first) {
@@ -356,8 +357,8 @@ namespace ft {
 				if (this->_count + count >= this->_cap)
 					reserve(this->_cap + count + ((this->_cap + 2) / 2));
 				tmp = this->_alloc.allocate(this->_cap);
-				for (std::ptrdiff_t i = 0; i != this->_count; ++i) {
-					if (i == dif) {
+				for (size_t i = 0; i != this->_count; ++i) {
+					if (i == (size_t)dif) {
 						while (j < count) {
 							this->_alloc.construct(tmp + i + j, *first);
 							++j;
@@ -366,7 +367,7 @@ namespace ft {
 					}
 					this->_alloc.construct(tmp + i + j, this->_head[i]);
 				}
-				for (std::ptrdiff_t i = 0; i < this->_count; ++i) {
+				for (size_t i = 0; i < this->_count; ++i) {
 					this->_alloc.destroy(this->_head + i);
 				}
 				this->_alloc.deallocate(this->_head, this->_count);
@@ -390,7 +391,7 @@ namespace ft {
 					throw LengthError();
 				tmp = this->_alloc.allocate(this->_cap);
 				for (size_t i = 0; i != this->_count; ++i) {
-					if (i == dif)
+					if (i == (size_t)dif)
 						continue;
 					this->_alloc.construct(tmp + j, this->_head[i]);
 					j++;

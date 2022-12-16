@@ -29,7 +29,7 @@ namespace ft {
 		}
 			node*	_treeMin(node *tmp) const {
 				if (!tmp)
-					return (nullptr);
+					return (NULL);
 				while (tmp->left && tmp->left->left)
 					tmp = tmp->left;
 				return (tmp);
@@ -37,7 +37,7 @@ namespace ft {
 
 			node*	_treeMax(node *tmp) const {
 				if (!tmp)
-					return (nullptr);
+					return (NULL);
 				while (tmp->right && tmp->right->right)
 					tmp = tmp->right;
 				return (tmp);
@@ -45,7 +45,7 @@ namespace ft {
 
 	public:
 		rbt_iterator() {
-			_ptr = nullptr;
+			_ptr = NULL;
 			return ;
 		}
 
@@ -163,7 +163,7 @@ class rbt_const_iterator {
 		}
 			node*	_treeMin(node *tmp) const {
 				if (!tmp)
-					return (nullptr);
+					return (NULL);
 				while (tmp->left && tmp->left->left)
 					tmp = tmp->left;
 				return (tmp);
@@ -171,7 +171,7 @@ class rbt_const_iterator {
 
 			node*	_treeMax(node *tmp) const {
 				if (!tmp)
-					return (nullptr);
+					return (NULL);
 				while (tmp->right && tmp->right->right)
 					tmp = tmp->right;
 				return (tmp);
@@ -179,7 +179,7 @@ class rbt_const_iterator {
 
 	public:
 		rbt_const_iterator() {
-			_ptr = nullptr;
+			_ptr = NULL;
 			return ;
 		}
 
@@ -293,10 +293,10 @@ class rbt_const_iterator {
 		typedef typename itraits::value_type		value_type;
 		typedef typename itraits::iterator_category	iterator_category;
 
-		reverse_iterator() : _ptr(nullptr), _t(nullptr) {
+		reverse_iterator() : _ptr(NULL), _t(NULL) {
 		// reverse_iterator() {
-		// 	this->_ptr = nullptr;
-		// 	this->_t = nullptr;
+		// 	this->_ptr = NULL;
+		// 	this->_t = NULL;
 			return ;
 		}
 
