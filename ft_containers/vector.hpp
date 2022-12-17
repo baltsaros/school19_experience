@@ -21,8 +21,8 @@ namespace ft {
 			typedef std::ptrdiff_t							difference_type;
 			typedef value_type&								reference;
 			typedef const value_type&						const_reference;
-			typedef vt_iterator<T*>							iterator;
-			typedef vt_iterator<const T*>					const_iterator;
+			typedef vt_iterator<T>							iterator;
+			typedef vt_iterator<const T>					const_iterator;
 			typedef ft::reverse_iterator<iterator>			reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 

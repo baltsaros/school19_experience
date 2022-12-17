@@ -157,15 +157,14 @@ namespace ft {
 
 	template <class Iter>
 	class vt_iterator: public iterator
-		<typename iterator_traits<Iter>::iterator_category,
-		typename iterator_traits<Iter>::value_type,
-		typename iterator_traits<Iter>::difference_type,
-		typename iterator_traits<Iter>::pointer,
-		typename iterator_traits<Iter>::reference> {
+		<typename iterator_traits<Iter*>::iterator_category,
+		typename iterator_traits<Iter*>::value_type,
+		typename iterator_traits<Iter*>::difference_type,
+		typename iterator_traits<Iter*>::pointer,
+		typename iterator_traits<Iter*>::reference> {
 
 	protected:
-		Iter	_ptr;
-		typedef iterator_traits<Iter>	itraits;
+		typedef ft::iterator<ft::random_access_iterator_tag, Iter>	itraits;
 
 	public:
 		typedef Iter								iterator_type;
@@ -174,13 +173,17 @@ namespace ft {
 		typedef typename itraits::pointer			pointer;
 		typedef typename itraits::value_type		value_type;
 		typedef typename itraits::iterator_category	iterator_category;
-
+	
+	protected:
+		pointer	_ptr;
+	
+	public:
 		vt_iterator() {
 			this->_ptr = NULL;
 			return ;
 		}
 
-		vt_iterator(const Iter &ptr) {
+		vt_iterator(const pointer &ptr) {
 			this->_ptr = ptr;
 			return ;
 		}
@@ -190,6 +193,10 @@ namespace ft {
 		vt_iterator(vt_iterator const &src) {
 			*this = src;
 			return ;
+		}
+
+		operator	vt_iterator<Iter const>() const {
+			return (vt_iterator<Iter const>(_ptr));
 		}
 
 		vt_iterator&	operator=(vt_iterator const &rhs) {
@@ -245,7 +252,7 @@ namespace ft {
 			return (vt_iterator(this->_ptr - n));
 		}
 
-		const	Iter&	base() const {
+		const	pointer&	base() const {
 			return (this->_ptr);
 		}
 
@@ -278,6 +285,24 @@ namespace ft {
 	std::ptrdiff_t	operator-(const vt_iterator<Iter1>& lhs,
 								const vt_iterator<Iter2>& rhs) {
 		return (lhs.base() - rhs.base());
+	}
+
+	template <class Iter1, class Iter2>
+	std::ptrdiff_t	operator+(const vt_iterator<Iter1>& lhs,
+								const vt_iterator<Iter2>& rhs) {
+		return (lhs.base() + rhs.base());
+	}
+
+	template <class Iter>
+	vt_iterator<Iter>	operator+(typename vt_iterator<Iter>::difference_type n,
+		 const vt_iterator<Iter>& it) {
+		return (vt_iterator<Iter>(it.base() + n));
+	}
+
+	template <class Iter>
+	vt_iterator<Iter>	operator-(typename vt_iterator<Iter>::difference_type n,
+		 const vt_iterator<Iter>& it) {
+		return (vt_iterator<Iter>(it.base() - n));
 	}
 }
 
