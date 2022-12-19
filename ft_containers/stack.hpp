@@ -5,6 +5,7 @@
 # include <exception>
 # include <cstring>
 # include "iterator.hpp"
+# include "reverse_iterator.hpp"
 # include "enable_if.hpp"
 # include "is_integral.hpp"
 # include "vector.hpp"
