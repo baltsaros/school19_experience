@@ -72,6 +72,8 @@ namespace ft {
 
 			//	DESTRUCTOR
 			~vector() {
+				if (!_head)
+					return ;
 				for (size_t i = 0; i < this->_count; ++i) {
 					this->_alloc.destroy(this->_head + i);
 				}
@@ -281,8 +283,8 @@ namespace ft {
 				if (this->_count >= this->_cap)
 					reserve(this->_cap + ((this->_cap + 2) / 2));
 				tmp = this->_alloc.allocate(this->_cap);
-				for (std::ptrdiff_t i = 0; i != this->_count; ++i) {
-					if (i == dif) {
+				for (size_t i = 0; i != this->_count; ++i) {
+					if (i == (size_t)dif) {
 						this->_alloc.construct(tmp + i + j, value);
 						++j;
 					}
@@ -314,8 +316,8 @@ namespace ft {
 				if (this->_count + count >= this->_cap)
 					reserve(this->_cap + count + ((this->_cap + 2) / 2));
 				tmp = this->_alloc.allocate(this->_cap);
-				for (std::ptrdiff_t i = 0; i != this->_count; ++i) {
-					if (i == dif) {
+				for (size_t i = 0; i != this->_count; ++i) {
+					if (i == (size_t)dif) {
 						while (j < count) {
 							this->_alloc.construct(tmp + i + j, value);
 							++j;
@@ -417,11 +419,11 @@ namespace ft {
 						++first;
 						continue ;
 					}
-					if (it == last)
-						ret = j;
 					this->_alloc.construct(tmp + j, *it);
 					++j;
 				}
+				if (last == end())
+					ret = j;
 				for (size_t i = 0; i < this->_count; ++i) {
 					this->_alloc.destroy(this->_head + i);
 				}
@@ -458,8 +460,10 @@ namespace ft {
 					throw LengthError();
 				if (this->_count == count)
 					return ;
-				else if (this->_cap < count)
+				else if (this->_cap < count) {
 					tmp = this->_alloc.allocate(count);
+					this->_cap = count;
+				}
 				else
 					tmp = this->_alloc.allocate(this->_cap);
 				for (size_t i = 0; i < count; ++i) {
@@ -480,9 +484,22 @@ namespace ft {
 			void	swap(vector& other) {
 				vector<T>	tmp;
 
-				tmp = *this;
-				*this = other;
-				other = tmp;
+				tmp._count = _count;
+				tmp._cap = _cap;
+				tmp._alloc = _alloc;
+				tmp._head = _head;
+
+				_count = other._count;
+				_cap = other._cap;
+				_alloc = other._alloc;
+				_head = other._head;
+
+				other._count = tmp._count;
+				other._cap = tmp._cap;
+				other._alloc = tmp._alloc;
+				other._head = tmp._head;
+
+				tmp._head = NULL;
 			}
 
 			// EXCEPTIONS

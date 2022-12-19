@@ -71,7 +71,7 @@ namespace ft {
 
 			tmp = this->_ptr;
 			--tmp;
-			return (tmp);
+			return &(*tmp);
 		}
 
 		reference	operator[](difference_type n) const {
@@ -118,6 +118,31 @@ namespace ft {
 			return (reverse_iterator(this->_ptr + n));
 		}
 	};
+
+
+	template <class Iter1, class Iter2>
+	std::ptrdiff_t	operator-(const reverse_iterator<Iter1>& lhs,
+								const reverse_iterator<Iter2>& rhs) {
+		return (rhs.base() - lhs.base());
+	}
+
+	template <class Iter1, class Iter2>
+	std::ptrdiff_t	operator+(const reverse_iterator<Iter1>& lhs,
+								const reverse_iterator<Iter2>& rhs) {
+		return (lhs.base() + rhs.base());
+	}
+
+	template <class Iter>
+	reverse_iterator<Iter>	operator+(typename reverse_iterator<Iter>::difference_type n,
+		 const reverse_iterator<Iter>& it) {
+		return (reverse_iterator<Iter>(it.base() - n));
+	}
+
+	template <class Iter>
+	reverse_iterator<Iter>	operator-(typename reverse_iterator<Iter>::difference_type n,
+		 const reverse_iterator<Iter>& it) {
+		return (reverse_iterator<Iter>(it.base() + n));
+	}
 
 	template <class Iter1, class Iter2>
 	bool	operator==(const reverse_iterator<Iter1> &lhs,
@@ -291,6 +316,42 @@ namespace ft {
 	std::ptrdiff_t	operator+(const vt_iterator<Iter1>& lhs,
 								const vt_iterator<Iter2>& rhs) {
 		return (lhs.base() + rhs.base());
+	}
+
+	template <class Iter1, class Iter2>
+	bool	operator==(const vt_iterator<Iter1>& lhs,
+								const vt_iterator<Iter2>& rhs) {
+		return (lhs.base() == rhs.base());
+	}
+
+	template <class Iter1, class Iter2>
+	bool	operator!=(const vt_iterator<Iter1>& lhs,
+								const vt_iterator<Iter2>& rhs) {
+		return (lhs.base() != rhs.base());
+	}
+
+	template <class Iter1, class Iter2>
+	bool	operator>(const vt_iterator<Iter1>& lhs,
+								const vt_iterator<Iter2>& rhs) {
+		return (lhs.base() > rhs.base());
+	}
+
+	template <class Iter1, class Iter2>
+	bool	operator>=(const vt_iterator<Iter1>& lhs,
+								const vt_iterator<Iter2>& rhs) {
+		return (lhs.base() >= rhs.base());
+	}
+
+	template <class Iter1, class Iter2>
+	bool	operator<(const vt_iterator<Iter1>& lhs,
+								const vt_iterator<Iter2>& rhs) {
+		return (lhs.base() < rhs.base());
+	}
+
+	template <class Iter1, class Iter2>
+	bool	operator<=(const vt_iterator<Iter1>& lhs,
+								const vt_iterator<Iter2>& rhs) {
+		return (lhs.base() <= rhs.base());
 	}
 
 	template <class Iter>
