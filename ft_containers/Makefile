@@ -8,7 +8,8 @@ C_RESET			=\033[0m
 
 NAME		= containers
 # SRC_DIR	= srcs
-SRCS		= vector_tests.cpp
+# SRCS		= vector_tests.cpp
+SRCS		= stack_tests.cpp
 # SRCS		= map_test.cpp
 # SRCS		= ${notdir ${SRCS_F}}
 

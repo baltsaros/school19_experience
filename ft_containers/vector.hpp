@@ -84,19 +84,8 @@ namespace ft {
 
 			// ASSIGN OPERATOR
 			vector&	operator=(const vector& other) {
-				if (this == &other)
-					return (*this);
-				for (size_t i = 0; i < _count; ++i) {
-					_alloc.destroy(_head + i);
-				}
-				_alloc.deallocate(_head, _count);
-				_count = other._count;
-				_cap = other._cap;
-				_alloc = other._alloc;
-				_head = _alloc.allocate(_count);
-				for (size_t i = 0; i < _count; ++i) {
-					_alloc.construct(_head + i, other[i]);
-				}
+				if (this != &other)
+					assign(other.begin(), other.end());
 				return (*this);
 			}
 
