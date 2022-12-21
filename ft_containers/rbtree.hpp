@@ -22,10 +22,10 @@ namespace ft {
 		Node<Pair>	*parent;
 
 		Node(Node *parent) : color(BLACK), level(0),
-			parent(parent), left(NULL), right(NULL) {}
+			left(NULL), right(NULL), parent(parent) {}
 
-		Node(Pair v, bool c, size_t lvl, Node *p, Node *l, Node *r) :
-			value(v), color(c), level(lvl), parent(p), left(l), right(r) {}
+		Node(Pair v, bool c, size_t lvl, Node *l, Node *r, Node *p) :
+			value(v), color(c), level(lvl), left(l), right(r), parent(p) {}
 
 	};
 
@@ -91,7 +91,8 @@ namespace ft {
 					clear();
 				_root = NULL;
 				if (src._root && src._root != src._nil)
-					copyTree(src._root, src._nil);
+					insert(src.begin(), src.end());
+					// copyTree(src._root, src._nil);
 				else if (src._root == src._nil)
 					_root = _nil;
 				return (*this);
@@ -121,7 +122,7 @@ namespace ft {
 					node	*parent = _nil;
 
 					child = _node_alloc.allocate(1);
-					_node_alloc.construct(child, node(root->value, root->color, root->level, NULL, _nil, _nil));
+					_node_alloc.construct(child, node(root->value, root->color, root->level, _nil, _nil, NULL));
 
 					while (head != _nil)
 					{
@@ -536,7 +537,7 @@ namespace ft {
 					return (ret);
 				}
 				child = _node_alloc.allocate(1);
-				_node_alloc.construct(child, node(value, RED, 0, NULL, _nil, _nil));
+				_node_alloc.construct(child, node(value, RED, 0, _nil, _nil, NULL));
 
 				while (head != _nil)
 				{
@@ -572,7 +573,7 @@ namespace ft {
 				if (tmp != _nil)
 					return (iterator(tmp));
 				child = _node_alloc.allocate(1);
-				_node_alloc.construct(child, node(value, RED, 0, NULL, _nil, _nil));
+				_node_alloc.construct(child, node(value, RED, 0, _nil, _nil, NULL));
 
 				while (head != _nil)
 				{
@@ -623,10 +624,12 @@ namespace ft {
 			}
 
 			void	clear() {
-				if (_root == _nil)
+				if (_root == _nil || !_root)
 					return ;
 				deleteAll(_root);
-				_root = NULL;
+				// _root = NULL;
+				_root = _nil;
+				_root->parent = _nil;
 			}
 
 			void	swap(RBTree& other) {
@@ -697,7 +700,6 @@ namespace ft {
 
 				for (iterator head = begin(); head != last; ++head) {
 					if (_comp(key.first, head->first)) {
-						head++;
 						return (head);
 					}
 				}
@@ -709,7 +711,6 @@ namespace ft {
 
 				for (const_iterator head = begin(); head != last; ++head) {
 					if (_comp(key.first, head->first)) {
-						head++;
 						return (head);
 					}
 				}

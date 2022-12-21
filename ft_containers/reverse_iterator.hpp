@@ -28,11 +28,7 @@ namespace ft {
 		typedef typename itraits::value_type		value_type;
 		typedef typename itraits::iterator_category	iterator_category;
 
-		reverse_iterator() {
-			_ptr = NULL;
-			_t = NULL;
-			return ;
-		}
+		reverse_iterator(): _ptr(NULL), _t(NULL) {}
 
 		explicit reverse_iterator(iterator_type x) {
 			_ptr = x;
