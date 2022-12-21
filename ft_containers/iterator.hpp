@@ -40,14 +40,8 @@ namespace ft {
 
 		~ra_iterator() {};
 
-		ra_iterator(ra_iterator const &src) {
-			*this = src;
-			return ;
-		}
-
-		operator	ra_iterator<Iter const>() const {
-			return (ra_iterator<Iter const>(_ptr));
-		}
+		template <class U>
+		ra_iterator(const ra_iterator<U> &src): _ptr(src.base()) {}
 
 		ra_iterator&	operator=(ra_iterator const &rhs) {
 			_ptr = rhs._ptr;
