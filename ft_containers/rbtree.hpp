@@ -212,8 +212,8 @@ namespace ft {
 				bool	y_color;
 
 				y = toDelete;
-				if (toDelete == _nil)
-					return ;
+				// if (toDelete == _nil)
+				// 	return ;
 				y_color = y->color;
 				if (y->left == _nil) {
 					x = y->right;
@@ -228,7 +228,9 @@ namespace ft {
 					y = findMin(tmp->right);
 					y_color = y->color;
 					x = y->right;
-					if (y->parent != tmp) {
+					if (y->parent == tmp)
+						x->parent = y;
+					else {
 						transplant(y, y->right);
 						y->right = tmp->right;
 						tmp->right->parent = y;
@@ -238,7 +240,6 @@ namespace ft {
 					y->left->parent = y;
 					y->color = tmp->color;
 				}
-				// std::cout << "to delete2: " << toDelete->key << "\n";
 				_node_alloc.destroy(toDelete);
 				_node_alloc.deallocate(toDelete, 1);
 				_size--;
@@ -304,6 +305,7 @@ namespace ft {
 						}
 					}
 				}
+				x->color = BLACK;
 			}
 
 			void	rightRotation(node *x) {
@@ -363,7 +365,6 @@ namespace ft {
 				else
 					u->parent->right = v;
 				v->parent = u->parent;
-				_nil->parent = _root;
 			}
 
 			node*	findMin(node *tmp) const {
@@ -393,9 +394,9 @@ namespace ft {
 				fixLevels(_root, level);
 				printNode(_root);
 				tmp = findMin(_root);
-				std::cout << "min: " << tmp->key << "\n";
+				std::cout << "min: " << tmp->value.first << "\n";
 				tmp = findMax(_root);
-				std::cout << "max: " << tmp->key << "\n";
+				std::cout << "max: " << tmp->value.first << "\n";
 			}
 
 			void	fixLevels(node *tmp, int lvl) {
@@ -614,7 +615,7 @@ namespace ft {
 			}
 			
 			bool	erase(const value_type& key) {
-				node	*tmp = _root;
+				node	*tmp;
 
 				tmp = search(key);
 				if (!tmp || tmp == _nil)

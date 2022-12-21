@@ -43,6 +43,14 @@ int	main(void) {
 	m1.insert(ft::make_pair(3, "three"));
 	m1.insert(ft::make_pair(4, "four"));
 	m1.insert(ft::make_pair(5, "five"));
+	// m1.insert(ft::make_pair(6, "a"));
+	// m1.insert(ft::make_pair(7, "b"));
+	// m1.insert(ft::make_pair(8, "c"));
+	// m1.insert(ft::make_pair(9, "d"));
+	// m1.erase(2);
+	// m1.printMap();
+	// m1.erase(3);
+	// m1.printMap();
 
 	m2.insert(std::make_pair(0, "zero"));
 	m2.insert(std::make_pair(1, "one"));
