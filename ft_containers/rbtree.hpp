@@ -101,6 +101,8 @@ namespace ft {
 			virtual ~RBTree() {
 				// std::cout << "destructor\n";
 				clear();
+				if (!_nil)
+					return ;
 				_node_alloc.destroy(_nil);
 				_node_alloc.deallocate(_nil, 1);
 				_nil = NULL;
@@ -628,7 +630,6 @@ namespace ft {
 				if (_root == _nil || !_root)
 					return ;
 				deleteAll(_root);
-				// _root = NULL;
 				_root = _nil;
 				_root->parent = _nil;
 			}
@@ -636,9 +637,33 @@ namespace ft {
 			void	swap(RBTree& other) {
 				RBTree	tmp;
 
-				tmp = *this;
-				*this = other;
-				other = tmp;
+				tmp._node_alloc.destroy(tmp._nil);
+				tmp._node_alloc.deallocate(tmp._nil, 1);
+				tmp._nil = NULL;
+
+				tmp._size = _size;
+				tmp._nil = _nil;
+				tmp._root = _root;
+				tmp._alloc = _alloc;
+				tmp._node_alloc = _node_alloc;
+				tmp._comp = _comp;
+
+				_size = other._size;
+				_nil = other._nil;
+				_root = other._root;
+				_alloc = other._alloc;
+				_node_alloc = other._node_alloc;
+				_comp = other._comp;
+
+				other._size = tmp._size;
+				other._nil = tmp._nil;
+				other._root = tmp._root;
+				other._alloc = tmp._alloc;
+				other._node_alloc = tmp._node_alloc;
+				other._comp = tmp._comp;
+
+				tmp._root = NULL;
+				tmp._nil = NULL;
 			}
 
 			// LOOKUPS
@@ -742,8 +767,6 @@ namespace ft {
 			}
 
 			friend bool	operator<(const RBTree& lhs, const RBTree& rhs) {
-				if (lhs.size() != rhs.size())
-					return (false);
 				return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 			}
 
