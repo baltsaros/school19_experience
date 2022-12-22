@@ -612,8 +612,8 @@ namespace ft {
 			}
 
 			void	erase(iterator first, iterator last) {
-				for (; first != last; first++)
-					erase(first);
+				while (first != last)
+					erase(first++);
 			}
 			
 			bool	erase(const value_type& key) {

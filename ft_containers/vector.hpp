@@ -408,6 +408,8 @@ namespace ft {
 					}
 					_alloc.construct(tmp + j, *it);
 					++j;
+					if (it < first)
+						++ret;
 				}
 				if (last == end())
 					ret = j;
