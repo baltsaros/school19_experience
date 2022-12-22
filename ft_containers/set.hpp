@@ -1,5 +1,5 @@
-#ifndef MAP_HPP
-# define MAP_HPP
+#ifndef SET_HPP
+# define SET_HPP
 
 # include <memory>
 # include <exception>
@@ -13,15 +13,14 @@
 
 namespace ft {
 	template <class Key,
-				class T,
 				class Compare = std::less<Key>,
-				class Allocator = std::allocator<pair<const Key, T> > >
-	class map {
+				class Allocator = std::allocator<Key> >
+	class set {
 		public:
 		// TYPEDEFS
 		typedef Key											key_type;
-		typedef T											mapped_type;
-		typedef pair<const Key, T>							value_type;
+		typedef Key											value_type;
+		typedef pair<Key, Key>								fake;
 		typedef Node<value_type>							node;
 		typedef std::size_t									size_type;
 		typedef std::ptrdiff_t								difference_type;
@@ -31,7 +30,7 @@ namespace ft {
 		typedef const value_type&							const_reference;
 		typedef typename Allocator::pointer					pointer;
 		typedef typename Allocator::const_pointer			const_pointer;
-		typedef	RBTree<Key, T, value_type, Compare, Allocator>	tree;
+		typedef	RBTree<Key, Key, fake, Compare, Allocator>	tree;
 		typedef typename tree::iterator						iterator;
 		typedef typename tree::const_iterator				const_iterator;
 		typedef typename tree::reverse_iterator				reverse_iterator;
@@ -56,28 +55,28 @@ namespace ft {
 
 		public:
 			// CONSTRUCTORS
-			map() {};
+			set() {};
 
-			explicit map(const Compare& comp, const Allocator& alloc = Allocator()) :
+			explicit set(const Compare& comp, const Allocator& alloc = Allocator()) :
 				_alloc(alloc), _tree(comp, alloc), _compare(comp), _size(0) {}
 
 			template <class InputIt>
-			map(InputIt first, InputIt last, const Compare& comp = Compare(),
+			set(InputIt first, InputIt last, const Compare& comp = Compare(),
 				const Allocator& alloc = Allocator(),
 				typename enable_if<!is_integral<InputIt>::value>::type* = NULL) :
 				 _alloc(alloc), _tree(comp, alloc), _compare(comp), _size(0) {
 				insert(first, last);
 			}
 
-			map(const map& other) {
+			set(const set& other) {
 				*this = other;
 			}
 
 			// DESCTRUCTOR
-			~map() {}
+			~set() {}
 
 			// ASSIGN OPERATOR
-			map&	operator=(const map& src) {
+			set&	operator=(const set& src) {
 				_alloc = src._alloc;
 				_compare = src._compare;
 				_size = src._size;
@@ -88,20 +87,6 @@ namespace ft {
 			// GET ALLOCATOR
 			allocator_type	get_allocator() const {
 				return (_alloc);
-			}
-
-			// ELEMENT ACCESS
-			T&	at(const Key& key) {
-				return (_tree.at(value_type(key, T())));
-			}
-
-			const T&	at(const Key& key) const {
-				return (_tree.at(value_type(key, T())));
-			}
-
-			T&	operator[](const Key& key) {
-				return (_tree[key]);
-				// return (_tree.operator[](value_type(key, T())));
 			}
 
 			// ITERATORS
@@ -181,7 +166,7 @@ namespace ft {
 				return (_tree.erase(value_type(key, T())));
 			}
 
-			void	swap(map& other) {
+			void	swap(set& other) {
 				_tree.swap(other._tree);
 			}
 
@@ -232,88 +217,84 @@ namespace ft {
 			}
 
 			// UTILS
-			void	printMap() {
+			void	printSet() {
 				_tree.printNode();
 			}
 
-			bool	test() {
-				return (_tree.test());
-			}
-
 			// FRIENDS
-			template <class KeyF, class TF, class CompareF, class AllocF>
-			friend bool	operator==(const map<KeyF, TF, CompareF, AllocF>& lhs,
-							const map<KeyF, TF, CompareF, AllocF>& rhs);
+			template <class KeyF, class CompareF, class AllocF>
+			friend bool	operator==(const set<KeyF, CompareF, AllocF>& lhs,
+							const set<KeyF, CompareF, AllocF>& rhs);
 
-			template <class KeyF, class TF, class CompareF, class AllocF>
-			friend bool	operator<(const map<KeyF, TF, CompareF, AllocF>& lhs,
-							const map<KeyF, TF, CompareF, AllocF>& rhs);
+			template <class KeyF, class CompareF, class AllocF>
+			friend bool	operator<(const set<KeyF, CompareF, AllocF>& lhs,
+							const set<KeyF, CompareF, AllocF>& rhs);
 
 			// EXCEPTIONS
 			class OutOfRange: public std::exception {
 				const char*	what(void) const throw() {
-					return ("ft::map.at() is out of range");
+					return ("ft::set.at() is out of range");
 				}
 			};
 
 			class OutOfBounds: public std::exception {
 				const char*	what(void) const throw() {
-					return ("ft::map[] index is out of bounds");
+					return ("ft::set[] index is out of bounds");
 				}
 			};
 
 			class EmptyContainer: public std::exception {
 				const char*	what(void) const throw() {
-					return ("ft::map is empty");
+					return ("ft::set is empty");
 				}
 			};
 
 			class LengthError: public std::exception {
 				const char*	what(void) const throw() {
-					return ("ft::map begin is ahead of end");
+					return ("ft::set begin is ahead of end");
 				}
 			};
 	};
 
-	template <class Key, class T, class Compare, class Alloc>
-	bool	operator==(const map<Key, T, Compare, Alloc>& lhs,
-						const map<Key, T, Compare, Alloc>& rhs) {
+	template <class Key, class Compare, class Alloc>
+	bool	operator==(const set<Key, Compare, Alloc>& lhs,
+						const set<Key, Compare, Alloc>& rhs) {
 		return (lhs._tree == rhs._tree);
 	}
 
-	template <class Key, class T, class Compare, class Alloc>
-	bool	operator!=(const map<Key, T, Compare, Alloc>& lhs,
-						const map<Key, T, Compare, Alloc>& rhs) {
+	template <class Key, class Compare, class Alloc>
+	bool	operator!=(const set<Key, Compare, Alloc>& lhs,
+						const set<Key, Compare, Alloc>& rhs) {
 		return !(lhs == rhs);
 	}
 
-	template <class Key, class T, class Compare, class Alloc>
-	bool	operator<(const map<Key, T, Compare, Alloc>& lhs,
-						const map<Key, T, Compare, Alloc>& rhs) {
+	template <class Key, class Compare, class Alloc>
+	bool	operator<(const set<Key, Compare, Alloc>& lhs,
+						const set<Key, Compare, Alloc>& rhs) {
 		return (lhs._tree < rhs._tree);
 	}
 
-	template <class Key, class T, class Compare, class Alloc>
-	bool	operator>(const map<Key, T, Compare, Alloc>& lhs,
-						const map<Key, T, Compare, Alloc>& rhs) {
+	template <class Key, class Compare, class Alloc>
+	bool	operator>(const set<Key, Compare, Alloc>& lhs,
+						const set<Key, Compare, Alloc>& rhs) {
 		return (!(lhs == rhs) && !(lhs < rhs));
 	}
 
-	template <class Key, class T, class Compare, class Alloc>
-	bool	operator<=(const map<Key, T, Compare, Alloc>& lhs,
-						const map<Key, T, Compare, Alloc>& rhs) {
+	template <class Key, class Compare, class Alloc>
+	bool	operator<=(const set<Key, Compare, Alloc>& lhs,
+						const set<Key, Compare, Alloc>& rhs) {
 		return !(lhs > rhs);
 	}
 
-	template <class Key, class T, class Compare, class Alloc>
-	bool	operator>=(const map<Key, T, Compare, Alloc>& lhs,
-						const map<Key, T, Compare, Alloc>& rhs) {
+	template <class Key, class Compare, class Alloc>
+	bool	operator>=(const set<Key, Compare, Alloc>& lhs,
+						const set<Key, Compare, Alloc>& rhs) {
 		return !(lhs < rhs);
 	}
 
-	template <class Key, class T, class Compare, class Alloc>
-	void	swap(const map<Key, T, Compare, Alloc>& lhs,
-						const map<Key, T, Compare, Alloc>& rhs) {
+	template <class Key, class Compare, class Alloc>
+	void	swap(const set<Key, Compare, Alloc>& lhs,
+						const set<Key, Compare, Alloc>& rhs) {
 		lhs.swap(rhs);
 	}
 };
