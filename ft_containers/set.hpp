@@ -9,7 +9,7 @@
 # include "is_integral.hpp"
 # include "lexi_compare.hpp"
 # include "pair.hpp"
-# include "rbtree.hpp"
+# include "rbtree_set.hpp"
 
 namespace ft {
 	template <class Key,
@@ -20,8 +20,6 @@ namespace ft {
 		// TYPEDEFS
 		typedef Key											key_type;
 		typedef Key											value_type;
-		typedef pair<Key, Key>								fake;
-		typedef Node<fake>									node;
 		typedef std::size_t									size_type;
 		typedef std::ptrdiff_t								difference_type;
 		typedef Compare										key_compare;
@@ -30,7 +28,7 @@ namespace ft {
 		typedef const value_type&							const_reference;
 		typedef typename Allocator::pointer					pointer;
 		typedef typename Allocator::const_pointer			const_pointer;
-		typedef	RBTree<Key, value_type, fake, Compare, Allocator>	tree;
+		typedef	RBTree<Key, Compare, Allocator>				tree;
 		typedef typename tree::iterator						iterator;
 		typedef typename tree::const_iterator				const_iterator;
 		typedef typename tree::reverse_iterator				reverse_iterator;
@@ -42,8 +40,8 @@ namespace ft {
 
 			public:
 				value_compare(key_compare comp) : _compare(comp) {}
-				bool	operator()(const fake& x, const fake& y) const {
-					return (_compare(x.first, y.first));
+				bool	operator()(const value_type x, const value_type& y) const {
+					return (_compare(x, y));
 				}
 		};
 
@@ -141,11 +139,11 @@ namespace ft {
 			}
 
 			pair<iterator, bool>	insert(const value_type& value) {
-				return (_tree.insert(fake(value, value)));
+				return (_tree.insert(value));
 			}
 
 			iterator	insert(iterator pos, const value_type& value) {
-				return (_tree.insert(pos, fake(value, value)));
+				return (_tree.insert(pos, value));
 			}
 
 			template <class InputIt>
@@ -163,7 +161,7 @@ namespace ft {
 			}
 
 			size_type	erase(const Key& key) {
-				return (_tree.erase(fake(key, key)));
+				return (_tree.erase(key));
 			}
 
 			void	swap(set& other) {
@@ -172,39 +170,39 @@ namespace ft {
 
 			// LOOKUPS
 			size_type	count(const Key& key) const {
-				return (_tree.count(fake(key, key)));
+				return (_tree.count(key));
 			}
 
 			iterator	find(const Key& key) {
-				return (_tree.find(fake(key, key)));
+				return (_tree.find(key));
 			}
 
 			const_iterator	find(const Key& key) const {
-				return (_tree.find(fake(key, key)));
+				return (_tree.find(key));
 			}
 
 			pair<iterator, iterator>	equal_range(const Key& key) {
-				return (_tree.equal_range(fake(key, key)));
+				return (_tree.equal_range(key));
 			}
 
 			pair<const_iterator, const_iterator>	equal_range(const Key& key) const {
-				return (_tree.equal_range(fake(key, key)));
+				return (_tree.equal_range(key));
 			}
 
 			iterator	lower_bound(const Key& key) {
-				return (_tree.lower_bound(fake(key, key)));
+				return (_tree.lower_bound(key));
 			}
 
 			const_iterator	lower_bound(const Key& key) const {
-				return (_tree.lower_bound(fake(key, key)));
+				return (_tree.lower_bound(key));
 			}
 
 			iterator	upper_bound(const Key& key) {
-				return (_tree.upper_bound(fake(key, key)));
+				return (_tree.upper_bound(key));
 			}
 
 			const_iterator	upper_bound(const Key& key) const {
-				return (_tree.upper_bound(fake(key, key)));
+				return (_tree.upper_bound(key));
 			}
 
 			// OBSERVERS

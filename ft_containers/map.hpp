@@ -101,7 +101,6 @@ namespace ft {
 
 			T&	operator[](const Key& key) {
 				return (_tree[key]);
-				// return (_tree.operator[](value_type(key, T())));
 			}
 
 			// ITERATORS

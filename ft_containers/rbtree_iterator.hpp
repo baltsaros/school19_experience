@@ -73,11 +73,11 @@ namespace ft {
 
 
 		reference	operator*() const {
-			return (static_cast<node*>(_ptr)->value);
+			return (_ptr->value);
 		}
 
 		pointer	operator->() const {
-			return &(static_cast<node*>(_ptr)->value);
+			return &(_ptr->value);
 		}
 
 		rbt_iterator&	operator++() {
