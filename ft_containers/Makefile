@@ -10,7 +10,8 @@ NAME		= containers
 # SRC_DIR	= srcs
 # SRCS		= vector_tests.cpp
 # SRCS		= stack_tests.cpp
-SRCS		= map_tests.cpp
+# SRCS		= map_tests.cpp
+SRCS		= set_tests.cpp
 # SRCS		= ${notdir ${SRCS_F}}
 
 OBJ_DIR		= objs

@@ -2,14 +2,22 @@
 # define RBTREE_HPP
 
 # include "rbtree_iterator.hpp"
-# include "map.hpp"
+// # include "map.hpp"
+// # include "set.hpp"
+# include <memory>
+# include <exception>
+# include <cstring>
+# include <iostream>
+# include "enable_if.hpp"
+# include "is_integral.hpp"
+# include "lexi_compare.hpp"
+# include "pair.hpp"
 # define BLACK	false
 # define RED	true
 
 // colors: 0/false - Black; 1/true - Red
 
 namespace ft {
-
 	template <class Pair>
 	struct Node {
 		typedef	const Node	const_Node;
@@ -108,44 +116,44 @@ namespace ft {
 				_nil = NULL;
 			}
 
-			void	copyTree(node *root, node *nil) {
-				if (!_root) {
-					node	*child;
+			// void	copyTree(node *root, node *nil) {
+			// 	if (!_root) {
+			// 		node	*child;
 
-					child = _node_alloc.allocate(1);
-					_node_alloc.construct(child, node(root->value, root->color, root->level, _nil, _nil, _nil));
-					_root = child;
-					_nil->parent = _root;
-					_size++;
-				}
-				else {
-					node	*child;
-					node	*head = _root;
-					node	*parent = _nil;
+			// 		child = _node_alloc.allocate(1);
+			// 		_node_alloc.construct(child, node(root->value, root->color, root->level, _nil, _nil, _nil));
+			// 		_root = child;
+			// 		_nil->parent = _root;
+			// 		_size++;
+			// 	}
+			// 	else {
+			// 		node	*child;
+			// 		node	*head = _root;
+			// 		node	*parent = _nil;
 
-					child = _node_alloc.allocate(1);
-					_node_alloc.construct(child, node(root->value, root->color, root->level, _nil, _nil, NULL));
+			// 		child = _node_alloc.allocate(1);
+			// 		_node_alloc.construct(child, node(root->value, root->color, root->level, _nil, _nil, NULL));
 
-					while (head != _nil)
-					{
-						parent = head;
-						if (_comp(child->value.first, head->value.first))
-							head = head->left;
-						else
-							head = head->right;
-					}
-					child->parent = parent;
-					if (_comp(child->value.first, parent->value.first))
-						parent->left = child;
-					else
-						parent->right = child;
-					_size++;
-				}
-				if (root && root->left && root->left != nil)
-					copyTree(root->left, nil);
-				if (root && root->right && root->right != nil)
-					copyTree(root->right, nil);
-			}
+			// 		while (head != _nil)
+			// 		{
+			// 			parent = head;
+			// 			if (_comp(child->value.first, head->value.first))
+			// 				head = head->left;
+			// 			else
+			// 				head = head->right;
+			// 		}
+			// 		child->parent = parent;
+			// 		if (_comp(child->value.first, parent->value.first))
+			// 			parent->left = child;
+			// 		else
+			// 			parent->right = child;
+			// 		_size++;
+			// 	}
+			// 	if (root && root->left && root->left != nil)
+			// 		copyTree(root->left, nil);
+			// 	if (root && root->right && root->right != nil)
+			// 		copyTree(root->right, nil);
+			// }
 
 
 			void	insertFixup(node *child) {
