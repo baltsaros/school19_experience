@@ -29,9 +29,9 @@ namespace ft {
 		typedef typename Allocator::pointer					pointer;
 		typedef typename Allocator::const_pointer			const_pointer;
 		typedef	RBTree<Key, Compare, Allocator>				tree;
-		typedef typename tree::iterator						iterator;
+		typedef typename tree::const_iterator				iterator;
 		typedef typename tree::const_iterator				const_iterator;
-		typedef typename tree::reverse_iterator				reverse_iterator;
+		typedef typename tree::const_reverse_iterator		reverse_iterator;
 		typedef typename tree::const_reverse_iterator		const_reverse_iterator;
 
 		class	value_compare {

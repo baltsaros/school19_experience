@@ -553,6 +553,41 @@ namespace ft {
 				return (iterator(child));
 			}
 
+			iterator	insert(const_iterator pos, const value_type& value) {
+				(void)pos;
+				if (!_root || _root == _nil)
+					return (create_root(value).first);
+
+				node	*child;
+				node	*head = _root;
+				node	*parent = _nil;
+				node	*tmp;
+
+				tmp = search(value);
+				if (tmp != _nil)
+					return (iterator(tmp));
+				child = _node_alloc.allocate(1);
+				_node_alloc.construct(child, node(value, RED, 0, _nil, _nil, NULL));
+
+				while (head != _nil)
+				{
+					parent = head;
+					if (_comp(child->value, head->value))
+						head = head->left;
+					else
+						head = head->right;
+					child->level++;
+				}
+				child->parent = parent;
+				if (_comp(child->value, parent->value))
+					parent->left = child;
+				else
+					parent->right = child;
+				_size++;
+				insertFixup(child);
+				return (iterator(child));
+			}
+
 			template <class InputIt>
 			void	insert(InputIt first, InputIt last) {
 				for (; first != last; ++first)
@@ -567,7 +602,20 @@ namespace ft {
 				deleteOne(tmp);
 			}
 
+			void	erase(const_iterator pos) {
+				node	*tmp = pos.base();
+
+				if (!tmp || tmp == _nil)
+					return ;
+				deleteOne(tmp);
+			}
+
 			void	erase(iterator first, iterator last) {
+				while (first != last)
+					erase(first++);
+			}
+
+			void	erase(const_iterator first, const_iterator last) {
 				while (first != last)
 					erase(first++);
 			}
