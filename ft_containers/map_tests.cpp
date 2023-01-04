@@ -275,7 +275,7 @@ int	main(void) {
 		m2.insert(std::make_pair(3, "three"));
 		m2.insert(std::make_pair(4, "four"));
 		m2.insert(std::make_pair(5, "five"));
-		for (it2 = m2.begin(); it2 != m2.end(); it2++) {
+		for (it2 = m2.begin(); it2 != m2.end(); it3++) {
 			std::cout << "STD: ";
 			printIter(it2);
 		}
