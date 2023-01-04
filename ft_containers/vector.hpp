@@ -238,7 +238,7 @@ namespace ft {
 					for (size_t i = 0; i < _count; ++i) {
 						_alloc.destroy(_head + i);
 					}
-					_alloc.deallocate(_head, _count);
+					_alloc.deallocate(_head, _cap);
 				}
 				_cap = new_cap;
 				_head = tmp;
@@ -330,7 +330,7 @@ namespace ft {
 				T				*tmp;
 				size_t			j = 0;
 				size_t			count = 0;
-				InputIt			it;
+				InputIt			it = first;
 
 				if (pos > end() || pos < begin())
 					throw LengthError();
@@ -340,12 +340,11 @@ namespace ft {
 					}
 					return ;
 				}
-				it = first;
 				for (; it != last; ++it) {
 					++count;
 				}
 				if (_count + count >= _cap)
-					reserve(_cap + count + ((_cap + 2) / 2));
+					_cap = _cap + count + ((_cap + 2) / 2);
 				tmp = _alloc.allocate(_cap);
 				for (size_t i = 0; i != _count; ++i) {
 					if (i == (size_t)dif) {
