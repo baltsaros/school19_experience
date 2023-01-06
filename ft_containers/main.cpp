@@ -1,10 +1,12 @@
 #include <iostream>
-#include <map>
 #include <string>
 #include <iterator>
+#include <map>
+#include "map.hpp"
 #include <vector>
 #include "vector.hpp"
-#include "map.hpp"
+#include <stack>
+#include "stack.hpp"
 
 #define NC "\e[0m"
 #define GRNB "\e[1;32m"
@@ -410,7 +412,6 @@ int	main(void) {
 
 	{
 		std::cout << GRNB "TESTING VECTOR\n" NC;
-			// TYPE_vector: assign, allocator
 		{
 			TYPE::vector<int>		v2(4, 100);
 			TYPE::vector<int>		v4(v2.begin(), v2.end());
@@ -420,7 +421,7 @@ int	main(void) {
 			p = v2.get_allocator().allocate(3);
 			for (size_t i = 0; i < 3; ++i) {
 				v2.get_allocator().construct(&p[i], i);
-				std::cout << "TYPE: " << p[i] << std::endl;
+				std::cout << "p[" << i << "]:" << p[i] << std::endl;
 				v2.get_allocator().destroy(&p[i]);
 			}
 			v2.get_allocator().deallocate(p, 3);
@@ -520,7 +521,7 @@ int	main(void) {
 			std::cout << std::endl;
 			std::cout << std::endl;
 
-			std::cout << "+++ insert(pos, count, value) +++" << std::endl;
+			std::cout << YLW "+++ insert(pos, count, value) +++" NC << std::endl;
 			std::cout << "array before insert: ";
 			for (TYPE::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
 				std::cout << *it << " ";
@@ -539,7 +540,7 @@ int	main(void) {
 			std::cout << std::endl;
 			std::cout << std::endl;
 
-			std::cout << "+++ insert(pos, It1, It2) +++" << std::endl;
+			std::cout << YLW "+++ insert(pos, It1, It2) +++" NC << std::endl;
 			std::cout << "array before insert: ";
 			for (TYPE::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
 				std::cout << *it << " ";
@@ -549,9 +550,9 @@ int	main(void) {
 			TYPE::vector<int>	v5(v2);
 			it2 = v2.begin() + 2;
 			v2.insert(it2, v2.begin(), v2.end());
-			// std::cout << "v2.insert(5, 3, 33)" << std::endl;
-			// it2 = v2.begin() + 5;
-			// v2.insert(it2, 3, 33);
+			std::cout << "v2.insert(5, 3, 33)" << std::endl;
+			it2 = v2.begin() + 5;
+			v2.insert(it2, 3, 33);
 			std::cout << "array after insert: ";
 			for (TYPE::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
 				std::cout << *it << " ";
@@ -564,7 +565,7 @@ int	main(void) {
 			for (int i = 0; i < 4; ++i) {
 				v7.push_back(i);
 			}
-			std::cout << "+++ erase(pos) +++" << std::endl;
+			std::cout << YLW "+++ erase(pos) +++" NC << std::endl;
 			std::cout << "v7.insert(2, 55)" << std::endl;
 			it2 = v7.begin() + 2;
 			it2 = v7.insert(it2, 55);
@@ -578,7 +579,7 @@ int	main(void) {
 			std::cout << std::endl;
 			std::cout << std::endl;
 
-			std::cout << "+++ erase(first, last) +++" << std::endl;
+			std::cout << YLW "+++ erase(first, last) +++" NC << std::endl;
 			std::cout << "array before erase: ";
 			for (TYPE::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
 				std::cout << *it << " ";
@@ -594,7 +595,7 @@ int	main(void) {
 			std::cout << std::endl;
 			std::cout << std::endl;
 
-			std::cout << "+++ resize(count, value) +++" << std::endl;
+			std::cout << YLW "+++ resize(count, value) +++" NC << std::endl;
 			std::cout << "array before resize: ";
 			for (TYPE::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
 				std::cout << *it << " ";
@@ -617,7 +618,7 @@ int	main(void) {
 			std::cout << std::endl;
 
 
-			std::cout << "+++ swap(vector) +++" << std::endl;
+			std::cout << YLW "+++ swap(vector) +++" NC << std::endl;
 			std::cout << "v2 before swap: ";
 			for (TYPE::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
 				std::cout << *it << " ";
@@ -649,7 +650,7 @@ int	main(void) {
 			std::cout << "v7.capacity: " << v7.capacity() << std::endl;
 			std::cout << std::endl;
 
-			std::cout << "+++ comparison +++" << std::endl;
+			std::cout << YLW "+++ comparison +++" NC << std::endl;
 			std::cout << "v2: ";
 			for (TYPE::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
 				std::cout << *it << " ";
@@ -664,6 +665,7 @@ int	main(void) {
 			std::cout << "v2.capacity: " << v2.capacity() << std::endl;
 			std::cout << "v7.size: " << v7.size() << std::endl;
 			std::cout << "v7.capacity: " << v7.capacity() << std::endl;
+			std::cout << std::endl;
 			std::cout << "v2 == v2? " << (v2 == v2) << std::endl;
 			std::cout << "v2 != v2? " << (v2 != v2) << std::endl;
 			std::cout << "v2 == v7? " << (v2 == v7) << std::endl;
@@ -678,7 +680,7 @@ int	main(void) {
 			std::cout << "v2 >= v7? " << (v2 >= v7) << std::endl;
 			std::cout << std::endl;
 
-			std::cout << "+++ swap(v1, v2) +++" << std::endl;
+			std::cout << YLW "+++ swap(v1, v2) +++" NC << std::endl;
 			std::cout << "v2 before swap: ";
 			for (TYPE::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
 				std::cout << *it << " ";
@@ -719,6 +721,7 @@ int	main(void) {
 			v2.clear();
 			std::cout << "v2.size: " << v2.size() << std::endl;
 			std::cout << "v2.capacity: " << v2.capacity() << std::endl;
+			std::cout << std::endl;
 			
 			std::cout << YLW "+++ push_back(value) +++" NC << std::endl;
 			std::cout << "v2.back(): " << v2.back() << std::endl;
@@ -754,22 +757,22 @@ int	main(void) {
 			std::cout << YLWB "\n+++++++++ ITERATORS +++++++++\n" NC;
 			std::cout << "v2.size: " << v2.size() << std::endl;
 			std::cout << "v2.capacity: " << v2.capacity() << std::endl;
-			std::cout << std::endl;
 
 			std::cout << YLW "\n+++ begin() +++\n" NC;
-			std::cout << "v2.begin()" << std::endl;
+			std::cout << "v2.begin(): ";
 			std::cout << *(v2.begin()) << std::endl;
+			std::cout << "it2 = v2.begin() " << std::endl;
 			it2 = v2.begin();
 			std::cout << "it2: " << *it2 << std::endl;
-			std::cout << std::endl;
 
 			std::cout << YLW "\n+++ end() +++\n" NC;
-			std::cout << "v2.end()" << std::endl;
+			std::cout << "v2.end(): ";
 			std::cout << *(v2.end()) << std::endl;
 			std::cout << std::endl;
 			
 			std::cout << YLW "+++ pre-in/decrementation +++" NC<< std::endl;
 			it4 = v2.end();
+			std::cout << "it2 = v2.end() " << std::endl;
 			std::cout << "it4: " << *it4 << std::endl;
 			--it4;
 			std::cout << "--it4: " << *it4 << std::endl;
@@ -848,17 +851,19 @@ int	main(void) {
 			std::cout << "v2.capacity: " << v2.capacity() << std::endl;
 			std::cout << std::endl;
 
-			std::cout << "v2.begin()" << std::endl;
+			std::cout << "v2.begin(): ";
 			std::cout << *(v2.begin()) << std::endl;
+			std::cout << "it2 = v2.rbegin()" << std::endl;
 			it2 = v2.rbegin();
 			std::cout << "it2: " << *it2 << std::endl;
 			std::cout << std::endl;
 
-			std::cout << "v2.end()" << std::endl;
+			std::cout << "v2.end(): ";
 			std::cout << *(v2.end()) << std::endl;
 			std::cout << std::endl;
 			
 			std::cout << YLW "+++ pre-in/decrementation +++" NC<< std::endl;
+			std::cout << "it4 = v2.rend()" << std::endl;
 			it4 = v2.rend();
 			std::cout << "it4: " << *it4 << std::endl;
 			--it4;
@@ -921,7 +926,82 @@ int	main(void) {
 			std::cout << (it2 != it4) << std::endl;
 			std::cout << std::endl;
 		}
-
 	}
+	{
+		std::cout << GRNB "TESTING STACK\n" NC;
+		TYPE::stack<int>	s2;
+
+		std::cout << YLWB "+++ push and top +++" NC << std::endl;
+		for (size_t i = 0; i < 7; ++i) {
+			s2.push(i);
+			std::cout << "push: " << i << std::endl;
+			std::cout << "top: " << s2.top() << std::endl;
+		}
+		std::cout << std::endl;
+
+
+		std::cout << YLWB "+++ empty() +++" NC << std::endl;
+		std::cout << "s2 empty()? " << s2.empty() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << YLWB "+++ size() +++" NC << std::endl;
+		std::cout << "s2 size()? " << s2.size() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << YLWB "+++ pop() +++" NC << std::endl;
+		std::cout << "s2 top(): " << s2.top() << std::endl;
+		s2.pop();
+		std::cout << "s2 top() after pop(): " << s2.top() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << YLWB "+++ copy constructor +++" NC << std::endl;
+		TYPE::stack<int>						s4(s2);
+
+		std::cout << "s4(s2)" << std::endl;
+		std::cout << "s4 top(): " << s4.top() << std::endl;
+		std::cout << "s4 size(): " << s4.size() << std::endl;
+		std::cout << "s4 empty(): " << s4.empty() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << YLWB "+++ operator= +++" NC << std::endl;
+		TYPE::stack<int>						s6;
+
+		std::cout << "s6 = s4" << std::endl;
+		s6 = s4;
+		std::cout << "s6 top(): " << s6.top() << std::endl;
+		std::cout << "s6 size(): " << s6.size() << std::endl;
+		std::cout << "s6 empty(): " << s6.empty() << std::endl;
+		std::cout << "s6.push(7)" << std::endl;
+		s6.push(7);
+		std::cout << "s6.top(): " << s6.top() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << YLWB "+++ comparisons +++" NC << std::endl;
+		std::cout << "s2 == s4 ? " << (s2 == s4) << std::endl;
+		std::cout << "s2 != s4 ? " << (s2 != s4) << std::endl;
+		std::cout << "s2 == s6 ? " << (s2 == s6) << std::endl;
+		std::cout << "s2 >= s4 ? " << (s2 >= s4) << std::endl;
+		std::cout << "s2 >  s4 ? " << (s2 > s4) << std::endl;
+		std::cout << "s2 <= s4 ? " << (s2 <= s4) << std::endl;
+		std::cout << "s2 <  s4 ? " << (s2 < s4) << std::endl;
+		std::cout << "s2 <  s6 ? " << (s2 < s6) << std::endl;
+		std::cout << "s6 >  s2 ? " << (s6 > s2) << std::endl;
+		std::cout << std::endl;
+
+		std::cout << YLWB "+++ std vector with ft stack +++" NC << std::endl;
+		TYPE::stack<int, std::vector<int> >	s10;
+		for (size_t i = 0; i < 7; ++i) {
+			s10.push(i);
+			std::cout << "push: " << i << std::endl;
+			std::cout << "top:  " << s10.top() << std::endl;
+		}
+		std::cout << std::endl;
+		std::cout << "s10 size(): " << s10.size() << std::endl;
+		std::cout << "s10 empty(): " << s10.empty() << std::endl;
+		s10.pop();
+		std::cout << "s10 top() after pop(): " << s10.top() << std::endl;
+		std::cout << std::endl;
+	}
+
 	return (0);
 }
