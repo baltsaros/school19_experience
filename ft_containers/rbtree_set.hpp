@@ -1,5 +1,5 @@
-#ifndef RBTREE_HPP
-# define RBTREE_HPP
+#ifndef RBTREE_SET_HPP
+# define RBTREE_SET_HPP
 
 # include "rbtree_iterator.hpp"
 # include "set.hpp"

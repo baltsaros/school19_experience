@@ -1,7 +1,7 @@
 #include <iostream>
-#include <set>
 #include <string>
 #include <iterator>
+#include <set>
 #include "set.hpp"
 
 template <class InputIt>
@@ -18,7 +18,6 @@ template <class T>
 void	printValue(T value) {
 	std::cout << value << std::endl;
 }
-
 
 template <class set, class InputIt>
 void	printSet(set s, InputIt it, std::string type) {
@@ -223,7 +222,7 @@ int	main(void) {
 		std::cout << "STD: m2.size()\n";
 		std::cout << m2.size() << "\n";
 
-		std::cout << "\n+++ insert(pair) +++\n";
+		std::cout << "\n+++ insert(value) +++\n";
 		m1.insert(0);
 		m1.insert(1);
 		m1.insert(2);
@@ -246,7 +245,7 @@ int	main(void) {
 			printIter(it2);
 		}
 
-		std::cout << "\n+++ insert(it, pair) +++\n";
+		std::cout << "\n+++ insert(it, value) +++\n";
 		it1 = m3.begin();
 		it2 = m4.begin();
 		// it1 = m3.end();
