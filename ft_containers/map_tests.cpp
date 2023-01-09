@@ -43,6 +43,14 @@ int	main(void) {
 	m1.insert(ft::make_pair(3, "three"));
 	m1.insert(ft::make_pair(4, "four"));
 	m1.insert(ft::make_pair(5, "five"));
+	// m1.insert(ft::make_pair(6, "a"));
+	// m1.insert(ft::make_pair(7, "b"));
+	// m1.insert(ft::make_pair(8, "c"));
+	// m1.insert(ft::make_pair(9, "d"));
+	// m1.erase(2);
+	// m1.printMap();
+	// m1.erase(3);
+	// m1.printMap();
 
 	m2.insert(std::make_pair(0, "zero"));
 	m2.insert(std::make_pair(1, "one"));
@@ -150,16 +158,16 @@ int	main(void) {
 		std::cout << "\n+++ rend() +++\n";
 		std::cout << "FT: rit1 = m1(rend()\n";
 		rit1 = m1.rend();
-		printIter(rit1);
-		// std::cout << "rit1++\n";
-		// rit1++;
 		// printIter(rit1);
+		std::cout << "rit1++\n";
+		rit1++;
+		printIter(rit1);
 		std::cout << "STD: rit2 = m2(rend()\n";
 		rit2 = m2.rend();
-		printIter(rit2);
-		// std::cout << "rit2++\n";
-		// rit2++;
 		// printIter(rit2);
+		std::cout << "rit2++\n";
+		rit2++;
+		printIter(rit2);
 	}
 
 	// CAPACITY
@@ -267,7 +275,7 @@ int	main(void) {
 		m2.insert(std::make_pair(3, "three"));
 		m2.insert(std::make_pair(4, "four"));
 		m2.insert(std::make_pair(5, "five"));
-		for (it2 = m2.begin(); it2 != m2.end(); it2++) {
+		for (it2 = m2.begin(); it2 != m2.end(); it3++) {
 			std::cout << "STD: ";
 			printIter(it2);
 		}

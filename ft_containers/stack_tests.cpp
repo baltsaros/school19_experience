@@ -1,8 +1,8 @@
 #include <iostream>
 #include <iterator>
 #include <vector>
-#include <stack>
 #include "vector.hpp"
+#include <stack>
 #include "stack.hpp"
 
 int	main(void) {

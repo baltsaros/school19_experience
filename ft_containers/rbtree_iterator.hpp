@@ -2,29 +2,23 @@
 # define RBTREE_ITERATOR_HPP
 
 # include "iterator_traits.hpp"
+# include "reverse_iterator.hpp"
 # include "rbtree.hpp"
 // # include <type_traits>
 
 namespace ft {
-	template <class Iter, class Pair>
+	template <class Pair>
 	struct Node;
 
-	template <class Iter, class Pair>
-	class rbt_iterator : public iterator
-		<typename iterator_traits<Pair*>::iterator_category,
-		typename iterator_traits<Pair*>::value_type,
-		typename iterator_traits<Pair*>::difference_type,
-		typename iterator_traits<Pair*>::pointer,
-		typename iterator_traits<Pair*>::reference> {
+	template <class Pair>
+	class rbt_iterator {
 	public:
-		typedef Node<typename std::remove_const<Iter>::type, typename std::remove_const<Pair>::type >					node;
-		typedef iterator_traits<Pair*>				itraits;
-		typedef Pair								iterator_type;
-		typedef typename itraits::difference_type	difference_type;
-		typedef typename itraits::reference			reference;
-		typedef typename itraits::pointer			pointer;
-		typedef typename itraits::value_type		value_type;
-		typedef typename itraits::iterator_category	iterator_category;
+		typedef Pair						value_type;
+		typedef Pair*						pointer;
+		typedef Pair&						reference;
+		typedef ft::bidirectional_iterator_tag	iterator_category;
+		typedef std::ptrdiff_t				difference_type;
+		typedef	Node<Pair>					node;
 
 	private:
 		node	*_ptr;
@@ -36,7 +30,7 @@ namespace ft {
 		}
 			node*	_treeMin(node *tmp) const {
 				if (!tmp)
-					return (nullptr);
+					return (NULL);
 				while (tmp->left && tmp->left->left)
 					tmp = tmp->left;
 				return (tmp);
@@ -44,7 +38,7 @@ namespace ft {
 
 			node*	_treeMax(node *tmp) const {
 				if (!tmp)
-					return (nullptr);
+					return (NULL);
 				while (tmp->right && tmp->right->right)
 					tmp = tmp->right;
 				return (tmp);
@@ -52,7 +46,7 @@ namespace ft {
 
 	public:
 		rbt_iterator() {
-			_ptr = nullptr;
+			_ptr = NULL;
 			return ;
 		}
 
@@ -72,6 +66,7 @@ namespace ft {
 			_ptr = rhs._ptr;
 			return (*this);
 		}
+
 
 		reference	operator*() const {
 			return (_ptr->value);
@@ -144,151 +139,138 @@ namespace ft {
 		}
 	};
 
-	template <class Iter>
-	class reverse_iterator {
+template <class Pair>
+class rbt_const_iterator {
+	public:
+		typedef const Pair						value_type;
+		typedef const Pair*						pointer;
+		typedef const Pair&						reference;
+		typedef rbt_iterator<Pair>				iterator;
+		typedef bidirectional_iterator_tag	iterator_category;
+		typedef std::ptrdiff_t				difference_type;
+		typedef	Node<Pair>			node;
 
 	private:
-		Iter	_t;
+		node	*_ptr;
 
-	protected:
-		Iter	_ptr;
-		typedef iterator_traits<Iter>	itraits;
+		bool	_check_nil(node *tree) {
+			if (!tree->left && !tree->right)
+				return (true);
+			return (false);
+		}
+			node*	_treeMin(node *tmp) const {
+				if (!tmp)
+					return (NULL);
+				while (tmp->left && tmp->left->left)
+					tmp = tmp->left;
+				return (tmp);
+			}
+
+			node*	_treeMax(node *tmp) const {
+				if (!tmp)
+					return (NULL);
+				while (tmp->right && tmp->right->right)
+					tmp = tmp->right;
+				return (tmp);
+			}
 
 	public:
-		typedef Iter								iterator_type;
-		typedef typename itraits::difference_type	difference_type;
-		typedef typename itraits::reference			reference;
-		typedef typename itraits::pointer			pointer;
-		typedef typename itraits::value_type		value_type;
-		typedef typename itraits::iterator_category	iterator_category;
-
-		reverse_iterator() : _ptr(nullptr), _t(nullptr) {
-		// reverse_iterator() {
-		// 	this->_ptr = nullptr;
-		// 	this->_t = nullptr;
+		rbt_const_iterator() {
+			_ptr = NULL;
 			return ;
 		}
 
-		explicit reverse_iterator(iterator_type x) {
-			this->_ptr = x;
-			this->_t = x;
+		explicit rbt_const_iterator(node *ptr) {
+			_ptr = ptr;
 			return ;
 		}
 
-		template <class U>
-		reverse_iterator(const reverse_iterator<U> &other) {
-			this->_ptr = other.base();
-			this->_t = other.base();
+		~rbt_const_iterator() {};
+
+		rbt_const_iterator(const iterator &src) {
+			_ptr = src.base();
 			return ;
 		}
 
-		template <class U>
-		reverse_iterator&	operator=(const reverse_iterator<U> &rhs) {
-			this->_ptr = rhs.base();
-			this->_t = this->_ptr;
+		iterator	it_const_cast() {
+			return (iterator(const_cast<typename iterator::node*>(_ptr)));
+		}
+
+		rbt_const_iterator&	operator=(rbt_const_iterator const &rhs) {
+			_ptr = rhs._ptr;
 			return (*this);
-		}
-
-		iterator_type	base() const {
-			return (this->_ptr);
 		}
 
 		reference	operator*() const {
-			Iter	tmp;
-
-			tmp = _ptr;
-			--tmp;
-			return (*tmp);
+			return (_ptr->value);
 		}
 
-		Iter	operator->() const {
-			Iter	tmp;
+		pointer	operator->() const {
+			return &(_ptr->value);
+		}
 
-			tmp = _ptr;
-			--tmp;
+		rbt_const_iterator&	operator++() {
+			if (_check_nil(_ptr))
+				_ptr = _ptr->parent;
+			else if (_ptr->right && _ptr->right->left)
+				_ptr = _treeMin(_ptr->right);
+			else {
+				node	*tmp = _ptr->parent;
+
+				while (!_check_nil(tmp) && _ptr == tmp->right) {
+					_ptr = tmp;
+					tmp = tmp->parent;
+				}
+				_ptr = tmp;
+			}
+			return (*this);
+		}
+
+		rbt_const_iterator	operator++(int) {
+			rbt_const_iterator	tmp = *this;
+
+			this->operator++();
 			return (tmp);
 		}
 
-		reference	operator[](difference_type n) const {
-			return *(*this + n);
-		}
+		rbt_const_iterator&	operator--() {
+			if (_check_nil(_ptr)) {
+				_ptr = _ptr->parent;
+				_ptr = _treeMax(_ptr);
+			}
+			else if (_ptr->left && _ptr->left->right)
+				_ptr = _treeMax(_ptr->left);
+			else {
+				node	*tmp = _ptr->parent;
 
-		reverse_iterator&	operator++() {
-			--(this->_ptr);
+				while (!_check_nil(tmp) && _ptr == tmp->left) {
+					_ptr = tmp;
+					tmp = tmp->parent;
+				}
+				_ptr = tmp;
+			}
 			return (*this);
 		}
 
-		reverse_iterator	operator++(int) {
-			reverse_iterator	tmp(*this);
-			--(this->_ptr);
+		rbt_const_iterator	operator--(int) {
+			rbt_const_iterator	tmp = *this;
+
+			this->operator--();
 			return (tmp);
 		}
 
-		reverse_iterator&	operator--() {
-			++(this->_ptr);
-			return (*this);
+		node*	base() const {
+			return (_ptr);
 		}
 
-		reverse_iterator	operator--(int) {
-			reverse_iterator	tmp(*this);
-			++(this->_ptr);
-			return (tmp);
+		bool	operator==(rbt_const_iterator const &rhs) const {
+			return (_ptr == rhs._ptr);
 		}
 
-		reverse_iterator&	operator+=(difference_type n) {
-			this->_ptr -= n;
-			return (*this);
-		}
-
-		reverse_iterator	operator+(difference_type n) const {
-			return (reverse_iterator(this->_ptr - n));
-		}
-
-		reverse_iterator&	operator-=(difference_type n) {
-			this->_ptr += n;
-			return (*this);
-		}
-
-		reverse_iterator	operator-(difference_type n) const {
-			return (reverse_iterator(this->_ptr + n));
+		bool	operator!=(rbt_const_iterator const &rhs) const {
+			return (_ptr != rhs._ptr);
 		}
 	};
-
-	template <class Iter1, class Iter2>
-	bool	operator==(const reverse_iterator<Iter1> &lhs,
-						const reverse_iterator<Iter2> &rhs){
-		return (lhs.base() == rhs.base());
-	}
-
-	template <class Iter1, class Iter2>
-	bool	operator!=(const reverse_iterator<Iter1> &lhs,
-						const reverse_iterator<Iter2> &rhs){
-		return (lhs.base() != rhs.base());
-	}
-
-	template <class Iter1, class Iter2>
-	bool	operator<(const reverse_iterator<Iter1> &lhs,
-						const reverse_iterator<Iter2> &rhs){
-		return (lhs.base() > rhs.base());
-	}
-
-	template <class Iter1, class Iter2>
-	bool	operator<=(const reverse_iterator<Iter1> &lhs,
-						const reverse_iterator<Iter2> &rhs){
-		return (lhs.base() >= rhs.base());
-	}
-
-	template <class Iter1, class Iter2>
-	bool	operator>(const reverse_iterator<Iter1> &lhs,
-						const reverse_iterator<Iter2> &rhs){
-		return (lhs.base() < rhs.base());
-	}
-
-	template <class Iter1, class Iter2>
-	bool	operator>=(const reverse_iterator<Iter1> &lhs,
-						const reverse_iterator<Iter2> &rhs){
-		return (lhs.base() <= rhs.base());
-	}
 }
 
 #endif

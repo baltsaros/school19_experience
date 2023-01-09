@@ -1,12 +1,6 @@
 #ifndef STACK_HPP
 # define STACK_HPP
 
-# include <memory>
-# include <exception>
-# include <cstring>
-# include "iterator.hpp"
-# include "enable_if.hpp"
-# include "is_integral.hpp"
 # include "vector.hpp"
 
 namespace ft {
@@ -63,40 +57,30 @@ namespace ft {
 				_cont.pop_back();
 			}
 
-			container_type	getCont() const {
-				return (_cont);
+			friend bool	operator==(const stack& lhs, const stack& rhs) {
+				return (lhs._cont == rhs._cont);
+			}
+
+			friend bool	operator!=(const stack& lhs, const stack& rhs) {
+				return (lhs._cont != rhs._cont);
+			}
+
+			friend bool	operator<(const stack& lhs, const stack& rhs) {
+				return (lhs._cont < rhs._cont);
+			}
+
+			friend bool	operator<=(const stack& lhs, const stack& rhs) {
+				return (lhs._cont <= rhs._cont);
+			}
+
+			friend bool	operator>(const stack& lhs, const stack& rhs) {
+				return (lhs._cont > rhs._cont);
+			}
+
+			friend bool	operator>=(const stack& lhs, const stack& rhs) {
+				return (lhs._cont >= rhs._cont);
 			}
 	};
-
-	template<class T, class Container>
-	bool	operator==(const stack<T, Container>& lhs, const stack<T, Container>& rhs) {
-		return (lhs.getCont() == rhs.getCont());
-	}
-
-	template<class T, class Container>
-	bool	operator!=(const stack<T, Container>& lhs, const stack<T, Container>& rhs) {
-		return (lhs.getCont() != rhs.getCont());
-	}
-
-	template<class T, class Container>
-	bool	operator<(const stack<T, Container>& lhs, const stack<T, Container>& rhs) {
-		return (lhs.getCont() < rhs.getCont());
-	}
-
-	template<class T, class Container>
-	bool	operator<=(const stack<T, Container>& lhs, const stack<T, Container>& rhs) {
-		return (lhs.getCont() <= rhs.getCont());
-	}
-
-	template<class T, class Container>
-	bool	operator>(const stack<T, Container>& lhs, const stack<T, Container>& rhs) {
-		return (lhs.getCont() > rhs.getCont());
-	}
-
-	template<class T, class Container>
-	bool	operator>=(const stack<T, Container>& lhs, const stack<T, Container>& rhs) {
-		return (lhs.getCont() >= rhs.getCont());
-	}
 }
 
 #endif

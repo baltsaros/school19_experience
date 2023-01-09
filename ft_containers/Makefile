@@ -8,7 +8,11 @@ C_RESET			=\033[0m
 
 NAME		= containers
 # SRC_DIR	= srcs
-SRCS		= map_test.cpp
+# SRCS		= vector_tests.cpp
+# SRCS		= stack_tests.cpp
+# SRCS		= map_tests.cpp
+# SRCS		= set_tests.cpp
+SRCS		= main.cpp
 # SRCS		= ${notdir ${SRCS_F}}
 
 OBJ_DIR		= objs
@@ -21,11 +25,27 @@ RMR			= rm -rf
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 INC			= -I .hpp
 
-all:
-	@g++ $(SRCS) && ./a.out
+all:	ft std
+	diff ft.txt std.txt
+
+ft:
+	@g++ -D TYPE=ft $(SRCS) -o ft
+	@./ft > ft.txt
+
+std:
+	@g++ -D TYPE=std $(SRCS) -o std
+	@./std > std.txt
 
 clean:
-	@rm ./a.out
+	@rm ft
+	@rm std
+	@rm ft.txt
+	@rm std.txt
+
+fclean:	clean
+
+re: fclean all
+
 # ${OBJ_DIR}/%.o : %.cpp
 # 			@mkdir -p ${OBJ_DIR}
 # 			@printf "${C_GREEN}.${C_RESET}";

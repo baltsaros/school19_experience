@@ -1,8 +1,8 @@
-#ifndef RBTREE_HPP
-# define RBTREE_HPP
+#ifndef RBTREE_SET_HPP
+# define RBTREE_SET_HPP
 
 # include "rbtree_iterator.hpp"
-# include "map.hpp"
+# include "set.hpp"
 
 # define BLACK	false
 # define RED	true
@@ -10,50 +10,47 @@
 // colors: 0/false - Black; 1/true - Red
 
 namespace ft {
-	template <class Pair>
+	template <class Value>
 	struct Node {
 		typedef	const Node	const_Node;
 
-		Pair		value;
+		Value		value;
 		bool		color;
 		size_t		level;
-		Node<Pair>	*left;
-		Node<Pair>	*right;
-		Node<Pair>	*parent;
+		Node<Value>	*left;
+		Node<Value>	*right;
+		Node<Value>	*parent;
 
 		Node(Node *parent) : color(BLACK), level(0),
 			left(NULL), right(NULL), parent(parent) {}
 
-		Node(Pair v, bool c, size_t lvl, Node *l, Node *r, Node *p) :
+		Node(Value v, bool c, size_t lvl, Node *l, Node *r, Node *p) :
 			value(v), color(c), level(lvl), left(l), right(r), parent(p) {}
 
 	};
 
 	template <class Key,
-				class T,
-				class Pair,
 				class Compare = std::less<Key>,
-				class Allocator = std::allocator<Pair> >
+				class Allocator = std::allocator<Key> >
 	class RBTree {
 		public:
 		// TYPEDEFS
 			typedef Key						key_type;
-			typedef T						mapped_type;
-			typedef Pair					value_type;
+			typedef Key						value_type;
 			typedef std::size_t				size_type;
 			typedef std::ptrdiff_t			difference_type;
 			typedef Compare					key_compare;
 			typedef Allocator				allocator_type;
 			typedef value_type&				reference;
 			typedef const value_type&		const_reference;
-			typedef Node<Pair>				node;
+			typedef Node<Key>				node;
 
 			typedef typename Allocator::pointer			pointer;
 			typedef typename Allocator::const_pointer	const_pointer;
-			typedef typename Allocator::template rebind<Node<value_type> >::other	alloc_node;
+			typedef typename Allocator::template rebind<Node<key_type> >::other	alloc_node;
 			
-			typedef rbt_iterator<Pair>						iterator;
-			typedef rbt_const_iterator<Pair>				const_iterator;
+			typedef rbt_iterator<Key>						iterator;
+			typedef rbt_const_iterator<Key>				const_iterator;
 			typedef ft::reverse_iterator<iterator>			reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
@@ -107,46 +104,6 @@ namespace ft {
 				_node_alloc.deallocate(_nil, 1);
 				_nil = NULL;
 			}
-
-			// void	copyTree(node *root, node *nil) {
-			// 	if (!_root) {
-			// 		node	*child;
-
-			// 		child = _node_alloc.allocate(1);
-			// 		_node_alloc.construct(child, node(root->value, root->color, root->level, _nil, _nil, _nil));
-			// 		_root = child;
-			// 		_nil->parent = _root;
-			// 		_size++;
-			// 	}
-			// 	else {
-			// 		node	*child;
-			// 		node	*head = _root;
-			// 		node	*parent = _nil;
-
-			// 		child = _node_alloc.allocate(1);
-			// 		_node_alloc.construct(child, node(root->value, root->color, root->level, _nil, _nil, NULL));
-
-			// 		while (head != _nil)
-			// 		{
-			// 			parent = head;
-			// 			if (_comp(child->value.first, head->value.first))
-			// 				head = head->left;
-			// 			else
-			// 				head = head->right;
-			// 		}
-			// 		child->parent = parent;
-			// 		if (_comp(child->value.first, parent->value.first))
-			// 			parent->left = child;
-			// 		else
-			// 			parent->right = child;
-			// 		_size++;
-			// 	}
-			// 	if (root && root->left && root->left != nil)
-			// 		copyTree(root->left, nil);
-			// 	if (root && root->right && root->right != nil)
-			// 		copyTree(root->right, nil);
-			// }
-
 
 			void	insertFixup(node *child) {
 				node	*uncle;
@@ -350,9 +307,9 @@ namespace ft {
 
 
 			node*	search(node *tmp, const value_type& key) const {
-				if (!tmp || tmp == _nil || tmp->value.first == key.first)
+				if (!tmp || tmp == _nil || tmp->value == key)
 					return (tmp);
-				if (_comp(tmp->value.first, key.first))
+				if (_comp(tmp->value, key))
 					return search(tmp->right, key);
 				else
 					return search(tmp->left, key);
@@ -396,9 +353,9 @@ namespace ft {
 				fixLevels(_root, level);
 				printNode(_root);
 				tmp = findMin(_root);
-				std::cout << "min: " << tmp->value.first << "\n";
+				std::cout << "min: " << tmp->value << "\n";
 				tmp = findMax(_root);
-				std::cout << "max: " << tmp->value.first << "\n";
+				std::cout << "max: " << tmp->value << "\n";
 			}
 
 			void	fixLevels(node *tmp, int lvl) {
@@ -412,18 +369,18 @@ namespace ft {
 
 			void	printNode(node *tmp) {
 				std::cout.width(15); 
-				std::cout << "root key: " << tmp->value.first << " | value: " << tmp->value.second;
+				std::cout << "root key: " << tmp->value;
 				std::cout.width(10); 
 				std::cout << " | color: " << tmp->color << " | level: " << tmp->level << "\n";
 				if (tmp->left != _nil) {
 					std::cout.width(15);
-					std::cout << "left key: " << tmp->left->value.first<< " | value: " << tmp->left->value.second;
+					std::cout << "left key: " << tmp->left->value;
 					std::cout.width(10);
 					std::cout << " | color: " << tmp->left->color << " | level: " << tmp->left->level << "\n";
 				}
 				if (tmp->right != _nil) {
 					std::cout.width(15);
-					std::cout << "right key: " << tmp->right->value.first << " | value: " << tmp->right->value.second;
+					std::cout << "right key: " << tmp->right->value;
 					std::cout.width(10);
 					std::cout << " | color: " << tmp->right->color << " | level: " << tmp->right->level << "\n";
 				}
@@ -434,34 +391,33 @@ namespace ft {
 			}
 
 			// ELEMENT ACCESS
-			T&	at(const value_type& key) {
+			Key&	at(const value_type& key) {
 				node	*tmp = NULL;
 
 				tmp = search(key);
 				if (!tmp || (!tmp->left && !tmp->right))
 					throw OutOfRange();
-				return (tmp->value.second);
+				return (tmp->value);
 			}
 
-			const T&	at(const value_type& key) const {
+			const Key&	at(const value_type& key) const {
 				node	*tmp = NULL;
 
 				tmp = search(key);
 				if (!tmp || (!tmp->left && !tmp->right))
 					throw OutOfRange();
-				return (tmp->value.second);
+				return (tmp->value);
 			}
 
-			T&	operator[](const Key& key) {
+			Key&	operator[](const Key& key) {
 				node			*tmp = NULL;
-				pair<Key, T>	value = value_type(key, T());
 
-				tmp = search(value);
+				tmp = search(key);
 				if (!tmp || (!tmp->left && !tmp->right)) {
-					insert(value);
-					tmp = search(value);
+					insert(key);
+					tmp = search(key);
 				}
-				return (tmp->value.second);
+				return (tmp->value);
 			}
 
 			// ITERATORS
@@ -545,14 +501,14 @@ namespace ft {
 				while (head != _nil)
 				{
 					parent = head;
-					if (_comp(child->value.first, head->value.first))
+					if (_comp(child->value, head->value))
 						head = head->left;
 					else
 						head = head->right;
 					child->level++;
 				}
 				child->parent = parent;
-				if (_comp(child->value.first, parent->value.first))
+				if (_comp(child->value, parent->value))
 					parent->left = child;
 				else
 					parent->right = child;
@@ -581,14 +537,49 @@ namespace ft {
 				while (head != _nil)
 				{
 					parent = head;
-					if (_comp(child->value.first, head->value.first))
+					if (_comp(child->value, head->value))
 						head = head->left;
 					else
 						head = head->right;
 					child->level++;
 				}
 				child->parent = parent;
-				if (_comp(child->value.first, parent->value.first))
+				if (_comp(child->value, parent->value))
+					parent->left = child;
+				else
+					parent->right = child;
+				_size++;
+				insertFixup(child);
+				return (iterator(child));
+			}
+
+			iterator	insert(const_iterator pos, const value_type& value) {
+				(void)pos;
+				if (!_root || _root == _nil)
+					return (create_root(value).first);
+
+				node	*child;
+				node	*head = _root;
+				node	*parent = _nil;
+				node	*tmp;
+
+				tmp = search(value);
+				if (tmp != _nil)
+					return (iterator(tmp));
+				child = _node_alloc.allocate(1);
+				_node_alloc.construct(child, node(value, RED, 0, _nil, _nil, NULL));
+
+				while (head != _nil)
+				{
+					parent = head;
+					if (_comp(child->value, head->value))
+						head = head->left;
+					else
+						head = head->right;
+					child->level++;
+				}
+				child->parent = parent;
+				if (_comp(child->value, parent->value))
 					parent->left = child;
 				else
 					parent->right = child;
@@ -611,7 +602,20 @@ namespace ft {
 				deleteOne(tmp);
 			}
 
+			void	erase(const_iterator pos) {
+				node	*tmp = pos.base();
+
+				if (!tmp || tmp == _nil)
+					return ;
+				deleteOne(tmp);
+			}
+
 			void	erase(iterator first, iterator last) {
+				while (first != last)
+					erase(first++);
+			}
+
+			void	erase(const_iterator first, const_iterator last) {
 				while (first != last)
 					erase(first++);
 			}
@@ -705,7 +709,7 @@ namespace ft {
 				iterator	last = end();
 
 				for (iterator head = begin(); head != last; ++head) {
-					if (!_comp(head->first, key.first))
+					if (!_comp(*head, key))
 						return (head);
 				}
 				return (last);
@@ -715,7 +719,7 @@ namespace ft {
 				const_iterator	last = end();
 
 				for (const_iterator head = begin(); head != last; ++head) {
-					if (!_comp(head->first, key.first))
+					if (!_comp(*head, key))
 						return (head);
 				}
 				return (last);
@@ -725,7 +729,7 @@ namespace ft {
 				iterator	last = end();
 
 				for (iterator head = begin(); head != last; ++head) {
-					if (_comp(key.first, head->first)) {
+					if (_comp(key, *head)) {
 						return (head);
 					}
 				}
@@ -736,7 +740,7 @@ namespace ft {
 				const_iterator	last = end();
 
 				for (const_iterator head = begin(); head != last; ++head) {
-					if (_comp(key.first, head->first)) {
+					if (_comp(key, *head)) {
 						return (head);
 					}
 				}
@@ -753,10 +757,6 @@ namespace ft {
 			// OBSERVER
 			key_compare	key_comp() const {
 				return (_comp);
-			}
-
-			bool	test() {
-				return (_comp(_root->value.first, _root->left->value.first));
 			}
 
 			// COMPARISON OPERATORS
