@@ -173,7 +173,7 @@ namespace ft {
 				return (_head);
 			}
 
-			T*	data() const {
+			const T*	data() const {
 				return (_head);
 			}
 
@@ -487,7 +487,7 @@ namespace ft {
 
 				tmp._head = NULL;
 			}
-
+		private:
 			// EXCEPTIONS
 			class OutOfRange: public std::exception {
 				const char*	what(void) const throw() {
