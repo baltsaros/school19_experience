@@ -13,6 +13,7 @@ NAME		= containers
 # SRCS		= map_tests.cpp
 # SRCS		= set_tests.cpp
 SRCS		= main.cpp
+SRCS_B		= main_bonus.cpp
 # SRCS		= ${notdir ${SRCS_F}}
 
 OBJ_DIR		= objs
@@ -28,12 +29,23 @@ INC			= -I .hpp
 all:	ft std
 	diff ft.txt std.txt
 
+bonus:	fclean ft_b std_b
+	diff ft.txt std.txt
+
 ft:
 	@g++ -D TYPE=ft $(SRCS) -o ft
 	@./ft > ft.txt
 
 std:
 	@g++ -D TYPE=std $(SRCS) -o std
+	@./std > std.txt
+
+ft_b:
+	@g++ -D TYPE=ft $(SRCS_B) -o ft
+	@./ft > ft.txt
+
+std_b:
+	@g++ -D TYPE=std $(SRCS_B) -o std
 	@./std > std.txt
 
 clean:
@@ -69,4 +81,4 @@ re: fclean all
 
 # re:			fclean all
 
-.PHONY:		all clean fclean re .cpp.o %.cpp%.o
+.PHONY:		all clean fclean re .cpp.o %.cpp%.o ft std bonus

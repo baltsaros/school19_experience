@@ -19,23 +19,23 @@ namespace ft {
 	class map {
 		public:
 		// TYPEDEFS
-		typedef Key											key_type;
-		typedef T											mapped_type;
-		typedef pair<const Key, T>							value_type;
-		typedef Node<value_type>							node;
-		typedef std::size_t									size_type;
-		typedef std::ptrdiff_t								difference_type;
-		typedef Compare										key_compare;
-		typedef Allocator									allocator_type;
-		typedef value_type&									reference;
-		typedef const value_type&							const_reference;
-		typedef typename Allocator::pointer					pointer;
-		typedef typename Allocator::const_pointer			const_pointer;
+		typedef Key												key_type;
+		typedef T												mapped_type;
+		typedef pair<const Key, T>								value_type;
+		typedef Node<value_type>								node;
+		typedef std::size_t										size_type;
+		typedef std::ptrdiff_t									difference_type;
+		typedef Compare											key_compare;
+		typedef Allocator										allocator_type;
+		typedef value_type&										reference;
+		typedef const value_type&								const_reference;
+		typedef typename Allocator::pointer						pointer;
+		typedef typename Allocator::const_pointer				const_pointer;
 		typedef	RBTree<Key, T, value_type, Compare, Allocator>	tree;
-		typedef typename tree::iterator						iterator;
-		typedef typename tree::const_iterator				const_iterator;
-		typedef typename tree::reverse_iterator				reverse_iterator;
-		typedef typename tree::const_reverse_iterator		const_reverse_iterator;
+		typedef typename tree::iterator							iterator;
+		typedef typename tree::const_iterator					const_iterator;
+		typedef typename tree::reverse_iterator					reverse_iterator;
+		typedef typename tree::const_reverse_iterator			const_reverse_iterator;
 
 		class	value_compare {
 			protected:
@@ -230,13 +230,10 @@ namespace ft {
 				return (value_compare(_tree.key_comp()));
 			}
 
+		private:
 			// UTILS
 			void	printMap() {
 				_tree.printNode();
-			}
-
-			bool	test() {
-				return (_tree.test());
 			}
 
 			// FRIENDS
