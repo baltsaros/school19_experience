@@ -66,7 +66,6 @@ namespace ft {
 			explicit RBTree(key_compare const &comp = key_compare(),
 				allocator_type const &alloc = allocator_type()) :
 				_alloc(alloc), _node_alloc(alloc), _size(0), _comp(comp) {
-				// std::cout << "constructor 1" << std::endl;
 				_root = NULL;
 				_nil = _node_alloc.allocate(1);
 				_node_alloc.construct(_nil, node(_root));
@@ -89,7 +88,6 @@ namespace ft {
 				_root = NULL;
 				if (src._root && src._root != src._nil)
 					insert(src.begin(), src.end());
-					// copyTree(src._root, src._nil);
 				else if (src._root == src._nil)
 					_root = _nil;
 				return (*this);
@@ -651,7 +649,6 @@ namespace ft {
 			void	rightRotation(node *x) {
 				node	*y;
 
-				// std::cout << "right rotation\n";
 				y = x->left;
 				x->left = y->right;
 				if (y->right != _nil)
@@ -670,7 +667,6 @@ namespace ft {
 			void	leftRotation(node *x) {
 				node	*y;
 
-				// std::cout << "left rotation\n";
 				y = x->right;
 				x->right = y->left;
 				if (y->left != _nil)
@@ -697,7 +693,6 @@ namespace ft {
 			}
 
 			void	transplant(node *u, node *v) {
-				// std::cout << "transplanting\n";
 				if (u->parent == _nil)
 					_root = v;
 				else if (u == u->parent->left)

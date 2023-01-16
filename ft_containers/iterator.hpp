@@ -14,7 +14,7 @@ namespace ft {
 		typename iterator_traits<Iter*>::reference> {
 
 	protected:
-		typedef ft::iterator<ft::random_access_iterator_tag, Iter>	itraits;
+		typedef iterator_traits<Iter*>	itraits;
 
 	public:
 		typedef Iter								iterator_type;

@@ -3,8 +3,6 @@
 
 # include "iterator_traits.hpp"
 # include "reverse_iterator.hpp"
-// # include "rbtree.hpp"
-// # include <type_traits>
 
 namespace ft {
 	template <class Pair>
@@ -13,12 +11,12 @@ namespace ft {
 	template <class Pair>
 	class rbt_iterator {
 	public:
-		typedef Pair						value_type;
-		typedef Pair*						pointer;
-		typedef Pair&						reference;
+		typedef Pair							value_type;
+		typedef Pair*							pointer;
+		typedef Pair&							reference;
 		typedef ft::bidirectional_iterator_tag	iterator_category;
-		typedef std::ptrdiff_t				difference_type;
-		typedef	Node<Pair>					node;
+		typedef std::ptrdiff_t					difference_type;
+		typedef	Node<Pair>						node;
 
 	private:
 		node	*_ptr;
@@ -142,13 +140,13 @@ namespace ft {
 template <class Pair>
 class rbt_const_iterator {
 	public:
-		typedef const Pair						value_type;
-		typedef const Pair*						pointer;
-		typedef const Pair&						reference;
-		typedef rbt_iterator<Pair>				iterator;
+		typedef const Pair					value_type;
+		typedef const Pair*					pointer;
+		typedef const Pair&					reference;
+		typedef rbt_iterator<Pair>			iterator;
 		typedef bidirectional_iterator_tag	iterator_category;
 		typedef std::ptrdiff_t				difference_type;
-		typedef	Node<Pair>			node;
+		typedef	Node<Pair>					node;
 
 	private:
 		node	*_ptr;
