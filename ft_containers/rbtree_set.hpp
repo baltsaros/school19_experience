@@ -105,291 +105,6 @@ namespace ft {
 				_nil = NULL;
 			}
 
-			void	insertFixup(node *child) {
-				node	*uncle;
-
-				if (child == _root || child->parent == _root)
-					return ;
-				while (child != _root && child->parent->color) {
-					if (child->parent == child->parent->parent->left) {
-						uncle = child->parent->parent->right;
-						if (uncle != _nil && uncle->color) {
-							child->parent->color = BLACK;
-							uncle->color = BLACK;
-							child->parent->parent->color = RED;
-							child = child->parent->parent;
-						}
-						else {
-							if (child == child->parent->right) {
-								child = child->parent;
-								leftRotation(child);
-							}
-							child->parent->color = BLACK;
-							child->parent->parent->color = RED;
-							rightRotation(child->parent->parent);
-						} 
-					}
-					else {
-						uncle = child->parent->parent->left;
-						if (uncle != _nil && uncle->color) {
-							child->parent->color = BLACK;
-							uncle->color = BLACK;
-							child->parent->parent->color = RED;
-							child = child->parent->parent;
-						}
-						else {
-							if (child == child->parent->left) {
-								child = child->parent;
-								rightRotation(child);
-							}
-							child->parent->color = BLACK;
-							child->parent->parent->color = RED;
-							leftRotation(child->parent->parent);
-						}
-					}
-				}
-				_root->color = BLACK;
-				_nil->parent = _root;
-			}
-
-			void	deleteAll(node *tmp) {
-				if (tmp == _nil || !tmp)
-					return ;
-				if (tmp->left != _nil)
-					deleteAll(tmp->left);
-				if (tmp->right != _nil)
-					deleteAll(tmp->right);
-				_node_alloc.destroy(tmp);
-				_node_alloc.deallocate(tmp, 1);
-				_size--;
-				tmp = NULL;
-			}
-
-			void	deleteOne(node *toDelete)
-			{
-				node	*y, *x, *tmp;
-				bool	y_color;
-
-				y = toDelete;
-				// if (toDelete == _nil)
-				// 	return ;
-				y_color = y->color;
-				if (y->left == _nil) {
-					x = y->right;
-					transplant(y, y->right);
-				}
-				else if (y->right == _nil) {
-					x = y->left;
-					transplant(y, y->left);
-				}
-				else {
-					tmp = y;
-					y = findMin(tmp->right);
-					y_color = y->color;
-					x = y->right;
-					if (y->parent == tmp)
-						x->parent = y;
-					else {
-						transplant(y, y->right);
-						y->right = tmp->right;
-						tmp->right->parent = y;
-					}
-					transplant(tmp, y);
-					y->left = tmp->left;
-					y->left->parent = y;
-					y->color = tmp->color;
-				}
-				_node_alloc.destroy(toDelete);
-				_node_alloc.deallocate(toDelete, 1);
-				_size--;
-				if (!y_color)
-					deleteFixup(x);
-				_nil->parent = _root;
-			}
-
-			void	deleteFixup(node *x) {
-				node	*w;
-
-				while (x != _root && !x->color) {
-					if (x == x->parent->left) {
-						w = x->parent->right;
-						if (w->color) {
-							w->color = BLACK;
-							x->parent->color = RED;
-							leftRotation(x->parent);
-							w = x->parent->right;
-						}
-						if (!w->left->color && !w->right->color) {
-							w->color = RED;
-							x = x->parent;
-						}
-						else {
-							if (!w->right->color) {
-								w->left->color = BLACK;
-								w->color = RED;
-								rightRotation(w);
-								w = x->parent->right;
-							}
-							w->color = x->parent->color;
-							x->parent->color = BLACK;
-							w->right->color = BLACK;
-							leftRotation(x->parent);
-							x = _root;
-						}
-					}
-					else {
-						w = x->parent->left;
-						if (w->color) {
-							w->color = BLACK;
-							x->parent->color = RED;
-							rightRotation(x->parent);
-							w = x->parent->left;
-						}
-						if (!w->right->color && !w->left->color) {
-							w->color = RED;
-							x = x->parent;
-						}
-						else {
-							if (!w->left->color) {
-								w->right->color = BLACK;
-								w->color = RED;
-								leftRotation(w);
-								w = x->parent->left;
-							}
-							w->color = x->parent->color;
-							x->parent->color = BLACK;
-							w->left->color = BLACK;
-							rightRotation(x->parent);
-							x = _root;
-						}
-					}
-				}
-				x->color = BLACK;
-			}
-
-			void	rightRotation(node *x) {
-				node	*y;
-
-				// std::cout << "right rotation\n";
-				y = x->left;
-				x->left = y->right;
-				if (y->right != _nil)
-					y->right->parent = x;
-				y->parent = x->parent;
-				if (x->parent == _nil)
-					_root = y;
-				else if (x == x->parent->left)
-					x->parent->left = y;
-				else
-					x->parent->right = y;
-				y->right = x;
-				x->parent = y;
-			}
-
-			void	leftRotation(node *x) {
-				node	*y;
-
-				// std::cout << "left rotation\n";
-				y = x->right;
-				x->right = y->left;
-				if (y->left != _nil)
-					y->left->parent = x;
-				y->parent = x->parent;
-				if (x->parent == _nil)
-					_root = y;
-				else if (x == x->parent->left)
-					x->parent->left = y;
-				else
-					x->parent->right = y;
-				y->left = x;
-				x->parent = y;
-			}
-
-
-			node*	search(node *tmp, const value_type& key) const {
-				if (!tmp || tmp == _nil || tmp->value == key)
-					return (tmp);
-				if (_comp(tmp->value, key))
-					return search(tmp->right, key);
-				else
-					return search(tmp->left, key);
-			}
-
-			void	transplant(node *u, node *v) {
-				// std::cout << "transplanting\n";
-				if (u->parent == _nil)
-					_root = v;
-				else if (u == u->parent->left)
-					u->parent->left = v;
-				else
-					u->parent->right = v;
-				v->parent = u->parent;
-			}
-
-			node*	findMin(node *tmp) const {
-				if (!tmp || tmp == _nil)
-					return (tmp);
-				while (tmp->left != _nil)
-					tmp = tmp->left;
-				return (tmp);
-			}
-
-			node*	findMax(node *tmp) const {
-				if (!tmp || tmp == _nil)
-					return (tmp);
-				while (tmp->right != _nil)
-					tmp = tmp->right;
-				return (tmp);
-			}
-
-			void	printNode() {
-				int	level = 0;
-				node	*tmp;
-
-				if (!_root) {
-					std::cout << "The tree does not exist!\n";
-					return ;
-				}
-				fixLevels(_root, level);
-				printNode(_root);
-				tmp = findMin(_root);
-				std::cout << "min: " << tmp->value << "\n";
-				tmp = findMax(_root);
-				std::cout << "max: " << tmp->value << "\n";
-			}
-
-			void	fixLevels(node *tmp, int lvl) {
-				tmp->level = lvl;
-				++lvl;
-				if (tmp->left != _nil)
-					fixLevels(tmp->left, lvl);
-				if (tmp->right != _nil)
-					fixLevels(tmp->right, lvl);
-			}
-
-			void	printNode(node *tmp) {
-				std::cout.width(15); 
-				std::cout << "root key: " << tmp->value;
-				std::cout.width(10); 
-				std::cout << " | color: " << tmp->color << " | level: " << tmp->level << "\n";
-				if (tmp->left != _nil) {
-					std::cout.width(15);
-					std::cout << "left key: " << tmp->left->value;
-					std::cout.width(10);
-					std::cout << " | color: " << tmp->left->color << " | level: " << tmp->left->level << "\n";
-				}
-				if (tmp->right != _nil) {
-					std::cout.width(15);
-					std::cout << "right key: " << tmp->right->value;
-					std::cout.width(10);
-					std::cout << " | color: " << tmp->right->color << " | level: " << tmp->right->level << "\n";
-				}
-				if (tmp->left != _nil)
-					printNode(tmp->left);
-				if (tmp->right != _nil)
-					printNode(tmp->right);
-			}
-
 			// ELEMENT ACCESS
 			Key&	at(const value_type& key) {
 				node	*tmp = NULL;
@@ -770,28 +485,314 @@ namespace ft {
 				return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 			}
 
+		private:
+			void	insertFixup(node *child) {
+				node	*uncle;
+
+				if (child == _root || child->parent == _root)
+					return ;
+				while (child != _root && child->parent->color) {
+					if (child->parent == child->parent->parent->left) {
+						uncle = child->parent->parent->right;
+						if (uncle != _nil && uncle->color) {
+							child->parent->color = BLACK;
+							uncle->color = BLACK;
+							child->parent->parent->color = RED;
+							child = child->parent->parent;
+						}
+						else {
+							if (child == child->parent->right) {
+								child = child->parent;
+								leftRotation(child);
+							}
+							child->parent->color = BLACK;
+							child->parent->parent->color = RED;
+							rightRotation(child->parent->parent);
+						} 
+					}
+					else {
+						uncle = child->parent->parent->left;
+						if (uncle != _nil && uncle->color) {
+							child->parent->color = BLACK;
+							uncle->color = BLACK;
+							child->parent->parent->color = RED;
+							child = child->parent->parent;
+						}
+						else {
+							if (child == child->parent->left) {
+								child = child->parent;
+								rightRotation(child);
+							}
+							child->parent->color = BLACK;
+							child->parent->parent->color = RED;
+							leftRotation(child->parent->parent);
+						}
+					}
+				}
+				_root->color = BLACK;
+				_nil->parent = _root;
+			}
+
+			void	deleteAll(node *tmp) {
+				if (tmp == _nil || !tmp)
+					return ;
+				if (tmp->left != _nil)
+					deleteAll(tmp->left);
+				if (tmp->right != _nil)
+					deleteAll(tmp->right);
+				_node_alloc.destroy(tmp);
+				_node_alloc.deallocate(tmp, 1);
+				_size--;
+				tmp = NULL;
+			}
+
+			void	deleteOne(node *toDelete)
+			{
+				node	*y, *x, *tmp;
+				bool	y_color;
+
+				y = toDelete;
+				// if (toDelete == _nil)
+				// 	return ;
+				y_color = y->color;
+				if (y->left == _nil) {
+					x = y->right;
+					transplant(y, y->right);
+				}
+				else if (y->right == _nil) {
+					x = y->left;
+					transplant(y, y->left);
+				}
+				else {
+					tmp = y;
+					y = findMin(tmp->right);
+					y_color = y->color;
+					x = y->right;
+					if (y->parent == tmp)
+						x->parent = y;
+					else {
+						transplant(y, y->right);
+						y->right = tmp->right;
+						tmp->right->parent = y;
+					}
+					transplant(tmp, y);
+					y->left = tmp->left;
+					y->left->parent = y;
+					y->color = tmp->color;
+				}
+				_node_alloc.destroy(toDelete);
+				_node_alloc.deallocate(toDelete, 1);
+				_size--;
+				if (!y_color)
+					deleteFixup(x);
+				_nil->parent = _root;
+			}
+
+			void	deleteFixup(node *x) {
+				node	*w;
+
+				while (x != _root && !x->color) {
+					if (x == x->parent->left) {
+						w = x->parent->right;
+						if (w->color) {
+							w->color = BLACK;
+							x->parent->color = RED;
+							leftRotation(x->parent);
+							w = x->parent->right;
+						}
+						if (!w->left->color && !w->right->color) {
+							w->color = RED;
+							x = x->parent;
+						}
+						else {
+							if (!w->right->color) {
+								w->left->color = BLACK;
+								w->color = RED;
+								rightRotation(w);
+								w = x->parent->right;
+							}
+							w->color = x->parent->color;
+							x->parent->color = BLACK;
+							w->right->color = BLACK;
+							leftRotation(x->parent);
+							x = _root;
+						}
+					}
+					else {
+						w = x->parent->left;
+						if (w->color) {
+							w->color = BLACK;
+							x->parent->color = RED;
+							rightRotation(x->parent);
+							w = x->parent->left;
+						}
+						if (!w->right->color && !w->left->color) {
+							w->color = RED;
+							x = x->parent;
+						}
+						else {
+							if (!w->left->color) {
+								w->right->color = BLACK;
+								w->color = RED;
+								leftRotation(w);
+								w = x->parent->left;
+							}
+							w->color = x->parent->color;
+							x->parent->color = BLACK;
+							w->left->color = BLACK;
+							rightRotation(x->parent);
+							x = _root;
+						}
+					}
+				}
+				x->color = BLACK;
+			}
+
+			void	rightRotation(node *x) {
+				node	*y;
+
+				// std::cout << "right rotation\n";
+				y = x->left;
+				x->left = y->right;
+				if (y->right != _nil)
+					y->right->parent = x;
+				y->parent = x->parent;
+				if (x->parent == _nil)
+					_root = y;
+				else if (x == x->parent->left)
+					x->parent->left = y;
+				else
+					x->parent->right = y;
+				y->right = x;
+				x->parent = y;
+			}
+
+			void	leftRotation(node *x) {
+				node	*y;
+
+				// std::cout << "left rotation\n";
+				y = x->right;
+				x->right = y->left;
+				if (y->left != _nil)
+					y->left->parent = x;
+				y->parent = x->parent;
+				if (x->parent == _nil)
+					_root = y;
+				else if (x == x->parent->left)
+					x->parent->left = y;
+				else
+					x->parent->right = y;
+				y->left = x;
+				x->parent = y;
+			}
+
+
+			node*	search(node *tmp, const value_type& key) const {
+				if (!tmp || tmp == _nil || tmp->value == key)
+					return (tmp);
+				if (_comp(tmp->value, key))
+					return search(tmp->right, key);
+				else
+					return search(tmp->left, key);
+			}
+
+			void	transplant(node *u, node *v) {
+				// std::cout << "transplanting\n";
+				if (u->parent == _nil)
+					_root = v;
+				else if (u == u->parent->left)
+					u->parent->left = v;
+				else
+					u->parent->right = v;
+				v->parent = u->parent;
+			}
+
+			node*	findMin(node *tmp) const {
+				if (!tmp || tmp == _nil)
+					return (tmp);
+				while (tmp->left != _nil)
+					tmp = tmp->left;
+				return (tmp);
+			}
+
+			node*	findMax(node *tmp) const {
+				if (!tmp || tmp == _nil)
+					return (tmp);
+				while (tmp->right != _nil)
+					tmp = tmp->right;
+				return (tmp);
+			}
+
+			void	printNode() {
+				int	level = 0;
+				node	*tmp;
+
+				if (!_root) {
+					std::cout << "The tree does not exist!\n";
+					return ;
+				}
+				fixLevels(_root, level);
+				printNode(_root);
+				tmp = findMin(_root);
+				std::cout << "min: " << tmp->value << "\n";
+				tmp = findMax(_root);
+				std::cout << "max: " << tmp->value << "\n";
+			}
+
+			void	fixLevels(node *tmp, int lvl) {
+				tmp->level = lvl;
+				++lvl;
+				if (tmp->left != _nil)
+					fixLevels(tmp->left, lvl);
+				if (tmp->right != _nil)
+					fixLevels(tmp->right, lvl);
+			}
+
+			void	printNode(node *tmp) {
+				std::cout.width(15); 
+				std::cout << "root key: " << tmp->value;
+				std::cout.width(10); 
+				std::cout << " | color: " << tmp->color << " | level: " << tmp->level << "\n";
+				if (tmp->left != _nil) {
+					std::cout.width(15);
+					std::cout << "left key: " << tmp->left->value;
+					std::cout.width(10);
+					std::cout << " | color: " << tmp->left->color << " | level: " << tmp->left->level << "\n";
+				}
+				if (tmp->right != _nil) {
+					std::cout.width(15);
+					std::cout << "right key: " << tmp->right->value;
+					std::cout.width(10);
+					std::cout << " | color: " << tmp->right->color << " | level: " << tmp->right->level << "\n";
+				}
+				if (tmp->left != _nil)
+					printNode(tmp->left);
+				if (tmp->right != _nil)
+					printNode(tmp->right);
+			}
+
 			// EXCEPTIONS
 			class OutOfRange: public std::exception {
 				const char*	what(void) const throw() {
-					return ("ft::map.at() is out of range");
+					return ("ft::set.at() is out of range");
 				}
 			};
 
 			class OutOfBounds: public std::exception {
 				const char*	what(void) const throw() {
-					return ("ft::map[] index is out of bounds");
+					return ("ft::set index is out of bounds");
 				}
 			};
 
 			class EmptyContainer: public std::exception {
 				const char*	what(void) const throw() {
-					return ("ft::map is empty");
+					return ("ft::set is empty");
 				}
 			};
 
 			class LengthError: public std::exception {
 				const char*	what(void) const throw() {
-					return ("ft::map begin is ahead of end");
+					return ("ft::set begin is ahead of end");
 				}
 			};
 	};
