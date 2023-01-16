@@ -136,15 +136,15 @@ int	main(void) {
 			printIterPair(it1);
 
 			std::cout << YLW "\n+++ rbegin() +++\n" NC;
-			std::cout << "rit1 = m1(rbegin()\n";
+			std::cout << "rit1 = m1(rbegin())\n";
 			rit1 = m1.rbegin();
 			printIterPair(rit1);
 
 			std::cout << YLW "\n+++ rend() +++\n" NC;
-			std::cout << "rit1 = m1(rend()\n";
+			std::cout << "rit1 = m1(rend())\n";
 			rit1 = m1.rend();
-			std::cout << "rit1++\n";
-			rit1++;
+			std::cout << "rit1--\n";
+			rit1--;
 			printIterPair(rit1);
 		}
 
@@ -776,16 +776,11 @@ int	main(void) {
 			std::cout << "it2 = v2.begin() " << std::endl;
 			it2 = v2.begin();
 			std::cout << "it2: " << *it2 << std::endl;
-
-			std::cout << YLW "\n+++ end() +++\n" NC;
-			std::cout << "v2.end(): ";
-			std::cout << *(v2.end()) << std::endl;
 			std::cout << std::endl;
 			
 			std::cout << YLW "+++ pre-in/decrementation +++" NC<< std::endl;
 			it4 = v2.end();
 			std::cout << "it2 = v2.end() " << std::endl;
-			std::cout << "it4: " << *it4 << std::endl;
 			--it4;
 			std::cout << "--it4: " << *it4 << std::endl;
 			--it4;
@@ -793,13 +788,10 @@ int	main(void) {
 			std::cout << "it4--: " << *(it4--) << std::endl;
 			std::cout << "it4: " << *it4 << std::endl;
 			std::cout << "it4--: " << *(it4--) << std::endl;
-			std::cout << "it4: " << *it4 << std::endl;
 			++it4;
 			std::cout << "++it4: " << *it4 << std::endl;
 			++it4;
 			std::cout << "++it4: " << *it4 << std::endl;
-			std::cout << "it4++: " << *(it4++) << std::endl;
-			std::cout << "it4: " << *it4 << std::endl;
 			std::cout << "it4++: " << *(it4++) << std::endl;
 			std::cout << "it4: " << *it4 << std::endl;
 			std::cout << std::endl;

@@ -110,8 +110,8 @@ int	main(void) {
 			std::cout << YLW "\n+++ rend() +++\n" NC;
 			std::cout << "rit1 = s1(rend()\n";
 			rit1 = s1.rend();
-			std::cout << "rit1++\n";
-			rit1++;
+			std::cout << "rit1--\n";
+			rit1--;
 			printIter(rit1);
 		}
 
