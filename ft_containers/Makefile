@@ -20,6 +20,8 @@ RMR			= rm -rf
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 
 all:	ft std
+	@./ft > ft.txt
+	@./std > std.txt
 	diff ft.txt std.txt
 
 bonus:	fclean ft_b std_b
@@ -30,11 +32,9 @@ dif:
 
 ft:
 	@g++ -D TYPE=ft $(SRCS) -o ft
-	@./ft > ft.txt
 
 std:
 	@g++ -D TYPE=std $(SRCS) -o std
-	@./std > std.txt
 
 ft_b:
 	@g++ -D TYPE=ft $(SRCS_B) -o ft
@@ -43,6 +43,21 @@ ft_b:
 std_b:
 	@g++ -D TYPE=std $(SRCS_B) -o std
 	@./std > std.txt
+
+stack:	ft std
+	@./ft stack> ft.txt
+	@./std stack> std.txt
+	diff ft.txt std.txt
+
+vector:	ft std
+	@./ft vector> ft.txt
+	@./std vector> std.txt
+	diff ft.txt std.txt
+
+map:	ft std
+	@./ft map> ft.txt
+	@./std map> std.txt
+	diff ft.txt std.txt
 
 clean:
 	@rm ft
@@ -56,4 +71,4 @@ fclean:	clean
 
 re: fclean all
 
-.PHONY:		all clean fclean re .cpp.o %.cpp%.o ft std bonus dif
+.PHONY:		all clean fclean re .cpp.o %.cpp%.o ft std bonus dif stack vector map
