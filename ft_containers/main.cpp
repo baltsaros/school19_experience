@@ -663,6 +663,7 @@ int	main(void) {
 			std::cout << std::endl;
 
 			std::cout << YLW "+++ comparison +++" NC << std::endl;
+			v2.push_back(7);
 			std::cout << "v2: ";
 			for (TYPE::vector<int>::iterator it = v2.begin(); it != v2.end(); ++it) {
 				std::cout << *it << " ";

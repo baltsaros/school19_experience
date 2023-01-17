@@ -534,17 +534,7 @@ namespace ft {
 	template <class T, class Alloc>
 	bool	operator!=(const vector<T, Alloc>& lhs,
 						const vector<T,Alloc>& rhs) {
-		if (lhs.size() != rhs.size())
-			return (true);
-		if (lhs.capacity() != rhs.capacity())
-			return (true);
-		if (lhs.get_allocator() != rhs.get_allocator())
-			return (true);
-		for (size_t i = 0; i != lhs.size(); ++i) {
-			if (lhs[i] == rhs[i])
-				return (false);
-		}
-		return (true);
+		return (!(lhs == rhs));
 	}
 
 	template <class T, class Alloc>
