@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/23 07:57:53 by abuzdin           #+#    #+#             */
+/*   Updated: 2023/01/23 07:57:54 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include <string>
 #include <iterator>
 #include <map>
-#include "map.hpp"
+#include "containers/map.hpp"
 #include <vector>
-#include "vector.hpp"
+#include "containers/vector.hpp"
 #include <stack>
-#include "stack.hpp"
+#include "containers/stack.hpp"
 
 #define NC "\e[0m"
 #define GRNB "\e[1;32m"

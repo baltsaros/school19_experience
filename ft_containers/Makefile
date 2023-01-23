@@ -24,7 +24,7 @@ all:	ft std
 	@./std > std.txt
 	diff ft.txt std.txt
 
-bonus:	fclean ft_b std_b
+bonus:	ft_b std_b
 	diff ft.txt std.txt
 
 dif:
@@ -64,10 +64,8 @@ clean:
 	@rm std
 	@rm ft.txt
 	@rm std.txt
-	@${RMR} ${OBJ_DIR}
 
 fclean:	clean
-	@${RM} ${NAME}
 
 re: fclean all
 

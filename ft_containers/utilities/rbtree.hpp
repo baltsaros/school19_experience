@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rbtree.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/23 07:58:34 by abuzdin           #+#    #+#             */
+/*   Updated: 2023/01/23 07:58:35 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RBTREE_HPP
 # define RBTREE_HPP
 
 # include "rbtree_iterator.hpp"
-# include "map.hpp"
+# include "../containers/map.hpp"
 
 # define BLACK	false
 # define RED	true

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/23 07:57:44 by abuzdin           #+#    #+#             */
+/*   Updated: 2023/01/23 07:57:45 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SET_HPP
 # define SET_HPP
 
@@ -5,11 +17,11 @@
 # include <exception>
 # include <cstring>
 # include <iostream>
-# include "enable_if.hpp"
-# include "is_integral.hpp"
-# include "lexi_compare.hpp"
-# include "pair.hpp"
-# include "rbtree_set.hpp"
+# include "../utilities/enable_if.hpp"
+# include "../utilities/is_integral.hpp"
+# include "../utilities/lexi_compare.hpp"
+# include "../utilities/pair.hpp"
+# include "../utilities/rbtree_set.hpp"
 
 namespace ft {
 	template <class Key,

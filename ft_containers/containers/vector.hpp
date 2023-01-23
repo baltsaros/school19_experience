@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/23 07:58:02 by abuzdin           #+#    #+#             */
+/*   Updated: 2023/01/23 07:58:03 by abuzdin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
 # include <memory>
 # include <exception>
 # include <cstring>
-# include "iterator.hpp"
-# include "reverse_iterator.hpp"
-# include "enable_if.hpp"
-# include "is_integral.hpp"
-# include "lexi_compare.hpp"
+# include "../utilities/iterator.hpp"
+# include "../utilities/reverse_iterator.hpp"
+# include "../utilities/enable_if.hpp"
+# include "../utilities/is_integral.hpp"
+# include "../utilities/lexi_compare.hpp"
 
 
 namespace ft {
