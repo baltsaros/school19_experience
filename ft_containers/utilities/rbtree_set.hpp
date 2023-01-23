@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 07:58:30 by abuzdin           #+#    #+#             */
-/*   Updated: 2023/01/23 07:58:31 by abuzdin          ###   ########.fr       */
+/*   Updated: 2023/01/23 13:42:42 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -431,45 +431,63 @@ namespace ft {
 			}
 
 			iterator	lower_bound(const value_type& key) {
-				iterator	last = end();
+				node	*tmp = _root;
+				node	*ret = _nil;
 
-				for (iterator head = begin(); head != last; ++head) {
-					if (!_comp(*head, key))
-						return (head);
+				while (tmp != _nil) {
+					if (!_comp(tmp->value, key)) {
+						ret = tmp;
+						tmp = tmp->left;
+					}
+					else
+						tmp = tmp->right;
 				}
-				return (last);
+				return (iterator(ret));
 			}
 
 			const_iterator	lower_bound(const value_type& key) const {
-				const_iterator	last = end();
+				node	*tmp = _root;
+				node	*ret = _nil;
 
-				for (const_iterator head = begin(); head != last; ++head) {
-					if (!_comp(*head, key))
-						return (head);
+				while (tmp != _nil) {
+					if (!_comp(tmp->value, key)) {
+						ret = tmp;
+						tmp = tmp->left;
+					}
+					else
+						tmp = tmp->right;
 				}
-				return (last);
+				return (const_iterator(ret));
 			}
 
 			iterator	upper_bound(const value_type& key) {
-				iterator	last = end();
+				node	*tmp = _root;
+				node	*ret = _nil;
 
-				for (iterator head = begin(); head != last; ++head) {
-					if (_comp(key, *head)) {
-						return (head);
+				while (tmp != _nil) {
+					if (_comp(key, tmp->value)) {
+						ret = tmp;
+						tmp = tmp->left;
 					}
+					else
+						tmp = tmp->right;
 				}
-				return (last);
+				return (iterator(ret));
 			}
 
 			const_iterator	upper_bound(const value_type& key) const {
-				const_iterator	last = end();
+				node	*tmp = _root;
+				node	*ret = _nil;
 
-				for (const_iterator head = begin(); head != last; ++head) {
-					if (_comp(key, *head)) {
-						return (head);
+				while (tmp != _nil) {
+					if (_comp(key, tmp->value)) {
+						ret = tmp;
+						tmp = tmp->left;
 					}
+					else
+						tmp = tmp->right;
 				}
-				return (last);
+				return (const_iterator(ret));
 			}
 
 			node*	search(const value_type& key) const {
