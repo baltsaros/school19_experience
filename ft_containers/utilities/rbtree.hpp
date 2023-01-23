@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 07:58:34 by abuzdin           #+#    #+#             */
-/*   Updated: 2023/01/23 13:43:34 by abuzdin          ###   ########.fr       */
+/*   Updated: 2023/01/23 15:08:28 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -459,8 +459,6 @@ namespace ft {
 
 			// COMPARISON OPERATORS
 			friend bool	operator==(const RBTree& lhs, const RBTree& rhs) {
-				if (lhs.size() != rhs.size())
-					return (false);
 				return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
 			}
 
